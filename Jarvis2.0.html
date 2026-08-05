@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Marvel Cinematic Universe Tracker</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#05070d;
+    --card:#0d1422;
+    --card2:#111b2f;
+    --primary:#00e5ff;
+    --secondary:#00b0ff;
+    --accent:#ff3d00;
+    --text:#ffffff;
+    --muted:#9db4d1;
+    --shadow:0 0 20px rgba(0,229,255,.25);
+}
+
+body{
+    font-family:"Orbitron",sans-serif;
+    background:radial-gradient(circle at top,#102040,#05070d 70%);
+    color:var(--text);
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(circle,#00e5ff22 1px,transparent 1px);
+    background-size:35px 35px;
+    animation:gridMove 18s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes gridMove{
+    from{transform:translateY(0);}
+    to{transform:translateY(35px);}
+}
+
+.container{
+    width:95%;
+    max-width:1200px;
+    margin:auto;
+    padding:25px;
+}header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.logo{
+    font-size:2rem;
+    color:var(--primary);
+    text-shadow:0 0 15px var(--primary);
+    animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+    from{
+        text-shadow:0 0 10px var(--primary);
+    }
+    to{
+        text-shadow:0 0 25px var(--primary),
+                    0 0 45px var(--primary);
+    }
+}
+
+.topbar{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+button,input{
+    border:none;
+    outline:none;
+    border-radius:12px;
+    font-family:"Orbitron",sans-serif;
+}
+
+button{
+    padding:12px 18px;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:var(--shadow);
+}
+
+button:hover{
+    transform:translateY(-3px) scale(1.05);
+}
+
+input{
+    width:100%;
+    padding:14px 18px;
+    margin:20px 0;
+    background:var(--card);
+    color:white;
+    border:1px solid #1f3558;
+    box-shadow:var(--shadow);
+}
+
+.panel{
+    background:rgba(13,20,34,.85);
+    backdrop-filter:blur(10px);
+    border:1px solid #17345f;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:var(--shadow);
+}.progress{
+    width:100%;
+    height:14px;
+    background:#1b2b45;
+    border-radius:20px;
+    overflow:hidden;
+    margin:20px 0;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#00e5ff,#00b0ff);
+    transition:.5s;
+    box-shadow:0 0 20px #00e5ff;
+}
+
+.movie-list{
+    list-style:none;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:15px;
+}
+
+.movie-list li{
+    background:var(--card);
+    padding:16px;
+    border-radius:14px;
+    border:1px solid #18345b;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    transition:.3s;
+}
+
+.movie-list li:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 20px rgba(0,229,255,.3);
+}
+
+footer{
+    text-align:center;
+    color:var(--muted);
+    padding:25px;
+}
+
+@media(max-width:768px){
+    header{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .logo{
+        font-size:1.5rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+    <h1 class="logo">⚡ MARVEL MCU TRACKER</h1>
+
+    <div class="topbar">
+        <button id="themeBtn">🎨 Theme</button>
+        <button id="soundBtn">🔊 Sound</button>
+    </div>
+</header>
+
+<div class="panel">
+
+<input
+type="text"
+id="search"
+placeholder="Search MCU Movie..."
+>
+
+<div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<ul id="movieList" class="movie-list"></ul>
+
+</div>
+
+<footer>
+    © 2026 Marvel Inspired MCU Tracker
+</footer><script>
+const movies = [
+  "Iron Man (2008)",
+  "The Incredible Hulk (2008)",
+  "Iron Man 2 (2010)",
+  "Thor (2011)",
+  "Captain America: The First Avenger (2011)",
+  "The Avengers (2012)",
+  "Iron Man 3 (2013)",
+  "Thor: The Dark World (2013)",
+  "Captain America: The Winter Soldier (2014)",
+  "Guardians of the Galaxy (2014)",
+  "Avengers: Age of Ultron (2015)",
+  "Ant-Man (2015)",
+  "Captain America: Civil War (2016)",
+  "Doctor Strange (2016)",
+  "Guardians of the Galaxy Vol. 2 (2017)",
+  "Spider-Man: Homecoming (2017)",
+  "Thor: Ragnarok (2017)",
+  "Black Panther (2018)",
+  "Avengers: Infinity War (2018)",
+  "Ant-Man and the Wasp (2018)",
+  "Captain Marvel (2019)",
+  "Avengers: Endgame (2019)",
+  "Spider-Man: Far From Home (2019)",
+  "Black Widow (2021)",
+  "Shang-Chi and the Legend of the Ten Rings (2021)",
+  "Eternals (2021)",
+  "Spider-Man: No Way Home (2021)",
+  "Doctor Strange in the Multiverse of Madness (2022)",
+  "Thor: Love and Thunder (2022)",
+  "Black Panther: Wakanda Forever (2022)"
+];
+
+const movieList = document.getElementById("movieList");
+const search = document.getElementById("search");
+const progressBar = document.getElementById("progressBar");
+const themeBtn = document.getElementById("themeBtn");
+const soundBtn = document.getElementById("soundBtn");
+
+let watched = JSON.parse(localStorage.getItem("watched")) || {};
+let soundEnabled = true;
+
+function saveData(){
+    localStorage.setItem("watched", JSON.stringify(watched));
+}
+
+function updateProgress(){
+    const total = movies.length;
+    const completed = Object.values(watched).filter(Boolean).length;
+    progressBar.style.width = `${(completed / total) * 100}%`;
+}
+
+function renderMovies(filter = "") {
+    movieList.innerHTML = "";
+
+    movies.forEach((movie, index) => {
+
+        if (!movie.toLowerCase().includes(filter.toLowerCase())) {
+            return;
+        }
+
+        const li = document.createElement("li");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = watched[index] || false;
+
+        checkbox.addEventListener("change", () => {
+            watched[index] = checkbox.checked;
+            saveData();
+            updateProgress();
+        });
+
+        const title = document.createElement("span");
+        title.textContent = movie;
+
+        li.appendChild(checkbox);
+        li.appendChild(title);
+
+        movieList.appendChild(li);
+    });
+
+    updateProgress();
+}
+
+search.addEventListener("input", () => {
+    renderMovies(search.value);
+});
+
+
+
+// ---------- Theme ----------
+let currentTheme = "dark";
+
+themeBtn.addEventListener("click", () => {
+
+    if (currentTheme === "dark") {
+
+        document.documentElement.style.setProperty("--bg", "#f4f8ff");
+        document.documentElement.style.setProperty("--card", "#ffffff");
+        document.documentElement.style.setProperty("--card2", "#eef5ff");
+        document.documentElement.style.setProperty("--text", "#111111");
+        document.documentElement.style.setProperty("--muted", "#555555");
+
+        currentTheme = "light";
+        themeBtn.textContent = "🌙 Dark";
+
+    } else {
+
+        document.documentElement.style.setProperty("--bg", "#05070d");
+        document.documentElement.style.setProperty("--card", "#0d1422");
+        document.documentElement.style.setProperty("--card2", "#111b2f");
+        document.documentElement.style.setProperty("--text", "#ffffff");
+        document.documentElement.style.setProperty("--muted", "#9db4d1");
+
+        currentTheme = "dark";
+        themeBtn.textContent = "☀️ Light";
+    }
+
+});
+
+// ---------- Sound ----------
+soundBtn.addEventListener("click", () => {
+
+    soundEnabled = !soundEnabled;
+
+    soundBtn.textContent = soundEnabled
+        ? "🔊 Sound"
+        : "🔇 Sound";
+
+});
+
+// ---------- Start ----------
+renderMovies();
+updateProgress();
+
+
+</script>
+
+</body>
+</html>
