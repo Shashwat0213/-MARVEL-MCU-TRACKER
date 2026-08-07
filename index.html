@@ -65,10 +65,22 @@ body::before{
 }
 
 .logo{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
     font-size:2rem;
     color:var(--primary);
     text-shadow:0 0 15px var(--primary);
     animation:glow 2s infinite alternate;
+}
+
+.powered{
+    margin-top:6px;
+    font-size:0.75rem;
+    font-weight:600;
+    letter-spacing:2px;
+    color:var(--secondary);
+    text-shadow:0 0 10px var(--secondary);
 }
 
 @keyframes glow{
@@ -189,8 +201,9 @@ footer{
 
 <header>
 <h1 class="logo">
-   ⚡ MARVEL MCU Tracker</h1>
-   <h5> <span class="powered">Powered by Shashwat</span></h5>
+    ⚡ MARVEL MCU Tracker
+    <span class="powered">Powered by Shashwat</span>
+</h1>
 
     <div class="topbar">
         <button id="themeBtn">🎨 Theme</button>
