@@ -29,7 +29,7 @@
 
 body{
     font-family:"Orbitron",sans-serif;
-    background:radial-gradient(circle at top,#102040,#05070d 70%);
+    background: radial-gradient(circle at top,#102040,var(--bg) 70%);
     color:var(--text);
     min-height:100vh;
     overflow-x:hidden;
@@ -188,7 +188,8 @@ footer{
 <div class="container">
 
 <header>
-    <h1 class="logo">⚡ MARVEL MCU TRACKER</h1>
+    <h1 class="logo">⚡ MARVEL MCU TRACKER 
+        powered by Shashwat</h1>
 
     <div class="topbar">
         <button id="themeBtn">🎨 Theme</button>
@@ -251,8 +252,7 @@ const movies = [
   "Doctor Strange in the Multiverse of Madness (2022)",
   "Thor: Love and Thunder (2022)",
   "Black Panther: Wakanda Forever (2022)",
-   "Spider-Man: No Way Home (2021)",
-"Ant-Man and the Wasp: Quantumania (2023)",     |
+"Ant-Man and the Wasp: Quantumania (2023)", 
 "Guardians of the Galaxy Vol. 3  (2023)",
     "The Marvels (2023)",
 "Deadpool & Wolverine (2024)",
@@ -277,7 +277,7 @@ function saveData(){
 
 function updateProgress(){
     const total = movies.length;
-    const completed = Object.values(watched).filter(Boolean).length;
+    const completed = movies.filter((_, index) => watched[index]).length;
     progressBar.style.width = `${(completed / total) * 100}%`;
 }
 
