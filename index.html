@@ -75,12 +75,38 @@ body::before{
 }
 
 .powered{
-    margin-top:6px;
+    display:block;
+    margin-top:8px;
     font-size:0.75rem;
-    font-weight:600;
-    letter-spacing:2px;
-    color:var(--secondary);
-    text-shadow:0 0 10px var(--secondary);
+    font-weight:700;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:#00e5ff;
+    text-shadow:
+        0 0 5px #00e5ff,
+        0 0 10px #00e5ff,
+        0 0 20px #00b0ff,
+        0 0 35px #00b0ff;
+    animation:poweredGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes poweredGlow{
+    from{
+        text-shadow:
+            0 0 5px #00e5ff,
+            0 0 10px #00e5ff,
+            0 0 20px #00b0ff;
+        opacity:0.85;
+    }
+
+    to{
+        text-shadow:
+            0 0 10px #00e5ff,
+            0 0 20px #00e5ff,
+            0 0 35px #00b0ff,
+            0 0 50px #00b0ff;
+        opacity:1;
+    }
 }
 
 @keyframes glow{
