@@ -322,7 +322,37 @@ const soundBtn = document.getElementById("soundBtn");
 
 let watched = JSON.parse(localStorage.getItem("watched")) || {};
 let soundEnabled = true;
+// ---------- Sound Effects ----------
 
+function playButtonSound() {
+    if (!soundEnabled) return;
+
+    const audio = new Audio(
+        "https://actions.google.com/sounds/v1/cartoon/pop.ogg"
+    );
+    audio.volume = 0.4;
+    audio.play();
+}
+
+function playTickSound() {
+    if (!soundEnabled) return;
+
+    const audio = new Audio(
+        "https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"
+    );
+    audio.volume = 0.5;
+    audio.play();
+}
+
+function playThemeSound() {
+    if (!soundEnabled) return;
+
+    const audio = new Audio(
+        "https://actions.google.com/sounds/v1/science_fiction/laser_1.ogg"
+    );
+    audio.volume = 0.4;
+    audio.play();
+}
 function saveData(){
     localStorage.setItem("watched", JSON.stringify(watched));
 }
@@ -372,7 +402,7 @@ function renderMovies(filter = "") {
         checkbox.addEventListener("change", () => {
 
             watched[index] = checkbox.checked;
-
+            playTickSound();
             if (checkbox.checked) {
                 title.style.textDecoration = "line-through";
                 title.style.opacity = "0.6";
@@ -416,7 +446,7 @@ search.addEventListener("input", () => {
 let currentTheme = "dark";
 
 themeBtn.addEventListener("click", () => {
-
+playThemeSound();
     if (currentTheme === "dark") {
 
         document.documentElement.style.setProperty("--bg", "#f4f8ff");
