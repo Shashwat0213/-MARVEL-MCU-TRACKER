@@ -177,6 +177,16 @@ input{
     background:linear-gradient(90deg,#00e5ff,#00b0ff);
     transition:.5s;
     box-shadow:0 0 20px #00e5ff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#ffffff;
+    font-size:12px;
+    font-weight:700;
+    white-space:nowrap;
+    overflow:hidden;
 }
 
 .movie-list{
@@ -246,7 +256,9 @@ placeholder="Search MCU Movie..."
 >
 
 <div class="progress">
-    <div class="progress-bar" id="progressBar"></div>
+    <div class="progress-bar" id="progressBar">
+        <span id="progressText">0%</span>
+    </div>
 </div>
 
 <ul id="movieList" class="movie-list"></ul>
@@ -316,9 +328,16 @@ function saveData(){
 }
 
 function updateProgress(){
+
     const total = movies.length;
     const completed = movies.filter((_, index) => watched[index]).length;
-    progressBar.style.width = `${(completed / total) * 100}%`;
+
+    const percent = Math.round((completed / total) * 100);
+
+    progressBar.style.width = `${percent}%`;
+
+    document.getElementById("progressText").textContent =
+        `${completed}/${total} (${percent}%)`;
 }
 
 function renderMovies(filter = "") {
