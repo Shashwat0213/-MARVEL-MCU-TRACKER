@@ -283,7 +283,10 @@ function updateProgress(){
 }
 
 function renderMovies(filter = "") {
+
     movieList.innerHTML = "";
+
+    let found = false;
 
     movies.forEach((movie, index) => {
 
@@ -291,17 +294,60 @@ function renderMovies(filter = "") {
             return;
         }
 
+        found = true;
+
         const li = document.createElement("li");
 
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.checked = watched[index] || false;
 
+        const title = document.createElement("span");
+        title.textContent = `${index + 1}. ${movie}`;
+
+        // Watched style
+        if (checkbox.checked) {
+            title.style.textDecoration = "line-through";
+            title.style.opacity = "0.6";
+        }
+
         checkbox.addEventListener("change", () => {
+
             watched[index] = checkbox.checked;
+
+            if (checkbox.checked) {
+                title.style.textDecoration = "line-through";
+                title.style.opacity = "0.6";
+            } else {
+                title.style.textDecoration = "none";
+                title.style.opacity = "1";
+            }
+
             saveData();
             updateProgress();
         });
+
+        li.appendChild(checkbox);
+        li.appendChild(title);
+
+        movieList.appendChild(li);
+
+    });
+
+    if (!found) {
+        movieList.innerHTML = `
+            <li style="
+                grid-column:1/-1;
+                text-align:center;
+                padding:20px;
+                color:#9db4d1;">
+                ❌ No movie found
+            </li>
+        `;
+    }
+
+    updateProgress();
+}
 
         const title = document.createElement("span");
         title.textContent = movie;
