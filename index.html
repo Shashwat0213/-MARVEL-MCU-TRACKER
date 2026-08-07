@@ -348,19 +348,6 @@ function renderMovies(filter = "") {
 
     updateProgress();
 }
-
-        const title = document.createElement("span");
-        title.textContent = movie;
-
-        li.appendChild(checkbox);
-        li.appendChild(title);
-
-        movieList.appendChild(li);
-    });
-
-    updateProgress();
-}
-
 search.addEventListener("input", () => {
     renderMovies(search.value);
 });
