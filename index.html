@@ -1097,25 +1097,25 @@ body.light-mode .meta-item{
 }
 
 
+/* =========================================================
+   MOBILE — 4 MOVIES PER ROW
+========================================================= */
+
 @media(max-width:700px){
 
     .container{
         width:96%;
-
         padding-top:15px;
     }
 
     header{
         flex-direction:column;
-
         align-items:stretch;
-
         text-align:center;
     }
 
     .logo{
         align-items:center;
-
         font-size:1.5rem;
     }
 
@@ -1124,22 +1124,87 @@ body.light-mode .meta-item{
     }
 
     .panel{
-        padding:15px;
+        padding:12px;
     }
 
+    /* Stats */
     .stats{
-        grid-template-columns:
-            repeat(2,1fr);
-
-        gap:10px;
+        grid-template-columns:repeat(2,1fr);
+        gap:8px;
     }
 
+    .stat-card{
+        padding:12px 6px;
+    }
+
+    .stat-number{
+        font-size:1.1rem;
+    }
+
+    .stat-label{
+        font-size:.55rem;
+    }
+
+    /* ⭐ MOVIES — 4 COLUMNS */
     .movie-list{
-        grid-template-columns:1fr;
+        grid-template-columns:repeat(4,minmax(0,1fr));
+        gap:8px;
     }
 
+    /* Smaller posters */
     .poster-container{
-        height:390px;
+        height:145px;
+    }
+
+    .movie-info{
+        padding:7px;
+    }
+
+    .movie-title{
+        font-size:.58rem;
+        line-height:1.25;
+        min-height:30px;
+        margin-bottom:7px;
+    }
+
+    .movie-meta{
+        gap:3px;
+        margin-bottom:7px;
+    }
+
+    .meta-item{
+        padding:3px 4px;
+        font-size:.38rem;
+        border-radius:4px;
+    }
+
+    .watch-row{
+        gap:3px;
+    }
+
+    .watch-label{
+        gap:3px;
+        font-size:.38rem;
+    }
+
+    .watch-checkbox{
+        width:12px;
+        height:12px;
+    }
+
+    .favorite-btn{
+        width:25px;
+        height:25px;
+        top:5px;
+        right:5px;
+        font-size:12px;
+    }
+
+    .phase-badge{
+        top:5px;
+        left:5px;
+        padding:3px 4px;
+        font-size:.32rem;
     }
 
     .filter-bar{
@@ -1148,7 +1213,6 @@ body.light-mode .meta-item{
 
     .sort-box{
         margin-left:0;
-
         width:100%;
     }
 
@@ -1158,31 +1222,69 @@ body.light-mode .meta-item{
 }
 
 
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
 @media(max-width:420px){
 
-    .stats{
-        grid-template-columns:1fr 1fr;
+    .container{
+        width:97%;
     }
 
-    .stat-card{
-        padding:13px 8px;
+    .panel{
+        padding:10px;
     }
 
-    .stat-number{
-        font-size:1.15rem;
+    .movie-list{
+        grid-template-columns:repeat(4,minmax(0,1fr));
+        gap:6px;
     }
 
     .poster-container{
-        height:350px;
+        height:125px;
+    }
+
+    .movie-info{
+        padding:5px;
+    }
+
+    .movie-title{
+        font-size:.48rem;
+        min-height:25px;
+        margin-bottom:5px;
+    }
+
+    .meta-item{
+        font-size:.32rem;
+        padding:2px 3px;
+    }
+
+    .watch-label{
+        font-size:.32rem;
+    }
+
+    .watch-checkbox{
+        width:10px;
+        height:10px;
+    }
+
+    .favorite-btn{
+        width:22px;
+        height:22px;
+        font-size:10px;
+    }
+
+    .phase-badge{
+        font-size:.28rem;
+        padding:2px 3px;
     }
 
     .top-btn{
         padding:10px 12px;
-
         font-size:.65rem;
     }
 }
-
 </style>
 </head>
 
@@ -1510,7 +1612,7 @@ const movies = [
         releaseDate: "May 3, 2002",
         rating: 7.4,
         phase: "Pre-MCU / Sony",
-        poster: "https://image.tmdb.org/t/p/w500/rweIrveL43TaxUN0akQEaM8BzQd.jpg"
+        poster: "https://i.pinimg.com/736x/db/12/82/db1282e0f4a2ca5730037a3669b6ddd6.jpg"
     },
 
     {
@@ -1519,7 +1621,7 @@ const movies = [
         releaseDate: "June 30, 2004",
         rating: 7.5,
         phase: "Pre-MCU / Sony",
-        poster: "https://image.tmdb.org/t/p/w500/olxpyq9kJ8D3hB9Q0j4R7dQY6f.jpg"
+        poster: "https://m.media-amazon.com/images/M/MV5BNGQ0YTQyYTgtNWI2YS00NTE2LWJmNDItNTFlMTUwNmFlZTM0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
     },
 
     {
@@ -1555,7 +1657,7 @@ const movies = [
         releaseDate: "May 7, 2010",
         rating: 6.9,
         phase: "Phase 1",
-        poster: "https://image.tmdb.org/t/p/w500/6WBeq4fCfn7ANvLzQ0W8mZx9J8a.jpg"
+        poster: "https://i.ebayimg.com/00/s/MTUwMFgxMDAw/z/S~cAAOSwABxgBctJ/$_57.JPG?set_id=8800005007"
     },
 
     {
