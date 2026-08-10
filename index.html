@@ -1583,7 +1583,7 @@ body.light-mode .meta-item{
             ⚡ MARVEL MCU TRACKER
 
             <span class="powered">
-                                POWERED BY SHASHWAT
+                POWERED BY SHASHWAT
             </span>
 
         </h1>
@@ -1709,7 +1709,7 @@ body.light-mode .meta-item{
             <div class="stat-card">
 
                 <div class="stat-icon">
-                    💗
+                    ⭐
                 </div>
 
                 <span
@@ -1792,7 +1792,7 @@ body.light-mode .meta-item{
                 class="filter-btn"
                 data-filter="favorites"
             >
-                💗 Favorites
+                ❤️ Favorites
             </button>
 
             <div class="sort-box">
@@ -2362,6 +2362,23 @@ const movies = [
     }
 
 ];
+
+/* =========================================================
+   TRAILER LINKS — SAFE AUTO FALLBACK
+   Uses YouTube search instead of fake video IDs.
+   Hindi trailer is searched first; if unavailable,
+   the user can choose the official English trailer.
+========================================================= */
+movies.forEach(function(movie){
+    if(!movie.trailer){
+        const query = encodeURIComponent(
+            movie.title + " official Hindi trailer"
+        );
+
+        movie.trailer =
+            "https://www.youtube.com/results?search_query=" + query;
+    }
+});
 
 /* =========================================================
    PART 2 DATA CHECK
@@ -3167,7 +3184,7 @@ function openMovieModal(movie, index){
             "inline-flex";
 
         modalTrailerBtn.textContent =
-            "▶ Watch Trailer";
+            "▶ Hindi Trailer";
 
     }else{
 
