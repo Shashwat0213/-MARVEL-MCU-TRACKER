@@ -1565,6 +1565,19 @@ body.light-mode .meta-item{
         transition:none;
     }
 }
+
+/* PREMIUM V2 */
+:root{--premium-accent:#e62429;--premium-accent2:#ffd54a;--premium-glow:rgba(230,36,41,.28)}
+body{background:radial-gradient(circle at 20% 0%,var(--premium-glow),transparent 30%),radial-gradient(circle at 90% 10%,rgba(0,229,255,.10),transparent 28%),var(--bg,#05070b)!important}
+.premium-hero{position:relative;overflow:hidden;margin:18px 0 22px;padding:34px 30px;border:1px solid rgba(255,255,255,.12);border-radius:26px;background:linear-gradient(120deg,rgba(10,12,18,.96),rgba(30,8,12,.82));box-shadow:0 20px 70px rgba(0,0,0,.35);isolation:isolate}
+.premium-hero:before{content:"";position:absolute;inset:-45%;background:conic-gradient(from 120deg,transparent 0 35%,var(--premium-accent) 45%,transparent 55%,var(--premium-accent2) 70%,transparent 80%);filter:blur(70px);opacity:.16;z-index:-2;animation:heroSpin 18s linear infinite}
+.premium-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.68),transparent 75%);z-index:-1}
+.hero-kicker{font-size:.75rem;letter-spacing:.22em;font-weight:800;color:var(--premium-accent2);text-transform:uppercase}.hero-title{font-size:clamp(2rem,5vw,4rem);line-height:.95;margin:10px 0;background:linear-gradient(90deg,#fff,var(--premium-accent2));-webkit-background-clip:text;background-clip:text;color:transparent}.hero-copy{max-width:650px;color:rgba(255,255,255,.72);line-height:1.6;margin:12px 0 20px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap}.hero-btn{border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:11px 16px;background:rgba(255,255,255,.07);color:#fff;cursor:pointer;font-weight:800}.hero-btn.primary{background:var(--premium-accent);border-color:transparent;box-shadow:0 8px 25px var(--premium-glow)}
+.theme-switcher{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 18px;padding:10px 12px;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:rgba(255,255,255,.035)}.theme-label{font-size:.72rem;font-weight:800;letter-spacing:.12em;opacity:.7;text-transform:uppercase}.theme-choice{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:inherit;border-radius:999px;padding:7px 11px;cursor:pointer}.theme-choice.active{border-color:var(--premium-accent);box-shadow:0 0 0 2px var(--premium-glow)}
+.continue-section{margin:0 0 22px}.continue-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.continue-head h2{margin:0;font-size:1rem}.continue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}.continue-card{display:flex;gap:10px;align-items:center;padding:10px;border-radius:16px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);cursor:pointer;transition:.2s}.continue-card:hover{transform:translateY(-3px);border-color:var(--premium-accent)}.continue-card img{width:48px;height:68px;object-fit:cover;border-radius:9px}.continue-card strong{font-size:.85rem}.continue-card small{display:block;opacity:.6;margin-top:4px}
+body.theme-blue{--premium-accent:#27a7ff;--premium-accent2:#a7e8ff;--premium-glow:rgba(39,167,255,.28)}body.theme-gold{--premium-accent:#d9a441;--premium-accent2:#fff0a8;--premium-glow:rgba(217,164,65,.28)}body.theme-cosmic{--premium-accent:#a855f7;--premium-accent2:#67e8f9;--premium-glow:rgba(168,85,247,.28)}
+@keyframes heroSpin{to{transform:rotate(360deg)}}@media(max-width:600px){.premium-hero{padding:25px 20px}.continue-grid{grid-template-columns:1fr 1fr}}
+
 </style>
 </head>
 
@@ -1614,6 +1627,27 @@ body.light-mode .meta-item{
         </div>
 
     </header>
+<section class="premium-hero" aria-label="Premium MCU dashboard">
+  <div class="hero-kicker">Marvel Inspired • Personal Watch Tracker</div>
+  <h2 class="hero-title">Your MCU. Your Timeline.</h2>
+  <p class="hero-copy">Track every movie, discover what to watch next, manage favorites, and keep your progress in one cinematic dashboard.</p>
+  <div class="hero-actions">
+    <button class="hero-btn primary" id="heroExploreBtn">🎬 Explore Movies</button>
+    <button class="hero-btn" id="heroContinueBtn">▶ Continue Watching</button>
+  </div>
+</section>
+<section class="theme-switcher" aria-label="Hero theme selector">
+  <span class="theme-label">Hero Theme</span>
+  <button class="theme-choice active" data-hero-theme="red">🔴 Marvel Red</button>
+  <button class="theme-choice" data-hero-theme="blue">🔵 Multiverse Blue</button>
+  <button class="theme-choice" data-hero-theme="gold">🟡 Infinity Gold</button>
+  <button class="theme-choice" data-hero-theme="cosmic">🟣 Cosmic</button>
+</section>
+<section class="continue-section" id="continueSection" hidden>
+  <div class="continue-head"><h2>▶ Continue Watching</h2><span id="continueCount"></span></div>
+  <div class="continue-grid" id="continueGrid"></div>
+</section>
+
 
 
     <!-- =====================================================
@@ -3622,6 +3656,36 @@ updateStats();
 console.log(
     "⚡ Marvel MCU Tracker loaded successfully!"
 );
+
+/* PREMIUM V2 JS */
+const continueSection=document.getElementById("continueSection");
+const continueGrid=document.getElementById("continueGrid");
+const continueCount=document.getElementById("continueCount");
+function renderContinue(){
+  if(!continueSection||!continueGrid)return;
+  const items=movies.map((m,i)=>({...m,originalIndex:i})).filter(m=>!watched[m.originalIndex]).slice(0,6);
+  if(!items.length){continueSection.hidden=true;return;}
+  continueSection.hidden=false;
+  continueCount.textContent=`${items.length} suggestions`;
+  continueGrid.innerHTML=items.map(m=>`<article class="continue-card" data-index="${m.originalIndex}"><img src="${m.poster||''}" alt=""><div><strong>${m.title}</strong><small>${m.phase||'MCU'} • ${m.year||'TBA'}</small></div></article>`).join('');
+  continueGrid.querySelectorAll('.continue-card').forEach(card=>card.addEventListener('click',()=>openMovieModal(movies[Number(card.dataset.index)],Number(card.dataset.index))));
+}
+function applyHeroTheme(theme){
+  document.body.classList.remove('theme-blue','theme-gold','theme-cosmic');
+  if(theme!=='red')document.body.classList.add('theme-'+theme);
+  localStorage.setItem('mcuHeroTheme',theme);
+  document.querySelectorAll('[data-hero-theme]').forEach(b=>b.classList.toggle('active',b.dataset.heroTheme===theme));
+}
+document.querySelectorAll('[data-hero-theme]').forEach(b=>b.addEventListener('click',()=>applyHeroTheme(b.dataset.heroTheme)));
+applyHeroTheme(localStorage.getItem('mcuHeroTheme')||'red');
+const heroExploreBtn=document.getElementById('heroExploreBtn');
+if(heroExploreBtn)heroExploreBtn.addEventListener('click',()=>document.getElementById('movieList')?.scrollIntoView({behavior:'smooth'}));
+const heroContinueBtn=document.getElementById('heroContinueBtn');
+if(heroContinueBtn)heroContinueBtn.addEventListener('click',()=>document.getElementById('continueSection')?.scrollIntoView({behavior:'smooth'}));
+const premiumRenderMovies=renderMovies;
+renderMovies=function(){premiumRenderMovies();renderContinue();};
+renderContinue();
+
 </script>
 
 </body>
