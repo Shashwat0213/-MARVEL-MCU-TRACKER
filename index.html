@@ -1,3 +1,4 @@
+<!-- MCU Tracker Firebase V6 Final -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1729,7 +1730,7 @@ body.light-mode .v3-greeting p{color:#52627a}
 <!-- ===== V4 ADMIN DASHBOARD ===== -->
 <div class="admin-overlay" id="adminOverlay" aria-hidden="true">
 <section class="admin-panel" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
-<div class="admin-head"><div><div class="auth-brand">MCU TRACKER V4</div><h2 id="adminTitle">🛡️ Admin Dashboard</h2></div><button class="admin-close" id="adminCloseBtn">✕ Close</button></div>
+<div class="admin-head"><div><div class="auth-brand">MCU TRACKER V6</div><h2 id="adminTitle">🛡️ Admin Dashboard</h2></div><button class="admin-close" id="adminCloseBtn">✕ Close</button></div>
 <div class="admin-stats"><div class="admin-stat"><b id="adminUsers">0</b><span>Total Users</span></div><div class="admin-stat"><b id="adminAdmins">0</b><span>Admins</span></div><div class="admin-stat"><b id="adminWatched">0</b><span>Watched Items</span></div><div class="admin-stat"><b id="adminFavorites">0</b><span>Favorites</span></div></div>
 <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>User</th><th>Email</th><th>Role</th><th>Watched</th><th>Favorites</th><th>Actions</th></tr></thead><tbody id="adminUserRows"></tbody></table></div>
 <div class="admin-footer">Local admin mode: accounts are stored in this browser. This is not production authentication. For real multi-device accounts, connect Supabase/Firebase.</div>
@@ -3981,7 +3982,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  updateProfile
+  updateProfile,
+  setPersistence,
+  browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
 import {
@@ -4000,12 +4003,13 @@ import {
 
 /* ---------- FIREBASE CONFIG ---------- */
 const FIREBASE_CONFIG = {
-  apiKey: "PASTE_YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyAxiho1OLRry1mU8CRm6lQirUGQCVlNDWg",
+  authDomain: "marvel-mcu-tracker.firebaseapp.com",
+  projectId: "marvel-mcu-tracker",
+  storageBucket: "marvel-mcu-tracker.firebasestorage.app",
+  messagingSenderId: "353104751639",
+  appId: "1:353104751639:web:9f5e43501ead4bbedd4052",
+  measurementId: "G-5DJXGHN0NV"
 };
 
 const FIREBASE_READY =
@@ -4051,8 +4055,8 @@ function safeJSON(value){
 
 function getLocalTracker(){
   return {
-    watched: safeJSON(watched || {}),
-    favorites: safeJSON(favorites || {}),
+    watched: safeJSON(window.watched || {}),
+    favorites: safeJSON(window.favorites || {}),
     history: (() => {
       try { return JSON.parse(localStorage.getItem("mcuV3History") || "[]"); }
       catch(e){ return []; }
@@ -4064,13 +4068,12 @@ function getLocalTracker(){
 function applyTrackerState(state){
   if(!state) return;
 
-  // Apply Firebase data to the real tracker state used by this page.
-  watched = (state.watched && typeof state.watched === "object") ? state.watched : {};
-  favorites = (state.favorites && typeof state.favorites === "object") ? state.favorites : {};
-
-  // Keep local cache consistent with the cloud copy.
-  localStorage.setItem("mcuWatched", JSON.stringify(watched));
-  localStorage.setItem("mcuFavorites", JSON.stringify(favorites));
+  if(typeof window.watched !== "undefined"){
+    window.watched = state.watched || {};
+  }
+  if(typeof window.favorites !== "undefined"){
+    window.favorites = state.favorites || {};
+  }
 
   if(state.name){
     localStorage.setItem("mcuV3Name", state.name);
@@ -4080,10 +4083,8 @@ function applyTrackerState(state){
     localStorage.setItem("mcuV3History", JSON.stringify(state.history.slice(0,8)));
   }
 
-  // Re-render only after the cloud state has been applied.
   if(typeof window.renderMovies === "function") window.renderMovies();
   if(typeof window.renderV3 === "function") window.renderV3();
-  if(typeof updateProgress === "function") updateProgress();
 }
 
 function closeAuth(){
@@ -4217,8 +4218,9 @@ async function saveCloudState(){
 
 async function firebaseSubmit(event){
   event.preventDefault();
-  if(!FIREBASE_READY){
-    setMessage("Firebase is not configured yet.");
+  if(!FIREBASE_READY || !auth || !db){
+    setMessage("Firebase could not initialize. Please refresh the page and check Firebase Console settings.");
+    console.error("Firebase initialization state:", {configured:FIREBASE_READY, auth:!!auth, db:!!db});
     return;
   }
 
@@ -4273,7 +4275,11 @@ async function firebaseSubmit(event){
       "auth/email-already-in-use":"That email is already registered.",
       "auth/weak-password":"Password must be at least 6 characters.",
       "auth/invalid-email":"Please enter a valid email address.",
-      "auth/network-request-failed":"Network error. Check your internet connection."
+      "auth/network-request-failed":"Network error. Check your internet connection.",
+      "auth/operation-not-allowed":"Email/Password sign-in is not enabled in Firebase Authentication.",
+      "auth/unauthorized-domain":"This GitHub Pages domain is not authorized in Firebase Authentication.",
+      "auth/user-disabled":"This account has been disabled.",
+      "permission-denied":"Firestore permission denied. Check your Firestore Security Rules."
     };
     setMessage(messages[err.code] || err.message || "Authentication failed.");
   }finally{
@@ -4310,7 +4316,7 @@ function exportData(){
   const payload = {
     exportedAt: new Date().toISOString(),
     app: "MCU Tracker",
-    version: "Firebase V5",
+    version: "Firebase V6",
     state: getLocalTracker()
   };
 
@@ -4530,7 +4536,9 @@ if(FIREBASE_READY){
     auth = getAuth(firebaseApp);
     db = getFirestore(firebaseApp);
 
-    setSyncStatus("connecting…","idle");
+    // Keep the Firebase session signed in on this browser.
+    await setPersistence(auth, browserLocalPersistence);
+    setSyncStatus("connected","ok");
 
     onAuthStateChanged(auth,async user=>{
       activeUser = user;
@@ -4552,10 +4560,11 @@ if(FIREBASE_READY){
       }
     });
   }catch(err){
-    console.error(err);
+    console.error("Firebase initialization failed:", err);
     setSyncStatus("initialization failed","error");
   }
 }else{
+  console.error("Firebase config is incomplete:", FIREBASE_CONFIG);
   setSyncStatus("setup required","error");
 }
 
