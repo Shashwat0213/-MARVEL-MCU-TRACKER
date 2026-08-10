@@ -1638,11 +1638,10 @@ body.theme-blue{--premium-accent:#27a7ff;--premium-accent2:#a7e8ff;--premium-glo
 </section>
 <section class="theme-switcher" aria-label="Hero theme selector">
   <span class="theme-label">Hero Theme</span>
- 
+  <button class="theme-choice active" data-hero-theme="red">🔴 Marvel Red</button>
   <button class="theme-choice" data-hero-theme="blue">🔵 Multiverse Blue</button>
   <button class="theme-choice" data-hero-theme="gold">🟡 Infinity Gold</button>
   <button class="theme-choice" data-hero-theme="cosmic">🟣 Cosmic</button>
-    <button class="theme-choice active" data-hero-theme="red">🔴 Marvel Red</button>
 </section>
 <section class="continue-section" id="continueSection" hidden>
   <div class="continue-head"><h2>▶ Continue Watching</h2><span id="continueCount"></span></div>
@@ -1744,18 +1743,18 @@ body.theme-blue{--premium-accent:#27a7ff;--premium-accent2:#a7e8ff;--premium-glo
             <div class="stat-card">
 
                 <div class="stat-icon">
-                    💗
+                    ⭐
                 </div>
 
                 <span
                     class="stat-number"
-                    id="favouriteMovies"
+                    id="favoriteMovies"
                 >
                     0
                 </span>
 
                 <span class="stat-label">
-                   FAVOURITE
+                    Favorites
                 </span>
 
             </div>
@@ -1827,7 +1826,7 @@ body.theme-blue{--premium-accent:#27a7ff;--premium-accent2:#a7e8ff;--premium-glo
                 class="filter-btn"
                 data-filter="favorites"
             >
-               💗 Favorites
+                ❤️ Favorites
             </button>
 
             <div class="sort-box">
@@ -2795,7 +2794,7 @@ function renderMovies(){
         }
 
         favorite.innerHTML =
-            isFavorite ? "💗" : "♡";
+            isFavorite ? "❤️" : "♡";
 
         favorite.title =
             "Add to favorites";
@@ -2995,7 +2994,7 @@ function renderMovies(){
 
         favoriteText.textContent =
             isFavorite
-                ? "💗 Favorite"
+                ? "❤️ Favorite"
                 : "♡";
 
 
@@ -3241,7 +3240,7 @@ function openMovieModal(movie, index){
 
     modalFavoriteBtn.textContent =
         favorites[index]
-            ? "💗 Favorited"
+            ? "❤️ Favorited"
             : "♡ Favorite";
 
 
@@ -3392,7 +3391,7 @@ modalFavoriteBtn.addEventListener(
 
         modalFavoriteBtn.textContent =
             favorites[currentModalIndex]
-                ? "💗 Favorited"
+                ? "❤️ Favorited"
                 : "♡ Favorite";
 
         renderMovies();
