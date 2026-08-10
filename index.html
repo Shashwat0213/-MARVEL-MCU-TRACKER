@@ -1,4 +1,4 @@
-<!-- MCU Tracker Firebase V6 Final -->
+<!-- MCU Tracker Firebase V7 Cloud Sync -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -3954,6 +3954,33 @@ renderContinue();
 
 
 
+
+/* ---------- FIREBASE DATA BRIDGE ---------- */
+window.__mcuTrackerBridge = {
+  getState(){
+    return {
+      watched: JSON.parse(JSON.stringify(watched || {})),
+      favorites: JSON.parse(JSON.stringify(favorites || {})),
+      history: (() => {
+        try { return JSON.parse(localStorage.getItem("mcuV3History") || "[]"); }
+        catch(e){ return []; }
+      })(),
+      name: localStorage.getItem("mcuV3Name") || ""
+    };
+  },
+  applyState(state){
+    watched = state?.watched || {};
+    favorites = state?.favorites || {};
+    localStorage.setItem("mcuWatched", JSON.stringify(watched));
+    localStorage.setItem("mcuFavorites", JSON.stringify(favorites));
+    if(Array.isArray(state?.history)) localStorage.setItem("mcuV3History", JSON.stringify(state.history.slice(0,8)));
+    if(state?.name) localStorage.setItem("mcuV3Name", state.name);
+    saveData();
+    if(typeof renderMovies === "function") renderMovies();
+    if(typeof window.renderV3 === "function") window.renderV3();
+  }
+};
+
 </script>
 
 
@@ -4054,37 +4081,23 @@ function safeJSON(value){
 }
 
 function getLocalTracker(){
+  if(window.__mcuTrackerBridge){
+    return window.__mcuTrackerBridge.getState();
+  }
   return {
-    watched: safeJSON(window.watched || {}),
-    favorites: safeJSON(window.favorites || {}),
-    history: (() => {
-      try { return JSON.parse(localStorage.getItem("mcuV3History") || "[]"); }
-      catch(e){ return []; }
-    })(),
-    name: localStorage.getItem("mcuV3Name") || ""
+    watched: {},
+    favorites: {},
+    history: [],
+    name: ""
   };
 }
 
 function applyTrackerState(state){
   if(!state) return;
-
-  if(typeof window.watched !== "undefined"){
-    window.watched = state.watched || {};
+  if(window.__mcuTrackerBridge){
+    window.__mcuTrackerBridge.applyState(state);
+    return;
   }
-  if(typeof window.favorites !== "undefined"){
-    window.favorites = state.favorites || {};
-  }
-
-  if(state.name){
-    localStorage.setItem("mcuV3Name", state.name);
-  }
-
-  if(Array.isArray(state.history)){
-    localStorage.setItem("mcuV3History", JSON.stringify(state.history.slice(0,8)));
-  }
-
-  if(typeof window.renderMovies === "function") window.renderMovies();
-  if(typeof window.renderV3 === "function") window.renderV3();
 }
 
 function closeAuth(){
@@ -4172,47 +4185,51 @@ async function loadCloudState(){
   setSyncStatus("synced","ok");
 }
 
+let cloudSaveInProgress = false;
+let cloudSavePending = false;
+
 async function saveCloudState(){
-  if(!activeUser || !db || syncing) return;
+  if(!activeUser || !db) return false;
+  if(cloudSaveInProgress){
+    cloudSavePending = true;
+    return false;
+  }
+
+  cloudSaveInProgress = true;
   syncing = true;
-
   try{
-    const state = getLocalTracker();
-    const name =
-      state.name ||
-      activeUser.displayName ||
-      activeUser.email?.split("@")[0] ||
-      "User";
+    do{
+      cloudSavePending = false;
+      const state = getLocalTracker();
+      const name = state.name || activeUser.displayName || activeUser.email?.split("@")[0] || "User";
+      const profileRef = doc(db, "users", activeUser.uid);
+      const trackerRef = doc(db, "users", activeUser.uid, "private", "tracker");
 
-    await setDoc(
-      doc(db, "users", activeUser.uid),
-      {
+      await setDoc(profileRef, {
         uid: activeUser.uid,
         email: activeUser.email || "",
         displayName: name,
         updatedAt: serverTimestamp()
-      },
-      {merge:true}
-    );
+      }, {merge:true});
 
-    await setDoc(
-      doc(db, "users", activeUser.uid, "private", "tracker"),
-      {
-        watched: state.watched,
-        favorites: state.favorites,
-        history: state.history,
+      await setDoc(trackerRef, {
+        watched: state.watched || {},
+        favorites: state.favorites || {},
+        history: Array.isArray(state.history) ? state.history : [],
         name,
         updatedAt: serverTimestamp()
-      },
-      {merge:true}
-    );
+      }, {merge:true});
 
-    setSyncStatus("synced","ok");
+      setSyncStatus("synced","ok");
+    }while(cloudSavePending);
+    return true;
   }catch(err){
     console.error("Cloud save failed:", err);
-    setSyncStatus("sync failed","error");
+    setSyncStatus("sync failed: " + (err?.code || "error"),"error");
+    return false;
   }finally{
     syncing = false;
+    cloudSaveInProgress = false;
   }
 }
 
@@ -4514,7 +4531,10 @@ const originalSaveData = window.saveData;
 if(typeof originalSaveData === "function"){
   window.saveData = function(){
     const result = originalSaveData.apply(this,arguments);
-    if(activeUser) saveCloudState();
+    if(activeUser) {
+      setSyncStatus("saving…","idle");
+      saveCloudState();
+    }
     return result;
   };
 }
