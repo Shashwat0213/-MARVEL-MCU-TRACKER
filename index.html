@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Marvel Cinematic Universe Tracker</title>
+<title>Marvel Cinematic Universe Tracker — V4</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -1575,8 +1575,86 @@ body{background:radial-gradient(circle at 20% 0%,var(--premium-glow),transparent
 .hero-kicker{font-size:.75rem;letter-spacing:.22em;font-weight:800;color:var(--premium-accent2);text-transform:uppercase}.hero-title{font-size:clamp(2rem,5vw,4rem);line-height:.95;margin:10px 0;background:linear-gradient(90deg,#fff,var(--premium-accent2));-webkit-background-clip:text;background-clip:text;color:transparent}.hero-copy{max-width:650px;color:rgba(255,255,255,.72);line-height:1.6;margin:12px 0 20px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap}.hero-btn{border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:11px 16px;background:rgba(255,255,255,.07);color:#fff;cursor:pointer;font-weight:800}.hero-btn.primary{background:var(--premium-accent);border-color:transparent;box-shadow:0 8px 25px var(--premium-glow)}
 .theme-switcher{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 18px;padding:10px 12px;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:rgba(255,255,255,.035)}.theme-label{font-size:.72rem;font-weight:800;letter-spacing:.12em;opacity:.7;text-transform:uppercase}.theme-choice{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:inherit;border-radius:999px;padding:7px 11px;cursor:pointer}.theme-choice.active{border-color:var(--premium-accent);box-shadow:0 0 0 2px var(--premium-glow)}
 .continue-section{margin:0 0 22px}.continue-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.continue-head h2{margin:0;font-size:1rem}.continue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}.continue-card{display:flex;gap:10px;align-items:center;padding:10px;border-radius:16px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);cursor:pointer;transition:.2s}.continue-card:hover{transform:translateY(-3px);border-color:var(--premium-accent)}.continue-card img{width:48px;height:68px;object-fit:cover;border-radius:9px}.continue-card strong{font-size:.85rem}.continue-card small{display:block;opacity:.6;margin-top:4px}
-body.theme-blue{--premium-accent:#27a7ff;--premium-accent2:#a7e8ff;--premium-glow:rgba(39,167,255,.28)}body.theme-gold{--premium-accent:#d9a441;--premium-accent2:#fff0a8;--premium-glow:rgba(217,164,65,.28)}body.theme-cosmic{--premium-accent:#a855f7;--premium-accent2:#67e8f9;--premium-glow:rgba(168,85,247,.28)}
+body.theme-blue{--premium-accent:#27a7ff;--premium-accent2:#a7e8ff;--premium-glow:rgba(39,167,255,.28)}body.theme-blue .premium-hero{background:linear-gradient(90deg,rgba(3,10,22,.97) 0%,rgba(5,18,38,.84) 42%,rgba(0,30,70,.25) 100%),url("https://image.tmdb.org/t/p/w780/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg") center right/cover no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center}.theme-blue .premium-hero:after{background:linear-gradient(90deg,rgba(0,5,15,.94),rgba(0,20,50,.5),transparent)}
+body.theme-gold{--premium-accent:#d9a441;--premium-accent2:#fff0a8;--premium-glow:rgba(217,164,65,.28)}body.theme-gold .premium-hero{background:linear-gradient(90deg,rgba(12,9,2,.97) 0%,rgba(35,25,4,.82) 42%,rgba(60,45,10,.20) 100%),url("https://image.tmdb.org/t/p/w780/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg") center right/cover no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center}.theme-gold .premium-hero:after{background:linear-gradient(90deg,rgba(10,7,0,.95),rgba(30,20,3,.52),transparent)}
+body.theme-cosmic{--premium-accent:#a855f7;--premium-accent2:#67e8f9;--premium-glow:rgba(168,85,247,.28)}body.theme-cosmic .premium-hero{background:linear-gradient(90deg,rgba(8,4,20,.97) 0%,rgba(24,8,42,.82) 42%,rgba(30,10,55,.22) 100%),url("https://image.tmdb.org/t/p/w780/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg") center right/cover no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center}.theme-cosmic .premium-hero:after{background:linear-gradient(90deg,rgba(8,2,20,.95),rgba(30,5,45,.5),transparent)}
+body.theme-ironman{--premium-accent:#e10600;--premium-accent2:#ffcc66;--premium-glow:rgba(225,6,0,.32)}body.theme-ironman .premium-hero{background:linear-gradient(90deg,rgba(4,5,8,.96) 0%,rgba(8,9,13,.82) 42%,rgba(20,8,5,.30) 100%),url("https://image.tmdb.org/t/p/w780/78lPtwv72eTNqFW9COBYI0dWDJa.jpg") center right/cover no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center;border-color:rgba(255,190,80,.22);box-shadow:0 25px 90px rgba(225,6,0,.18),inset 0 0 70px rgba(0,0,0,.35)}body.theme-ironman .premium-hero:before{background:radial-gradient(circle at 78% 45%,rgba(255,205,90,.72),transparent 7%),radial-gradient(circle at 78% 45%,rgba(0,190,255,.35),transparent 18%),conic-gradient(from 90deg,transparent 0 40%,#e10600 47%,transparent 55%,#ffcc66 68%,transparent 76%);filter:blur(35px);opacity:.32}body.theme-ironman .premium-hero:after{background:linear-gradient(90deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,.72) 38%,rgba(0,0,0,.12) 100%)}body.theme-ironman .hero-kicker{color:#ffcc66;text-shadow:0 0 12px rgba(255,204,102,.55)}body.theme-ironman .hero-title{background:linear-gradient(90deg,#fff 0%,#ffcc66 55%,#e10600 100%);-webkit-background-clip:text;background-clip:text}body.theme-ironman .hero-btn.primary{background:linear-gradient(135deg,#e10600,#9b0000);box-shadow:0 8px 30px rgba(225,6,0,.38)}body.theme-ironman .theme-choice.active{border-color:#ffcc66;box-shadow:0 0 0 2px rgba(255,204,102,.16),0 0 20px rgba(225,6,0,.22)}
+body:not(.theme-blue):not(.theme-gold):not(.theme-cosmic):not(.theme-ironman) .premium-hero{background:linear-gradient(90deg,rgba(12,3,5,.97) 0%,rgba(35,6,10,.82) 42%,rgba(70,8,14,.18) 100%),url("https://image.tmdb.org/t/p/w780/or06FN3Dka5tukK1e9sl16pB3iy.jpg") center right/cover no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center}
+.theme-poster-strip{display:flex;align-items:center;gap:14px;margin:-4px 0 20px;padding:10px 12px;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(255,255,255,.035);overflow:hidden}.theme-poster-strip img{width:58px;height:82px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,.14);box-shadow:0 8px 25px rgba(0,0,0,.3)}.theme-poster-info{min-width:0}.theme-poster-info strong{display:block;font-size:.78rem;letter-spacing:.05em}.theme-poster-info span{display:block;margin-top:4px;font-size:.58rem;opacity:.6}.theme-poster-chip{margin-left:auto;padding:7px 10px;border-radius:999px;font-size:.55rem;font-weight:800;border:1px solid var(--premium-accent);color:var(--premium-accent2);white-space:nowrap}@media(max-width:600px){.theme-poster-chip{display:none}.theme-poster-strip img{width:48px;height:68px}}
 @keyframes heroSpin{to{transform:rotate(360deg)}}@media(max-width:600px){.premium-hero{padding:25px 20px}.continue-grid{grid-template-columns:1fr 1fr}}
+
+
+/* =========================================================
+   MCU TRACKER V3 — PREMIUM DASHBOARD
+========================================================= */
+.v3-dashboard{margin:0 0 24px;display:grid;grid-template-columns:1.35fr .65fr;gap:14px}
+.v3-card{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.1);border-radius:20px;background:linear-gradient(145deg,rgba(17,27,47,.9),rgba(6,10,18,.92));box-shadow:0 14px 40px rgba(0,0,0,.2);padding:20px}
+.v3-card:before{content:"";position:absolute;width:180px;height:180px;right:-80px;top:-90px;border-radius:50%;background:var(--premium-glow);filter:blur(12px);pointer-events:none}
+.v3-profile{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.v3-greeting small{display:block;color:var(--muted);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.v3-greeting h2{font-size:1.35rem;margin:0 0 7px}.v3-greeting p{margin:0;color:rgba(255,255,255,.62);font:600 .78rem/1.5 Arial,sans-serif}
+.v3-avatar{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(135deg,var(--premium-accent),var(--secondary));font-size:1.45rem;font-weight:900;box-shadow:0 0 25px var(--premium-glow)}
+.v3-mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:17px}.v3-mini-stat{padding:10px;border-radius:13px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}.v3-mini-stat strong{display:block;color:var(--premium-accent2);font-size:1rem}.v3-mini-stat span{font-size:.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.v3-progress{margin-top:15px}.v3-progress-row{display:flex;justify-content:space-between;font-size:.62rem;color:var(--muted);margin-bottom:7px}.v3-progress-track{height:9px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}.v3-progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--premium-accent),var(--premium-accent2));box-shadow:0 0 15px var(--premium-glow);transition:width .5s ease}
+.v3-next-title{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--premium-accent2);margin-bottom:8px}.v3-next-movie{display:flex;gap:12px;align-items:center;cursor:pointer}.v3-next-movie img{width:65px;height:92px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,.12)}.v3-next-movie strong{display:block;font-size:.88rem;line-height:1.4}.v3-next-movie span{display:block;color:var(--muted);font-size:.58rem;margin-top:6px;line-height:1.5}
+.v3-section{margin:0 0 24px}.v3-section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.v3-section-head h2{font-size:.95rem;margin:0}.v3-section-head span{font-size:.58rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.v3-timeline{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.v3-phase{padding:13px 9px;border:1px solid rgba(255,255,255,.08);border-radius:15px;background:rgba(255,255,255,.035);cursor:pointer;transition:.2s}.v3-phase:hover{transform:translateY(-3px);border-color:var(--premium-accent)}.v3-phase strong{font-size:.68rem}.v3-phase small{display:block;color:var(--muted);font-size:.52rem;margin-top:7px}.v3-phase-bar{height:5px;background:rgba(255,255,255,.08);border-radius:99px;margin-top:9px;overflow:hidden}.v3-phase-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--premium-accent),var(--premium-accent2));transition:width .4s}
+.v3-achievements{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.v3-achievement{padding:13px;border-radius:15px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.035);opacity:.48;filter:grayscale(1);transition:.25s}.v3-achievement.unlocked{opacity:1;filter:none;border-color:rgba(255,213,74,.3);box-shadow:0 0 20px rgba(255,213,74,.08)}.v3-achievement b{font-size:1.2rem}.v3-achievement strong{display:block;font-size:.65rem;margin-top:6px}.v3-achievement small{display:block;color:var(--muted);font-size:.5rem;line-height:1.45;margin-top:4px}
+.v3-recent{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.v3-recent-item{display:flex;gap:9px;align-items:center;padding:9px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);cursor:pointer}.v3-recent-item img{width:38px;height:54px;object-fit:cover;border-radius:7px}.v3-recent-item strong{font-size:.62rem;line-height:1.35}.v3-recent-item small{display:block;color:var(--muted);font-size:.48rem;margin-top:4px}
+.v3-empty{color:var(--muted);font-size:.65rem;padding:12px 0}.v3-profile-edit{display:flex;gap:7px;margin-top:12px}.v3-profile-edit input{flex:1;min-width:0;padding:9px 11px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:inherit;outline:none;font-family:inherit;font-size:.65rem}.v3-profile-edit button{padding:9px 12px;border-radius:10px;border:0;background:var(--premium-accent);color:#fff;font-weight:800;cursor:pointer}
+body.light-mode .v3-card,body.light-mode .v3-phase,body.light-mode .v3-achievement,body.light-mode .v3-recent-item{background:rgba(255,255,255,.78);border-color:rgba(80,110,150,.15)}
+body.light-mode .v3-greeting p{color:#52627a}
+@media(max-width:900px){.v3-dashboard{grid-template-columns:1fr}.v3-timeline{grid-template-columns:repeat(3,1fr)}.v3-achievements{grid-template-columns:repeat(2,1fr)}.v3-recent{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.v3-timeline{grid-template-columns:repeat(2,1fr)}.v3-recent{grid-template-columns:1fr}.v3-mini-stats{grid-template-columns:repeat(3,1fr)}.v3-card{padding:15px}}
+
+
+/* ===== PREMIUM LOCAL AUTH UI ===== */
+.auth-bar{display:flex;align-items:center;gap:10px;margin-left:auto}
+.auth-user{display:none;align-items:center;gap:9px;padding:6px 10px;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:rgba(255,255,255,.045)}
+.auth-avatar{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:900;background:linear-gradient(135deg,var(--premium-accent),var(--premium-accent2));color:#090b10}
+.auth-user strong{font-size:.78rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.auth-login-btn,.auth-logout-btn{border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:9px 12px;background:rgba(255,255,255,.06);color:inherit;cursor:pointer;font-weight:800}
+.auth-login-btn{background:linear-gradient(135deg,var(--premium-accent),var(--premium-accent2));color:#07080b;border:0}
+.auth-overlay{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(18px)}
+.auth-overlay.open{display:flex}
+.auth-card{width:min(430px,100%);border:1px solid rgba(255,255,255,.14);border-radius:28px;background:linear-gradient(145deg,rgba(20,24,34,.98),rgba(9,12,18,.98));box-shadow:0 30px 100px rgba(0,0,0,.55);padding:28px;position:relative}
+.auth-close{position:absolute;right:15px;top:13px;width:36px;height:36px;border:0;border-radius:50%;background:rgba(255,255,255,.07);color:#fff;font-size:20px;cursor:pointer}
+.auth-brand{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--premium-accent2);font-weight:900}
+.auth-card h2{font-size:2rem;margin:7px 0 5px}.auth-card p{opacity:.68;margin:0 0 20px;font-size:.9rem}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:5px;background:rgba(255,255,255,.05);border-radius:13px;margin-bottom:18px}
+.auth-tab{border:0;background:transparent;color:inherit;padding:10px;border-radius:9px;font-weight:800;cursor:pointer}.auth-tab.active{background:rgba(255,255,255,.11)}
+.auth-form{display:grid;gap:12px}.auth-field{display:grid;gap:6px}.auth-field label{font-size:.74rem;font-weight:800;opacity:.72}.auth-field input{width:100%;box-sizing:border-box;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(0,0,0,.22);color:inherit;padding:12px 13px;outline:none}.auth-field input:focus{border-color:var(--premium-accent);box-shadow:0 0 0 3px var(--premium-glow)}
+.auth-submit{margin-top:4px;border:0;border-radius:13px;padding:13px;background:linear-gradient(135deg,var(--premium-accent),var(--premium-accent2));color:#07080b;font-weight:950;cursor:pointer}.auth-message{min-height:18px;font-size:.76rem;font-weight:700;color:#ff9b9b}.auth-note{font-size:.68rem;opacity:.5;margin-top:15px;line-height:1.5}
+@media(max-width:760px){.auth-bar{width:100%;margin-top:10px}.auth-user{flex:1}.auth-user strong{max-width:180px}}
+
+
+/* ===== V5 AUTH + ADMIN ===== */
+.auth-bar{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin:10px 0 16px}
+.auth-user{display:none;align-items:center;gap:9px}.auth-avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--premium-accent,#e50914),#111);color:#fff;font-weight:800;box-shadow:0 0 18px var(--premium-glow,rgba(229,9,20,.3))}
+.auth-login-btn,.auth-logout-btn,.auth-admin-btn{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:inherit;border-radius:12px;padding:10px 14px;cursor:pointer;font-weight:700}.auth-admin-btn{background:linear-gradient(135deg,#d9a441,#8f5d00);color:#111}
+.auth-overlay{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.78);backdrop-filter:blur(12px)}.auth-overlay.open{display:flex}.auth-card{width:min(460px,100%);padding:28px;border-radius:24px;background:linear-gradient(145deg,#161616,#090909);border:1px solid rgba(255,255,255,.14);box-shadow:0 25px 80px rgba(0,0,0,.55);position:relative}.auth-close{position:absolute;right:14px;top:10px;background:none;border:0;color:#aaa;font-size:28px;cursor:pointer}.auth-brand{font-size:12px;letter-spacing:2px;color:var(--premium-accent,#e50914);font-weight:800;margin-bottom:10px}.auth-card h2{font-size:30px;margin-bottom:5px}.auth-card p{color:#aaa;margin-bottom:18px}.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}.auth-tab{padding:11px;border-radius:10px;border:1px solid #333;background:#111;color:#aaa;cursor:pointer}.auth-tab.active{color:#fff;border-color:var(--premium-accent,#e50914);background:rgba(229,9,20,.12)}.auth-form{display:grid;gap:13px}.auth-field{display:grid;gap:6px}.auth-field label{font-size:12px;color:#aaa}.auth-field input{width:100%;padding:13px;border-radius:10px;border:1px solid #333;background:#080808;color:#fff;outline:none}.auth-field input:focus{border-color:var(--premium-accent,#e50914)}.auth-submit{padding:13px;border:0;border-radius:11px;background:linear-gradient(135deg,var(--premium-accent,#e50914),#7d0000);color:#fff;font-weight:800;cursor:pointer}.auth-message{min-height:18px;color:#ff7b7b;font-size:13px}.auth-note{margin-top:16px;color:#777;font-size:11px;line-height:1.5}
+.admin-overlay{position:fixed;inset:0;z-index:9998;display:none;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);padding:20px;overflow:auto}.admin-overlay.open{display:block}.admin-panel{width:min(1100px,100%);margin:30px auto;background:#0d0d0d;border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:22px;box-shadow:0 30px 100px #000}.admin-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}.admin-head h2{margin:0}.admin-close{border:0;background:#222;color:#fff;border-radius:10px;padding:9px 12px;cursor:pointer}.admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.admin-stat{background:#151515;border:1px solid #262626;border-radius:14px;padding:16px}.admin-stat b{display:block;font-size:25px}.admin-stat span{color:#888;font-size:12px}.admin-table-wrap{overflow:auto;border:1px solid #252525;border-radius:14px}.admin-table{width:100%;border-collapse:collapse;min-width:700px}.admin-table th,.admin-table td{padding:12px;border-bottom:1px solid #222;text-align:left;font-size:13px}.admin-table th{color:#aaa;background:#141414}.admin-table td{color:#ddd}.admin-role{font-size:10px;padding:4px 7px;border-radius:999px;background:#222}.admin-role.admin{background:rgba(217,164,65,.18);color:#ffd979}.admin-actions{display:flex;gap:6px;flex-wrap:wrap}.admin-actions button{border:1px solid #333;background:#171717;color:#ddd;border-radius:8px;padding:7px 9px;cursor:pointer}.admin-actions button.danger{color:#ff8c8c}.admin-footer{color:#777;font-size:11px;margin-top:14px;line-height:1.5}@media(max-width:700px){.admin-stats{grid-template-columns:1fr 1fr}.auth-bar{justify-content:center}}
+
+
+/* ===== V5 SECUREAUTH-STYLE LOGIN UI ===== */
+.auth-tabs{display:none!important}
+.auth-overlay{position:fixed;inset:0;z-index:10050;display:none;align-items:center;justify-content:center;padding:18px;background:radial-gradient(circle at 20% 10%,rgba(0,229,255,.12),transparent 30%),radial-gradient(circle at 85% 90%,rgba(84,64,255,.18),transparent 35%),rgba(3,7,20,.93);backdrop-filter:blur(18px)}
+.auth-overlay.open{display:flex;animation:v5Fade .25s ease}
+.auth-card{width:min(780px,100%);max-height:min(92vh,900px);overflow:auto;padding:0;border-radius:34px;background:#10182a;border:1px solid rgba(120,190,255,.18);box-shadow:0 35px 120px rgba(0,0,0,.7),0 0 55px rgba(0,229,255,.08);position:relative;isolation:isolate}
+.auth-card:before{content:"";position:absolute;inset:-2px;border-radius:36px;background:linear-gradient(135deg,rgba(0,229,255,.16),transparent 35%,rgba(91,73,255,.18));z-index:-1;filter:blur(1px)}
+.auth-top{height:82px;padding:0 30px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(150,190,255,.13);background:rgba(3,7,22,.62)}
+.auth-logo{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.03em;font-size:20px}.auth-logo-icon{width:34px;height:34px;display:grid;place-items:center;border:2px solid #17d9ff;border-radius:9px;color:#17d9ff;box-shadow:0 0 20px rgba(23,217,255,.28)}
+.auth-secure{display:flex;align-items:center;gap:10px;color:#23d69b;font-weight:800}.auth-secure-dot{width:14px;height:14px;border-radius:50%;background:#13c98b;box-shadow:0 0 14px rgba(19,201,139,.6)}
+.auth-close{position:absolute;right:18px;top:18px;width:38px;height:38px;border:1px solid rgba(255,255,255,.08);border-radius:50%;background:rgba(255,255,255,.05);color:#b8c4d8;font-size:22px;cursor:pointer;z-index:3}.auth-close:hover{background:rgba(255,255,255,.1);color:#fff}
+.auth-body{padding:50px 58px 36px;text-align:center}.auth-key{width:136px;height:136px;margin:0 auto 28px;border-radius:32px;display:grid;place-items:center;font-size:66px;background:linear-gradient(135deg,#2b91df,#564be6);box-shadow:0 0 40px rgba(0,190,255,.28),0 22px 40px rgba(0,0,0,.22)}
+.auth-card h2{font-size:44px;line-height:1.05;margin:0 0 12px;font-weight:900;letter-spacing:-.03em}.auth-card p{font-size:22px;color:#94a3bc;margin:0 0 38px}
+.auth-form{display:grid;gap:18px;text-align:left}.auth-field{display:grid;gap:9px}.auth-field label{font-size:17px;font-weight:900;color:#d6deeb;letter-spacing:.04em;text-transform:uppercase}.auth-input-wrap{position:relative}.auth-input-icon{position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:24px;opacity:.65}.auth-field input{width:100%;box-sizing:border-box;padding:20px 58px 20px 58px;border-radius:18px;border:1px solid rgba(136,165,210,.18);background:#050a19;color:#fff;font-size:20px;outline:none;transition:.2s}.auth-field input::placeholder{color:#5d6b84}.auth-field input:focus{border-color:#16c8f2;box-shadow:0 0 0 4px rgba(22,200,242,.1),0 0 30px rgba(22,200,242,.08)}
+.auth-pass-toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:#91a0b8;font-size:22px;cursor:pointer;padding:10px}.auth-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#8d9bb1;font-size:14px}.auth-check{display:flex;align-items:center;gap:8px}.auth-check input{accent-color:#20c9f5;width:17px;height:17px}.auth-link{color:#24d8ff;text-decoration:none;font-weight:800}.auth-submit{min-height:66px;border:0;border-radius:18px;background:linear-gradient(100deg,#12c5d9,#2d91df 48%,#5546e7);color:#fff;font-size:25px;font-weight:900;cursor:pointer;box-shadow:0 16px 35px rgba(28,148,229,.24);transition:.2s}.auth-submit:hover{transform:translateY(-2px);filter:brightness(1.08)}.auth-submit:disabled{opacity:.65;cursor:wait;transform:none}
+.auth-demo{min-height:60px;border:1px solid rgba(128,160,205,.16);border-radius:17px;background:rgba(36,51,74,.48);color:#22d4f4;font-size:17px;font-weight:800;cursor:pointer}.auth-demo:hover{background:rgba(44,66,96,.65)}
+.auth-create{margin-top:34px;text-align:center;color:#8795aa;font-size:16px}.auth-create button{border:0;background:none;color:#22d4f4;font-size:16px;font-weight:900;text-decoration:underline;cursor:pointer}.auth-note{margin:30px -58px -36px;padding:24px 30px;background:rgba(3,7,22,.58);border-top:1px solid rgba(150,190,255,.1);color:#65738b;font-size:14px;line-height:1.55}
+.auth-message{min-height:22px;font-size:14px;font-weight:800;color:#ff8e9b;text-align:center}.auth-message.ok{color:#37d9a0}.auth-signup-extra{display:none}.auth-card.signup-mode .auth-signup-extra{display:grid}
+@keyframes v5Fade{from{opacity:0}to{opacity:1}}
+@media(max-width:700px){.auth-card{width:100%;border-radius:28px}.auth-top{height:72px;padding:0 18px}.auth-logo{font-size:16px}.auth-secure{font-size:13px}.auth-body{padding:34px 22px 26px}.auth-key{width:106px;height:106px;font-size:50px;border-radius:26px;margin-bottom:22px}.auth-card h2{font-size:34px}.auth-card p{font-size:17px;margin-bottom:28px}.auth-field label{font-size:14px}.auth-field input{font-size:17px;padding:17px 52px}.auth-submit{min-height:58px;font-size:21px}.auth-note{margin:24px -22px -26px;padding:20px 22px}.auth-secure span:last-child{display:none}}
 
 </style>
 </head>
@@ -1627,6 +1705,50 @@ body.theme-blue{--premium-accent:#27a7ff;--premium-accent2:#a7e8ff;--premium-glo
         </div>
 
     </header>
+
+
+<!-- ===== AUTHENTICATION UI ===== -->
+<div class="auth-bar" id="authBar">
+  <div class="auth-user" id="authUserBox">
+    <span class="auth-avatar" id="authAvatar">S</span>
+    <strong id="authUserName">Guest</strong>
+    <button class="auth-logout-btn" id="authLogoutBtn">Logout</button><button class="auth-admin-btn" id="authAdminBtn" style="display:none">🛡️ Admin</button>
+  </div>
+  <button class="auth-login-btn" id="authOpenBtn">👤 Login</button>
+</div>
+
+<div class="auth-overlay" id="authOverlay" aria-hidden="true">
+  <section class="auth-card" id="authCard" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <button class="auth-close" id="authCloseBtn" aria-label="Close">×</button>
+    <div class="auth-top"><div class="auth-logo"><span class="auth-logo-icon">♢</span> SECUREAUTH™</div><div class="auth-secure"><span class="auth-secure-dot"></span><span>System Secure</span></div></div>
+    <div class="auth-body">
+      <div class="auth-key">🔑</div>
+      <h2 id="authTitle">Welcome Back</h2>
+      <p id="authSubtitle">Sign in to access your secure MCU workspace</p>
+      <form class="auth-form" id="authForm">
+        <div class="auth-field auth-signup-extra" id="authNameField"><label for="authName">Display Name</label><div class="auth-input-wrap"><span class="auth-input-icon">👤</span><input id="authName" maxlength="24" autocomplete="name" placeholder="Your name"></div></div>
+        <div class="auth-field"><label for="authEmail">Email ID / Username</label><div class="auth-input-wrap"><span class="auth-input-icon">✉</span><input id="authEmail" type="email" autocomplete="username" required placeholder="admin@example.com"></div></div>
+        <div class="auth-field"><label for="authPassword">Password</label><div class="auth-input-wrap"><span class="auth-input-icon">🔒</span><input id="authPassword" type="password" minlength="6" autocomplete="current-password" required placeholder="••••••••"><button class="auth-pass-toggle" type="button" id="authPassToggle" aria-label="Show password">◉</button></div></div>
+        <div class="auth-meta"><label class="auth-check"><input id="authRemember" type="checkbox" checked> Remember me</label><a class="auth-link" href="#" id="authForgot">Forgot password?</a></div>
+        <div class="auth-message" id="authMessage"></div>
+        <button class="auth-submit" id="authSubmit" type="submit">↪ &nbsp; Sign In</button>
+        <button class="auth-demo" id="authDemoBtn" type="button">✦ &nbsp; Fill Admin Demo Credentials</button>
+      </form>
+      <div class="auth-create"><span id="authCreateText">Don't have an account?</span> <button id="authSwitchBtn" type="button">Create one</button></div>
+    </div>
+    <div class="auth-note">Secure ID &amp; Password Authentication System • Powered by MCU Tracker<br><small>Prototype mode: accounts are stored locally in this browser. For real multi-device security, connect Supabase/Firebase.</small></div>
+  </section>
+</div>
+
+<!-- ===== V4 ADMIN DASHBOARD ===== -->
+<div class="admin-overlay" id="adminOverlay" aria-hidden="true">
+<section class="admin-panel" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+<div class="admin-head"><div><div class="auth-brand">MCU TRACKER V5</div><h2 id="adminTitle">🛡️ Admin Dashboard</h2></div><button class="admin-close" id="adminCloseBtn">✕ Close</button></div>
+<div class="admin-stats"><div class="admin-stat"><b id="adminUsers">0</b><span>Total Users</span></div><div class="admin-stat"><b id="adminAdmins">0</b><span>Admins</span></div><div class="admin-stat"><b id="adminWatched">0</b><span>Watched Items</span></div><div class="admin-stat"><b id="adminFavorites">0</b><span>Favorites</span></div></div>
+<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>User</th><th>Email</th><th>Role</th><th>Watched</th><th>Favorites</th><th>Actions</th></tr></thead><tbody id="adminUserRows"></tbody></table></div>
+<div class="admin-footer">Local admin mode: accounts are stored in this browser. This is not production authentication. For real multi-device accounts, connect Supabase/Firebase.</div>
+</section></div>
+
 <section class="premium-hero" aria-label="Premium MCU dashboard">
   <div class="hero-kicker">Marvel Inspired • Personal Watch Tracker</div>
   <h2 class="hero-title">Your MCU. Your Timeline.</h2>
@@ -1642,6 +1764,12 @@ body.theme-blue{--premium-accent:#27a7ff;--premium-accent2:#a7e8ff;--premium-glo
   <button class="theme-choice" data-hero-theme="blue">🔵 Multiverse Blue</button>
   <button class="theme-choice" data-hero-theme="gold">🟡 Infinity Gold</button>
   <button class="theme-choice" data-hero-theme="cosmic">🟣 Cosmic</button>
+  <button class="theme-choice" data-hero-theme="ironman">🤖 Iron Man</button>
+</section>
+<section class="theme-poster-strip" aria-live="polite">
+  <img id="themePoster" src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg" alt="Theme poster">
+  <div class="theme-poster-info"><strong id="themePosterTitle">Avengers: Endgame</strong><span id="themePosterSubtitle">Marvel Red • Phase 3</span></div>
+  <span class="theme-poster-chip">CINEMATIC THEME</span>
 </section>
 <section class="continue-section" id="continueSection" hidden>
   <div class="continue-head"><h2>▶ Continue Watching</h2><span id="continueCount"></span></div>
@@ -1654,7 +1782,57 @@ body.theme-blue{--premium-accent:#27a7ff;--premium-accent2:#a7e8ff;--premium-glo
          MAIN PANEL
     ====================================================== -->
 
-    <main class="panel">
+    
+<!-- V3 PREMIUM DASHBOARD -->
+<section class="v3-dashboard" aria-label="Personal MCU dashboard">
+  <div class="v3-card">
+    <div class="v3-profile">
+      <div class="v3-greeting">
+        <small>Personal MCU Command Center</small>
+        <h2 id="v3Greeting">Welcome back, Shashwat ⚡</h2>
+        <p>Your cinematic journey, progress and achievements — all in one place.</p>
+      </div>
+      <div class="v3-avatar" id="v3Avatar">S</div>
+    </div>
+    <div class="v3-mini-stats">
+      <div class="v3-mini-stat"><strong id="v3Watched">0</strong><span>Watched</span></div>
+      <div class="v3-mini-stat"><strong id="v3Favs">0</strong><span>Favorites</span></div>
+      <div class="v3-mini-stat"><strong id="v3Remaining">0</strong><span>Remaining</span></div>
+    </div>
+    <div class="v3-progress">
+      <div class="v3-progress-row"><span>MCU Journey</span><b id="v3ProgressText">0%</b></div>
+      <div class="v3-progress-track"><div class="v3-progress-fill" id="v3ProgressFill"></div></div>
+    </div>
+    <div class="v3-profile-edit">
+      <input id="v3NameInput" maxlength="24" placeholder="Your display name">
+      <button id="v3SaveName">Save</button>
+    </div>
+  </div>
+  <div class="v3-card">
+    <div class="v3-next-title">Recommended Next</div>
+    <div class="v3-next-movie" id="v3NextMovie">
+      <img id="v3NextPoster" src="" alt="Next movie poster">
+      <div><strong id="v3NextTitle">Loading...</strong><span id="v3NextMeta">Your next unwatched movie</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="v3-section">
+  <div class="v3-section-head"><h2>🧭 MCU Phase Timeline</h2><span>Progress by saga</span></div>
+  <div class="v3-timeline" id="v3Timeline"></div>
+</section>
+
+<section class="v3-section">
+  <div class="v3-section-head"><h2>🏆 Achievements</h2><span id="v3AchievementCount">0 unlocked</span></div>
+  <div class="v3-achievements" id="v3Achievements"></div>
+</section>
+
+<section class="v3-section">
+  <div class="v3-section-head"><h2>🕘 Recently Opened</h2><span>Latest activity</span></div>
+  <div class="v3-recent" id="v3Recent"></div>
+</section>
+
+<main class="panel">
 
         <!-- SEARCH -->
 
@@ -1991,9 +2169,6 @@ body.theme-blue{--premium-accent:#27a7ff;--premium-accent2:#a7e8ff;--premium-glo
     </div>
 
 </div>
-<div class="movie-modal" id="movieModal">
-</div>
-
 
 <!-- =========================================================
      JAVASCRIPT
@@ -3670,11 +3845,26 @@ function renderContinue(){
   continueGrid.innerHTML=items.map(m=>`<article class="continue-card" data-index="${m.originalIndex}"><img src="${m.poster||''}" alt=""><div><strong>${m.title}</strong><small>${m.phase||'MCU'} • ${m.year||'TBA'}</small></div></article>`).join('');
   continueGrid.querySelectorAll('.continue-card').forEach(card=>card.addEventListener('click',()=>openMovieModal(movies[Number(card.dataset.index)],Number(card.dataset.index))));
 }
+const heroThemeData={
+  red:{title:'Avengers: Endgame',subtitle:'Marvel Red • Phase 3',poster:'https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg'},
+  blue:{title:'Spider-Man: No Way Home',subtitle:'Multiverse Blue • Phase 4',poster:'https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg'},
+  gold:{title:'Avengers: Infinity War',subtitle:'Infinity Gold • Phase 3',poster:'https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg'},
+  cosmic:{title:'Guardians of the Galaxy',subtitle:'Cosmic • Phase 2',poster:'https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg'},
+  ironman:{title:'Iron Man',subtitle:'Iron Man • Phase 1',poster:'https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg'}
+};
 function applyHeroTheme(theme){
-  document.body.classList.remove('theme-blue','theme-gold','theme-cosmic');
+  if(!heroThemeData[theme])theme='red';
+  document.body.classList.remove('theme-blue','theme-gold','theme-cosmic','theme-ironman');
   if(theme!=='red')document.body.classList.add('theme-'+theme);
   localStorage.setItem('mcuHeroTheme',theme);
   document.querySelectorAll('[data-hero-theme]').forEach(b=>b.classList.toggle('active',b.dataset.heroTheme===theme));
+  const data=heroThemeData[theme];
+  const poster=document.getElementById('themePoster');
+  const title=document.getElementById('themePosterTitle');
+  const subtitle=document.getElementById('themePosterSubtitle');
+  if(poster){poster.src=data.poster;poster.alt=data.title+' poster';}
+  if(title)title.textContent=data.title;
+  if(subtitle)subtitle.textContent=data.subtitle;
 }
 document.querySelectorAll('[data-hero-theme]').forEach(b=>b.addEventListener('click',()=>applyHeroTheme(b.dataset.heroTheme)));
 applyHeroTheme(localStorage.getItem('mcuHeroTheme')||'red');
@@ -3685,6 +3875,169 @@ if(heroContinueBtn)heroContinueBtn.addEventListener('click',()=>document.getElem
 const premiumRenderMovies=renderMovies;
 renderMovies=function(){premiumRenderMovies();renderContinue();};
 renderContinue();
+
+
+/* =========================================================
+   MCU TRACKER V3 — DASHBOARD LOGIC
+========================================================= */
+(function(){
+  const V3 = {
+    historyKey: 'mcuV3History',
+    nameKey: 'mcuV3Name'
+  };
+  const $ = id => document.getElementById(id);
+  const getHistory = () => { try { return JSON.parse(localStorage.getItem(V3.historyKey)) || []; } catch(e) { return []; } };
+  const saveHistory = list => localStorage.setItem(V3.historyKey, JSON.stringify(list.slice(0,8)));
+
+  function recordMovie(movie, index){
+    if(!movie) return;
+    let list = getHistory().filter(x => x.index !== index);
+    list.unshift({index, title: movie.title, poster: movie.poster || '', phase: movie.phase || 'MCU', year: movie.year || ''});
+    saveHistory(list);
+  }
+
+  const originalOpenMovieModalV3 = window.openMovieModal;
+  if(typeof originalOpenMovieModalV3 === 'function'){
+    window.openMovieModal = function(movie,index){
+      recordMovie(movie,index);
+      return originalOpenMovieModalV3.apply(this, arguments);
+    };
+  }
+
+  function movieProgress(){
+    const total = movies.length;
+    const done = movies.filter((_,i)=>!!watched[i]).length;
+    return total ? Math.round(done/total*100) : 0;
+  }
+
+  function renderV3(){
+    const name = localStorage.getItem(V3.nameKey) || 'Shashwat';
+    $('v3Greeting').textContent = `Welcome back, ${name} ⚡`;
+    $('v3Avatar').textContent = name.trim().charAt(0).toUpperCase() || 'S';
+    $('v3NameInput').value = name;
+
+    const done = movies.filter((_,i)=>!!watched[i]).length;
+    const favs = movies.filter((_,i)=>!!favorites[i]).length;
+    const remaining = movies.length - done;
+    const percent = movieProgress();
+    $('v3Watched').textContent = done;
+    $('v3Favs').textContent = favs;
+    $('v3Remaining').textContent = remaining;
+    $('v3ProgressText').textContent = percent + '%';
+    $('v3ProgressFill').style.width = percent + '%';
+
+    const nextIndex = movies.findIndex((_,i)=>!watched[i]);
+    const next = nextIndex >= 0 ? movies[nextIndex] : null;
+    if(next){
+      $('v3NextPoster').src = next.poster || '';
+      $('v3NextPoster').onerror = function(){this.src='https://placehold.co/300x450/0d1422/00e5ff?text=MCU';};
+      $('v3NextTitle').textContent = next.title;
+      $('v3NextMeta').textContent = `${next.phase || 'MCU'} • ${next.year || 'TBA'} • ⭐ ${next.rating || 'TBA'}`;
+      $('v3NextMovie').onclick = () => openMovieModal(next,nextIndex);
+    } else {
+      $('v3NextTitle').textContent = 'MCU Complete 🎉';
+      $('v3NextMeta').textContent = 'You have completed every movie in this tracker.';
+    }
+
+    const phases = [...new Set(movies.map(m=>m.phase || 'MCU'))];
+    $('v3Timeline').innerHTML = phases.map(phase=>{
+      const ids = movies.map((m,i)=>({m,i})).filter(x=>x.m.phase===phase).map(x=>x.i);
+      const total=ids.length, complete=ids.filter(i=>!!watched[i]).length, pct=total?Math.round(complete/total*100):0;
+      return `<button class="v3-phase" data-phase="${phase.replace(/"/g,'&quot;')}"><strong>${phase}</strong><small>${complete}/${total} watched • ${pct}%</small><div class="v3-phase-bar"><i style="width:${pct}%"></i></div></button>`;
+    }).join('');
+    $('v3Timeline').querySelectorAll('.v3-phase').forEach(btn=>btn.addEventListener('click',()=>{
+      const phase=btn.dataset.phase;
+      const target=[...document.querySelectorAll('.movie-card')].find(card=>card.dataset.phase===phase);
+      document.querySelector('.panel')?.scrollIntoView({behavior:'smooth'});
+      const phaseBtn=[...document.querySelectorAll('.filter-btn')].find(b=>b.dataset.filter==='all');
+      if(phaseBtn) phaseBtn.click();
+      if(search){search.value=phase; search.dispatchEvent(new Event('input'));}
+    }));
+
+    const achievements = [
+      ['⚡','First Mission','Watch 1 movie',done>=1],
+      ['🛡️','Avenger','Watch 10 movies',done>=10],
+      ['💎','Infinity Saga','Watch 20 movies',done>=20],
+      ['🌌','Multiverse','Watch 30 movies',done>=30],
+      ['⭐','Collector','Save 5 favorites',favs>=5],
+      ['🏆','Completionist','Watch every movie',done===movies.length && movies.length>0],
+      ['🔥','Halfway Hero','Reach 50% progress',percent>=50],
+      ['👑','MCU Master','Reach 90% progress',percent>=90]
+    ];
+    const unlocked=achievements.filter(a=>a[3]).length;
+    $('v3AchievementCount').textContent = `${unlocked}/${achievements.length} unlocked`;
+    $('v3Achievements').innerHTML = achievements.map(a=>`<article class="v3-achievement ${a[3]?'unlocked':''}"><b>${a[0]}</b><strong>${a[1]}</strong><small>${a[2]}</small></article>`).join('');
+
+    const history=getHistory();
+    $('v3Recent').innerHTML = history.length ? history.map(x=>`<article class="v3-recent-item" data-index="${x.index}"><img src="${x.poster}" alt=""><div><strong>${x.title}</strong><small>${x.phase} • ${x.year}</small></div></article>`).join('') : '<div class="v3-empty">Open a movie to build your recent activity.</div>';
+    $('v3Recent').querySelectorAll('.v3-recent-item').forEach(card=>{
+      card.onclick=()=>{const i=Number(card.dataset.index); if(movies[i]) openMovieModal(movies[i],i);};
+    });
+    $('v3Recent').querySelectorAll('img').forEach(img=>img.onerror=function(){this.src='https://placehold.co/100x150/0d1422/00e5ff?text=MCU';});
+  }
+
+  $('v3SaveName').addEventListener('click',()=>{
+    const value=$('v3NameInput').value.trim() || 'Shashwat';
+    localStorage.setItem(V3.nameKey,value);
+    renderV3();
+  });
+  $('v3NameInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('v3SaveName').click();});
+
+  const originalRenderMoviesV3 = window.renderMovies;
+  if(typeof originalRenderMoviesV3 === 'function'){
+    window.renderMovies = function(){
+      const result=originalRenderMoviesV3.apply(this,arguments);
+      renderV3();
+      return result;
+    };
+  }
+
+  const originalSaveDataV3 = window.saveData;
+  if(typeof originalSaveDataV3 === 'function'){
+    window.saveData = function(){
+      const result=originalSaveDataV3.apply(this,arguments);
+      renderV3();
+      return result;
+    };
+  }
+
+  renderV3();
+})();
+
+
+/* ===== MCU TRACKER V5 AUTH + ADMIN ===== */
+(function(){
+'use strict';
+const ACCOUNT_KEY='mcuAccountsV5',SESSION_KEY='mcuSessionV5',ADMIN_CLAIM_CODE='MARVEL-ADMIN-2026',DEMO_EMAIL='admin@mcutracker.local',DEMO_PASSWORD='Admin@123',$=id=>document.getElementById(id);
+let mode='login';
+function readAccounts(){try{return JSON.parse(localStorage.getItem(ACCOUNT_KEY)||'{}')}catch(e){return {}}}
+function writeAccounts(a){localStorage.setItem(ACCOUNT_KEY,JSON.stringify(a))}
+function getSession(){return localStorage.getItem(SESSION_KEY)||''}
+function setSession(e){e?localStorage.setItem(SESSION_KEY,e):localStorage.removeItem(SESSION_KEY)}
+async function hashPassword(v){if(window.crypto&&crypto.subtle){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}let h=2166136261;for(let i=0;i<v.length;i++){h^=v.charCodeAt(i);h=Math.imul(h,16777619)}return'fallback-'+(h>>>0).toString(16)}
+function current(){const a=readAccounts(),e=getSession();return e&&a[e]?a[e]:null}
+function snapshot(){return{watched:typeof watched!=='undefined'?{...watched}:{},favorites:typeof favorites!=='undefined'?{...favorites}:{},soundEnabled:typeof soundEnabled!=='undefined'?soundEnabled:true,heroTheme:localStorage.getItem('mcuHeroTheme')||'red',name:localStorage.getItem('mcuV3Name')||''}}
+function applyAccount(a){if(typeof watched!=='undefined')watched=a?.watched?{...a.watched}:{};if(typeof favorites!=='undefined')favorites=a?.favorites?{...a.favorites}:{};if(typeof soundEnabled!=='undefined')soundEnabled=a?.soundEnabled!==false;if(a?.heroTheme)localStorage.setItem('mcuHeroTheme',a.heroTheme);if(a?.name)localStorage.setItem('mcuV3Name',a.name);if(typeof renderMovies==='function')renderMovies();if(typeof renderV3==='function')renderV3();if(typeof applyHeroTheme==='function')applyHeroTheme(localStorage.getItem('mcuHeroTheme')||'red')}
+function saveCurrent(){const e=getSession(),a=readAccounts();if(!e||!a[e])return;a[e]={...a[e],...snapshot(),lastActive:new Date().toISOString()};writeAccounts(a)}
+function updateHeader(){const a=current();$('authUserBox').style.display=a?'flex':'none';$('authOpenBtn').style.display=a?'none':'';$('authAdminBtn').style.display=a?.role==='admin'?'':'none';if(a){$('authUserName').textContent=a.name||a.email.split('@')[0];$('authAvatar').textContent=(a.name||a.email).charAt(0).toUpperCase()}}
+function message(text,ok=false){$('authMessage').textContent=text;$('authMessage').classList.toggle('ok',ok)}
+function openAuth(which='login'){$('authOverlay').classList.add('open');$('authOverlay').setAttribute('aria-hidden','false');setMode(which);setTimeout(()=>$('authEmail').focus(),50)}
+function closeAuth(){$('authOverlay').classList.remove('open');$('authOverlay').setAttribute('aria-hidden','true');$('authMessage').textContent='';$('authMessage').classList.remove('ok')}
+function setMode(next){mode=next;const s=mode==='signup';$('authCard').classList.toggle('signup-mode',s);$('authTitle').textContent=s?'Create Your Account':'Welcome Back';$('authSubtitle').textContent=s?'Create your secure MCU Tracker workspace':'Sign in to access your secure MCU workspace';$('authSubmit').textContent=s?'✦  Create Account':'↪  Sign In';$('authCreateText').textContent=s?'Already have an account?':"Don't have an account?";$('authSwitchBtn').textContent=s?'Sign in':'Create one';$('authPassword').autocomplete=s?'new-password':'current-password';message('')}
+$('authOpenBtn').addEventListener('click',()=>openAuth('login'));$('authCloseBtn').addEventListener('click',closeAuth);$('authOverlay').addEventListener('click',e=>{if(e.target===$('authOverlay'))closeAuth()});$('authSwitchBtn').addEventListener('click',()=>setMode(mode==='login'?'signup':'login'));$('authPassToggle').addEventListener('click',()=>{const i=$('authPassword');i.type=i.type==='password'?'text':'password';$('authPassToggle').textContent=i.type==='password'?'◉':'◉̸'});$('authForgot').addEventListener('click',e=>{e.preventDefault();message('Local prototype: password recovery is not available without a backend.')});
+$('authDemoBtn').addEventListener('click',async()=>{const a=readAccounts();if(!a[DEMO_EMAIL]){a[DEMO_EMAIL]={email:DEMO_EMAIL,name:'MCU Admin',passwordHash:await hashPassword(DEMO_PASSWORD),role:'admin',watched:{},favorites:{},soundEnabled:true,heroTheme:'red',createdAt:new Date().toISOString(),lastActive:new Date().toISOString()};writeAccounts(a)}$('authEmail').value=DEMO_EMAIL;$('authPassword').value=DEMO_PASSWORD;setMode('login');message('Demo admin credentials filled. Tap Sign In.',true)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('authOverlay').classList.contains('open'))closeAuth()});
+$('authForm').addEventListener('submit',async e=>{e.preventDefault();const email=$('authEmail').value.trim().toLowerCase(),pass=$('authPassword').value,accounts=readAccounts();message('');$('authSubmit').disabled=true;try{if(mode==='signup'){const name=$('authName').value.trim()||email.split('@')[0];if(pass.length<6){message('Password must be at least 6 characters.');return}if(accounts[email]){message('This email is already registered.');return}const account={email,name,passwordHash:await hashPassword(pass),role:'user',watched:{},favorites:{},soundEnabled:true,heroTheme:'red',createdAt:new Date().toISOString(),lastActive:new Date().toISOString()};accounts[email]=account;writeAccounts(accounts);setSession(email);applyAccount(account);updateHeader();closeAuth()}else{const a=accounts[email];if(!a){message('Account not found. Create an account first.');return}if(await hashPassword(pass)!==a.passwordHash){message('Incorrect email or password.');return}a.lastActive=new Date().toISOString();accounts[email]=a;writeAccounts(accounts);setSession(email);applyAccount(a);updateHeader();closeAuth()}}finally{$('authSubmit').disabled=false}});
+$('authLogoutBtn').addEventListener('click',()=>{saveCurrent();setSession('');if(typeof watched!=='undefined')watched={};if(typeof favorites!=='undefined')favorites={};localStorage.removeItem('mcuV3Name');if(typeof renderMovies==='function')renderMovies();if(typeof renderV3==='function')renderV3();updateHeader()});
+const oldSaveData=window.saveData;if(typeof oldSaveData==='function')window.saveData=function(){const r=oldSaveData.apply(this,arguments);saveCurrent();return r};
+function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function adminOnly(){const a=current();if(!a||a.role!=='admin'){alert('Admin access required.');return false}return true}
+function renderAdmin(){if(!adminOnly())return;const list=Object.values(readAccounts());$('adminUsers').textContent=list.length;$('adminAdmins').textContent=list.filter(x=>x.role==='admin').length;$('adminWatched').textContent=list.reduce((n,x)=>n+Object.values(x.watched||{}).filter(Boolean).length,0);$('adminFavorites').textContent=list.reduce((n,x)=>n+Object.values(x.favorites||{}).filter(Boolean).length,0);$('adminUserRows').innerHTML=list.map(a=>{const e=encodeURIComponent(a.email);return`<tr><td><b>${esc(a.name||'User')}</b></td><td>${esc(a.email)}</td><td><span class="admin-role ${a.role==='admin'?'admin':''}">${a.role||'user'}</span></td><td>${Object.values(a.watched||{}).filter(Boolean).length}</td><td>${Object.values(a.favorites||{}).filter(Boolean).length}</td><td><div class="admin-actions">${a.email!==getSession()?`<button data-act="role" data-email="${e}">${a.role==='admin'?'Revoke admin':'Make admin'}</button><button class="danger" data-act="delete" data-email="${e}">Delete</button>`:'<span style="color:#777">Current</span>'}</div></td></tr>`}).join('')||'<tr><td colspan="6">No users.</td></tr>'}
+function openAdmin(){if(!adminOnly())return;$('adminOverlay').classList.add('open');$('adminOverlay').setAttribute('aria-hidden','false');renderAdmin()}function closeAdmin(){$('adminOverlay').classList.remove('open');$('adminOverlay').setAttribute('aria-hidden','true')}
+$('authAdminBtn').addEventListener('click',openAdmin);$('adminCloseBtn').addEventListener('click',closeAdmin);$('adminOverlay').addEventListener('click',e=>{if(e.target===$('adminOverlay'))closeAdmin()});$('adminUserRows').addEventListener('click',e=>{const b=e.target.closest('button[data-act]');if(!b||!adminOnly())return;const email=decodeURIComponent(b.dataset.email),a=readAccounts();if(!a[email])return;if(b.dataset.act==='delete'){if(!confirm('Delete '+email+' from this browser?'))return;delete a[email]}else a[email].role=a[email].role==='admin'?'user':'admin';writeAccounts(a);renderAdmin();updateHeader()});
+window.mcuClaimAdmin=function(code){const e=getSession(),a=readAccounts();if(!e||!a[e])return{ok:false,message:'Login first.'};if(code!==ADMIN_CLAIM_CODE)return{ok:false,message:'Invalid admin code.'};a[e].role='admin';writeAccounts(a);updateHeader();return{ok:true,message:'Admin access granted.'}};
+const a=current();if(a)applyAccount(a);updateHeader();
+})();
 
 </script>
 
