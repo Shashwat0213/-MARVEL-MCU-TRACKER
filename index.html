@@ -1,10 +1,11 @@
+<!-- MCU Tracker Firebase V5 Final -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Marvel Cinematic Universe Tracker — V4</title>
+<title>Marvel Cinematic Universe Tracker — Firebase Edition</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -1598,14 +1599,14 @@ body:not(.theme-blue):not(.theme-gold):not(.theme-cosmic):not(.theme-ironman) .p
 .v3-progress{margin-top:15px}.v3-progress-row{display:flex;justify-content:space-between;font-size:.62rem;color:var(--muted);margin-bottom:7px}.v3-progress-track{height:9px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}.v3-progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--premium-accent),var(--premium-accent2));box-shadow:0 0 15px var(--premium-glow);transition:width .5s ease}
 .v3-next-title{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--premium-accent2);margin-bottom:8px}.v3-next-movie{display:flex;gap:12px;align-items:center;cursor:pointer}.v3-next-movie img{width:65px;height:92px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,.12)}.v3-next-movie strong{display:block;font-size:.88rem;line-height:1.4}.v3-next-movie span{display:block;color:var(--muted);font-size:.58rem;margin-top:6px;line-height:1.5}
 .v3-section{margin:0 0 24px}.v3-section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.v3-section-head h2{font-size:.95rem;margin:0}.v3-section-head span{font-size:.58rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
-.v3-timeline{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.v3-phase{padding:13px 9px;border:1px solid rgba(255,255,255,.08);border-radius:15px;background:rgba(255,255,255,.035);cursor:pointer;transition:.2s}.v3-phase:hover{transform:translateY(-3px);border-color:var(--premium-accent)}.v3-phase strong{font-size:.68rem}.v3-phase small{display:block;color:var(--muted);font-size:.52rem;margin-top:7px}.v3-phase-bar{height:5px;background:rgba(255,255,255,.08);border-radius:99px;margin-top:9px;overflow:hidden}.v3-phase-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--premium-accent),var(--premium-accent2));transition:width .4s}
-.v3-achievements{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.v3-achievement{padding:13px;border-radius:15px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.035);opacity:.48;filter:grayscale(1);transition:.25s}.v3-achievement.unlocked{opacity:1;filter:none;border-color:rgba(255,213,74,.3);box-shadow:0 0 20px rgba(255,213,74,.08)}.v3-achievement b{font-size:1.2rem}.v3-achievement strong{display:block;font-size:.65rem;margin-top:6px}.v3-achievement small{display:block;color:var(--muted);font-size:.5rem;line-height:1.45;margin-top:4px}
+
+
 .v3-recent{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.v3-recent-item{display:flex;gap:9px;align-items:center;padding:9px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);cursor:pointer}.v3-recent-item img{width:38px;height:54px;object-fit:cover;border-radius:7px}.v3-recent-item strong{font-size:.62rem;line-height:1.35}.v3-recent-item small{display:block;color:var(--muted);font-size:.48rem;margin-top:4px}
 .v3-empty{color:var(--muted);font-size:.65rem;padding:12px 0}.v3-profile-edit{display:flex;gap:7px;margin-top:12px}.v3-profile-edit input{flex:1;min-width:0;padding:9px 11px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:inherit;outline:none;font-family:inherit;font-size:.65rem}.v3-profile-edit button{padding:9px 12px;border-radius:10px;border:0;background:var(--premium-accent);color:#fff;font-weight:800;cursor:pointer}
-body.light-mode .v3-card,body.light-mode .v3-phase,body.light-mode .v3-achievement,body.light-mode .v3-recent-item{background:rgba(255,255,255,.78);border-color:rgba(80,110,150,.15)}
+body.light-mode .v3-card,body.light-mode .v3-recent-item{background:rgba(255,255,255,.78);border-color:rgba(80,110,150,.15)}
 body.light-mode .v3-greeting p{color:#52627a}
-@media(max-width:900px){.v3-dashboard{grid-template-columns:1fr}.v3-timeline{grid-template-columns:repeat(3,1fr)}.v3-achievements{grid-template-columns:repeat(2,1fr)}.v3-recent{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.v3-timeline{grid-template-columns:repeat(2,1fr)}.v3-recent{grid-template-columns:1fr}.v3-mini-stats{grid-template-columns:repeat(3,1fr)}.v3-card{padding:15px}}
+@media(max-width:900px){.v3-dashboard{grid-template-columns:1fr}.v3-recent{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.v3-recent{grid-template-columns:1fr}.v3-mini-stats{grid-template-columns:repeat(3,1fr)}.v3-card{padding:15px}}
 
 
 /* ===== PREMIUM LOCAL AUTH UI ===== */
@@ -1628,37 +1629,12 @@ body.light-mode .v3-greeting p{color:#52627a}
 @media(max-width:760px){.auth-bar{width:100%;margin-top:10px}.auth-user{flex:1}.auth-user strong{max-width:180px}}
 
 
-/* ===== V5 AUTH + ADMIN ===== */
+/* ===== V4 AUTH + ADMIN ===== */
 .auth-bar{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin:10px 0 16px}
 .auth-user{display:none;align-items:center;gap:9px}.auth-avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--premium-accent,#e50914),#111);color:#fff;font-weight:800;box-shadow:0 0 18px var(--premium-glow,rgba(229,9,20,.3))}
 .auth-login-btn,.auth-logout-btn,.auth-admin-btn{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:inherit;border-radius:12px;padding:10px 14px;cursor:pointer;font-weight:700}.auth-admin-btn{background:linear-gradient(135deg,#d9a441,#8f5d00);color:#111}
 .auth-overlay{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.78);backdrop-filter:blur(12px)}.auth-overlay.open{display:flex}.auth-card{width:min(460px,100%);padding:28px;border-radius:24px;background:linear-gradient(145deg,#161616,#090909);border:1px solid rgba(255,255,255,.14);box-shadow:0 25px 80px rgba(0,0,0,.55);position:relative}.auth-close{position:absolute;right:14px;top:10px;background:none;border:0;color:#aaa;font-size:28px;cursor:pointer}.auth-brand{font-size:12px;letter-spacing:2px;color:var(--premium-accent,#e50914);font-weight:800;margin-bottom:10px}.auth-card h2{font-size:30px;margin-bottom:5px}.auth-card p{color:#aaa;margin-bottom:18px}.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}.auth-tab{padding:11px;border-radius:10px;border:1px solid #333;background:#111;color:#aaa;cursor:pointer}.auth-tab.active{color:#fff;border-color:var(--premium-accent,#e50914);background:rgba(229,9,20,.12)}.auth-form{display:grid;gap:13px}.auth-field{display:grid;gap:6px}.auth-field label{font-size:12px;color:#aaa}.auth-field input{width:100%;padding:13px;border-radius:10px;border:1px solid #333;background:#080808;color:#fff;outline:none}.auth-field input:focus{border-color:var(--premium-accent,#e50914)}.auth-submit{padding:13px;border:0;border-radius:11px;background:linear-gradient(135deg,var(--premium-accent,#e50914),#7d0000);color:#fff;font-weight:800;cursor:pointer}.auth-message{min-height:18px;color:#ff7b7b;font-size:13px}.auth-note{margin-top:16px;color:#777;font-size:11px;line-height:1.5}
 .admin-overlay{position:fixed;inset:0;z-index:9998;display:none;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);padding:20px;overflow:auto}.admin-overlay.open{display:block}.admin-panel{width:min(1100px,100%);margin:30px auto;background:#0d0d0d;border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:22px;box-shadow:0 30px 100px #000}.admin-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}.admin-head h2{margin:0}.admin-close{border:0;background:#222;color:#fff;border-radius:10px;padding:9px 12px;cursor:pointer}.admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.admin-stat{background:#151515;border:1px solid #262626;border-radius:14px;padding:16px}.admin-stat b{display:block;font-size:25px}.admin-stat span{color:#888;font-size:12px}.admin-table-wrap{overflow:auto;border:1px solid #252525;border-radius:14px}.admin-table{width:100%;border-collapse:collapse;min-width:700px}.admin-table th,.admin-table td{padding:12px;border-bottom:1px solid #222;text-align:left;font-size:13px}.admin-table th{color:#aaa;background:#141414}.admin-table td{color:#ddd}.admin-role{font-size:10px;padding:4px 7px;border-radius:999px;background:#222}.admin-role.admin{background:rgba(217,164,65,.18);color:#ffd979}.admin-actions{display:flex;gap:6px;flex-wrap:wrap}.admin-actions button{border:1px solid #333;background:#171717;color:#ddd;border-radius:8px;padding:7px 9px;cursor:pointer}.admin-actions button.danger{color:#ff8c8c}.admin-footer{color:#777;font-size:11px;margin-top:14px;line-height:1.5}@media(max-width:700px){.admin-stats{grid-template-columns:1fr 1fr}.auth-bar{justify-content:center}}
-
-
-/* ===== V5 SECUREAUTH-STYLE LOGIN UI ===== */
-.auth-tabs{display:none!important}
-.auth-overlay{position:fixed;inset:0;z-index:10050;display:none;align-items:center;justify-content:center;padding:18px;background:radial-gradient(circle at 20% 10%,rgba(0,229,255,.12),transparent 30%),radial-gradient(circle at 85% 90%,rgba(84,64,255,.18),transparent 35%),rgba(3,7,20,.93);backdrop-filter:blur(18px)}
-.auth-overlay.open{display:flex;animation:v5Fade .25s ease}
-.auth-card{width:min(780px,100%);max-height:min(92vh,900px);overflow:auto;padding:0;border-radius:34px;background:#10182a;border:1px solid rgba(120,190,255,.18);box-shadow:0 35px 120px rgba(0,0,0,.7),0 0 55px rgba(0,229,255,.08);position:relative;isolation:isolate}
-.auth-card:before{content:"";position:absolute;inset:-2px;border-radius:36px;background:linear-gradient(135deg,rgba(0,229,255,.16),transparent 35%,rgba(91,73,255,.18));z-index:-1;filter:blur(1px)}
-.auth-top{height:82px;padding:0 30px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(150,190,255,.13);background:rgba(3,7,22,.62)}
-.auth-logo{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.03em;font-size:20px}.auth-logo-icon{width:34px;height:34px;display:grid;place-items:center;border:2px solid #17d9ff;border-radius:9px;color:#17d9ff;box-shadow:0 0 20px rgba(23,217,255,.28)}
-.auth-secure{display:flex;align-items:center;gap:10px;color:#23d69b;font-weight:800}.auth-secure-dot{width:14px;height:14px;border-radius:50%;background:#13c98b;box-shadow:0 0 14px rgba(19,201,139,.6)}
-.auth-close{position:absolute;right:18px;top:18px;width:38px;height:38px;border:1px solid rgba(255,255,255,.08);border-radius:50%;background:rgba(255,255,255,.05);color:#b8c4d8;font-size:22px;cursor:pointer;z-index:3}.auth-close:hover{background:rgba(255,255,255,.1);color:#fff}
-.auth-body{padding:50px 58px 36px;text-align:center}.auth-key{width:136px;height:136px;margin:0 auto 28px;border-radius:32px;display:grid;place-items:center;font-size:66px;background:linear-gradient(135deg,#2b91df,#564be6);box-shadow:0 0 40px rgba(0,190,255,.28),0 22px 40px rgba(0,0,0,.22)}
-.auth-card h2{font-size:44px;line-height:1.05;margin:0 0 12px;font-weight:900;letter-spacing:-.03em}.auth-card p{font-size:22px;color:#94a3bc;margin:0 0 38px}
-.auth-form{display:grid;gap:18px;text-align:left}.auth-field{display:grid;gap:9px}.auth-field label{font-size:17px;font-weight:900;color:#d6deeb;letter-spacing:.04em;text-transform:uppercase}.auth-input-wrap{position:relative}.auth-input-icon{position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:24px;opacity:.65}.auth-field input{width:100%;box-sizing:border-box;padding:20px 58px 20px 58px;border-radius:18px;border:1px solid rgba(136,165,210,.18);background:#050a19;color:#fff;font-size:20px;outline:none;transition:.2s}.auth-field input::placeholder{color:#5d6b84}.auth-field input:focus{border-color:#16c8f2;box-shadow:0 0 0 4px rgba(22,200,242,.1),0 0 30px rgba(22,200,242,.08)}
-.auth-pass-toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:#91a0b8;font-size:22px;cursor:pointer;padding:10px}.auth-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#8d9bb1;font-size:14px}.auth-check{display:flex;align-items:center;gap:8px}.auth-check input{accent-color:#20c9f5;width:17px;height:17px}.auth-link{color:#24d8ff;text-decoration:none;font-weight:800}.auth-submit{min-height:66px;border:0;border-radius:18px;background:linear-gradient(100deg,#12c5d9,#2d91df 48%,#5546e7);color:#fff;font-size:25px;font-weight:900;cursor:pointer;box-shadow:0 16px 35px rgba(28,148,229,.24);transition:.2s}.auth-submit:hover{transform:translateY(-2px);filter:brightness(1.08)}.auth-submit:disabled{opacity:.65;cursor:wait;transform:none}
-.auth-demo{min-height:60px;border:1px solid rgba(128,160,205,.16);border-radius:17px;background:rgba(36,51,74,.48);color:#22d4f4;font-size:17px;font-weight:800;cursor:pointer}.auth-demo:hover{background:rgba(44,66,96,.65)}
-.auth-create{margin-top:34px;text-align:center;color:#8795aa;font-size:16px}.auth-create button{border:0;background:none;color:#22d4f4;font-size:16px;font-weight:900;text-decoration:underline;cursor:pointer}.auth-note{margin:30px -58px -36px;padding:24px 30px;background:rgba(3,7,22,.58);border-top:1px solid rgba(150,190,255,.1);color:#65738b;font-size:14px;line-height:1.55}
-.auth-message{min-height:22px;font-size:14px;font-weight:800;color:#ff8e9b;text-align:center}.auth-message.ok{color:#37d9a0}.auth-signup-extra{display:none}.auth-card.signup-mode .auth-signup-extra{display:grid}
-@keyframes v5Fade{from{opacity:0}to{opacity:1}}
-@media(max-width:700px){.auth-card{width:100%;border-radius:28px}.auth-top{height:72px;padding:0 18px}.auth-logo{font-size:16px}.auth-secure{font-size:13px}.auth-body{padding:34px 22px 26px}.auth-key{width:106px;height:106px;font-size:50px;border-radius:26px;margin-bottom:22px}.auth-card h2{font-size:34px}.auth-card p{font-size:17px;margin-bottom:28px}.auth-field label{font-size:14px}.auth-field input{font-size:17px;padding:17px 52px}.auth-submit{min-height:58px;font-size:21px}.auth-note{margin:24px -22px -26px;padding:20px 22px}.auth-secure span:last-child{display:none}}
-
-
-/* ===== V6 SECURE ADMIN PORTAL ===== */
-.secure-admin-entry{border:1px solid rgba(0,229,255,.18);background:rgba(0,229,255,.05);color:#8feeff;border-radius:12px;padding:9px 12px;cursor:pointer;font-weight:800}.secure-admin-overlay{position:fixed;inset:0;z-index:10060;display:none;align-items:center;justify-content:center;padding:18px;background:radial-gradient(circle at 20% 10%,rgba(0,229,255,.12),transparent 30%),radial-gradient(circle at 85% 90%,rgba(84,64,255,.18),transparent 35%),rgba(3,7,20,.96);backdrop-filter:blur(20px);overflow:auto}.secure-admin-overlay.open{display:flex}.secure-admin-card{width:min(920px,100%);max-height:94vh;overflow:auto;padding:26px;border-radius:28px;background:linear-gradient(145deg,#10182a,#070c17);border:1px solid rgba(0,229,255,.18);box-shadow:0 35px 120px #000,0 0 60px rgba(0,229,255,.08);position:relative}.secure-admin-close{position:absolute;right:15px;top:13px;border:0;background:rgba(255,255,255,.07);color:#fff;width:38px;height:38px;border-radius:50%;font-size:24px;cursor:pointer}.secure-admin-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.secure-admin-logo{font-size:.75rem;letter-spacing:.18em;color:#5feaff;font-weight:900}.secure-admin-status{font-size:.7rem;color:#52e5a4}.secure-admin-status span{display:inline-block;width:8px;height:8px;border-radius:50%;background:#20d889;box-shadow:0 0 12px #20d889;margin-right:6px}.secure-admin-icon{width:78px;height:78px;display:grid;place-items:center;margin:20px auto;background:linear-gradient(135deg,#0bbddc,#554dff);border-radius:22px;font-size:2rem;box-shadow:0 0 35px rgba(0,229,255,.25)}.secure-admin-card h2{text-align:center;font-size:1.7rem;margin:8px 0}.secure-admin-sub{text-align:center;color:#91a5c2;font:600 .75rem/1.6 Arial,sans-serif;max-width:620px;margin:0 auto 22px}.secure-admin-form{max-width:520px;margin:auto;display:grid;gap:13px}.secure-admin-form label,.admin-box label{display:grid;gap:7px;color:#b8c8df;font-size:.68rem;font-weight:800;letter-spacing:.05em}.secure-admin-form input,.admin-box input{width:100%;padding:13px;border:1px solid #263955;border-radius:11px;background:#050a15;color:#fff;outline:none}.secure-admin-form input:focus,.admin-box input:focus{border-color:#19dfff;box-shadow:0 0 0 3px rgba(25,223,255,.08)}.secure-pass-wrap{position:relative}.secure-pass-wrap input{padding-right:45px}.secure-pass-wrap button{position:absolute;right:8px;top:7px;border:0;background:transparent;color:#8ea3bf;padding:7px;cursor:pointer}.admin-security-row{display:flex;justify-content:space-between;gap:10px;color:#7489a8;font-size:.58rem}.secure-admin-message,.admin-small{min-height:18px;color:#ff8b8b;font-size:.68rem}.secure-admin-submit,.admin-action-main{border:0;border-radius:12px;padding:14px;background:linear-gradient(135deg,#10bddc,#5448ef);color:#fff;font-weight:900;cursor:pointer;box-shadow:0 10px 30px rgba(0,190,255,.18)}.admin-first-setup,.admin-back-btn{display:block;margin:16px auto 0;border:1px solid #29405d;background:#111d30;color:#7eeeff;padding:10px 14px;border-radius:10px;cursor:pointer}.secure-admin-dashboard-head{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:18px}.secure-admin-dashboard-head h2{text-align:left;margin:5px 0}.secure-admin-dashboard-head p{margin:0;color:#7d91ad;font-size:.65rem}.admin-signout{border:1px solid #46343a;background:#20151a;color:#ff9b9b;border-radius:10px;padding:9px 12px;cursor:pointer}.admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:15px 0}.admin-stat{background:#0b1321;border:1px solid #1c304b;border-radius:13px;padding:14px}.admin-stat b{display:block;font-size:1.35rem;color:#63e9ff}.admin-stat span{font-size:.55rem;color:#8093ad}.admin-grid-two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.admin-box{background:#0b1321;border:1px solid #1c304b;border-radius:15px;padding:16px;margin-bottom:12px}.admin-box h3{font-size:.8rem;margin:0 0 7px}.admin-box p{font:600 .62rem/1.5 Arial,sans-serif;color:#7e92ae;margin:0 0 12px}.admin-box label{margin-bottom:10px}.admin-action-secondary{border:1px solid #29405d;background:#101c2e;color:#9befff;border-radius:10px;padding:10px 12px;cursor:pointer;font-weight:800;margin:8px 5px 0 0}.admin-users-box{overflow:hidden}.admin-box-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.admin-table-wrap{overflow:auto}.admin-table{width:100%;border-collapse:collapse;min-width:720px}.admin-table th,.admin-table td{padding:10px;border-bottom:1px solid #1c2b40;text-align:left;font-size:.62rem}.admin-table th{color:#8196b1}.admin-table td{color:#dbe7f7}.admin-role{font-size:.48rem;padding:4px 7px;border-radius:99px;background:rgba(0,229,255,.1);color:#71eaff}.admin-row-delete{border:1px solid #4a2c34;background:#21151a;color:#ff9a9a;border-radius:7px;padding:6px 8px;cursor:pointer}.add-admin-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:8px}.admin-account-list{display:grid;gap:8px}.admin-account-row{display:flex;align-items:center;gap:9px;padding:10px;border:1px solid #1c304b;border-radius:10px;background:#07101d;font-size:.62rem}.admin-account-row b{flex:1}.admin-account-row span{font-size:.48rem;color:#72eaff}.admin-account-row em{font-style:normal;color:#6d839e}.admin-remove-btn{border:1px solid #4a2c34;background:#21151a;color:#ff9a9a;border-radius:7px;padding:5px 8px;cursor:pointer}.admin-security-note{padding:12px;border-radius:12px;background:rgba(255,190,50,.06);border:1px solid rgba(255,190,50,.16);color:#b7a67d;font:600 .6rem/1.55 Arial,sans-serif}@media(max-width:700px){.admin-grid-two{grid-template-columns:1fr}.admin-stats{grid-template-columns:1fr 1fr}.add-admin-grid{grid-template-columns:1fr}.secure-admin-top{align-items:flex-start}.secure-admin-entry{font-size:.6rem;padding:8px}.secure-admin-card{padding:18px}}
 
 </style>
 </head>
@@ -1716,78 +1692,49 @@ body.light-mode .v3-greeting p{color:#52627a}
   <div class="auth-user" id="authUserBox">
     <span class="auth-avatar" id="authAvatar">S</span>
     <strong id="authUserName">Guest</strong>
-    <button class="auth-logout-btn" id="authLogoutBtn">Logout</button>
+    <button class="auth-logout-btn" id="authLogoutBtn">Logout</button><button class="auth-admin-btn" id="authAdminBtn" style="display:none">🛡️ Admin</button>
   </div>
   <button class="auth-login-btn" id="authOpenBtn">👤 Login</button>
-  <button class="secure-admin-entry" id="secureAdminEntry">🔐 Admin Portal</button>
 </div>
 
 <div class="auth-overlay" id="authOverlay" aria-hidden="true">
-  <section class="auth-card" id="authCard" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+  <section class="auth-card" role="dialog" aria-modal="true" aria-labelledby="authTitle">
     <button class="auth-close" id="authCloseBtn" aria-label="Close">×</button>
-    <div class="auth-top"><div class="auth-logo"><span class="auth-logo-icon">♢</span> SECUREAUTH™</div><div class="auth-secure"><span class="auth-secure-dot"></span><span>System Secure</span></div></div>
-    <div class="auth-body">
-      <div class="auth-key">🔑</div>
-      <h2 id="authTitle">Welcome Back</h2>
-      <p id="authSubtitle">Sign in to access your secure MCU workspace</p>
-      <form class="auth-form" id="authForm">
-        <div class="auth-field auth-signup-extra" id="authNameField"><label for="authName">Display Name</label><div class="auth-input-wrap"><span class="auth-input-icon">👤</span><input id="authName" maxlength="24" autocomplete="name" placeholder="Your name"></div></div>
-        <div class="auth-field"><label for="authEmail">Email ID / Username</label><div class="auth-input-wrap"><span class="auth-input-icon">✉</span><input id="authEmail" type="email" autocomplete="username" required placeholder="admin@example.com"></div></div>
-        <div class="auth-field"><label for="authPassword">Password</label><div class="auth-input-wrap"><span class="auth-input-icon">🔒</span><input id="authPassword" type="password" minlength="6" autocomplete="current-password" required placeholder="••••••••"><button class="auth-pass-toggle" type="button" id="authPassToggle" aria-label="Show password">◉</button></div></div>
-        <div class="auth-meta"><label class="auth-check"><input id="authRemember" type="checkbox" checked> Remember me</label><a class="auth-link" href="#" id="authForgot">Forgot password?</a></div>
-        <div class="auth-message" id="authMessage"></div>
-        <button class="auth-submit" id="authSubmit" type="submit">↪ &nbsp; Sign In</button>
-        <button class="auth-demo" id="authDemoBtn" type="button">✦ &nbsp; Fill Admin Demo Credentials</button>
-      </form>
-      <div class="auth-create"><span id="authCreateText">Don't have an account?</span> <button id="authSwitchBtn" type="button">Create one</button></div>
+    <div class="auth-brand">⚡ MCU TRACKER ACCOUNT</div>
+    <h2 id="authTitle">Welcome back</h2>
+    <p id="authSubtitle">Sign in to keep your MCU journey tied to your account.</p>
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-auth-tab="login">Login</button>
+      <button class="auth-tab" data-auth-tab="signup">Create account</button>
     </div>
-    <div class="auth-note">Secure ID &amp; Password Authentication System • Powered by MCU Tracker<br><small>Prototype mode: accounts are stored locally in this browser. For real multi-device security, connect Supabase/Firebase.</small></div>
+    <form class="auth-form" id="authForm">
+      <div class="auth-field" id="authNameField" style="display:none">
+        <label for="authName">Display name</label>
+        <input id="authName" maxlength="24" autocomplete="name" placeholder="Your name">
+      </div>
+      <div class="auth-field">
+        <label for="authEmail">Email</label>
+        <input id="authEmail" type="email" autocomplete="email" required placeholder="you@example.com">
+      </div>
+      <div class="auth-field">
+        <label for="authPassword">Password</label>
+        <input id="authPassword" type="password" minlength="6" autocomplete="current-password" required placeholder="Minimum 6 characters">
+      </div>
+      <div class="auth-message" id="authMessage"></div>
+      <button class="auth-submit" id="authSubmit" type="submit">Login</button>
+    </form>
+    <div class="auth-note">Your account is secured by Firebase Authentication. Your tracker progress and favorites can sync across devices when Firebase is configured.</div>
   </section>
 </div>
 
-<!-- ===== V6 SECURE ADMIN PORTAL ===== -->
-<div class="secure-admin-overlay" id="secureAdminOverlay" aria-hidden="true">
-  <section class="secure-admin-card" id="secureAdminCard" role="dialog" aria-modal="true" aria-labelledby="secureAdminTitle">
-    <button class="secure-admin-close" id="secureAdminClose" aria-label="Close">×</button>
-    <div class="secure-admin-top"><div class="secure-admin-logo">🛡️ SECURE ADMIN</div><div class="secure-admin-status"><span></span> Protected</div></div>
-    <div id="adminLoginView">
-      <div class="secure-admin-icon">🔐</div>
-      <h2 id="secureAdminTitle">Admin Sign In</h2>
-      <p class="secure-admin-sub">Separate administrator authentication. User passwords never grant admin access.</p>
-      <form id="adminLoginForm" class="secure-admin-form">
-        <label>Admin Gmail / Email<input id="adminEmail" type="email" autocomplete="username" required placeholder="your@gmail.com"></label>
-        <label>Admin Password<div class="secure-pass-wrap"><input id="adminPassword" type="password" autocomplete="current-password" required placeholder="Enter admin password"><button type="button" id="adminPassToggle">◉</button></div></label>
-        <div class="admin-security-row"><span>🔒 5 failed attempts = temporary lock</span><span id="adminLockText"></span></div>
-        <div class="secure-admin-message" id="adminLoginMessage"></div>
-        <button class="secure-admin-submit" type="submit" id="adminLoginSubmit">Sign in as Admin</button>
-      </form>
-      <button class="admin-first-setup" id="adminFirstSetupBtn">First-time admin setup</button>
-    </div>
-    <div id="adminSetupView" hidden>
-      <div class="secure-admin-icon">⚙️</div><h2>Secure Admin Setup</h2>
-      <p class="secure-admin-sub">Initialize the separate master admin credential on this browser. Choose your Gmail address and a strong password. This setup is only for the static-file version; production security requires a backend.</p>
-      <form id="adminSetupForm" class="secure-admin-form">
-        <label>Admin Gmail<input id="setupAdminEmail" type="email" autocomplete="email" required placeholder="your@gmail.com"></label>
-        <label>New Admin Password<input id="setupAdminPassword" type="password" minlength="10" required placeholder="At least 10 characters"></label>
-        <label>Confirm Admin Password<input id="setupAdminPassword2" type="password" minlength="10" required placeholder="Repeat password"></label>
-        <div class="secure-admin-message" id="adminSetupMessage"></div>
-        <button class="secure-admin-submit" type="submit">Create Master Admin</button>
-      </form>
-      <button class="admin-back-btn" id="adminBackLogin">← Back to Admin Login</button>
-    </div>
-    <div id="adminDashboardView" hidden>
-      <div class="secure-admin-dashboard-head"><div><div class="secure-admin-logo">SECURE ADMIN</div><h2>Admin Control Center</h2><p id="adminSignedInAs"></p></div><button class="admin-signout" id="adminSignout">Sign out</button></div>
-      <div class="admin-stats"><div class="admin-stat"><b id="adminUsers">0</b><span>Total Users</span></div><div class="admin-stat"><b id="adminAdmins">1</b><span>Admins</span></div><div class="admin-stat"><b id="adminWatched">0</b><span>Watched</span></div><div class="admin-stat"><b id="adminFavorites">0</b><span>Favorites</span></div></div>
-      <div class="admin-grid-two">
-        <section class="admin-box"><h3>📧 Gmail / Notification Settings</h3><p>Save the Gmail address where you want admin/user details prepared for sending. Automatic email delivery requires a backend/email service.</p><label>Notification Gmail<input id="notificationEmail" type="email" placeholder="your@gmail.com"></label><button id="saveNotificationEmail" class="admin-action-main">Save Gmail</button><button id="composeAdminEmail" class="admin-action-secondary">✉ Open Gmail / Email</button><div id="gmailStatus" class="admin-small"></div></section>
-        <section class="admin-box"><h3>🔑 Change Admin Password</h3><label>Current password<input id="changeCurrentPassword" type="password"></label><label>New password<input id="changeNewPassword" type="password" minlength="10"></label><label>Confirm new password<input id="changeNewPassword2" type="password" minlength="10"></label><button id="changeAdminPassword" class="admin-action-main">Change Password</button><div id="passwordStatus" class="admin-small"></div></section>
-      </div>
-      <section class="admin-box admin-users-box"><div class="admin-box-head"><div><h3>👥 User Management</h3><p>Manage registered user accounts. Admin role is controlled separately from the user profile.</p></div><button id="refreshAdminUsers" class="admin-action-secondary">↻ Refresh</button></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>User</th><th>Email</th><th>Role</th><th>Watched</th><th>Favorites</th><th>Actions</th></tr></thead><tbody id="adminUserRows"></tbody></table></div></section>
-      <section class="admin-box"><h3>➕ Add Admin</h3><p>Create a separate admin credential. It will not appear as an admin badge in the normal user profile.</p><div class="add-admin-grid"><input id="newAdminEmail" type="email" placeholder="admin@gmail.com"><input id="newAdminPassword" type="password" minlength="10" placeholder="Temporary password"><button id="addAdminBtn" class="admin-action-main">Add Admin</button></div><div id="addAdminStatus" class="admin-small"></div></section><section class="admin-box"><h3>🛡️ Admin Accounts</h3><div id="adminAccountsList" class="admin-account-list"></div></section>
-      <div class="admin-security-note">⚠️ This single-file build protects admin access with a separate credential store, SHA-256 password hashing, lockout and session checks. It cannot provide server-side security or automatic Gmail delivery because there is no backend in an HTML file. For real production security, connect Supabase/Firebase before publishing.</div>
-    </div>
-  </section>
-</div>
+<!-- ===== V4 ADMIN DASHBOARD ===== -->
+<div class="admin-overlay" id="adminOverlay" aria-hidden="true">
+<section class="admin-panel" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+<div class="admin-head"><div><div class="auth-brand">MCU TRACKER V4</div><h2 id="adminTitle">🛡️ Admin Dashboard</h2></div><button class="admin-close" id="adminCloseBtn">✕ Close</button></div>
+<div class="admin-stats"><div class="admin-stat"><b id="adminUsers">0</b><span>Total Users</span></div><div class="admin-stat"><b id="adminAdmins">0</b><span>Admins</span></div><div class="admin-stat"><b id="adminWatched">0</b><span>Watched Items</span></div><div class="admin-stat"><b id="adminFavorites">0</b><span>Favorites</span></div></div>
+<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>User</th><th>Email</th><th>Role</th><th>Watched</th><th>Favorites</th><th>Actions</th></tr></thead><tbody id="adminUserRows"></tbody></table></div>
+<div class="admin-footer">Local admin mode: accounts are stored in this browser. This is not production authentication. For real multi-device accounts, connect Supabase/Firebase.</div>
+</section></div>
 
 <section class="premium-hero" aria-label="Premium MCU dashboard">
   <div class="hero-kicker">Marvel Inspired • Personal Watch Tracker</div>
@@ -1830,7 +1777,7 @@ body.light-mode .v3-greeting p{color:#52627a}
       <div class="v3-greeting">
         <small>Personal MCU Command Center</small>
         <h2 id="v3Greeting">Welcome back, Shashwat ⚡</h2>
-        <p>Your cinematic journey, progress and achievements — all in one place.</p>
+        <p>Your cinematic journey and progress — all in one place.</p>
       </div>
       <div class="v3-avatar" id="v3Avatar">S</div>
     </div>
@@ -1855,16 +1802,6 @@ body.light-mode .v3-greeting p{color:#52627a}
       <div><strong id="v3NextTitle">Loading...</strong><span id="v3NextMeta">Your next unwatched movie</span></div>
     </div>
   </div>
-</section>
-
-<section class="v3-section">
-  <div class="v3-section-head"><h2>🧭 MCU Phase Timeline</h2><span>Progress by saga</span></div>
-  <div class="v3-timeline" id="v3Timeline"></div>
-</section>
-
-<section class="v3-section">
-  <div class="v3-section-head"><h2>🏆 Achievements</h2><span id="v3AchievementCount">0 unlocked</span></div>
-  <div class="v3-achievements" id="v3Achievements"></div>
 </section>
 
 <section class="v3-section">
@@ -3979,35 +3916,6 @@ renderContinue();
       $('v3NextMeta').textContent = 'You have completed every movie in this tracker.';
     }
 
-    const phases = [...new Set(movies.map(m=>m.phase || 'MCU'))];
-    $('v3Timeline').innerHTML = phases.map(phase=>{
-      const ids = movies.map((m,i)=>({m,i})).filter(x=>x.m.phase===phase).map(x=>x.i);
-      const total=ids.length, complete=ids.filter(i=>!!watched[i]).length, pct=total?Math.round(complete/total*100):0;
-      return `<button class="v3-phase" data-phase="${phase.replace(/"/g,'&quot;')}"><strong>${phase}</strong><small>${complete}/${total} watched • ${pct}%</small><div class="v3-phase-bar"><i style="width:${pct}%"></i></div></button>`;
-    }).join('');
-    $('v3Timeline').querySelectorAll('.v3-phase').forEach(btn=>btn.addEventListener('click',()=>{
-      const phase=btn.dataset.phase;
-      const target=[...document.querySelectorAll('.movie-card')].find(card=>card.dataset.phase===phase);
-      document.querySelector('.panel')?.scrollIntoView({behavior:'smooth'});
-      const phaseBtn=[...document.querySelectorAll('.filter-btn')].find(b=>b.dataset.filter==='all');
-      if(phaseBtn) phaseBtn.click();
-      if(search){search.value=phase; search.dispatchEvent(new Event('input'));}
-    }));
-
-    const achievements = [
-      ['⚡','First Mission','Watch 1 movie',done>=1],
-      ['🛡️','Avenger','Watch 10 movies',done>=10],
-      ['💎','Infinity Saga','Watch 20 movies',done>=20],
-      ['🌌','Multiverse','Watch 30 movies',done>=30],
-      ['⭐','Collector','Save 5 favorites',favs>=5],
-      ['🏆','Completionist','Watch every movie',done===movies.length && movies.length>0],
-      ['🔥','Halfway Hero','Reach 50% progress',percent>=50],
-      ['👑','MCU Master','Reach 90% progress',percent>=90]
-    ];
-    const unlocked=achievements.filter(a=>a[3]).length;
-    $('v3AchievementCount').textContent = `${unlocked}/${achievements.length} unlocked`;
-    $('v3Achievements').innerHTML = achievements.map(a=>`<article class="v3-achievement ${a[3]?'unlocked':''}"><b>${a[0]}</b><strong>${a[1]}</strong><small>${a[2]}</small></article>`).join('');
-
     const history=getHistory();
     $('v3Recent').innerHTML = history.length ? history.map(x=>`<article class="v3-recent-item" data-index="${x.index}"><img src="${x.poster}" alt=""><div><strong>${x.title}</strong><small>${x.phase} • ${x.year}</small></div></article>`).join('') : '<div class="v3-empty">Open a movie to build your recent activity.</div>';
     $('v3Recent').querySelectorAll('.v3-recent-item').forEach(card=>{
@@ -4045,98 +3953,637 @@ renderContinue();
 })();
 
 
-/* ===== V6 USER AUTH + SEPARATE SECURE ADMIN PORTAL ===== */
-(function(){
-'use strict';
-const ACCOUNT_KEY='mcuAccountsV6', SESSION_KEY='mcuSessionV6', ADMIN_KEY='mcuSecureAdminV6', ADMIN_SESSION='mcuAdminSessionV6', ADMIN_LOCK='mcuAdminLockV6';
-const $=id=>document.getElementById(id);
-let mode='login', adminAttempts=0;
-function readJSON(key,fallback){try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}catch(e){return fallback}}
-function writeJSON(key,val){localStorage.setItem(key,JSON.stringify(val))}
-function accounts(){return readJSON(ACCOUNT_KEY,{})}
-function session(){return localStorage.getItem(SESSION_KEY)||''}
-function setSession(e){e?localStorage.setItem(SESSION_KEY,e):localStorage.removeItem(SESSION_KEY)}
-function admin(){return readJSON(ADMIN_KEY,null)}
-function activeAdmin(){const e=sessionStorage.getItem(ADMIN_SESSION)||'';const a=admin();return a&&e&&a.admins&&a.admins[e]?a.admins[e]:null}
-function setAdminSession(email){email?sessionStorage.setItem(ADMIN_SESSION,email):sessionStorage.removeItem(ADMIN_SESSION)}
-async function hash(v){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
-function current(){const a=accounts(),e=session();return e&&a[e]?a[e]:null}
-function snapshot(){return{watched:typeof watched!=='undefined'?{...watched}:{},favorites:typeof favorites!=='undefined'?{...favorites}:{},soundEnabled:typeof soundEnabled!=='undefined'?soundEnabled:true,heroTheme:localStorage.getItem('mcuHeroTheme')||'red',name:localStorage.getItem('mcuV3Name')||''}}
-function applyAccount(a){if(typeof watched!=='undefined')watched=a?.watched?{...a.watched}:{};if(typeof favorites!=='undefined')favorites=a?.favorites?{...a.favorites}:{};if(typeof soundEnabled!=='undefined')soundEnabled=a?.soundEnabled!==false;if(a?.heroTheme)localStorage.setItem('mcuHeroTheme',a.heroTheme);if(a?.name)localStorage.setItem('mcuV3Name',a.name);if(typeof renderMovies==='function')renderMovies();if(typeof renderV3==='function')renderV3();if(typeof applyHeroTheme==='function')applyHeroTheme(localStorage.getItem('mcuHeroTheme')||'red')}
-function saveCurrent(){const e=session(),a=accounts();if(!e||!a[e])return;a[e]={...a[e],...snapshot(),lastActive:new Date().toISOString()};writeJSON(ACCOUNT_KEY,a)}
-function updateHeader(){const a=current();$('authUserBox').style.display=a?'flex':'none';$('authOpenBtn').style.display=a?'none':'';if(a){$('authUserName').textContent=a.name||a.email.split('@')[0];$('authAvatar').textContent=(a.name||a.email).charAt(0).toUpperCase()}}
-function msg(text,ok=false){$('authMessage').textContent=text;$('authMessage').classList.toggle('ok',ok)}
-function openAuth(which='login'){$('authOverlay').classList.add('open');$('authOverlay').setAttribute('aria-hidden','false');setMode(which);setTimeout(()=>$('authEmail').focus(),50)}
-function closeAuth(){$('authOverlay').classList.remove('open');$('authOverlay').setAttribute('aria-hidden','true');msg('')}
-function setMode(next){mode=next;const s=mode==='signup';$('authCard').classList.toggle('signup-mode',s);$('authTitle').textContent=s?'Create Your Account':'Welcome Back';$('authSubtitle').textContent=s?'Create your secure MCU Tracker workspace':'Sign in to access your secure MCU workspace';$('authSubmit').textContent=s?'✦  Create Account':'↪  Sign In';$('authCreateText').textContent=s?'Already have an account?':"Don't have an account?";$('authSwitchBtn').textContent=s?'Sign in':'Create one';$('authPassword').autocomplete=s?'new-password':'current-password';$('authDemoBtn').style.display='none';msg('')}
-$('authOpenBtn').onclick=()=>openAuth('login');$('authCloseBtn').onclick=closeAuth;$('authOverlay').onclick=e=>{if(e.target===$('authOverlay'))closeAuth()};$('authSwitchBtn').onclick=()=>setMode(mode==='login'?'signup':'login');$('authPassToggle').onclick=()=>{const i=$('authPassword');i.type=i.type==='password'?'text':'password'};$('authForgot').onclick=e=>{e.preventDefault();msg('Password recovery needs a backend/email service. Ask the administrator to reset it.')};
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){if($('authOverlay').classList.contains('open'))closeAuth();if($('secureAdminOverlay').classList.contains('open'))closeAdmin()}});
-$('authForm').onsubmit=async e=>{e.preventDefault();const email=$('authEmail').value.trim().toLowerCase(),pass=$('authPassword').value,A=accounts();$('authSubmit').disabled=true;try{if(mode==='signup'){const name=$('authName').value.trim()||email.split('@')[0];if(pass.length<8){msg('Password must be at least 8 characters.');return}if(A[email]){msg('This email is already registered.');return}const a={email,name,passwordHash:await hash(pass),role:'user',watched:{},favorites:{},soundEnabled:true,heroTheme:'red',createdAt:new Date().toISOString()};A[email]=a;writeJSON(ACCOUNT_KEY,A);setSession(email);applyAccount(a);updateHeader();closeAuth()}else{const a=A[email];if(!a||a.passwordHash!==await hash(pass)){msg('Incorrect email or password.');return}setSession(email);a.lastActive=new Date().toISOString();A[email]=a;writeJSON(ACCOUNT_KEY,A);applyAccount(a);updateHeader();closeAuth()}}finally{$('authSubmit').disabled=false}};
-$('authLogoutBtn').onclick=()=>{saveCurrent();setSession('');if(typeof watched!=='undefined')watched={};if(typeof favorites!=='undefined')favorites={};localStorage.removeItem('mcuV3Name');if(typeof renderMovies==='function')renderMovies();if(typeof renderV3==='function')renderV3();updateHeader()};
-const oldSave=window.saveData;if(typeof oldSave==='function')window.saveData=function(){const r=oldSave.apply(this,arguments);saveCurrent();return r};
-
-/* ADMIN PORTAL */
-function lockInfo(){return readJSON(ADMIN_LOCK,{fails:0,until:0})}
-function isLocked(){const l=lockInfo();return l.until>Date.now()}
-function adminMessage(id,text,ok=false){$(id).textContent=text;$(id).style.color=ok?'#49e6a1':'#ff8b8b'}
-function showAdmin(view){$('adminLoginView').hidden=view!=='login';$('adminSetupView').hidden=view!=='setup';$('adminDashboardView').hidden=view!=='dashboard'}
-function adminSession(){return !!activeAdmin()}
-function openAdmin(){showAdmin(admin()? (adminSession()?'dashboard':'login') : 'setup');$('secureAdminOverlay').classList.add('open');$('secureAdminOverlay').setAttribute('aria-hidden','false');if(adminSession())renderAdmin();}
-function closeAdmin(){if(adminSession())saveAdminSession();$('secureAdminOverlay').classList.remove('open');$('secureAdminOverlay').setAttribute('aria-hidden','true')}
-function saveAdminSession(){/* sessionStorage is intentionally cleared on tab close */}
-$('secureAdminEntry').onclick=openAdmin;$('secureAdminClose').onclick=closeAdmin;$('adminPassToggle').onclick=()=>{const i=$('adminPassword');i.type=i.type==='password'?'text':'password'};
-$('adminFirstSetupBtn').onclick=()=>{showAdmin('setup');adminMessage('adminSetupMessage','')};$('adminBackLogin').onclick=()=>showAdmin('login');
-$('adminSetupForm').onsubmit=async e=>{e.preventDefault();if(admin()){adminMessage('adminSetupMessage','Master admin already exists.');return}const email=$('setupAdminEmail').value.trim().toLowerCase(),p=$('setupAdminPassword').value,p2=$('setupAdminPassword2').value;if(p.length<10){adminMessage('adminSetupMessage','Use at least 10 characters.');return}if(p!==p2){adminMessage('adminSetupMessage','Passwords do not match.');return}writeJSON(ADMIN_KEY,{admins:{[email]:{email,passwordHash:await hash(p),name:'Master Admin',isMaster:true,createdAt:new Date().toISOString(),lastPasswordChange:new Date().toISOString()}},notificationEmail:email,createdAt:new Date().toISOString()});adminMessage('adminSetupMessage','Master admin created. Now sign in from Admin Login.',true);setTimeout(()=>showAdmin('login'),500)};
-$('adminLoginForm').onsubmit=async e=>{e.preventDefault();if(!admin()){showAdmin('setup');return}if(isLocked()){adminMessage('adminLoginMessage','Admin login temporarily locked. Try again later.');return}const a=admin(),email=$('adminEmail').value.trim().toLowerCase(),p=$('adminPassword').value,record=a.admins&&a.admins[email];if(!record||await hash(p)!==record.passwordHash){const l=lockInfo();l.fails=(l.fails||0)+1;if(l.fails>=5){l.fails=0;l.until=Date.now()+5*60*1000;adminMessage('adminLoginMessage','Too many failed attempts. Locked for 5 minutes.')}else adminMessage('adminLoginMessage',`Invalid admin credentials. ${5-l.fails} attempts remaining.`);writeJSON(ADMIN_LOCK,l);return}localStorage.removeItem(ADMIN_LOCK);setAdminSession(email);showAdmin('dashboard');renderAdmin()};
-$('adminSignout').onclick=()=>{setAdminSession('');showAdmin('login');$('adminPassword').value='';};
-function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
-function renderAdmin(){const a=admin();if(!a||!adminSession()){showAdmin('login');return}$('adminSignedInAs').textContent='Signed in as '+a.email;$('notificationEmail').value=a.notificationEmail||a.email;const list=Object.values(accounts());$('adminUsers').textContent=list.length;$('adminAdmins').textContent='1';$('adminWatched').textContent=list.reduce((n,x)=>n+Object.values(x.watched||{}).filter(Boolean).length,0);$('adminFavorites').textContent=list.reduce((n,x)=>n+Object.values(x.favorites||{}).filter(Boolean).length,0);$('adminUserRows').innerHTML=list.map(x=>`<tr><td><b>${esc(x.name||'User')}</b></td><td>${esc(x.email)}</td><td><span class="admin-role">USER</span></td><td>${Object.values(x.watched||{}).filter(Boolean).length}</td><td>${Object.values(x.favorites||{}).filter(Boolean).length}</td><td><button class="admin-row-delete" data-email="${encodeURIComponent(x.email)}">Delete</button></td></tr>`).join('')||'<tr><td colspan="6">No users.</td></tr>'}
-$('refreshAdminUsers').onclick=renderAdmin;$('saveNotificationEmail').onclick=()=>{const a=admin();const e=$('notificationEmail').value.trim().toLowerCase();if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)){adminMessage('gmailStatus','Enter a valid Gmail/email address.');return}a.notificationEmail=e;writeJSON(ADMIN_KEY,a);adminMessage('gmailStatus','Notification Gmail saved.',true)};
-$('composeAdminEmail').onclick=()=>{const a=admin();const to=encodeURIComponent(a.notificationEmail||a.email);const subject=encodeURIComponent('MCU Tracker Admin Details');const body=encodeURIComponent(`MCU Tracker Admin\nAdmin Email: ${a.email}\nCreated: ${a.createdAt}\n\nThis message was prepared by the local Admin Portal.`);window.location.href=`mailto:${to}?subject=${subject}&body=${body}`};
-$('changeAdminPassword').onclick=async()=>{const cfg=admin(),a=activeAdmin(),c=$('changeCurrentPassword').value,n=$('changeNewPassword').value,n2=$('changeNewPassword2').value;if(!a||await hash(c)!==a.passwordHash){adminMessage('passwordStatus','Current password is incorrect.');return}if(n.length<10){adminMessage('passwordStatus','New password must be at least 10 characters.');return}if(n!==n2){adminMessage('passwordStatus','New passwords do not match.');return}a.passwordHash=await hash(n);a.lastPasswordChange=new Date().toISOString();cfg.admins[a.email]=a;writeJSON(ADMIN_KEY,cfg);setAdminSession('');adminMessage('passwordStatus','Password changed. Please sign in again.',true);setTimeout(()=>showAdmin('login'),500)};
-$('addAdminBtn').onclick=async()=>{const cfg=admin(),me=activeAdmin(),email=$('newAdminEmail').value.trim().toLowerCase(),p=$('newAdminPassword').value;if(!cfg||!me){adminMessage('addAdminStatus','Admin session expired. Sign in again.');return}if(!email||!email.includes('@')){adminMessage('addAdminStatus','Enter a valid admin email.');return}if(p.length<10){adminMessage('addAdminStatus','Temporary password must be at least 10 characters.');return}if(cfg.admins[email]){adminMessage('addAdminStatus','That admin already exists.');return}cfg.admins[email]={email,passwordHash:await hash(p),name:'Administrator',isMaster:false,createdAt:new Date().toISOString(),lastPasswordChange:new Date().toISOString()};writeJSON(ADMIN_KEY,cfg);$('newAdminEmail').value='';$('newAdminPassword').value='';adminMessage('addAdminStatus','Admin added successfully. They can sign in from Admin Portal.',true);renderAdmin()};
-document.addEventListener('click',e=>{const b=e.target.closest('.admin-remove-btn');if(!b)return;const cfg=admin(),me=activeAdmin(),email=decodeURIComponent(b.dataset.admin);if(!cfg||!me||!cfg.admins[email]||cfg.admins[email].isMaster)return;if(confirm('Remove admin '+email+'?')){delete cfg.admins[email];writeJSON(ADMIN_KEY,cfg);renderAdmin()}});
-$('adminUserRows').onclick=e=>{const b=e.target.closest('.admin-row-delete');if(!b)return;const email=decodeURIComponent(b.dataset.email),A=accounts();if(confirm('Delete user '+email+'?')){delete A[email];writeJSON(ACCOUNT_KEY,A);if(session()===email)setSession('');renderAdmin();updateHeader()}};
-if(current())applyAccount(current());updateHeader();
-})();
 
 </script>
 
 
-<!-- MCU TRACKER V7 — SECURE SUPABASE INTEGRATION SHELL -->
-<style>
-.v7-config-overlay{position:fixed;inset:0;z-index:12000;display:none;place-items:center;padding:18px;background:rgba(0,0,0,.84);backdrop-filter:blur(16px)}
-.v7-config-overlay.open{display:grid}
-.v7-config-card{width:min(560px,100%);background:#0e1420;border:1px solid rgba(0,229,255,.2);border-radius:24px;padding:24px;box-shadow:0 30px 100px #000}
-.v7-config-card h2{margin:0 0 6px}.v7-config-card p{color:#9aa7ba;font-size:13px;line-height:1.5}
-.v7-config-grid{display:grid;gap:10px;margin-top:16px}.v7-config-grid label{font-size:12px;color:#aeb9c8}
-.v7-config-grid input{width:100%;box-sizing:border-box;padding:12px;border-radius:10px;border:1px solid #293448;background:#080d16;color:#fff}
-.v7-config-actions{display:flex;gap:9px;margin-top:16px}.v7-config-actions button{padding:11px 14px;border-radius:10px;border:1px solid #2a374b;background:#151e2c;color:#fff;cursor:pointer;font-weight:700}
-.v7-config-actions .primary{background:linear-gradient(135deg,#00d9ff,#5865ff);border:0;color:#07101a}
-.v7-status{margin-top:12px;font-size:12px;color:#8fa0b5;min-height:18px}
-</style>
-<div class="v7-config-overlay" id="v7ConfigOverlay" aria-hidden="true">
-<section class="v7-config-card" role="dialog" aria-modal="true">
-<h2>⚙️ V7 Cloud Setup</h2>
-<p>Connect the GitHub Pages frontend to Supabase. Never enter an admin password or service-role/secret key here. Only the public publishable/anon key belongs in the browser.</p>
-<div class="v7-config-grid">
-<label>Supabase Project URL</label><input id="v7SupabaseUrl" placeholder="https://YOUR-PROJECT.supabase.co" autocomplete="off">
-<label>Supabase Publishable/Anon Key</label><input id="v7SupabaseKey" placeholder="sb_publishable_... / anon key" autocomplete="off">
-</div>
-<div class="v7-config-actions"><button id="v7ConfigCancel">Cancel</button><button class="primary" id="v7ConfigSave">Save Local Config</button></div>
-<div class="v7-status" id="v7ConfigStatus"></div>
-</section></div>
-<script>
-(function(){
-'use strict';
-const KEY='mcuV7SupabaseConfig',$=id=>document.getElementById(id);
-function openConfig(){const c=(()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}})();$('v7ConfigOverlay').classList.add('open');$('v7SupabaseUrl').value=c.url||'';$('v7SupabaseKey').value=c.key||''}
-function closeConfig(){$('v7ConfigOverlay').classList.remove('open')}
-$('v7ConfigCancel').onclick=closeConfig;
-$('v7ConfigSave').onclick=()=>{const url=$('v7SupabaseUrl').value.trim().replace(/\/+$/,''),key=$('v7SupabaseKey').value.trim();if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(url)){return $('v7ConfigStatus').textContent='Enter a valid Supabase project URL.'}if(key.length<20){return $('v7ConfigStatus').textContent='Enter the public publishable/anon key.'}localStorage.setItem(KEY,JSON.stringify({url,key}));$('v7ConfigStatus').textContent='Saved. Reload after the Supabase V7 integration is installed.'};
-document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.altKey&&e.shiftKey&&e.key.toLowerCase()==='s')openConfig()});
-window.MCU_V7={version:'7.0.0',auth:'Supabase Auth',database:'Postgres + RLS',admin:'server-side role/RLS',email:'Edge Function + transactional email provider',config:()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}};
-})();
+/* =========================================================
+   
+<script type="module">
+/* =========================================================
+   MCU TRACKER — FIREBASE BACKEND UPGRADE
+   ---------------------------------------------------------
+   Configure FIREBASE_CONFIG with your Firebase Web App values.
+   Enable:
+     - Authentication > Email/Password
+     - Firestore Database
+   Admin access is ONLY granted by a Firebase Auth custom claim:
+     { admin: true }
+   Never place a Firebase service-account/private key in this file.
+========================================================= */
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  limit,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+
+/* ---------- FIREBASE CONFIG ---------- */
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyAxiho1OLRry1mU8CRm6lQirUGQCVlNDWg",
+  authDomain: "marvel-mcu-tracker.firebaseapp.com",
+  projectId: "marvel-mcu-tracker",
+  storageBucket: "marvel-mcu-tracker.firebasestorage.app",
+  messagingSenderId: "353104751639",
+  appId: "1:353104751639:web:9f5e43501ead4bbedd4052",
+  measurementId: "G-5DJXGHN0NV"
+};
+
+const FIREBASE_READY =
+  FIREBASE_CONFIG.apiKey &&
+  !FIREBASE_CONFIG.apiKey.startsWith("PASTE_") &&
+  FIREBASE_CONFIG.projectId &&
+  !FIREBASE_CONFIG.projectId.startsWith("YOUR_") &&
+  FIREBASE_CONFIG.appId &&
+  !FIREBASE_CONFIG.appId.startsWith("YOUR_");
+
+let firebaseApp = null;
+let auth = null;
+let db = null;
+let activeUser = null;
+let activeAdmin = false;
+let syncing = false;
+
+const $ = id => document.getElementById(id);
+
+function setMessage(message, ok=false){
+  const el = $("authMessage");
+  if(el){
+    el.textContent = message || "";
+    el.style.color = ok ? "#6dff9a" : "#ff7b7b";
+  }
+}
+
+function setSyncStatus(text, state="idle"){
+  const el = $("firebaseSyncStatus");
+  if(!el) return;
+  el.textContent = "Firebase: " + text;
+  el.dataset.state = state;
+  el.style.borderColor =
+    state === "ok" ? "rgba(0,230,118,.45)" :
+    state === "error" ? "rgba(255,80,80,.45)" :
+    "rgba(255,255,255,.12)";
+}
+
+function safeJSON(value){
+  try { return JSON.parse(JSON.stringify(value)); }
+  catch(e){ return {}; }
+}
+
+function getLocalTracker(){
+  return {
+    watched: safeJSON(window.watched || {}),
+    favorites: safeJSON(window.favorites || {}),
+    history: (() => {
+      try { return JSON.parse(localStorage.getItem("mcuV3History") || "[]"); }
+      catch(e){ return []; }
+    })(),
+    name: localStorage.getItem("mcuV3Name") || ""
+  };
+}
+
+function applyTrackerState(state){
+  if(!state) return;
+
+  if(typeof window.watched !== "undefined"){
+    window.watched = state.watched || {};
+  }
+  if(typeof window.favorites !== "undefined"){
+    window.favorites = state.favorites || {};
+  }
+
+  if(state.name){
+    localStorage.setItem("mcuV3Name", state.name);
+  }
+
+  if(Array.isArray(state.history)){
+    localStorage.setItem("mcuV3History", JSON.stringify(state.history.slice(0,8)));
+  }
+
+  if(typeof window.renderMovies === "function") window.renderMovies();
+  if(typeof window.renderV3 === "function") window.renderV3();
+}
+
+function closeAuth(){
+  const overlay = $("authOverlay");
+  if(overlay){
+    overlay.classList.remove("open");
+    overlay.setAttribute("aria-hidden","true");
+  }
+}
+
+function openAuth(){
+  const overlay = $("authOverlay");
+  if(!overlay) return;
+  overlay.classList.add("open");
+  overlay.setAttribute("aria-hidden","false");
+  $("authEmail")?.focus();
+}
+
+function setMode(mode){
+  const signup = mode === "signup";
+  document.querySelectorAll(".auth-tab").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.authTab === mode);
+  });
+  $("authTitle").textContent = signup ? "Create your account" : "Welcome back";
+  $("authSubtitle").textContent = signup
+    ? "Create a secure Firebase account for your MCU journey."
+    : "Sign in to sync your MCU tracker across devices.";
+  $("authNameField").style.display = signup ? "grid" : "none";
+  $("authName").required = signup;
+  $("authSubmit").textContent = signup ? "Create account" : "Login";
+  setMessage("");
+}
+
+function updateHeader(){
+  const userBox = $("authUserBox");
+  const loginBtn = $("authOpenBtn");
+  const nameEl = $("authUserName");
+  const avatar = $("authAvatar");
+  const adminBtn = $("authAdminBtn");
+
+  if(activeUser){
+    const name = activeUser.displayName || activeUser.email?.split("@")[0] || "User";
+    userBox.style.display = "flex";
+    loginBtn.style.display = "none";
+    nameEl.textContent = name;
+    avatar.textContent = name.trim().charAt(0).toUpperCase() || "U";
+    adminBtn.style.display = activeAdmin ? "inline-block" : "none";
+  }else{
+    userBox.style.display = "none";
+    loginBtn.style.display = "inline-block";
+    adminBtn.style.display = "none";
+  }
+}
+
+async function loadCloudState(){
+  if(!activeUser || !db) return;
+  setSyncStatus("loading…","idle");
+
+  const profileRef = doc(db, "users", activeUser.uid);
+  const trackerRef = doc(db, "users", activeUser.uid, "private", "tracker");
+
+  const [profileSnap, trackerSnap] = await Promise.all([
+    getDoc(profileRef),
+    getDoc(trackerRef)
+  ]);
+
+  const profile = profileSnap.exists() ? profileSnap.data() : {};
+  const tracker = trackerSnap.exists() ? trackerSnap.data() : null;
+
+  if(profile.displayName && profile.displayName !== activeUser.displayName){
+    try { await updateProfile(activeUser, {displayName: profile.displayName}); } catch(e){}
+  }
+
+  if(tracker){
+    applyTrackerState({
+      watched: tracker.watched || {},
+      favorites: tracker.favorites || {},
+      history: tracker.history || [],
+      name: profile.displayName || tracker.name || ""
+    });
+  }else{
+    await saveCloudState();
+  }
+
+  setSyncStatus("synced","ok");
+}
+
+async function saveCloudState(){
+  if(!activeUser || !db || syncing) return;
+  syncing = true;
+
+  try{
+    const state = getLocalTracker();
+    const name =
+      state.name ||
+      activeUser.displayName ||
+      activeUser.email?.split("@")[0] ||
+      "User";
+
+    await setDoc(
+      doc(db, "users", activeUser.uid),
+      {
+        uid: activeUser.uid,
+        email: activeUser.email || "",
+        displayName: name,
+        updatedAt: serverTimestamp()
+      },
+      {merge:true}
+    );
+
+    await setDoc(
+      doc(db, "users", activeUser.uid, "private", "tracker"),
+      {
+        watched: state.watched,
+        favorites: state.favorites,
+        history: state.history,
+        name,
+        updatedAt: serverTimestamp()
+      },
+      {merge:true}
+    );
+
+    setSyncStatus("synced","ok");
+  }catch(err){
+    console.error("Cloud save failed:", err);
+    setSyncStatus("sync failed","error");
+  }finally{
+    syncing = false;
+  }
+}
+
+async function firebaseSubmit(event){
+  event.preventDefault();
+  if(!FIREBASE_READY){
+    setMessage("Firebase is not configured yet.");
+    return;
+  }
+
+  const mode = document.querySelector(".auth-tab.active")?.dataset.authTab || "login";
+  const email = $("authEmail").value.trim();
+  const password = $("authPassword").value;
+  const name = $("authName").value.trim();
+
+  if(!email || !password) return;
+
+  $("authSubmit").disabled = true;
+  setMessage("Please wait…");
+
+  try{
+    if(mode === "signup"){
+      const cred = await createUserWithEmailAndPassword(auth,email,password);
+
+      if(name){
+        await updateProfile(cred.user,{displayName:name});
+      }
+
+      await setDoc(
+        doc(db,"users",cred.user.uid),
+        {
+          uid:cred.user.uid,
+          email:cred.user.email || email,
+          displayName:name || email.split("@")[0],
+          createdAt:serverTimestamp(),
+          updatedAt:serverTimestamp()
+        },
+        {merge:true}
+      );
+
+      activeUser = cred.user;
+      activeAdmin = (await cred.user.getIdTokenResult(true)).claims?.admin === true;
+      updateHeader();
+      closeAuth();
+      setMessage("",true);
+      await saveCloudState();
+    }else{
+      const cred = await signInWithEmailAndPassword(auth,email,password);
+      activeUser = cred.user;
+      activeAdmin = (await cred.user.getIdTokenResult(true)).claims?.admin === true;
+      updateHeader();
+      closeAuth();
+      await loadCloudState();
+    }
+  }catch(err){
+    console.error(err);
+    const messages = {
+      "auth/invalid-credential":"Email or password is incorrect.",
+      "auth/email-already-in-use":"That email is already registered.",
+      "auth/weak-password":"Password must be at least 6 characters.",
+      "auth/invalid-email":"Please enter a valid email address.",
+      "auth/network-request-failed":"Network error. Check your internet connection."
+    };
+    setMessage(messages[err.code] || err.message || "Authentication failed.");
+  }finally{
+    $("authSubmit").disabled = false;
+  }
+}
+
+async function firebaseLogout(){
+  if(!auth) return;
+  try{
+    await signOut(auth);
+    activeUser = null;
+    activeAdmin = false;
+    updateHeader();
+    setSyncStatus("not signed in","idle");
+  }catch(err){
+    console.error(err);
+  }
+}
+
+async function manualSync(){
+  if(!FIREBASE_READY){
+    alert("Add your Firebase Web App config to index.html first.");
+    return;
+  }
+  if(!activeUser){
+    openAuth();
+    return;
+  }
+  await saveCloudState();
+}
+
+function exportData(){
+  const payload = {
+    exportedAt: new Date().toISOString(),
+    app: "MCU Tracker",
+    version: "Firebase V5",
+    state: getLocalTracker()
+  };
+
+  const blob = new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "mcu-tracker-backup.json";
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function importData(file){
+  return new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+
+    reader.onload = async () => {
+      try{
+        const payload = JSON.parse(reader.result);
+        const state = payload.state || payload;
+
+        if(typeof state !== "object") throw new Error("Invalid backup.");
+
+        applyTrackerState({
+          watched: state.watched || {},
+          favorites: state.favorites || {},
+          history: Array.isArray(state.history) ? state.history : [],
+          name: state.name || ""
+        });
+
+        if(activeUser) await saveCloudState();
+        alert("Backup restored successfully.");
+        resolve();
+      }catch(err){
+        alert("Could not restore this backup.");
+        reject(err);
+      }
+    };
+
+    reader.onerror = ()=>reject(reader.error);
+    reader.readAsText(file);
+  });
+}
+
+async function openFirebaseAdmin(){
+  if(!activeUser){
+    alert("Please login first.");
+    return;
+  }
+
+  const token = await activeUser.getIdTokenResult(true);
+  if(token.claims?.admin !== true){
+    alert("Admin access required.");
+    return;
+  }
+
+  const overlay = $("adminOverlay");
+  if(!overlay) return;
+
+  overlay.classList.add("open");
+  overlay.setAttribute("aria-hidden","false");
+
+  try{
+    const usersSnap = await getDocs(
+      query(collection(db,"users"),orderBy("createdAt","desc"),limit(200))
+    );
+
+    let users = 0;
+    let admins = 0;
+    let watchedTotal = 0;
+    let favoritesTotal = 0;
+    let rows = "";
+
+    for(const userDoc of usersSnap.docs){
+      users++;
+      const data = userDoc.data() || {};
+      const trackerSnap = await getDoc(
+        doc(db,"users",userDoc.id,"private","tracker")
+      );
+      const tracker = trackerSnap.exists() ? trackerSnap.data() : {};
+
+      const watchedCount = Object.values(tracker.watched || {}).filter(Boolean).length;
+      const favoriteCount = Object.values(tracker.favorites || {}).filter(Boolean).length;
+
+      watchedTotal += watchedCount;
+      favoritesTotal += favoriteCount;
+
+      if(data.admin === true) admins++;
+
+      rows += `
+        <tr>
+          <td><b>${escapeHTML(data.displayName || "User")}</b></td>
+          <td>${escapeHTML(data.email || "")}</td>
+          <td><span class="admin-role ${data.admin === true ? "admin" : ""}">
+            ${data.admin === true ? "admin" : "user"}
+          </span></td>
+          <td>${watchedCount}</td>
+          <td>${favoriteCount}</td>
+          <td><span style="color:#777">Firebase protected</span></td>
+        </tr>`;
+    }
+
+    $("adminUsers").textContent = users;
+    $("adminAdmins").textContent = admins;
+    $("adminWatched").textContent = watchedTotal;
+    $("adminFavorites").textContent = favoritesTotal;
+    $("adminUserRows").innerHTML =
+      rows || '<tr><td colspan="6">No users found.</td></tr>';
+
+  }catch(err){
+    console.error(err);
+    $("adminUserRows").innerHTML =
+      '<tr><td colspan="6">Admin data could not be loaded. Check Firestore rules.</td></tr>';
+  }
+}
+
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  }[char]));
+}
+
+
+/* ---------- UI EVENTS ---------- */
+$("authOpenBtn")?.addEventListener("click",openAuth);
+$("authCloseBtn")?.addEventListener("click",closeAuth);
+
+$("authOverlay")?.addEventListener("click",event=>{
+  if(event.target === $("authOverlay")) closeAuth();
+});
+
+document.querySelectorAll(".auth-tab").forEach(btn=>{
+  btn.addEventListener("click",()=>setMode(btn.dataset.authTab));
+});
+
+$("authForm")?.addEventListener("submit",firebaseSubmit);
+$("authLogoutBtn")?.addEventListener("click",firebaseLogout);
+$("authAdminBtn")?.addEventListener("click",openFirebaseAdmin);
+$("adminCloseBtn")?.addEventListener("click",()=>{
+  $("adminOverlay")?.classList.remove("open");
+  $("adminOverlay")?.setAttribute("aria-hidden","true");
+});
+
+$("adminOverlay")?.addEventListener("click",event=>{
+  if(event.target === $("adminOverlay")){
+    $("adminOverlay").classList.remove("open");
+    $("adminOverlay").setAttribute("aria-hidden","true");
+  }
+});
+
+
+/* ---------- BACKUP / RESTORE / SYNC CONTROLS ---------- */
+const authBar = $("authBar");
+
+if(authBar){
+  const syncBtn = document.createElement("button");
+  syncBtn.className = "auth-logout-btn";
+  syncBtn.id = "firebaseSyncBtn";
+  syncBtn.textContent = "☁ Sync";
+  syncBtn.addEventListener("click",manualSync);
+
+  const backupBtn = document.createElement("button");
+  backupBtn.className = "auth-logout-btn";
+  backupBtn.id = "firebaseBackupBtn";
+  backupBtn.textContent = "⇩ Backup";
+  backupBtn.addEventListener("click",exportData);
+
+  const restoreBtn = document.createElement("button");
+  restoreBtn.className = "auth-logout-btn";
+  restoreBtn.id = "firebaseRestoreBtn";
+  restoreBtn.textContent = "⇧ Restore";
+
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.accept = "application/json";
+  fileInput.hidden = true;
+
+  restoreBtn.addEventListener("click",()=>fileInput.click());
+  fileInput.addEventListener("change",()=>{
+    if(fileInput.files?.[0]){
+      importData(fileInput.files[0]).finally(()=>{fileInput.value="";});
+    }
+  });
+
+  authBar.append(syncBtn,backupBtn,restoreBtn,fileInput);
+}
+
+
+/* ---------- KEEP FIREBASE IN SYNC WITH EXISTING TRACKER ---------- */
+const originalSaveData = window.saveData;
+if(typeof originalSaveData === "function"){
+  window.saveData = function(){
+    const result = originalSaveData.apply(this,arguments);
+    if(activeUser) saveCloudState();
+    return result;
+  };
+}
+
+const originalRenderMovies = window.renderMovies;
+if(typeof originalRenderMovies === "function"){
+  window.renderMovies = function(){
+    const result = originalRenderMovies.apply(this,arguments);
+    if(typeof window.renderV3 === "function") window.renderV3();
+    return result;
+  };
+}
+
+
+/* ---------- AUTH STATE ---------- */
+if(FIREBASE_READY){
+  try{
+    firebaseApp = initializeApp(FIREBASE_CONFIG);
+    auth = getAuth(firebaseApp);
+    db = getFirestore(firebaseApp);
+
+    setSyncStatus("connecting…","idle");
+
+    onAuthStateChanged(auth,async user=>{
+      activeUser = user;
+      activeAdmin = false;
+      updateHeader();
+
+      if(!user){
+        setSyncStatus("not signed in","idle");
+        return;
+      }
+
+      try{
+        activeAdmin = (await user.getIdTokenResult(true)).claims?.admin === true;
+        updateHeader();
+        await loadCloudState();
+      }catch(err){
+        console.error(err);
+        setSyncStatus("sync failed","error");
+      }
+    });
+  }catch(err){
+    console.error(err);
+    setSyncStatus("initialization failed","error");
+  }
+}else{
+  setSyncStatus("setup required","error");
+}
+
+
+/* Public helper for troubleshooting / optional console use. */
+window.mcuFirebase = {
+  manualSync,
+  exportData,
+  importData,
+  openAdmin: openFirebaseAdmin,
+  get user(){ return activeUser; },
+  get configured(){ return FIREBASE_READY; }
+};
+
+
+/* ---------- FIREBASE STATUS PILL ---------- */
+const status = document.createElement("div");
+status.id = "firebaseSyncStatus";
+status.dataset.state = "idle";
+status.textContent = FIREBASE_READY ? "Firebase: connecting…" : "Firebase: setup required";
+status.style.cssText =
+  "position:fixed;bottom:12px;right:12px;z-index:10000;" +
+  "padding:7px 11px;border-radius:999px;" +
+  "background:rgba(10,12,18,.88);" +
+  "border:1px solid rgba(255,255,255,.12);" +
+  "font:700 10px Arial,sans-serif;color:#fff;" +
+  "backdrop-filter:blur(10px)";
+document.body.appendChild(status);
+
 </script>
 
 </body>
