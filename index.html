@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="theme-version" content="V9.2 • Red Theme Third">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -1637,6 +1638,42 @@ body.light-mode .v3-greeting p{color:#52627a}
 .admin-overlay{position:fixed;inset:0;z-index:9998;display:none;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);padding:20px;overflow:auto}.admin-overlay.open{display:block}.admin-panel{width:min(1100px,100%);margin:30px auto;background:#0d0d0d;border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:22px;box-shadow:0 30px 100px #000}.admin-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}.admin-head h2{margin:0}.admin-close{border:0;background:#222;color:#fff;border-radius:10px;padding:9px 12px;cursor:pointer}.admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.admin-stat{background:#151515;border:1px solid #262626;border-radius:14px;padding:16px}.admin-stat b{display:block;font-size:25px}.admin-stat span{color:#888;font-size:12px}.admin-table-wrap{overflow:auto;border:1px solid #252525;border-radius:14px}.admin-table{width:100%;border-collapse:collapse;min-width:700px}.admin-table th,.admin-table td{padding:12px;border-bottom:1px solid #222;text-align:left;font-size:13px}.admin-table th{color:#aaa;background:#141414}.admin-table td{color:#ddd}.admin-role{font-size:10px;padding:4px 7px;border-radius:999px;background:#222}.admin-role.admin{background:rgba(217,164,65,.18);color:#ffd979}.admin-actions{display:flex;gap:6px;flex-wrap:wrap}.admin-actions button{border:1px solid #333;background:#171717;color:#ddd;border-radius:8px;padding:7px 9px;cursor:pointer}.admin-actions button.danger{color:#ff8c8c}.admin-footer{color:#777;font-size:11px;margin-top:14px;line-height:1.5}@media(max-width:700px){.admin-stats{grid-template-columns:1fr 1fr}.auth-bar{justify-content:center}}
 
 </style>
+
+<style id="v8-autosync-ui">
+  #firebaseSyncBtn,
+  #firebaseBackupBtn,
+  #firebaseRestoreBtn,
+  #firebaseFileInput {
+    display: none !important;
+  }
+  .v8-cloud-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 8px;
+    font-size: 12px;
+    opacity: .9;
+  }
+</style>
+
+
+<style id="v9-role-admin-css">
+  #v9AdminPanel { display:none; margin:20px 0; padding:18px; border:1px solid rgba(255,255,255,.12); border-radius:14px; background:rgba(0,0,0,.18); }
+  #v9AdminPanel input, #v9AdminPanel textarea { width:100%; box-sizing:border-box; padding:10px; border-radius:9px; margin:5px 0 10px; }
+  #v9AdminPanel .v9-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  @media(max-width:700px){ #v9AdminPanel .v9-row{grid-template-columns:1fr;} }
+  #v9AdminMessage { margin-top:10px; font-size:13px; }
+</style>
+
+
+<style id="v9-2-theme-order">
+/*
+  V9.2 THEME ORDER
+  The original Red theme is moved to position #3.
+  Massive Blue is NOT forced as the default theme.
+*/
+</style>
+
 </head>
 
 <body>
@@ -1722,6 +1759,8 @@ body.light-mode .v3-greeting p{color:#52627a}
       </div>
       <div class="auth-message" id="authMessage"></div>
       <button class="auth-submit" id="authSubmit" type="submit">Login</button>
+<button type="button" id="v9GoogleBtn" class="auth-logout-btn" style="width:100%;margin-top:8px">Continue with Google</button>
+
     </form>
     <div class="auth-note">Your account is secured by Firebase Authentication. Your tracker progress and favorites can sync across devices when Firebase is configured.</div>
   </section>
@@ -1809,6 +1848,27 @@ body.light-mode .v3-greeting p{color:#52627a}
   <div class="v3-recent" id="v3Recent"></div>
 </section>
 
+
+<section id="v9AdminPanel" aria-hidden="true">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+    <div><h3 style="margin:0">🛡️ Admin Panel</h3><div style="font-size:13px;opacity:.75">Role-based catalog management</div></div>
+    <button type="button" id="v9AdminClose" class="auth-logout-btn">Close</button>
+  </div>
+  <div class="v9-row" style="margin-top:14px">
+    <div><label>Movie / Series ID</label><input id="v9CatalogId" placeholder="e.g. iron-man-4"></div>
+    <div><label>Title</label><input id="v9CatalogTitle" placeholder="Title"></div>
+  </div>
+  <div class="v9-row">
+    <div><label>Type</label><input id="v9CatalogType" placeholder="movie or series"></div>
+    <div><label>Release date</label><input id="v9CatalogRelease" placeholder="2027-05-01"></div>
+  </div>
+  <label>Description</label><textarea id="v9CatalogDescription" rows="4" placeholder="Description"></textarea>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button type="button" id="v9CatalogSave" class="auth-logout-btn">Save / Update</button>
+    <button type="button" id="v9CatalogDelete" class="auth-logout-btn">Delete</button>
+  </div>
+  <div id="v9AdminMessage"></div>
+</section>
 <main class="panel">
 
         <!-- SEARCH -->
@@ -4614,6 +4674,132 @@ status.style.cssText =
   "backdrop-filter:blur(10px)";
 document.body.appendChild(status);
 
+</script>
+
+
+<script>
+(function(){
+  const status = () => document.getElementById("v8CloudStatusText");
+
+  function setV8Status(text){
+    const el = status();
+    if(el) el.textContent = text;
+  }
+
+  if(typeof window.saveCloudState === "function" && !window.__v8SaveWrapped){
+    const originalSave = window.saveCloudState;
+    window.saveCloudState = async function(){
+      setV8Status("Saving…");
+      try{
+        const result = await originalSave.apply(this, arguments);
+        setV8Status("Synced");
+        return result;
+      }catch(err){
+        setV8Status("Sync failed");
+        throw err;
+      }
+    };
+    window.__v8SaveWrapped = true;
+  }
+
+  if(typeof window.loadCloudState === "function" && !window.__v8LoadWrapped){
+    const originalLoad = window.loadCloudState;
+    window.loadCloudState = async function(){
+      setV8Status("Loading…");
+      try{
+        const result = await originalLoad.apply(this, arguments);
+        setV8Status("Synced");
+        return result;
+      }catch(err){
+        setV8Status("Sync failed");
+        throw err;
+      }
+    };
+    window.__v8LoadWrapped = true;
+  }
+
+  if(typeof window.saveData === "function" && !window.__v8DataWrapped){
+    const originalDataSave = window.saveData;
+    window.saveData = function(){
+      const result = originalDataSave.apply(this, arguments);
+      try{
+        if(window.mcuFirebase && window.mcuFirebase.user &&
+           typeof window.saveCloudState === "function"){
+          window.saveCloudState();
+        }
+      }catch(e){
+        console.warn("V8 auto-sync queue failed:", e);
+      }
+      return result;
+    };
+    window.__v8DataWrapped = true;
+  }
+
+  setV8Status("Cloud sync ready");
+})();
+</script>
+
+\n<script type="module">\n/* MCU TRACKER V9: Google Sign-In + Firestore role-based admin */\nimport { getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";\nimport { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";\nimport { getFirestore, doc, getDoc, setDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";\n\nconst app=getApps()[0];\nif(app){\n  const auth=getAuth(app);\n  const db=getFirestore(app);\n  const googleBtn=()=>document.getElementById('v9GoogleBtn');\n  const adminBtn=()=>document.getElementById('authAdminBtn');\n  const panel=()=>document.getElementById('v9AdminPanel');\n  const msg=(t)=>{const e=document.getElementById('v9AdminMessage');if(e)e.textContent=t;};\n\n  async function roleFor(user){\n    if(!user) return 'user';\n    const s=await getDoc(doc(db,'users',user.uid));\n    return s.exists() ? (s.data().role || 'user') : 'user';\n  }\n\n  async function refreshRoleUI(user){\n    const isAdmin=(await roleFor(user))==='admin';\n    const b=adminBtn();\n    if(b) b.style.display=isAdmin?'inline-block':'none';\n    if(panel() && !isAdmin){ panel().style.display='none'; panel().setAttribute('aria-hidden','true'); }\n    return isAdmin;\n  }\n\n  async function googleLogin(){\n    try{\n      const result=await signInWithPopup(auth,new GoogleAuthProvider());\n      const u=result.user;\n      const ref=doc(db,'users',u.uid);\n      const old=await getDoc(ref);\n      if(!old.exists()){\n        await setDoc(ref,{uid:u.uid,email:u.email||'',displayName:u.displayName||'',role:'user',createdAt:serverTimestamp(),updatedAt:serverTimestamp()});\n      }else{\n        // Never change an existing role from the client.\n        await setDoc(ref,{uid:u.uid,email:u.email||'',displayName:u.displayName||'',updatedAt:serverTimestamp()},{merge:true});\n      }\n      await refreshRoleUI(u);\n    }catch(e){\n      console.error(e);\n      const m={\n        'auth/unauthorized-domain':'Add your GitHub Pages domain under Firebase Authentication → Settings → Authorized domains.',\n        'auth/popup-blocked':'Your browser blocked the Google sign-in popup.',\n        'auth/popup-closed-by-user':'Google sign-in was cancelled.',\n        'auth/account-exists-with-different-credential':'This email already has another sign-in method. Use that method first.'\n      };\n      alert(m[e.code]||e.message||'Google sign-in failed.');\n    }\n  }\n\n  function openAdmin(){\n    const p=panel(); if(p){p.style.display='block';p.setAttribute('aria-hidden','false');p.scrollIntoView({behavior:'smooth',block:'start'});}\n  }\n\n  async function requireAdmin(){\n    const u=auth.currentUser;\n    if(!u || (await roleFor(u))!=='admin') throw new Error('Admin role required.');\n    return u;\n  }\n\n  googleBtn()?.addEventListener('click',googleLogin);\n  document.addEventListener('click',async(e)=>{\n    if(e.target?.id==='authAdminBtn') openAdmin();\n    if(e.target?.id==='v9AdminClose'){const p=panel();if(p){p.style.display='none';p.setAttribute('aria-hidden','true');}}\n    if(e.target?.id==='v9CatalogSave'){\n      try{\n        const u=await requireAdmin();\n        const id=document.getElementById('v9CatalogId')?.value.trim();\n        const title=document.getElementById('v9CatalogTitle')?.value.trim();\n        if(!id||!title) throw new Error('ID and title are required.');\n        await setDoc(doc(db,'catalog',id),{title,type:document.getElementById('v9CatalogType')?.value.trim()||'movie',releaseDate:document.getElementById('v9CatalogRelease')?.value.trim()||'',description:document.getElementById('v9CatalogDescription')?.value.trim()||'',updatedAt:serverTimestamp(),updatedBy:u.uid},{merge:true});\n        msg('Saved to Firestore.');\n      }catch(err){console.error(err);msg(err.message||'Save failed.');}\n    }\n    if(e.target?.id==='v9CatalogDelete'){\n      try{\n        await requireAdmin();\n        const id=document.getElementById('v9CatalogId')?.value.trim();\n        if(!id) throw new Error('Enter the catalog ID first.');\n        await deleteDoc(doc(db,'catalog',id));\n        msg('Deleted from Firestore.');\n      }catch(err){console.error(err);msg(err.message||'Delete failed.');}\n    }\n  });\n\n  onAuthStateChanged(auth,async(user)=>{\n    await refreshRoleUI(user);\n  });\n\n  // Expose only harmless status helpers; role remains server-enforced by rules.\n  window.mcuV9={get auth(){return auth;},get db(){return db;},roleFor};\n}\n</script>\n
+<script id="v9-2-theme-order-script">
+(function(){
+  function reorderThemes(){
+    const selectors = [
+      '[data-theme]',
+      '[data-theme-name]',
+      '.theme-option',
+      '.theme-btn',
+      '.theme-card',
+      'button.theme',
+      'select#themeSelector option'
+    ];
+
+    let nodes = [];
+    for(const selector of selectors){
+      document.querySelectorAll(selector).forEach(el=>{
+        if(!nodes.includes(el)) nodes.push(el);
+      });
+    }
+    if(nodes.length < 3) return;
+
+    // Find the original red theme using common labels/attributes.
+    const red = nodes.find(el=>{
+      const s = [
+        el.textContent || '',
+        el.getAttribute('data-theme') || '',
+        el.getAttribute('data-theme-name') || '',
+        el.value || '',
+        el.id || '',
+        el.className || ''
+      ].join(' ').toLowerCase();
+      return /\bred\b|marvel.?red|red.?theme/.test(s);
+    });
+
+    if(!red) return;
+
+    const parent = red.parentElement;
+    if(!parent) return;
+
+    // Move red after the second theme option, preserving everything else.
+    const current = Array.from(parent.children);
+    const themeChildren = current.filter(el=>nodes.includes(el));
+    if(themeChildren.length < 3) return;
+
+    const second = themeChildren[1];
+    if(red !== second && red !== themeChildren[2]){
+      second.after(red);
+    }
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', reorderThemes, {once:true});
+  }else{
+    reorderThemes();
+  }
+
+  // Run once more after apps that build the theme picker dynamically.
+  setTimeout(reorderThemes, 500);
+  setTimeout(reorderThemes, 1500);
+})();
 </script>
 
 </body>
