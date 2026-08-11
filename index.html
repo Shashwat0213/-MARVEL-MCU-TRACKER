@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="theme-version" content="V9.4 • Firestore Role Admin + Google Login Fix">
+<meta name="theme-version" content="V10 • Admin Control Center">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -1851,7 +1851,72 @@ body.light-mode .v3-greeting p{color:#52627a}
 
 <section id="v9AdminPanel" aria-hidden="true">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-    <div><h3 style="margin:0">🛡️ Admin Panel</h3><div style="font-size:13px;opacity:.75">Role-based catalog management</div></div>
+    <div><h3 style="margin:0">🛡️ 
+<!-- ===== V10 ADMIN CONTROL CENTER ===== -->
+<section id="v10AdminDashboard" class="admin-overlay" aria-hidden="true" style="display:none">
+  <div class="admin-modal" style="max-width:1100px;width:96%;margin:3vh auto;padding:22px;border-radius:18px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+      <div>
+        <h2 style="margin:0">🛡️ MCU Tracker Admin Control Center</h2>
+        <p style="margin:6px 0 0;opacity:.75">Manage users, movies and series from one place.</p>
+      </div>
+      <button type="button" id="v10AdminClose">✕</button>
+    </div>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:18px 0">
+      <button type="button" data-v10-tab="overview">Overview</button>
+      <button type="button" data-v10-tab="content">Movies & Series</button>
+      <button type="button" data-v10-tab="users">Users</button>
+    </div>
+
+    <div id="v10OverviewTab">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">
+        <div class="v10-stat"><strong id="v10MovieCount">0</strong><span>Movies</span></div>
+        <div class="v10-stat"><strong id="v10SeriesCount">0</strong><span>Series</span></div>
+        <div class="v10-stat"><strong id="v10UserCount">0</strong><span>Users</span></div>
+      </div>
+    </div>
+
+    <div id="v10ContentTab" style="display:none">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px">
+        <input id="v10ContentId" placeholder="Unique ID">
+        <input id="v10Title" placeholder="Movie / Series title">
+        <select id="v10Type"><option value="movie">Movie</option><option value="series">Series</option></select>
+        <input id="v10ReleaseDate" type="date">
+        <input id="v10PosterUrl" placeholder="Poster URL">
+        <input id="v10TrailerUrl" placeholder="Trailer URL (official)">
+        <input id="v10OfficialUrl" placeholder="Your / official movie link">
+        <input id="v10BackdropUrl" placeholder="Backdrop URL (optional)">
+        <textarea id="v10Description" placeholder="Description" style="grid-column:1/-1;min-height:100px"></textarea>
+      </div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0">
+        <button type="button" id="v10NewContent">New</button>
+        <button type="button" id="v10SaveContent">Save / Update</button>
+        <button type="button" id="v10DeleteContent">Delete</button>
+      </div>
+
+      <input id="v10ContentSearch" placeholder="Search existing movies / series..." style="width:100%;margin:8px 0">
+      <div id="v10ContentList"></div>
+    </div>
+
+    <div id="v10UsersTab" style="display:none">
+      <input id="v10UserSearch" placeholder="Search users..." style="width:100%;margin:8px 0">
+      <div id="v10UserList"></div>
+    </div>
+
+    <p id="v10AdminStatus" style="margin-top:14px"></p>
+  </div>
+</section>
+<style>
+#v10AdminDashboard .v10-stat{padding:18px;border-radius:14px;background:rgba(30,80,180,.10);display:flex;flex-direction:column;gap:6px}
+#v10AdminDashboard .v10-stat strong{font-size:28px}
+#v10AdminDashboard input,#v10AdminDashboard select,#v10AdminDashboard textarea{padding:10px;border-radius:9px;border:1px solid #888}
+#v10AdminDashboard button{padding:9px 13px;border-radius:9px;cursor:pointer}
+.v10-row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(128,128,128,.25)}
+</style>
+
+Admin Panel</h3><div style="font-size:13px;opacity:.75">Role-based catalog management</div></div>
     <button type="button" id="v9AdminClose" class="auth-logout-btn">Close</button>
   </div>
   <div class="v9-row" style="margin-top:14px">
@@ -4985,6 +5050,364 @@ if (app) {
   setTimeout(reorderThemes, 500);
   setTimeout(reorderThemes, 1500);
 })();
+</script>
+
+
+<script type="module">
+/* MCU TRACKER V10: Admin Control Center */
+import { getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getFirestore, collection, getDocs, doc, getDoc, setDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const app = getApps()[0];
+if (app) {
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const ADMIN_EMAIL = "mcutrackersupport@gmail.com";
+
+  const $ = id => document.getElementById(id);
+  const status = t => { if ($("v10AdminStatus")) $("v10AdminStatus").textContent = t; };
+
+  async function roleForV10(user) {
+    if (!user) return "user";
+    const s = await getDoc(doc(db, "users", user.uid));
+    return s.exists() && s.data().role === "admin" ? "admin" : "user";
+  }
+
+  async function requireAdmin() {
+    const u = auth.currentUser;
+    if (!u || (await roleForV10(u)) !== "admin") throw new Error("Admin access required.");
+    return u;
+  }
+
+  async function loadContent() {
+    await requireAdmin();
+    const snap = await getDocs(collection(db, "catalog"));
+    const items = [];
+    let movies = 0, series = 0;
+
+    snap.forEach(s => {
+      const d = s.data();
+      const item = { id: s.id, ...d };
+      items.push(item);
+      if ((d.type || "movie") === "series") series++; else movies++;
+    });
+
+    $("v10MovieCount").textContent = movies;
+    $("v10SeriesCount").textContent = series;
+
+    const q = ($("v10ContentSearch").value || "").toLowerCase();
+    const list = items.filter(x => `${x.title||""} ${x.id}`.toLowerCase().includes(q));
+    $("v10ContentList").innerHTML = list.map(x => `
+      <div class="v10-row">
+        <div><strong>${escapeHtml(x.title || x.id)}</strong><small> — ${escapeHtml(x.type || "movie")}</small></div>
+        <button type="button" data-v10-edit="${escapeAttr(x.id)}">Edit</button>
+      </div>`).join("") || "<p>No content found.</p>";
+  }
+
+  async function loadUsers() {
+    await requireAdmin();
+    const snap = await getDocs(collection(db, "users"));
+    const users = [];
+    snap.forEach(s => users.push({ id:s.id, ...s.data() }));
+    $("v10UserCount").textContent = users.length;
+
+    const q = ($("v10UserSearch").value || "").toLowerCase();
+    const list = users.filter(x => `${x.email||""} ${x.displayName||""}`.toLowerCase().includes(q));
+    $("v10UserList").innerHTML = list.map(x => `
+      <div class="v10-row">
+        <div><strong>${escapeHtml(x.displayName || "User")}</strong><br><small>${escapeHtml(x.email || "")} · ${escapeHtml(x.role || "user")}</small></div>
+        <div>
+          ${x.role === "admin" ? "" : `<button type="button" data-v10-remove-user="${escapeAttr(x.id)}">Remove</button>`}
+        </div>
+      </div>`).join("") || "<p>No users found.</p>";
+  }
+
+  function fillContent(d) {
+    $("v10ContentId").value = d.id || "";
+    $("v10Title").value = d.title || "";
+    $("v10Type").value = d.type || "movie";
+    $("v10ReleaseDate").value = d.releaseDate || "";
+    $("v10PosterUrl").value = d.posterUrl || "";
+    $("v10TrailerUrl").value = d.trailerUrl || "";
+    $("v10OfficialUrl").value = d.officialUrl || "";
+    $("v10BackdropUrl").value = d.backdropUrl || "";
+    $("v10Description").value = d.description || "";
+  }
+
+  function clearContent() {
+    ["v10ContentId","v10Title","v10ReleaseDate","v10PosterUrl","v10TrailerUrl","v10OfficialUrl","v10BackdropUrl","v10Description"]
+      .forEach(id => { if ($(id)) $(id).value = ""; });
+    $("v10Type").value = "movie";
+  }
+
+  const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const escapeAttr = escapeHtml;
+
+  document.addEventListener("click", async e => {
+    const b = e.target.closest("button");
+    if (!b) return;
+
+    try {
+      if (b.id === "authAdminBtn") {
+        await requireAdmin();
+        $("v10AdminDashboard").style.display = "block";
+        $("v10AdminDashboard").setAttribute("aria-hidden","false");
+        await loadContent();
+        await loadUsers();
+      }
+
+      if (b.id === "v10AdminClose") {
+        $("v10AdminDashboard").style.display = "none";
+        $("v10AdminDashboard").setAttribute("aria-hidden","true");
+      }
+
+      if (b.dataset.v10Tab) {
+        const tab = b.dataset.v10Tab;
+        $("v10OverviewTab").style.display = tab === "overview" ? "block" : "none";
+        $("v10ContentTab").style.display = tab === "content" ? "block" : "none";
+        $("v10UsersTab").style.display = tab === "users" ? "block" : "none";
+        if (tab === "content") await loadContent();
+        if (tab === "users") await loadUsers();
+      }
+
+      if (b.id === "v10NewContent") clearContent();
+
+      if (b.dataset.v10Edit) {
+        await requireAdmin();
+        const s = await getDoc(doc(db, "catalog", b.dataset.v10Edit));
+        if (s.exists()) fillContent({id:s.id, ...s.data()});
+      }
+
+      if (b.id === "v10SaveContent") {
+        const u = await requireAdmin();
+        const id = $("v10ContentId").value.trim();
+        const title = $("v10Title").value.trim();
+        if (!id || !title) throw new Error("ID and title are required.");
+
+        await setDoc(doc(db, "catalog", id), {
+          title,
+          type: $("v10Type").value,
+          releaseDate: $("v10ReleaseDate").value,
+          posterUrl: $("v10PosterUrl").value.trim(),
+          trailerUrl: $("v10TrailerUrl").value.trim(),
+          officialUrl: $("v10OfficialUrl").value.trim(),
+          backdropUrl: $("v10BackdropUrl").value.trim(),
+          description: $("v10Description").value.trim(),
+          updatedAt: serverTimestamp(),
+          updatedBy: u.uid
+        }, { merge: true });
+
+        status("Saved successfully.");
+        await loadContent();
+      }
+
+      if (b.id === "v10DeleteContent") {
+        await requireAdmin();
+        const id = $("v10ContentId").value.trim();
+        if (!id) throw new Error("Enter/select a content ID first.");
+        if (!confirm("Delete this item?")) return;
+        await deleteDoc(doc(db, "catalog", id));
+        clearContent();
+        status("Deleted.");
+        await loadContent();
+      }
+
+      if (b.dataset.v10RemoveUser) {
+        await requireAdmin();
+        const uid = b.dataset.v10RemoveUser;
+        if (!confirm("Remove this user from the app database?")) return;
+        await deleteDoc(doc(db, "users", uid));
+        status("User record removed. Firebase Authentication account is not deleted by the client.");
+        await loadUsers();
+      }
+    } catch (err) {
+      console.error(err);
+      status(err.message || "Operation failed.");
+    }
+  });
+
+  $("v10ContentSearch")?.addEventListener("input", () => loadContent().catch(console.error));
+  $("v10UserSearch")?.addEventListener("input", () => loadUsers().catch(console.error));
+
+  onAuthStateChanged(auth, async user => {
+    const admin = user && (await roleForV10(user)) === "admin";
+    const btn = $("authAdminBtn");
+    if (btn) btn.style.display = admin ? "inline-block" : "none";
+    if (!admin && $("v10AdminDashboard")) $("v10AdminDashboard").style.display = "none";
+  });
+}
+</script>
+
+
+<!-- ===== MCU TRACKER V11 — UNIFIED ADMIN CONTROL CENTER ===== -->
+<section id="v11AdminDashboard" style="display:none;position:fixed;inset:0;z-index:99999;overflow:auto;background:rgba(0,0,0,.78);padding:18px">
+  <div style="max-width:1150px;margin:20px auto;background:#111;color:#fff;border-radius:20px;padding:22px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+      <div><h2 style="margin:0">🛡️ MCU Tracker V11 Admin</h2><p style="margin:6px 0;opacity:.75">One Firestore role system • no HTML edits for content updates</p></div>
+      <button id="v11Close">✕</button>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0">
+      <button data-v11tab="overview">Overview</button>
+      <button data-v11tab="content">Movies & Series</button>
+      <button data-v11tab="users">Users</button>
+    </div>
+
+    <div id="v11Overview">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">
+        <div class="v11stat"><b id="v11Movies">0</b><span>Movies</span></div>
+        <div class="v11stat"><b id="v11Series">0</b><span>Series</span></div>
+        <div class="v11stat"><b id="v11Users">0</b><span>Users</span></div>
+        <div class="v11stat"><b id="v11Admins">0</b><span>Admins</span></div>
+      </div>
+    </div>
+
+    <div id="v11Content" style="display:none">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px">
+        <input id="v11Id" placeholder="Unique ID">
+        <input id="v11Title" placeholder="Movie / Series title">
+        <select id="v11Type"><option value="movie">Movie</option><option value="series">Series</option></select>
+        <input id="v11Release" type="date">
+        <input id="v11Poster" placeholder="Poster URL">
+        <input id="v11Trailer" placeholder="Trailer URL">
+        <input id="v11MovieLink" placeholder="Your / official movie link">
+        <input id="v11Backdrop" placeholder="Backdrop URL (optional)">
+        <textarea id="v11Description" placeholder="Description" style="grid-column:1/-1;min-height:100px"></textarea>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0">
+        <button id="v11New">New</button>
+        <button id="v11Save">Save / Update</button>
+        <button id="v11Delete">Delete</button>
+      </div>
+      <input id="v11Search" placeholder="Search movies / series..." style="width:100%">
+      <div id="v11ContentList"></div>
+    </div>
+
+    <div id="v11UsersTab" style="display:none">
+      <input id="v11UserSearch" placeholder="Search users..." style="width:100%">
+      <div id="v11UserList"></div>
+    </div>
+    <p id="v11Status"></p>
+  </div>
+</section>
+<style>
+#v11AdminDashboard input,#v11AdminDashboard select,#v11AdminDashboard textarea{padding:10px;border-radius:9px;border:1px solid #777;background:#181818;color:#fff}
+#v11AdminDashboard button{padding:9px 13px;border-radius:9px;cursor:pointer}
+.v11stat{padding:18px;border-radius:14px;background:rgba(50,120,255,.12);display:flex;flex-direction:column;gap:6px}
+.v11stat b{font-size:28px}.v11row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #333}
+</style>
+<script type="module">
+/* V11 unified Firestore-role admin layer */
+import { getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, collection, getDocs, setDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const v11App = getApps()[0];
+if (v11App) {
+  const v11Auth = getAuth(v11App);
+  const v11Db = getFirestore(v11App);
+  const V11_ADMIN_EMAIL = "mcutrackersupport@gmail.com";
+
+  const q = id => document.getElementById(id);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+  async function v11Role(user) {
+    if (!user) return "user";
+    const snap = await getDoc(doc(v11Db,"users",user.uid));
+    return snap.exists() && snap.data().role === "admin" ? "admin" : "user";
+  }
+  async function v11RequireAdmin() {
+    const u = v11Auth.currentUser;
+    if (!u || (await v11Role(u)) !== "admin") throw new Error("Admin access required.");
+    return u;
+  }
+
+  function status(s){ if(q("v11Status")) q("v11Status").textContent=s; }
+  function clearForm(){
+    ["v11Id","v11Title","v11Release","v11Poster","v11Trailer","v11MovieLink","v11Backdrop","v11Description"].forEach(x=>q(x).value="");
+    q("v11Type").value="movie";
+  }
+
+  async function loadContent(){
+    await v11RequireAdmin();
+    const snap=await getDocs(collection(v11Db,"catalog"));
+    let movies=0,series=0,items=[];
+    snap.forEach(d=>{const x={id:d.id,...d.data()};items.push(x);x.type==="series"?series++:movies++;});
+    q("v11Movies").textContent=movies;q("v11Series").textContent=series;
+    const term=(q("v11Search").value||"").toLowerCase();
+    items=items.filter(x=>`${x.title||""} ${x.id}`.toLowerCase().includes(term));
+    q("v11ContentList").innerHTML=items.map(x=>`<div class="v11row"><div><b>${esc(x.title||x.id)}</b><small> — ${esc(x.type||"movie")}</small></div><button data-v11edit="${esc(x.id)}">Edit</button></div>`).join("")||"<p>No content found.</p>";
+  }
+
+  async function loadUsers(){
+    await v11RequireAdmin();
+    const snap=await getDocs(collection(v11Db,"users"));
+    const users=[];let admins=0;
+    snap.forEach(d=>{const x={id:d.id,...d.data()};users.push(x);if(x.role==="admin")admins++;});
+    q("v11Users").textContent=users.length;q("v11Admins").textContent=admins;
+    const term=(q("v11UserSearch").value||"").toLowerCase();
+    const list=users.filter(x=>`${x.email||""} ${x.displayName||""}`.toLowerCase().includes(term));
+    q("v11UserList").innerHTML=list.map(x=>`<div class="v11row"><div><b>${esc(x.displayName||"User")}</b><br><small>${esc(x.email||"")} · ${esc(x.role||"user")}</small></div>${x.role==="admin"?"":`<button data-v11remove="${esc(x.id)}">Remove</button>`}</div>`).join("")||"<p>No users found.</p>";
+  }
+
+  function fill(x){
+    q("v11Id").value=x.id||"";q("v11Title").value=x.title||"";q("v11Type").value=x.type||"movie";
+    q("v11Release").value=x.releaseDate||"";q("v11Poster").value=x.posterUrl||"";
+    q("v11Trailer").value=x.trailerUrl||"";q("v11MovieLink").value=x.officialUrl||"";
+    q("v11Backdrop").value=x.backdropUrl||"";q("v11Description").value=x.description||"";
+  }
+
+  document.addEventListener("click",async e=>{
+    const b=e.target.closest("button"); if(!b)return;
+    try{
+      if(b.id==="v11Close"){q("v11AdminDashboard").style.display="none";return;}
+      if(b.dataset.v11tab){
+        ["v11Overview","v11Content","v11UsersTab"].forEach(x=>q(x).style.display="none");
+        q(b.dataset.v11tab==="overview"?"v11Overview":b.dataset.v11tab==="content"?"v11Content":"v11UsersTab").style.display="block";
+        if(b.dataset.v11tab==="content")await loadContent();
+        if(b.dataset.v11tab==="users")await loadUsers();
+        return;
+      }
+      if(b.id==="v11New"){clearForm();return;}
+      if(b.dataset.v11edit){
+        await v11RequireAdmin();const d=await getDoc(doc(v11Db,"catalog",b.dataset.v11edit));
+        if(d.exists())fill({id:d.id,...d.data()});return;
+      }
+      if(b.id==="v11Save"){
+        const u=await v11RequireAdmin(),id=q("v11Id").value.trim(),title=q("v11Title").value.trim();
+        if(!id||!title)throw Error("ID and title are required.");
+        await setDoc(doc(v11Db,"catalog",id),{
+          title,type:q("v11Type").value,releaseDate:q("v11Release").value,
+          posterUrl:q("v11Poster").value.trim(),trailerUrl:q("v11Trailer").value.trim(),
+          officialUrl:q("v11MovieLink").value.trim(),backdropUrl:q("v11Backdrop").value.trim(),
+          description:q("v11Description").value.trim(),updatedAt:serverTimestamp(),updatedBy:u.uid
+        },{merge:true});
+        status("Saved to Firestore.");await loadContent();return;
+      }
+      if(b.id==="v11Delete"){
+        await v11RequireAdmin();const id=q("v11Id").value.trim();if(!id)throw Error("Select an item first.");
+        if(!confirm("Delete this item?"))return;await deleteDoc(doc(v11Db,"catalog",id));clearForm();status("Deleted.");await loadContent();return;
+      }
+      if(b.dataset.v11remove){
+        await v11RequireAdmin();if(!confirm("Remove this user's Firestore record?"))return;
+        await deleteDoc(doc(v11Db,"users",b.dataset.v11remove));status("User record removed.");await loadUsers();return;
+      }
+    }catch(err){console.error(err);status(err.message||"Operation failed.");}
+  });
+
+  q("v11Search")?.addEventListener("input",()=>loadContent().catch(console.error));
+  q("v11UserSearch")?.addEventListener("input",()=>loadUsers().catch(console.error));
+
+  onAuthStateChanged(v11Auth,async user=>{
+    const admin=user&&(await v11Role(user))==="admin";
+    const oldAdminButton=q("authAdminBtn");
+    if(oldAdminButton) oldAdminButton.style.display=admin?"inline-block":"none";
+    if(admin && oldAdminButton){
+      oldAdminButton.onclick=async()=>{q("v11AdminDashboard").style.display="block";await loadContent();await loadUsers();};
+    }
+    if(!admin)q("v11AdminDashboard").style.display="none";
+  });
+}
 </script>
 
 </body>
