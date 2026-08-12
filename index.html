@@ -1602,12 +1602,11 @@ body:not(.theme-blue):not(.theme-gold):not(.theme-cosmic):not(.theme-ironman) .p
 .v3-section{margin:0 0 24px}.v3-section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.v3-section-head h2{font-size:.95rem;margin:0}.v3-section-head span{font-size:.58rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
 
 
-.v3-recent{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.v3-recent-item{display:flex;gap:9px;align-items:center;padding:9px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);cursor:pointer}.v3-recent-item img{width:38px;height:54px;object-fit:cover;border-radius:7px}.v3-recent-item strong{font-size:.62rem;line-height:1.35}.v3-recent-item small{display:block;color:var(--muted);font-size:.48rem;margin-top:4px}
-.v3-empty{color:var(--muted);font-size:.65rem;padding:12px 0}.v3-profile-edit{display:flex;gap:7px;margin-top:12px}.v3-profile-edit input{flex:1;min-width:0;padding:9px 11px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:inherit;outline:none;font-family:inherit;font-size:.65rem}.v3-profile-edit button{padding:9px 12px;border-radius:10px;border:0;background:var(--premium-accent);color:#fff;font-weight:800;cursor:pointer}
-body.light-mode .v3-card,body.light-mode .v3-recent-item{background:rgba(255,255,255,.78);border-color:rgba(80,110,150,.15)}
+.v3-profile-edit{display:flex;gap:7px;margin-top:12px}.v3-profile-edit input{flex:1;min-width:0;padding:9px 11px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:inherit;outline:none;font-family:inherit;font-size:.65rem}.v3-profile-edit button{padding:9px 12px;border-radius:10px;border:0;background:var(--premium-accent);color:#fff;font-weight:800;cursor:pointer}
+body.light-mode .v3-card{background:rgba(255,255,255,.78);border-color:rgba(80,110,150,.15)}
 body.light-mode .v3-greeting p{color:#52627a}
-@media(max-width:900px){.v3-dashboard{grid-template-columns:1fr}.v3-recent{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.v3-recent{grid-template-columns:1fr}.v3-mini-stats{grid-template-columns:repeat(3,1fr)}.v3-card{padding:15px}}
+@media(max-width:900px){.v3-dashboard{grid-template-columns:1fr}}
+@media(max-width:520px){.v3-mini-stats{grid-template-columns:repeat(3,1fr)}.v3-card{padding:15px}}
 
 
 /* ===== PREMIUM LOCAL AUTH UI ===== */
@@ -1827,10 +1826,7 @@ body.light-mode .v3-greeting p{color:#52627a}
   <div class="theme-poster-info"><strong id="themePosterTitle">Avengers: Endgame</strong><span id="themePosterSubtitle">Marvel Red • Phase 3</span></div>
   <span class="theme-poster-chip">CINEMATIC THEME</span>
 </section>
-<section class="continue-section" id="continueSection" hidden>
-  <div class="continue-head"><h2>▶ Continue Watching</h2><span id="continueCount"></span></div>
-  <div class="continue-grid" id="continueGrid"></div>
-</section>
+
 
 
 
@@ -1873,11 +1869,10 @@ body.light-mode .v3-greeting p{color:#52627a}
   </div>
 </section>
 
-<section class="v3-section">
-  <div class="v3-section-head"><h2>🕘 Recently Opened</h2><span>Latest activity</span></div>
-  <div class="v3-recent" id="v3Recent"></div>
+<section class="continue-section" id="continueSection" hidden>
+  <div class="continue-head"><h2>▶ Continue Watching</h2><span id="continueCount"></span></div>
+  <div class="continue-grid" id="continueGrid"></div>
 </section>
-
 
 <section id="v9AdminPanel" aria-hidden="true">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
@@ -3970,7 +3965,7 @@ const continueGrid=document.getElementById("continueGrid");
 const continueCount=document.getElementById("continueCount");
 function renderContinue(){
   if(!continueSection||!continueGrid)return;
-  const items=movies.map((m,i)=>({...m,originalIndex:i})).filter(m=>!watched[m.originalIndex]).slice(0,6);
+  const items=movies.map((m,i)=>({...m,originalIndex:i})).filter(m=>!watched[m.originalIndex]).slice(0,3);
   if(!items.length){continueSection.hidden=true;return;}
   continueSection.hidden=false;
   continueCount.textContent=`${items.length} suggestions`;
@@ -4014,28 +4009,9 @@ renderContinue();
 ========================================================= */
 (function(){
   const V3 = {
-    historyKey: 'mcuV3History',
     nameKey: 'mcuV3Name'
   };
   const $ = id => document.getElementById(id);
-  const getHistory = () => { try { return JSON.parse(localStorage.getItem(V3.historyKey)) || []; } catch(e) { return []; } };
-  const saveHistory = list => localStorage.setItem(V3.historyKey, JSON.stringify(list.slice(0,8)));
-
-  function recordMovie(movie, index){
-    if(!movie) return;
-    let list = getHistory().filter(x => x.index !== index);
-    list.unshift({index, title: movie.title, poster: movie.poster || '', phase: movie.phase || 'MCU', year: movie.year || ''});
-    saveHistory(list);
-  }
-
-  const originalOpenMovieModalV3 = window.openMovieModal;
-  if(typeof originalOpenMovieModalV3 === 'function'){
-    window.openMovieModal = function(movie,index){
-      recordMovie(movie,index);
-      return originalOpenMovieModalV3.apply(this, arguments);
-    };
-  }
-
   function movieProgress(){
     const total = movies.length;
     const done = movies.filter((_,i)=>!!watched[i]).length;
@@ -4071,12 +4047,6 @@ renderContinue();
       $('v3NextMeta').textContent = 'You have completed every movie in this tracker.';
     }
 
-    const history=getHistory();
-    $('v3Recent').innerHTML = history.length ? history.map(x=>`<article class="v3-recent-item" data-index="${x.index}"><img src="${x.poster}" alt=""><div><strong>${x.title}</strong><small>${x.phase} • ${x.year}</small></div></article>`).join('') : '<div class="v3-empty">Open a movie to build your recent activity.</div>';
-    $('v3Recent').querySelectorAll('.v3-recent-item').forEach(card=>{
-      card.onclick=()=>{const i=Number(card.dataset.index); if(movies[i]) openMovieModal(movies[i],i);};
-    });
-    $('v3Recent').querySelectorAll('img').forEach(img=>img.onerror=function(){this.src='https://placehold.co/100x150/0d1422/00e5ff?text=MCU';});
   }
 
   $('v3SaveName').addEventListener('click',()=>{
@@ -5270,17 +5240,17 @@ if (app) {
 </script>
 
 
-<!-- ===== MCU TRACKER V15.1 — CLEAN ADMIN CONTROL CENTER ===== -->
-<section id="v11AdminDashboard" style="display:none;position:fixed;inset:0;z-index:99999;overflow:auto;background:rgba(0,0,0,.82);padding:18px">
-  <div style="max-width:1150px;margin:20px auto;background:#111;color:#fff;border-radius:20px;padding:22px;box-shadow:0 20px 70px rgba(0,0,0,.45)">
+<!-- ===== MCU TRACKER V15 — UNIFIED ADMIN CONTROL CENTER ===== -->
+<section id="v11AdminDashboard" style="display:none;position:fixed;inset:0;z-index:99999;overflow:auto;background:rgba(0,0,0,.78);padding:18px">
+  <div style="max-width:1150px;margin:20px auto;background:#111;color:#fff;border-radius:20px;padding:22px">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
-      <div><h2 style="margin:0">🛡️ MCU Tracker V15.1 Admin Control Center</h2><p style="margin:6px 0;opacity:.75">Firebase / Firestore powered • one clean admin layer</p></div>
-      <button id="v11Close" type="button">✕</button>
+      <div><h2 style="margin:0">🛡️ MCU Tracker V15 Admin</h2><p style="margin:6px 0;opacity:.75">One Firestore role system • no HTML edits for content updates</p></div>
+      <button id="v11Close">✕</button>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0">
-      <button data-v11tab="overview" type="button">Overview</button>
-      <button data-v11tab="content" type="button">Movies & Series</button>
-      <button data-v11tab="users" type="button">Users</button>
+      <button data-v11tab="overview">Overview</button>
+      <button data-v11tab="content">Movies & Series</button>
+      <button data-v11tab="users">Users</button>
     </div>
 
     <div id="v11Overview">
@@ -5300,152 +5270,448 @@ if (app) {
         <input id="v11Release" type="date">
         <input id="v11Poster" placeholder="Poster URL">
         <input id="v11Trailer" placeholder="Trailer URL">
-        <input id="v11Download" placeholder="Download URL">
+        <input id="v11MovieLink" placeholder="Your / official movie link">
         <input id="v11Backdrop" placeholder="Backdrop URL (optional)">
         <textarea id="v11Description" placeholder="Description" style="grid-column:1/-1;min-height:100px"></textarea>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0">
-        <button id="v11New" type="button">New</button>
-        <button id="v11Save" type="button">Save / Update</button>
-        <button id="v11Delete" type="button">Delete</button>
+        <button id="v11New">New</button>
+        <button id="v11Save">Save / Update</button>
+        <button id="v11Delete">Delete</button>
       </div>
       <input id="v11Search" placeholder="Search movies / series..." style="width:100%">
       <div id="v11ContentList"></div>
     </div>
 
     <div id="v11UsersTab" style="display:none">
-      <input id="v11UserSearch" placeholder="Search users by name / email..." style="width:100%">
+      <input id="v11UserSearch" placeholder="Search users..." style="width:100%">
       <div id="v11UserList"></div>
     </div>
-    <p id="v11Status" style="min-height:20px"></p>
+    <p id="v11Status"></p>
   </div>
 </section>
 <style>
-#v11AdminDashboard input,#v11AdminDashboard select,#v11AdminDashboard textarea{padding:10px;border-radius:9px;border:1px solid #777;background:#181818;color:#fff;box-sizing:border-box}
+#v11AdminDashboard input,#v11AdminDashboard select,#v11AdminDashboard textarea{padding:10px;border-radius:9px;border:1px solid #777;background:#181818;color:#fff}
 #v11AdminDashboard button{padding:9px 13px;border-radius:9px;cursor:pointer}
 .v11stat{padding:18px;border-radius:14px;background:rgba(50,120,255,.12);display:flex;flex-direction:column;gap:6px}
 .v11stat b{font-size:28px}.v11row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #333}
-.v15-command-avatar{display:flex;align-items:center;gap:12px;margin:10px 0;padding:10px 14px;border-radius:14px;background:rgba(255,255,255,.06)}
-.v15-command-avatar img{width:48px;height:48px;border-radius:50%;object-fit:cover;background:#222;border:1px solid rgba(255,255,255,.18)}
 </style>
 <script type="module">
-/* ===== MCU TRACKER V15.1 — SINGLE WORKING FIREBASE LAYER ===== */
-import {getApps} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import {getAuth,onAuthStateChanged,updateProfile} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import {getFirestore,doc,getDoc,setDoc,deleteDoc,collection,getDocs,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-import {getStorage,ref,uploadBytes,getDownloadURL} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
+/* V15 unified Firestore-role admin layer */
+import { getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, collection, getDocs, setDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
-const app=getApps()[0];
-if(app){
-  const auth=getAuth(app),db=getFirestore(app);
-  let storage=null; try{storage=getStorage(app)}catch(_){ }
-  const $=id=>document.getElementById(id);
-  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;", "'":"&#39;"}[c]));
-  const adminUser=async u=>{if(!u)return false;const s=await getDoc(doc(db,"users",u.uid));return s.exists()&&s.data().role==="admin"};
-  const requireAdmin=async()=>{if(!await adminUser(auth.currentUser))throw Error("Admin access required.");return auth.currentUser};
-  const status=t=>{if($("v11Status"))$("v11Status").textContent=t||""};
+const v11App = getApps()[0];
+if (v11App) {
+  const v11Auth = getAuth(v11App);
+  const v11Db = getFirestore(v11App);
+  const V11_ADMIN_EMAIL = "mcutrackersupport@gmail.com";
 
-  function clearForm(){
-    ["v11Id","v11Title","v11Release","v11Poster","v11Trailer","v11Download","v11Backdrop","v11Description"].forEach(id=>$(id).value="");
-    $("v11Type").value="movie";status("New item ready.");
+  const q = id => document.getElementById(id);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+  async function v11Role(user) {
+    if (!user) return "user";
+    const snap = await getDoc(doc(v11Db,"users",user.uid));
+    return snap.exists() && snap.data().role === "admin" ? "admin" : "user";
   }
-  function fill(x){
-    $("v11Id").value=x.id||"";$("v11Title").value=x.title||"";$("v11Type").value=x.type||"movie";
-    $("v11Release").value=x.releaseDate||"";$("v11Poster").value=x.posterUrl||"";$("v11Trailer").value=x.trailerUrl||"";
-    $("v11Download").value=x.downloadUrl||"";$("v11Backdrop").value=x.backdropUrl||"";$("v11Description").value=x.description||"";
-    status("Loaded for editing.");
+  async function v11RequireAdmin() {
+    const u = v11Auth.currentUser;
+    if (!u || (await v11Role(u)) !== "admin") throw new Error("Admin access required.");
+    return u;
+  }
+
+  function status(s){ if(q("v11Status")) q("v11Status").textContent=s; }
+  function clearForm(){
+    ["v11Id","v11Title","v11Release","v11Poster","v11Trailer","v11MovieLink","v11Backdrop","v11Description"].forEach(x=>q(x).value="");
+    q("v11Type").value="movie";
   }
 
   async function loadContent(){
-    await requireAdmin();
-    const snap=await getDocs(collection(db,"catalog"));let movies=0,series=0,items=[];
-    snap.forEach(d=>{const x={id:d.id,...d.data()};items.push(x);x.type==="series"?series++:movies++});
-    $("v11Movies").textContent=movies;$("v11Series").textContent=series;
-    const term=($("v11Search").value||"").trim().toLowerCase();
+    await v11RequireAdmin();
+    const snap=await getDocs(collection(v11Db,"catalog"));
+    let movies=0,series=0,items=[];
+    snap.forEach(d=>{const x={id:d.id,...d.data()};items.push(x);x.type==="series"?series++:movies++;});
+    q("v11Movies").textContent=movies;q("v11Series").textContent=series;
+    const term=(q("v11Search").value||"").toLowerCase();
     items=items.filter(x=>`${x.title||""} ${x.id}`.toLowerCase().includes(term));
-    $("v11ContentList").innerHTML=items.map(x=>`<div class="v11row"><div><b>${esc(x.title||x.id)}</b><br><small>${esc(x.type||"movie")} · ${esc(x.id)}</small></div><button type="button" data-v11edit="${esc(x.id)}">Edit</button></div>`).join("")||"<p>No content found.</p>";
+    q("v11ContentList").innerHTML=items.map(x=>`<div class="v11row"><div><b>${esc(x.title||x.id)}</b><small> — ${esc(x.type||"movie")}</small></div><button data-v11edit="${esc(x.id)}">Edit</button></div>`).join("")||"<p>No content found.</p>";
   }
 
   async function loadUsers(){
-    await requireAdmin();
-    const snap=await getDocs(collection(db,"users"));const users=[];let admins=0;
-    snap.forEach(d=>{const x={id:d.id,...d.data()};users.push(x);if(x.role==="admin")admins++});
-    $("v11Users").textContent=users.length;$("v11Admins").textContent=admins;
-    const term=($("v11UserSearch").value||"").trim().toLowerCase();
+    await v11RequireAdmin();
+    const snap=await getDocs(collection(v11Db,"users"));
+    const users=[];let admins=0;
+    snap.forEach(d=>{const x={id:d.id,...d.data()};users.push(x);if(x.role==="admin")admins++;});
+    q("v11Users").textContent=users.length;q("v11Admins").textContent=admins;
+    const term=(q("v11UserSearch").value||"").toLowerCase();
     const list=users.filter(x=>`${x.email||""} ${x.displayName||""}`.toLowerCase().includes(term));
-    $("v11UserList").innerHTML=list.map(x=>`<div class="v11row"><div><b>${esc(x.displayName||"User")}</b><br><small>${esc(x.email||"")} · ${esc(x.role||"user")}</small></div>${x.role==="admin"?"":`<button type="button" data-v11remove="${esc(x.id)}">Remove</button>`}</div>`).join("")||"<p>No users found.</p>";
+    q("v11UserList").innerHTML=list.map(x=>`<div class="v11row"><div><b>${esc(x.displayName||"User")}</b><br><small>${esc(x.email||"")} · ${esc(x.role||"user")}</small></div>${x.role==="admin"?"":`<button data-v11remove="${esc(x.id)}">Remove</button>`}</div>`).join("")||"<p>No users found.</p>";
   }
 
-  async function saveContent(){
-    const u=await requireAdmin(),id=$("v11Id").value.trim(),title=$("v11Title").value.trim();
-    if(!id||!title)throw Error("Unique ID and title are required.");
-    await setDoc(doc(db,"catalog",id),{
-      title,type:$("v11Type").value,releaseDate:$("v11Release").value,
-      posterUrl:$("v11Poster").value.trim(),trailerUrl:$("v11Trailer").value.trim(),
-      downloadUrl:$("v11Download").value.trim(),backdropUrl:$("v11Backdrop").value.trim(),
-      description:$("v11Description").value.trim(),updatedBy:u.uid,updatedAt:serverTimestamp()
-    },{merge:true});
-    status("Saved to Firestore successfully.");await loadContent();
-  }
-
-  async function deleteContent(){
-    await requireAdmin();const id=$("v11Id").value.trim();if(!id)throw Error("Select a movie/series first.");
-    if(!confirm("Delete this movie/series from Firestore?"))return;
-    await deleteDoc(doc(db,"catalog",id));clearForm();status("Movie/series deleted.");await loadContent();
-  }
-
-  function layout(){
-    const h=document.querySelector("#heroThemes,#hero-themes,[data-section='hero-themes']");
-    const c=document.querySelector("#personalMCUCommandCenter,#personalCommandCenter,[data-section='personal-command-center']");
-    const w=document.querySelector("#continueWatching,#continue-watching,[data-section='continue-watching']");
-    if(h&&c&&h.parentElement)c.parentElement.insertBefore(c,h.nextSibling);
-    if(c&&w&&c.parentElement)c.parentElement.insertBefore(w,c.nextSibling);
-    if(w)w.querySelectorAll(".movie-card,.content-card,.movie-item,[data-movie-card]").forEach((x,i)=>x.style.display=i<3?"":"none");
-    document.querySelectorAll("#recentlyOpened,#recently-opened,[data-section='recently-opened']").forEach(x=>x.remove());
-  }
-
-  async function mountAvatar(u){
-    const c=document.querySelector("#personalMCUCommandCenter,#personalCommandCenter,[data-section='personal-command-center']");if(!c)return;
-    let box=$("v15CommandAvatar");
-    if(!box){
-      box=document.createElement("div");box.id="v15CommandAvatar";box.className="v15-command-avatar";
-      box.innerHTML='<img id="v15CommandAvatarImg" alt="Profile avatar"><div><b>MCU Profile</b><div id="v15CommandAvatarName" style="opacity:.75"></div></div><input id="v15CommandAvatarInput" type="file" accept="image/*" style="max-width:180px;margin-left:auto">';
-      c.prepend(box);
-    }
-    const s=await getDoc(doc(db,"users",u.uid)),d=s.exists()?s.data():{};
-    $("v15CommandAvatarImg").src=d.avatarUrl||u.photoURL||"";
-    $("v15CommandAvatarName").textContent=d.displayName||u.displayName||u.email?.split("@")[0]||"MCU User";
-    const input=$("v15CommandAvatarInput");
-    if(input&&!input.dataset.bound){input.dataset.bound="1";input.onchange=async e=>{
-      const f=e.target.files?.[0];if(!f)return;
-      if(f.size>5*1024*1024){status("Avatar must be 5 MB or smaller.");return}
-      try{if(!storage)throw Error("Firebase Storage is not enabled.");status("Uploading avatar…");const r=ref(storage,`avatars/${u.uid}/${Date.now()}-${f.name.replace(/[^a-zA-Z0-9._-]/g,"_")}`);await uploadBytes(r,f,{contentType:f.type});const url=await getDownloadURL(r);await setDoc(doc(db,"users",u.uid),{avatarUrl:url,updatedAt:serverTimestamp()},{merge:true});try{await updateProfile(u,{photoURL:url})}catch(_){}$("v15CommandAvatarImg").src=url;status("Avatar saved.")}catch(err){status(err.message||"Avatar upload failed.")}
-    }};
+  function fill(x){
+    q("v11Id").value=x.id||"";q("v11Title").value=x.title||"";q("v11Type").value=x.type||"movie";
+    q("v11Release").value=x.releaseDate||"";q("v11Poster").value=x.posterUrl||"";
+    q("v11Trailer").value=x.trailerUrl||"";q("v11MovieLink").value=x.officialUrl||"";
+    q("v11Backdrop").value=x.backdropUrl||"";q("v11Description").value=x.description||"";
   }
 
   document.addEventListener("click",async e=>{
-    const b=e.target.closest("button");if(!b)return;
+    const b=e.target.closest("button"); if(!b)return;
     try{
-      if(b.id==="v11Close"){$("v11AdminDashboard").style.display="none";return}
-      if(b.dataset.v11tab){["v11Overview","v11Content","v11UsersTab"].forEach(x=>$(x).style.display="none");const id=b.dataset.v11tab==="overview"?"v11Overview":b.dataset.v11tab==="content"?"v11Content":"v11UsersTab";$(id).style.display="block";if(id==="v11Content")await loadContent();if(id==="v11UsersTab")await loadUsers();return}
-      if(b.id==="v11New"){clearForm();return}
-      if(b.dataset.v11edit){await requireAdmin();const d=await getDoc(doc(db,"catalog",b.dataset.v11edit));if(d.exists())fill({id:d.id,...d.data()});return}
-      if(b.id==="v11Save"){await saveContent();return}
-      if(b.id==="v11Delete"){await deleteContent();return}
-      if(b.dataset.v11remove){await requireAdmin();if(!confirm("Remove this user's Firestore record?"))return;await deleteDoc(doc(db,"users",b.dataset.v11remove));status("User record removed.");await loadUsers();return}
-    }catch(err){console.error(err);status(err.message||"Operation failed.")}
+      if(b.id==="v11Close"){q("v11AdminDashboard").style.display="none";return;}
+      if(b.dataset.v11tab){
+        ["v11Overview","v11Content","v11UsersTab"].forEach(x=>q(x).style.display="none");
+        q(b.dataset.v11tab==="overview"?"v11Overview":b.dataset.v11tab==="content"?"v11Content":"v11UsersTab").style.display="block";
+        if(b.dataset.v11tab==="content")await loadContent();
+        if(b.dataset.v11tab==="users")await loadUsers();
+        return;
+      }
+      if(b.id==="v11New"){clearForm();return;}
+      if(b.dataset.v11edit){
+        await v11RequireAdmin();const d=await getDoc(doc(v11Db,"catalog",b.dataset.v11edit));
+        if(d.exists())fill({id:d.id,...d.data()});return;
+      }
+      if(b.id==="v11Save"){
+        const u=await v11RequireAdmin(),id=q("v11Id").value.trim(),title=q("v11Title").value.trim();
+        if(!id||!title)throw Error("ID and title are required.");
+        await setDoc(doc(v11Db,"catalog",id),{
+          title,type:q("v11Type").value,releaseDate:q("v11Release").value,
+          posterUrl:q("v11Poster").value.trim(),trailerUrl:q("v11Trailer").value.trim(),
+          officialUrl:q("v11MovieLink").value.trim(),backdropUrl:q("v11Backdrop").value.trim(),
+          description:q("v11Description").value.trim(),updatedAt:serverTimestamp(),updatedBy:u.uid
+        },{merge:true});
+        status("Saved to Firestore.");await loadContent();return;
+      }
+      if(b.id==="v11Delete"){
+        await v11RequireAdmin();const id=q("v11Id").value.trim();if(!id)throw Error("Select an item first.");
+        if(!confirm("Delete this item?"))return;await deleteDoc(doc(v11Db,"catalog",id));clearForm();status("Deleted.");await loadContent();return;
+      }
+      if(b.dataset.v11remove){
+        await v11RequireAdmin();if(!confirm("Remove this user's Firestore record?"))return;
+        await deleteDoc(doc(v11Db,"users",b.dataset.v11remove));status("User record removed.");await loadUsers();return;
+      }
+    }catch(err){console.error(err);status(err.message||"Operation failed.");}
   });
 
-  $("v11Search")?.addEventListener("input",()=>loadContent().catch(err=>status(err.message)));
-  $("v11UserSearch")?.addEventListener("input",()=>loadUsers().catch(err=>status(err.message)));
+  q("v11Search")?.addEventListener("input",()=>loadContent().catch(console.error));
+  q("v11UserSearch")?.addEventListener("input",()=>loadUsers().catch(console.error));
 
-  onAuthStateChanged(auth,async u=>{
-    const ok=await adminUser(u),btn=$("authAdminBtn");
-    if(btn){btn.style.display=ok?"inline-block":"none";if(ok)btn.onclick=async()=>{$("v11AdminDashboard").style.display="block";await loadContent();await loadUsers()}}
-    if(!ok){$("v11AdminDashboard").style.display="none"}else{await mountAvatar(u)}
-    layout();
+  onAuthStateChanged(v11Auth,async user=>{
+    const admin=user&&(await v11Role(user))==="admin";
+    const oldAdminButton=q("authAdminBtn");
+    if(oldAdminButton) oldAdminButton.style.display=admin?"inline-block":"none";
+    if(admin && oldAdminButton){
+      oldAdminButton.onclick=async()=>{q("v11AdminDashboard").style.display="block";await loadContent();await loadUsers();};
+    }
+    if(!admin)q("v11AdminDashboard").style.display="none";
   });
-  setTimeout(layout,400);setTimeout(layout,1200);setInterval(layout,1500);
+}
+</script>
+
+
+<script type="module">
+/* MCU Tracker V15 upgrades */
+import {getApps} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {getAuth,onAuthStateChanged,updateProfile} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,collection,getDocs} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import {getStorage,ref,uploadBytes,getDownloadURL} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
+
+const apps12=getApps();
+if(apps12.length){
+ const app12=apps12[0],auth12=getAuth(app12),db12=getFirestore(app12);
+ let storage12=null; try{storage12=getStorage(app12)}catch(e){}
+ const $=id=>document.getElementById(id);
+ const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ async function admin12(u){
+   if(!u)return false;
+   const s=await getDoc(doc(db12,"users",u.uid));
+   return s.exists()&&s.data().role==="admin";
+ }
+ function reorder12(){
+   const c=document.querySelector("#personalMCUCommandCenter,#personalCommandCenter,[data-section='personal-command-center']");
+   const w=document.querySelector("#continueWatching,#continue-watching,[data-section='continue-watching']");
+   if(c&&w&&w.parentElement)w.parentElement.insertBefore(c,w);
+   if(w){
+     const cards=w.querySelectorAll(".movie-card,.content-card,.movie-item,[data-movie-card]");
+     cards.forEach((x,i)=>x.style.display=i<3?"":"none");
+   }
+ }
+ async function avatar12(u){
+   if(!u)return;
+   let p=$("v12AvatarPanel");
+   if(!p){
+     p=document.createElement("div");p.id="v12AvatarPanel";
+     p.style.cssText="margin:12px 0;padding:12px;border-radius:14px;background:rgba(120,120,255,.08)";
+     p.innerHTML='<div class="v12-row"><img id="v12Avatar" class="v12-avatar" alt="Profile avatar"><div><b>Profile Avatar</b><br><input id="v12AvatarInput" type="file" accept="image/*"><div id="v12AvatarStatus" style="font-size:12px;opacity:.75"></div></div></div>';
+     (document.querySelector("#v3Profile,#profile,.profile-card,#userProfile")||document.body).prepend(p);
+   }
+   const s=await getDoc(doc(db12,"users",u.uid)),d=s.exists()?s.data():{};
+   if($("v12Avatar"))$("v12Avatar").src=d.avatarUrl||u.photoURL||"";
+   $("v12AvatarInput")?.addEventListener("change",async e=>{
+     const f=e.target.files?.[0];if(!f)return;
+     if(f.size>5*1024*1024){$("v12AvatarStatus").textContent="Image must be 5 MB or smaller.";return}
+     try{
+       if(!storage12)throw Error("Firebase Storage is not enabled.");
+       $("v12AvatarStatus").textContent="Uploading…";
+       const r=ref(storage12,`avatars/${u.uid}/${Date.now()}-${f.name.replace(/[^a-zA-Z0-9._-]/g,"_")}`);
+       await uploadBytes(r,f,{contentType:f.type});
+       const url=await getDownloadURL(r);
+       await setDoc(doc(db12,"users",u.uid),{avatarUrl:url,updatedAt:new Date()},{merge:true});
+       try{await updateProfile(u,{photoURL:url})}catch(_){}
+       $("v12Avatar").src=url;$("v12AvatarStatus").textContent="Avatar saved.";
+     }catch(err){$("v12AvatarStatus").textContent=err.message||"Upload failed."}
+   },{once:true});
+ }
+ function installSearch12(){
+   const panel=$("v11AdminDashboard");if(!panel||$("v12AdminSearchTools"))return;
+   const box=document.createElement("div");box.id="v12AdminSearchTools";
+   box.style.cssText="margin:12px 0;padding:12px;border:1px solid #444;border-radius:12px";
+   box.innerHTML='<div style="display:flex;gap:8px;flex-wrap:wrap"><input id="v12MovieSearch" placeholder="Search movies / series" style="flex:1;min-width:220px"><button id="v12MovieSearchBtn">Search Movies</button><input id="v12UserSearch" placeholder="Search users by name/email" style="flex:1;min-width:220px"><button id="v12UserSearchBtn">Search Users</button></div><div id="v12SearchResults"></div>';
+   panel.querySelector("div")?.after(box);
+   async function movies(){
+     if(!await admin12(auth12.currentUser))return;
+     const t=($("v12MovieSearch").value||"").toLowerCase(),s=await getDocs(collection(db12,"catalog")),a=[];
+     s.forEach(d=>{const x={id:d.id,...d.data()};if(`${x.title||""} ${x.id}`.toLowerCase().includes(t))a.push(x)});
+     $("v12SearchResults").innerHTML=`<h4>Movies / Series (${a.length})</h4>`+a.map(x=>`<div class="v11row"><span><b>${esc(x.title||x.id)}</b> — ${esc(x.type||"movie")}</span><button data-v12edit="${esc(x.id)}">Edit</button></div>`).join("")||"<p>No results.</p>";
+   }
+   async function users(){
+     if(!await admin12(auth12.currentUser))return;
+     const t=($("v12UserSearch").value||"").toLowerCase(),s=await getDocs(collection(db12,"users")),a=[];
+     s.forEach(d=>{const x={id:d.id,...d.data()};if(`${x.displayName||""} ${x.email||""}`.toLowerCase().includes(t))a.push(x)});
+     $("v12SearchResults").innerHTML=`<h4>Users (${a.length})</h4>`+a.map(x=>`<div class="v11row"><b>${esc(x.displayName||"User")}</b><span>${esc(x.email||"")} · ${esc(x.role||"user")}</span></div>`).join("")||"<p>No results.</p>";
+   }
+   $("v12MovieSearchBtn").onclick=movies;$("v12UserSearchBtn").onclick=users;
+ }
+ onAuthStateChanged(auth12,async u=>{
+   installSearch12();reorder12();if(u)await avatar12(u);
+   const b=$("authAdminBtn");if(b){b.style.display=await admin12(u)?"inline-block":"none";}
+ });
+ setTimeout(reorder12,400);setTimeout(reorder12,1200);
+}
+</script>
+
+
+<script type="module">
+/* ===== V15 WORKING ADMIN LAYER ===== */
+import {getApps} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,deleteDoc,collection,getDocs,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const a13=getApps()[0];
+if(a13){
+ const au=getAuth(a13),db=getFirestore(a13);
+ const $=id=>document.getElementById(id);
+ const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ async function admin(){const u=au.currentUser;if(!u)return false;const s=await getDoc(doc(db,"users",u.uid));return s.exists()&&s.data().role==="admin";}
+ function panel(){return $("v11AdminDashboard")||$("v10AdminDashboard");}
+
+ function install(){
+   const p=panel(); if(!p||$("v13Tools"))return;
+   const box=document.createElement("div");box.id="v13Tools";box.className="v13-admin-tools";
+   box.innerHTML=`
+   <h3 style="margin-top:0">V15 Content & User Manager</h3>
+   <div class="v13-grid">
+    <input id="v13MovieQ" placeholder="Search movies / series">
+    <input id="v13UserQ" placeholder="Search users by name/email">
+   </div>
+   <div class="v13-actions">
+    <button id="v13MovieBtn">Search Movies</button>
+    <button id="v13UserBtn">Search Users</button>
+    <button id="v13NewBtn">New Movie / Series</button>
+   </div>
+   <div id="v13Results"></div>
+   <hr>
+   <div class="v13-grid">
+    <input id="v13Id" placeholder="Unique ID">
+    <input id="v13Title" placeholder="Title">
+    <select id="v13Type"><option value="movie">Movie</option><option value="series">Series</option></select>
+    <input id="v13Release" type="date" placeholder="Release date">
+    <input id="v13Poster" placeholder="Poster URL">
+    <input id="v13Trailer" placeholder="Trailer URL">
+    <input id="v13Link" placeholder="Your / official movie link">
+    <input id="v13Backdrop" placeholder="Backdrop URL">
+    <textarea id="v13Desc" placeholder="Description" style="min-height:90px;grid-column:1/-1"></textarea>
+   </div>
+   <div class="v13-actions">
+    <button id="v13Save">Save / Update</button>
+    <button id="v13Delete">Delete</button>
+   </div>
+   <div id="v13Status" style="opacity:.8"></div>`;
+   p.appendChild(box);
+
+   $("v13MovieBtn").onclick=searchMovies;
+   $("v13UserBtn").onclick=searchUsers;
+   $("v13NewBtn").onclick=()=>clearForm();
+   $("v13Save").onclick=saveContent;
+   $("v13Delete").onclick=deleteContent;
+   $("v13MovieQ").onkeydown=e=>{if(e.key==="Enter")searchMovies()};
+   $("v13UserQ").onkeydown=e=>{if(e.key==="Enter")searchUsers()};
+ }
+
+ async function searchMovies(){
+   if(!await admin())return;
+   const qv=($("v13MovieQ").value||"").toLowerCase(),s=await getDocs(collection(db,"catalog")),rows=[];
+   s.forEach(d=>{const x={id:d.id,...d.data()};if(`${x.id} ${x.title||""}`.toLowerCase().includes(qv))rows.push(x)});
+   $("v13Results").innerHTML=`<b>Content results: ${rows.length}</b>`+
+    rows.map(x=>`<div class="v13-result"><span><b>${esc(x.title||x.id)}</b><br><small>${esc(x.type||"movie")} · ${esc(x.id)}</small></span><button data-v13edit="${esc(x.id)}">Edit</button></div>`).join("")||"<p>No results.</p>";
+ }
+ async function searchUsers(){
+   if(!await admin())return;
+   const qv=($("v13UserQ").value||"").toLowerCase(),s=await getDocs(collection(db,"users")),rows=[];
+   s.forEach(d=>{const x={id:d.id,...d.data()};if(`${x.displayName||""} ${x.email||""}`.toLowerCase().includes(qv))rows.push(x)});
+   $("v13Results").innerHTML=`<b>User results: ${rows.length}</b>`+
+    rows.map(x=>`<div class="v13-result"><span><b>${esc(x.displayName||"User")}</b><br><small>${esc(x.email||"")} · ${esc(x.role||"user")}</small></span><button data-v13remove="${esc(x.id)}">Remove record</button></div>`).join("")||"<p>No users found.</p>";
+ }
+ function clearForm(){["v13Id","v13Title","v13Release","v13Poster","v13Trailer","v13Link","v13Backdrop","v13Desc"].forEach(i=>$(i).value="");$("v13Type").value="movie";$("v13Status").textContent="New item ready."}
+ function fill(x){$("v13Id").value=x.id||"";$("v13Title").value=x.title||"";$("v13Type").value=x.type||"movie";$("v13Release").value=x.releaseDate||"";$("v13Poster").value=x.posterUrl||"";$("v13Trailer").value=x.trailerUrl||"";$("v13Link").value=x.officialUrl||"";$("v13Backdrop").value=x.backdropUrl||"";$("v13Desc").value=x.description||"";$("v13Status").textContent="Loaded for editing."}
+ async function saveContent(){
+   const u=au.currentUser;if(!await admin())return;
+   const id=$("v13Id").value.trim(),title=$("v13Title").value.trim();
+   if(!id||!title){$("v13Status").textContent="ID and title are required.";return}
+   await setDoc(doc(db,"catalog",id),{
+    title,type:$("v13Type").value,releaseDate:$("v13Release").value,
+    posterUrl:$("v13Poster").value.trim(),trailerUrl:$("v13Trailer").value.trim(),
+    officialUrl:$("v13Link").value.trim(),backdropUrl:$("v13Backdrop").value.trim(),
+    description:$("v13Desc").value.trim(),updatedAt:serverTimestamp(),updatedBy:u.uid
+   },{merge:true});
+   $("v13Status").textContent="Saved successfully to Firestore.";await searchMovies();
+ }
+ async function deleteContent(){
+   if(!await admin())return;const id=$("v13Id").value.trim();if(!id)return;
+   if(!confirm("Delete this movie/series?"))return;await deleteDoc(doc(db,"catalog",id));clearForm();await searchMovies();
+ }
+ document.addEventListener("click",async e=>{
+   const b=e.target.closest("button");if(!b)return;
+   if(b.dataset.v13edit){const s=await getDoc(doc(db,"catalog",b.dataset.v13edit));if(s.exists())fill({id:s.id,...s.data()})}
+   if(b.dataset.v13remove){if(!await admin())return;if(confirm("Remove this user's Firestore record?")){await deleteDoc(doc(db,"users",b.dataset.v13remove));await searchUsers()}}
+ });
+ onAuthStateChanged(au,async u=>{
+   const ok=await admin();const old=$("authAdminBtn");if(old){old.style.display=ok?"inline-block":"none";}
+   if(ok){install();}else if($("v13Tools"))$("v13Tools").remove();
+ });
+}
+</script>
+
+
+<script type="module">
+/* MCU Tracker V15
+   Uses the app's existing Firebase initialization.
+   Admin authority: users/{uid}.role === "admin"
+   Content authority: catalog/{contentId}
+*/
+import {getApps} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,deleteDoc,collection,getDocs,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const apps=getApps();
+if(apps.length){
+ const app=apps[0],auth=getAuth(app),db=getFirestore(app);
+ const $=id=>document.getElementById(id);
+ const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ async function admin(){
+   const u=auth.currentUser;if(!u)return false;
+   const s=await getDoc(doc(db,"users",u.uid));
+   return s.exists() && s.data().role==="admin";
+ }
+ function host(){return $("v11AdminDashboard")||$("v10AdminDashboard")||document.querySelector("[data-admin-panel]")}
+ function mount(){
+   const p=host();if(!p||$("mcuV15Admin"))return;
+   const e=document.createElement("section");e.id="mcuV15Admin";e.className="mcu-v15-admin";
+   e.innerHTML=`
+    <h3>V15 Admin Control Center</h3>
+    <div class="mcu-v15-grid">
+      <input id="m15mq" placeholder="Search movies / series">
+      <input id="m15uq" placeholder="Search users by name / email">
+    </div>
+    <div class="mcu-v15-actions">
+      <button id="m15ms">Search Movies</button>
+      <button id="m15us">Search Users</button>
+      <button id="m15new">Add Movie / Series</button>
+    </div>
+    <div id="m15results"></div><hr>
+    <div class="mcu-v15-grid">
+      <input id="m15id" placeholder="Unique ID">
+      <input id="m15title" placeholder="Title">
+      <select id="m15type"><option value="movie">Movie</option><option value="series">Series</option></select>
+      <input id="m15date" type="date">
+      <input id="m15poster" placeholder="Poster URL">
+      <input id="m15backdrop" placeholder="Backdrop URL">
+      <input id="m15trailer" placeholder="Trailer URL">
+      <input id="m15watch" placeholder="Watch / movie link">
+      <input id="m15download" placeholder="Download link">
+      <textarea id="m15desc" placeholder="Description" style="min-height:90px;grid-column:1/-1"></textarea>
+    </div>
+    <div class="mcu-v15-actions">
+      <button id="m15save">Save / Update</button>
+      <button id="m15delete">Delete</button>
+      <button id="m15clear">Clear</button>
+    </div>
+    <div id="m15status"></div>`;
+   p.appendChild(e);
+   $("m15ms").onclick=movies;$("m15us").onclick=users;$("m15new").onclick=clearForm;
+   $("m15clear").onclick=clearForm;$("m15save").onclick=save;$("m15delete").onclick=remove;
+ }
+ async function movies(){
+   if(!await admin())return;
+   const q=($("m15mq").value||"").toLowerCase(),s=await getDocs(collection(db,"catalog")),a=[];
+   s.forEach(d=>{const x={id:d.id,...d.data()};if(`${x.id} ${x.title||""}`.toLowerCase().includes(q))a.push(x)});
+   $("m15results").innerHTML=`<b>Movies / Series: ${a.length}</b>`+
+    a.map(x=>`<div class="mcu-v15-row"><span><b>${esc(x.title||x.id)}</b><br><small>${esc(x.type||"movie")} · ${esc(x.id)}</small></span><button data-m15edit="${esc(x.id)}">Edit</button></div>`).join("")||"<p>No results.</p>";
+ }
+ async function users(){
+   if(!await admin())return;
+   const q=($("m15uq").value||"").toLowerCase(),s=await getDocs(collection(db,"users")),a=[];
+   s.forEach(d=>{const x={id:d.id,...d.data()};if(`${x.displayName||""} ${x.email||""}`.toLowerCase().includes(q))a.push(x)});
+   $("m15results").innerHTML=`<b>Users: ${a.length}</b>`+
+    a.map(x=>`<div class="mcu-v15-row"><span><b>${esc(x.displayName||"User")}</b><br><small>${esc(x.email||"")} · ${esc(x.role||"user")}</small></span><button data-m15remove="${esc(x.id)}">Remove</button></div>`).join("")||"<p>No users found.</p>";
+ }
+ function clearForm(){["m15id","m15title","m15date","m15poster","m15backdrop","m15trailer","m15watch","m15download","m15desc"].forEach(i=>$(i).value="");$("m15type").value="movie"}
+ function load(x){
+   $("m15id").value=x.id||"";$("m15title").value=x.title||"";$("m15type").value=x.type||"movie";
+   $("m15date").value=x.releaseDate||"";$("m15poster").value=x.posterUrl||"";$("m15backdrop").value=x.backdropUrl||"";
+   $("m15trailer").value=x.trailerUrl||"";$("m15watch").value=x.watchUrl||x.officialUrl||"";
+   $("m15download").value=x.downloadUrl||"";$("m15desc").value=x.description||"";
+ }
+ async function save(){
+   if(!await admin())return;
+   const id=$("m15id").value.trim(),title=$("m15title").value.trim();
+   if(!id||!title){$("m15status").textContent="ID and title are required.";return}
+   await setDoc(doc(db,"catalog",id),{
+    title,type:$("m15type").value,releaseDate:$("m15date").value,
+    posterUrl:$("m15poster").value.trim(),backdropUrl:$("m15backdrop").value.trim(),
+    trailerUrl:$("m15trailer").value.trim(),watchUrl:$("m15watch").value.trim(),
+    officialUrl:$("m15watch").value.trim(),downloadUrl:$("m15download").value.trim(),
+    description:$("m15desc").value.trim(),updatedBy:auth.currentUser.uid,updatedAt:serverTimestamp()
+   },{merge:true});
+   $("m15status").textContent="Saved to Firestore.";movies();
+ }
+ async function remove(){
+   if(!await admin())return;const id=$("m15id").value.trim();if(!id)return;
+   if(confirm("Delete this movie/series?")){await deleteDoc(doc(db,"catalog",id));clearForm();movies()}
+ }
+ document.addEventListener("click",async ev=>{
+   const b=ev.target.closest("button");if(!b)return;
+   if(b.dataset.m15edit&&await admin()){const s=await getDoc(doc(db,"catalog",b.dataset.m15edit));if(s.exists())load({id:s.id,...s.data()})}
+   if(b.dataset.m15remove&&await admin()&&confirm("Remove this user's Firestore record?")){await deleteDoc(doc(db,"users",b.dataset.m15remove));users()}
+ });
+ function layout(){
+   const h=document.querySelector("#heroThemes,#hero-themes,[data-section='hero-themes']");
+   const c=document.querySelector("#personalMCUCommandCenter,#personalCommandCenter,[data-section='personal-command-center']");
+   const w=document.querySelector("#continueWatching,#continue-watching,[data-section='continue-watching']");
+   if(h&&c)h.parentElement.insertBefore(c,h.nextSibling);
+   if(c&&w)c.parentElement.insertBefore(w,c.nextSibling);
+   if(w)w.querySelectorAll(".movie-card,.content-card,.movie-item,[data-movie-card]").forEach((x,i)=>x.style.display=i<3?"":"none");
+   document.querySelectorAll("#recentlyOpened,#recently-opened,[data-section='recently-opened']").forEach(x=>x.remove());
+ }
+ onAuthStateChanged(auth,async()=>{
+   const ok=await admin(),btn=$("authAdminBtn");
+   if(btn)btn.style.display=ok?"inline-block":"none";
+   if(ok)mount();else $("mcuV15Admin")?.remove();
+   layout();
+ });
+ setInterval(layout,1200);
 }
 </script>
 
