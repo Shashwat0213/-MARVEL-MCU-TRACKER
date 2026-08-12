@@ -1695,6 +1695,15 @@ body.light-mode .v3-greeting p{color:#52627a}
 .v13-result{padding:10px 0;border-bottom:1px solid #333;display:flex;justify-content:space-between;gap:8px;align-items:center}
 @media(max-width:600px){.v13-grid{grid-template-columns:1fr}.v13-result{align-items:flex-start;flex-direction:column}}
 </style>
+
+<style id="mcu-v15">
+.mcu-v15-admin{margin:14px 0;padding:16px;border:1px solid #444;border-radius:16px}
+.mcu-v15-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px}
+.mcu-v15-grid input,.mcu-v15-grid select,.mcu-v15-grid textarea{width:100%;box-sizing:border-box;padding:10px;border-radius:9px;border:1px solid #777;background:#181818;color:#fff}
+.mcu-v15-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.mcu-v15-row{padding:10px 0;border-bottom:1px solid #333;display:flex;justify-content:space-between;gap:10px;align-items:center}
+@media(max-width:600px){.mcu-v15-grid{grid-template-columns:1fr}.mcu-v15-row{flex-direction:column;align-items:flex-start}}
+</style>
 </head>
 
 <body>
@@ -5261,11 +5270,11 @@ if (app) {
 </script>
 
 
-<!-- ===== MCU TRACKER V14 — UNIFIED ADMIN CONTROL CENTER ===== -->
+<!-- ===== MCU TRACKER V15 — UNIFIED ADMIN CONTROL CENTER ===== -->
 <section id="v11AdminDashboard" style="display:none;position:fixed;inset:0;z-index:99999;overflow:auto;background:rgba(0,0,0,.78);padding:18px">
   <div style="max-width:1150px;margin:20px auto;background:#111;color:#fff;border-radius:20px;padding:22px">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
-      <div><h2 style="margin:0">🛡️ MCU Tracker V14 Admin</h2><p style="margin:6px 0;opacity:.75">One Firestore role system • no HTML edits for content updates</p></div>
+      <div><h2 style="margin:0">🛡️ MCU Tracker V15 Admin</h2><p style="margin:6px 0;opacity:.75">One Firestore role system • no HTML edits for content updates</p></div>
       <button id="v11Close">✕</button>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0">
@@ -5318,7 +5327,7 @@ if (app) {
 .v11stat b{font-size:28px}.v11row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #333}
 </style>
 <script type="module">
-/* V14 unified Firestore-role admin layer */
+/* V15 unified Firestore-role admin layer */
 import { getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import { getFirestore, doc, getDoc, collection, getDocs, setDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
@@ -5433,7 +5442,7 @@ if (v11App) {
 
 
 <script type="module">
-/* MCU Tracker V14 upgrades */
+/* MCU Tracker V15 upgrades */
 import {getApps} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import {getAuth,onAuthStateChanged,updateProfile} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import {getFirestore,doc,getDoc,setDoc,collection,getDocs} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
@@ -5515,7 +5524,7 @@ if(apps12.length){
 
 
 <script type="module">
-/* ===== V14 WORKING ADMIN LAYER ===== */
+/* ===== V15 WORKING ADMIN LAYER ===== */
 import {getApps} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import {getFirestore,doc,getDoc,setDoc,deleteDoc,collection,getDocs,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
@@ -5532,7 +5541,7 @@ if(a13){
    const p=panel(); if(!p||$("v13Tools"))return;
    const box=document.createElement("div");box.id="v13Tools";box.className="v13-admin-tools";
    box.innerHTML=`
-   <h3 style="margin-top:0">V14 Content & User Manager</h3>
+   <h3 style="margin-top:0">V15 Content & User Manager</h3>
    <div class="v13-grid">
     <input id="v13MovieQ" placeholder="Search movies / series">
     <input id="v13UserQ" placeholder="Search users by name/email">
@@ -5616,41 +5625,125 @@ if(a13){
 </script>
 
 
-<style id="v14-mobile">
-@media(max-width:600px){#v3Stats,.stats-grid,.tracker-stats{gap:5px!important}#v3Stats>*,.stats-grid>*,.tracker-stats>*{padding:7px 5px!important;min-width:0!important}}
-</style>
 <script type="module">
+/* MCU Tracker V15
+   Uses the app's existing Firebase initialization.
+   Admin authority: users/{uid}.role === "admin"
+   Content authority: catalog/{contentId}
+*/
 import {getApps} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import {getFirestore,doc,getDoc,setDoc,deleteDoc,collection,getDocs,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-const A=getApps(); if(A.length){
- const app=A[0],auth=getAuth(app),db=getFirestore(app),$=id=>document.getElementById(id);
+
+const apps=getApps();
+if(apps.length){
+ const app=apps[0],auth=getAuth(app),db=getFirestore(app);
+ const $=id=>document.getElementById(id);
  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
- async function admin(){const u=auth.currentUser;if(!u)return false;const s=await getDoc(doc(db,"users",u.uid));return s.exists()&&s.data().role==="admin"}
- function mount(){
-  const p=$("v11AdminDashboard")||$("v10AdminDashboard")||$("v13Tools");if(!p||$("v14Admin"))return;
-  const x=document.createElement("div");x.id="v14Admin";x.style.cssText="margin:12px 0;padding:14px;border:1px solid #444;border-radius:14px";
-  x.innerHTML=`<h3>V14 Admin Manager</h3><div style="display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))">
-  <input id="v14mq" placeholder="Search movies / series"><input id="v14uq" placeholder="Search users by name/email">
-  <input id="v14id" placeholder="Movie ID"><input id="v14title" placeholder="Title">
-  <select id="v14type"><option value="movie">Movie</option><option value="series">Series</option></select>
-  <input id="v14date" type="date"><input id="v14poster" placeholder="Poster URL"><input id="v14trailer" placeholder="Trailer URL">
-  <input id="v14watch" placeholder="Watch / movie link"><input id="v14download" placeholder="Download link">
-  <input id="v14backdrop" placeholder="Backdrop URL"><textarea id="v14desc" placeholder="Description"></textarea></div>
-  <p><button id="v14ms">Search Movies</button> <button id="v14us">Search Users</button> <button id="v14new">New</button> <button id="v14save">Save / Update</button> <button id="v14del">Delete</button></p><div id="v14res"></div><div id="v14status"></div>`;
-  p.appendChild(x);
-  $("v14ms").onclick=movies;$("v14us").onclick=users;$("v14new").onclick=clear;$("v14save").onclick=save;$("v14del").onclick=del;
+ async function admin(){
+   const u=auth.currentUser;if(!u)return false;
+   const s=await getDoc(doc(db,"users",u.uid));
+   return s.exists() && s.data().role==="admin";
  }
- function clear(){["v14id","v14title","v14date","v14poster","v14trailer","v14watch","v14download","v14backdrop","v14desc"].forEach(i=>$(i).value="");$("v14type").value="movie"}
- async function movies(){if(!await admin())return;const q=($("v14mq").value||"").toLowerCase(),s=await getDocs(collection(db,"catalog")),a=[];s.forEach(d=>{let x={id:d.id,...d.data()};if((x.id+" "+(x.title||"")).toLowerCase().includes(q))a.push(x)});$("v14res").innerHTML=a.map(x=>`<p><b>${esc(x.title||x.id)}</b> <button data-e="${esc(x.id)}">Edit</button></p>`).join("")||"No results"}
- async function users(){if(!await admin())return;const q=($("v14uq").value||"").toLowerCase(),s=await getDocs(collection(db,"users")),a=[];s.forEach(d=>{let x={id:d.id,...d.data()};if(((x.displayName||"")+" "+(x.email||"")).toLowerCase().includes(q))a.push(x)});$("v14res").innerHTML=a.map(x=>`<p>${esc(x.displayName||"User")} — ${esc(x.email||"")} (${esc(x.role||"user")}) <button data-r="${esc(x.id)}">Remove</button></p>`).join("")||"No users"}
- function fill(x){$("v14id").value=x.id||"";$("v14title").value=x.title||"";$("v14type").value=x.type||"movie";$("v14date").value=x.releaseDate||"";$("v14poster").value=x.posterUrl||"";$("v14trailer").value=x.trailerUrl||"";$("v14watch").value=x.watchUrl||x.officialUrl||"";$("v14download").value=x.downloadUrl||"";$("v14backdrop").value=x.backdropUrl||"";$("v14desc").value=x.description||""}
- async function save(){if(!await admin())return;let id=$("v14id").value.trim(),title=$("v14title").value.trim();if(!id||!title)return;$("v14status").textContent="Saving…";await setDoc(doc(db,"catalog",id),{title,type:$("v14type").value,releaseDate:$("v14date").value,posterUrl:$("v14poster").value.trim(),trailerUrl:$("v14trailer").value.trim(),watchUrl:$("v14watch").value.trim(),officialUrl:$("v14watch").value.trim(),downloadUrl:$("v14download").value.trim(),backdropUrl:$("v14backdrop").value.trim(),description:$("v14desc").value.trim(),updatedBy:auth.currentUser.uid,updatedAt:serverTimestamp()},{merge:true});$("v14status").textContent="Saved to Firestore";movies()}
- async function del(){if(!await admin())return;let id=$("v14id").value.trim();if(id&&confirm("Delete this item?")){await deleteDoc(doc(db,"catalog",id));clear();movies()}}
- document.addEventListener("click",async e=>{let b=e.target.closest("button");if(!b)return;if(b.dataset.e){let s=await getDoc(doc(db,"catalog",b.dataset.e));if(s.exists())fill({id:s.id,...s.data()})}if(b.dataset.r&&await admin()&&confirm("Remove user record?")){await deleteDoc(doc(db,"users",b.dataset.r));users()}});
- function layout(){let h=document.querySelector("#heroThemes,#hero-themes,[data-section='hero-themes']"),c=document.querySelector("#personalMCUCommandCenter,#personalCommandCenter,[data-section='personal-command-center']"),w=document.querySelector("#continueWatching,#continue-watching,[data-section='continue-watching']");if(h&&c)h.parentElement.insertBefore(c,h.nextSibling);if(c&&w)c.parentElement.insertBefore(w,c.nextSibling);if(w)w.querySelectorAll(".movie-card,.content-card,.movie-item,[data-movie-card]").forEach((e,i)=>e.style.display=i<3?"":"none");document.querySelectorAll("#recentlyOpened,#recently-opened,[data-section='recently-opened']").forEach(e=>e.remove())}
- onAuthStateChanged(auth,async u=>{let ok=await admin(),b=$("authAdminBtn");if(b)b.style.display=ok?"inline-block":"none";if(ok)mount();layout()});setInterval(layout,1500);
+ function host(){return $("v11AdminDashboard")||$("v10AdminDashboard")||document.querySelector("[data-admin-panel]")}
+ function mount(){
+   const p=host();if(!p||$("mcuV15Admin"))return;
+   const e=document.createElement("section");e.id="mcuV15Admin";e.className="mcu-v15-admin";
+   e.innerHTML=`
+    <h3>V15 Admin Control Center</h3>
+    <div class="mcu-v15-grid">
+      <input id="m15mq" placeholder="Search movies / series">
+      <input id="m15uq" placeholder="Search users by name / email">
+    </div>
+    <div class="mcu-v15-actions">
+      <button id="m15ms">Search Movies</button>
+      <button id="m15us">Search Users</button>
+      <button id="m15new">Add Movie / Series</button>
+    </div>
+    <div id="m15results"></div><hr>
+    <div class="mcu-v15-grid">
+      <input id="m15id" placeholder="Unique ID">
+      <input id="m15title" placeholder="Title">
+      <select id="m15type"><option value="movie">Movie</option><option value="series">Series</option></select>
+      <input id="m15date" type="date">
+      <input id="m15poster" placeholder="Poster URL">
+      <input id="m15backdrop" placeholder="Backdrop URL">
+      <input id="m15trailer" placeholder="Trailer URL">
+      <input id="m15watch" placeholder="Watch / movie link">
+      <input id="m15download" placeholder="Download link">
+      <textarea id="m15desc" placeholder="Description" style="min-height:90px;grid-column:1/-1"></textarea>
+    </div>
+    <div class="mcu-v15-actions">
+      <button id="m15save">Save / Update</button>
+      <button id="m15delete">Delete</button>
+      <button id="m15clear">Clear</button>
+    </div>
+    <div id="m15status"></div>`;
+   p.appendChild(e);
+   $("m15ms").onclick=movies;$("m15us").onclick=users;$("m15new").onclick=clearForm;
+   $("m15clear").onclick=clearForm;$("m15save").onclick=save;$("m15delete").onclick=remove;
+ }
+ async function movies(){
+   if(!await admin())return;
+   const q=($("m15mq").value||"").toLowerCase(),s=await getDocs(collection(db,"catalog")),a=[];
+   s.forEach(d=>{const x={id:d.id,...d.data()};if(`${x.id} ${x.title||""}`.toLowerCase().includes(q))a.push(x)});
+   $("m15results").innerHTML=`<b>Movies / Series: ${a.length}</b>`+
+    a.map(x=>`<div class="mcu-v15-row"><span><b>${esc(x.title||x.id)}</b><br><small>${esc(x.type||"movie")} · ${esc(x.id)}</small></span><button data-m15edit="${esc(x.id)}">Edit</button></div>`).join("")||"<p>No results.</p>";
+ }
+ async function users(){
+   if(!await admin())return;
+   const q=($("m15uq").value||"").toLowerCase(),s=await getDocs(collection(db,"users")),a=[];
+   s.forEach(d=>{const x={id:d.id,...d.data()};if(`${x.displayName||""} ${x.email||""}`.toLowerCase().includes(q))a.push(x)});
+   $("m15results").innerHTML=`<b>Users: ${a.length}</b>`+
+    a.map(x=>`<div class="mcu-v15-row"><span><b>${esc(x.displayName||"User")}</b><br><small>${esc(x.email||"")} · ${esc(x.role||"user")}</small></span><button data-m15remove="${esc(x.id)}">Remove</button></div>`).join("")||"<p>No users found.</p>";
+ }
+ function clearForm(){["m15id","m15title","m15date","m15poster","m15backdrop","m15trailer","m15watch","m15download","m15desc"].forEach(i=>$(i).value="");$("m15type").value="movie"}
+ function load(x){
+   $("m15id").value=x.id||"";$("m15title").value=x.title||"";$("m15type").value=x.type||"movie";
+   $("m15date").value=x.releaseDate||"";$("m15poster").value=x.posterUrl||"";$("m15backdrop").value=x.backdropUrl||"";
+   $("m15trailer").value=x.trailerUrl||"";$("m15watch").value=x.watchUrl||x.officialUrl||"";
+   $("m15download").value=x.downloadUrl||"";$("m15desc").value=x.description||"";
+ }
+ async function save(){
+   if(!await admin())return;
+   const id=$("m15id").value.trim(),title=$("m15title").value.trim();
+   if(!id||!title){$("m15status").textContent="ID and title are required.";return}
+   await setDoc(doc(db,"catalog",id),{
+    title,type:$("m15type").value,releaseDate:$("m15date").value,
+    posterUrl:$("m15poster").value.trim(),backdropUrl:$("m15backdrop").value.trim(),
+    trailerUrl:$("m15trailer").value.trim(),watchUrl:$("m15watch").value.trim(),
+    officialUrl:$("m15watch").value.trim(),downloadUrl:$("m15download").value.trim(),
+    description:$("m15desc").value.trim(),updatedBy:auth.currentUser.uid,updatedAt:serverTimestamp()
+   },{merge:true});
+   $("m15status").textContent="Saved to Firestore.";movies();
+ }
+ async function remove(){
+   if(!await admin())return;const id=$("m15id").value.trim();if(!id)return;
+   if(confirm("Delete this movie/series?")){await deleteDoc(doc(db,"catalog",id));clearForm();movies()}
+ }
+ document.addEventListener("click",async ev=>{
+   const b=ev.target.closest("button");if(!b)return;
+   if(b.dataset.m15edit&&await admin()){const s=await getDoc(doc(db,"catalog",b.dataset.m15edit));if(s.exists())load({id:s.id,...s.data()})}
+   if(b.dataset.m15remove&&await admin()&&confirm("Remove this user's Firestore record?")){await deleteDoc(doc(db,"users",b.dataset.m15remove));users()}
+ });
+ function layout(){
+   const h=document.querySelector("#heroThemes,#hero-themes,[data-section='hero-themes']");
+   const c=document.querySelector("#personalMCUCommandCenter,#personalCommandCenter,[data-section='personal-command-center']");
+   const w=document.querySelector("#continueWatching,#continue-watching,[data-section='continue-watching']");
+   if(h&&c)h.parentElement.insertBefore(c,h.nextSibling);
+   if(c&&w)c.parentElement.insertBefore(w,c.nextSibling);
+   if(w)w.querySelectorAll(".movie-card,.content-card,.movie-item,[data-movie-card]").forEach((x,i)=>x.style.display=i<3?"":"none");
+   document.querySelectorAll("#recentlyOpened,#recently-opened,[data-section='recently-opened']").forEach(x=>x.remove());
+ }
+ onAuthStateChanged(auth,async()=>{
+   const ok=await admin(),btn=$("authAdminBtn");
+   if(btn)btn.style.display=ok?"inline-block":"none";
+   if(ok)mount();else $("mcuV15Admin")?.remove();
+   layout();
+ });
+ setInterval(layout,1200);
 }
 </script>
+
 </body>
 </html>
