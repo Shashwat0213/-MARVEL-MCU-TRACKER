@@ -1674,6 +1674,27 @@ body.light-mode .v3-greeting p{color:#52627a}
 */
 </style>
 
+
+<style id="v12-responsive">
+@media (max-width:600px){
+  #v3Stats,.stats-grid,.tracker-stats{gap:6px!important}
+  #v3Stats>*,.stats-grid>*,.tracker-stats>*{min-width:0!important;padding:8px 6px!important;border-radius:10px!important}
+  #v3Stats strong,#v3Stats b,.stats-grid strong,.stats-grid b{font-size:16px!important}
+  #v3Stats span,#v3Stats small,.stats-grid span,.stats-grid small{font-size:10px!important;white-space:nowrap}
+}
+.v12-avatar{width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.25)}
+.v12-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+</style>
+
+
+<style id="v13-working">
+.v13-admin-tools{margin:12px 0;padding:14px;border:1px solid #444;border-radius:14px}
+.v13-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px}
+.v13-grid input,.v13-grid select,.v13-grid textarea{width:100%;box-sizing:border-box;padding:10px;border-radius:9px;border:1px solid #777;background:#181818;color:#fff}
+.v13-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.v13-result{padding:10px 0;border-bottom:1px solid #333;display:flex;justify-content:space-between;gap:8px;align-items:center}
+@media(max-width:600px){.v13-grid{grid-template-columns:1fr}.v13-result{align-items:flex-start;flex-direction:column}}
+</style>
 </head>
 
 <body>
@@ -5240,11 +5261,11 @@ if (app) {
 </script>
 
 
-<!-- ===== MCU TRACKER V11 — UNIFIED ADMIN CONTROL CENTER ===== -->
+<!-- ===== MCU TRACKER V13 — UNIFIED ADMIN CONTROL CENTER ===== -->
 <section id="v11AdminDashboard" style="display:none;position:fixed;inset:0;z-index:99999;overflow:auto;background:rgba(0,0,0,.78);padding:18px">
   <div style="max-width:1150px;margin:20px auto;background:#111;color:#fff;border-radius:20px;padding:22px">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
-      <div><h2 style="margin:0">🛡️ MCU Tracker V11 Admin</h2><p style="margin:6px 0;opacity:.75">One Firestore role system • no HTML edits for content updates</p></div>
+      <div><h2 style="margin:0">🛡️ MCU Tracker V13 Admin</h2><p style="margin:6px 0;opacity:.75">One Firestore role system • no HTML edits for content updates</p></div>
       <button id="v11Close">✕</button>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0">
@@ -5297,7 +5318,7 @@ if (app) {
 .v11stat b{font-size:28px}.v11row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #333}
 </style>
 <script type="module">
-/* V11 unified Firestore-role admin layer */
+/* V13 unified Firestore-role admin layer */
 import { getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import { getFirestore, doc, getDoc, collection, getDocs, setDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
@@ -5407,6 +5428,190 @@ if (v11App) {
     }
     if(!admin)q("v11AdminDashboard").style.display="none";
   });
+}
+</script>
+
+
+<script type="module">
+/* MCU Tracker V13 upgrades */
+import {getApps} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {getAuth,onAuthStateChanged,updateProfile} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,collection,getDocs} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import {getStorage,ref,uploadBytes,getDownloadURL} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
+
+const apps12=getApps();
+if(apps12.length){
+ const app12=apps12[0],auth12=getAuth(app12),db12=getFirestore(app12);
+ let storage12=null; try{storage12=getStorage(app12)}catch(e){}
+ const $=id=>document.getElementById(id);
+ const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ async function admin12(u){
+   if(!u)return false;
+   const s=await getDoc(doc(db12,"users",u.uid));
+   return s.exists()&&s.data().role==="admin";
+ }
+ function reorder12(){
+   const c=document.querySelector("#personalMCUCommandCenter,#personalCommandCenter,[data-section='personal-command-center']");
+   const w=document.querySelector("#continueWatching,#continue-watching,[data-section='continue-watching']");
+   if(c&&w&&w.parentElement)w.parentElement.insertBefore(c,w);
+   if(w){
+     const cards=w.querySelectorAll(".movie-card,.content-card,.movie-item,[data-movie-card]");
+     cards.forEach((x,i)=>x.style.display=i<3?"":"none");
+   }
+ }
+ async function avatar12(u){
+   if(!u)return;
+   let p=$("v12AvatarPanel");
+   if(!p){
+     p=document.createElement("div");p.id="v12AvatarPanel";
+     p.style.cssText="margin:12px 0;padding:12px;border-radius:14px;background:rgba(120,120,255,.08)";
+     p.innerHTML='<div class="v12-row"><img id="v12Avatar" class="v12-avatar" alt="Profile avatar"><div><b>Profile Avatar</b><br><input id="v12AvatarInput" type="file" accept="image/*"><div id="v12AvatarStatus" style="font-size:12px;opacity:.75"></div></div></div>';
+     (document.querySelector("#v3Profile,#profile,.profile-card,#userProfile")||document.body).prepend(p);
+   }
+   const s=await getDoc(doc(db12,"users",u.uid)),d=s.exists()?s.data():{};
+   if($("v12Avatar"))$("v12Avatar").src=d.avatarUrl||u.photoURL||"";
+   $("v12AvatarInput")?.addEventListener("change",async e=>{
+     const f=e.target.files?.[0];if(!f)return;
+     if(f.size>5*1024*1024){$("v12AvatarStatus").textContent="Image must be 5 MB or smaller.";return}
+     try{
+       if(!storage12)throw Error("Firebase Storage is not enabled.");
+       $("v12AvatarStatus").textContent="Uploading…";
+       const r=ref(storage12,`avatars/${u.uid}/${Date.now()}-${f.name.replace(/[^a-zA-Z0-9._-]/g,"_")}`);
+       await uploadBytes(r,f,{contentType:f.type});
+       const url=await getDownloadURL(r);
+       await setDoc(doc(db12,"users",u.uid),{avatarUrl:url,updatedAt:new Date()},{merge:true});
+       try{await updateProfile(u,{photoURL:url})}catch(_){}
+       $("v12Avatar").src=url;$("v12AvatarStatus").textContent="Avatar saved.";
+     }catch(err){$("v12AvatarStatus").textContent=err.message||"Upload failed."}
+   },{once:true});
+ }
+ function installSearch12(){
+   const panel=$("v11AdminDashboard");if(!panel||$("v12AdminSearchTools"))return;
+   const box=document.createElement("div");box.id="v12AdminSearchTools";
+   box.style.cssText="margin:12px 0;padding:12px;border:1px solid #444;border-radius:12px";
+   box.innerHTML='<div style="display:flex;gap:8px;flex-wrap:wrap"><input id="v12MovieSearch" placeholder="Search movies / series" style="flex:1;min-width:220px"><button id="v12MovieSearchBtn">Search Movies</button><input id="v12UserSearch" placeholder="Search users by name/email" style="flex:1;min-width:220px"><button id="v12UserSearchBtn">Search Users</button></div><div id="v12SearchResults"></div>';
+   panel.querySelector("div")?.after(box);
+   async function movies(){
+     if(!await admin12(auth12.currentUser))return;
+     const t=($("v12MovieSearch").value||"").toLowerCase(),s=await getDocs(collection(db12,"catalog")),a=[];
+     s.forEach(d=>{const x={id:d.id,...d.data()};if(`${x.title||""} ${x.id}`.toLowerCase().includes(t))a.push(x)});
+     $("v12SearchResults").innerHTML=`<h4>Movies / Series (${a.length})</h4>`+a.map(x=>`<div class="v11row"><span><b>${esc(x.title||x.id)}</b> — ${esc(x.type||"movie")}</span><button data-v12edit="${esc(x.id)}">Edit</button></div>`).join("")||"<p>No results.</p>";
+   }
+   async function users(){
+     if(!await admin12(auth12.currentUser))return;
+     const t=($("v12UserSearch").value||"").toLowerCase(),s=await getDocs(collection(db12,"users")),a=[];
+     s.forEach(d=>{const x={id:d.id,...d.data()};if(`${x.displayName||""} ${x.email||""}`.toLowerCase().includes(t))a.push(x)});
+     $("v12SearchResults").innerHTML=`<h4>Users (${a.length})</h4>`+a.map(x=>`<div class="v11row"><b>${esc(x.displayName||"User")}</b><span>${esc(x.email||"")} · ${esc(x.role||"user")}</span></div>`).join("")||"<p>No results.</p>";
+   }
+   $("v12MovieSearchBtn").onclick=movies;$("v12UserSearchBtn").onclick=users;
+ }
+ onAuthStateChanged(auth12,async u=>{
+   installSearch12();reorder12();if(u)await avatar12(u);
+   const b=$("authAdminBtn");if(b){b.style.display=await admin12(u)?"inline-block":"none";}
+ });
+ setTimeout(reorder12,400);setTimeout(reorder12,1200);
+}
+</script>
+
+
+<script type="module">
+/* ===== V13 WORKING ADMIN LAYER ===== */
+import {getApps} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,deleteDoc,collection,getDocs,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const a13=getApps()[0];
+if(a13){
+ const au=getAuth(a13),db=getFirestore(a13);
+ const $=id=>document.getElementById(id);
+ const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ async function admin(){const u=au.currentUser;if(!u)return false;const s=await getDoc(doc(db,"users",u.uid));return s.exists()&&s.data().role==="admin";}
+ function panel(){return $("v11AdminDashboard")||$("v10AdminDashboard");}
+
+ function install(){
+   const p=panel(); if(!p||$("v13Tools"))return;
+   const box=document.createElement("div");box.id="v13Tools";box.className="v13-admin-tools";
+   box.innerHTML=`
+   <h3 style="margin-top:0">V13 Content & User Manager</h3>
+   <div class="v13-grid">
+    <input id="v13MovieQ" placeholder="Search movies / series">
+    <input id="v13UserQ" placeholder="Search users by name/email">
+   </div>
+   <div class="v13-actions">
+    <button id="v13MovieBtn">Search Movies</button>
+    <button id="v13UserBtn">Search Users</button>
+    <button id="v13NewBtn">New Movie / Series</button>
+   </div>
+   <div id="v13Results"></div>
+   <hr>
+   <div class="v13-grid">
+    <input id="v13Id" placeholder="Unique ID">
+    <input id="v13Title" placeholder="Title">
+    <select id="v13Type"><option value="movie">Movie</option><option value="series">Series</option></select>
+    <input id="v13Release" type="date" placeholder="Release date">
+    <input id="v13Poster" placeholder="Poster URL">
+    <input id="v13Trailer" placeholder="Trailer URL">
+    <input id="v13Link" placeholder="Your / official movie link">
+    <input id="v13Backdrop" placeholder="Backdrop URL">
+    <textarea id="v13Desc" placeholder="Description" style="min-height:90px;grid-column:1/-1"></textarea>
+   </div>
+   <div class="v13-actions">
+    <button id="v13Save">Save / Update</button>
+    <button id="v13Delete">Delete</button>
+   </div>
+   <div id="v13Status" style="opacity:.8"></div>`;
+   p.appendChild(box);
+
+   $("v13MovieBtn").onclick=searchMovies;
+   $("v13UserBtn").onclick=searchUsers;
+   $("v13NewBtn").onclick=()=>clearForm();
+   $("v13Save").onclick=saveContent;
+   $("v13Delete").onclick=deleteContent;
+   $("v13MovieQ").onkeydown=e=>{if(e.key==="Enter")searchMovies()};
+   $("v13UserQ").onkeydown=e=>{if(e.key==="Enter")searchUsers()};
+ }
+
+ async function searchMovies(){
+   if(!await admin())return;
+   const qv=($("v13MovieQ").value||"").toLowerCase(),s=await getDocs(collection(db,"catalog")),rows=[];
+   s.forEach(d=>{const x={id:d.id,...d.data()};if(`${x.id} ${x.title||""}`.toLowerCase().includes(qv))rows.push(x)});
+   $("v13Results").innerHTML=`<b>Content results: ${rows.length}</b>`+
+    rows.map(x=>`<div class="v13-result"><span><b>${esc(x.title||x.id)}</b><br><small>${esc(x.type||"movie")} · ${esc(x.id)}</small></span><button data-v13edit="${esc(x.id)}">Edit</button></div>`).join("")||"<p>No results.</p>";
+ }
+ async function searchUsers(){
+   if(!await admin())return;
+   const qv=($("v13UserQ").value||"").toLowerCase(),s=await getDocs(collection(db,"users")),rows=[];
+   s.forEach(d=>{const x={id:d.id,...d.data()};if(`${x.displayName||""} ${x.email||""}`.toLowerCase().includes(qv))rows.push(x)});
+   $("v13Results").innerHTML=`<b>User results: ${rows.length}</b>`+
+    rows.map(x=>`<div class="v13-result"><span><b>${esc(x.displayName||"User")}</b><br><small>${esc(x.email||"")} · ${esc(x.role||"user")}</small></span><button data-v13remove="${esc(x.id)}">Remove record</button></div>`).join("")||"<p>No users found.</p>";
+ }
+ function clearForm(){["v13Id","v13Title","v13Release","v13Poster","v13Trailer","v13Link","v13Backdrop","v13Desc"].forEach(i=>$(i).value="");$("v13Type").value="movie";$("v13Status").textContent="New item ready."}
+ function fill(x){$("v13Id").value=x.id||"";$("v13Title").value=x.title||"";$("v13Type").value=x.type||"movie";$("v13Release").value=x.releaseDate||"";$("v13Poster").value=x.posterUrl||"";$("v13Trailer").value=x.trailerUrl||"";$("v13Link").value=x.officialUrl||"";$("v13Backdrop").value=x.backdropUrl||"";$("v13Desc").value=x.description||"";$("v13Status").textContent="Loaded for editing."}
+ async function saveContent(){
+   const u=au.currentUser;if(!await admin())return;
+   const id=$("v13Id").value.trim(),title=$("v13Title").value.trim();
+   if(!id||!title){$("v13Status").textContent="ID and title are required.";return}
+   await setDoc(doc(db,"catalog",id),{
+    title,type:$("v13Type").value,releaseDate:$("v13Release").value,
+    posterUrl:$("v13Poster").value.trim(),trailerUrl:$("v13Trailer").value.trim(),
+    officialUrl:$("v13Link").value.trim(),backdropUrl:$("v13Backdrop").value.trim(),
+    description:$("v13Desc").value.trim(),updatedAt:serverTimestamp(),updatedBy:u.uid
+   },{merge:true});
+   $("v13Status").textContent="Saved successfully to Firestore.";await searchMovies();
+ }
+ async function deleteContent(){
+   if(!await admin())return;const id=$("v13Id").value.trim();if(!id)return;
+   if(!confirm("Delete this movie/series?"))return;await deleteDoc(doc(db,"catalog",id));clearForm();await searchMovies();
+ }
+ document.addEventListener("click",async e=>{
+   const b=e.target.closest("button");if(!b)return;
+   if(b.dataset.v13edit){const s=await getDoc(doc(db,"catalog",b.dataset.v13edit));if(s.exists())fill({id:s.id,...s.data()})}
+   if(b.dataset.v13remove){if(!await admin())return;if(confirm("Remove this user's Firestore record?")){await deleteDoc(doc(db,"users",b.dataset.v13remove));await searchUsers()}}
+ });
+ onAuthStateChanged(au,async u=>{
+   const ok=await admin();const old=$("authAdminBtn");if(old){old.style.display=ok?"inline-block":"none";}
+   if(ok){install();}else if($("v13Tools"))$("v13Tools").remove();
+ });
 }
 </script>
 
