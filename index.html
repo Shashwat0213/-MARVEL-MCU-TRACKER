@@ -729,6 +729,7 @@ button{
     transition:.5s ease;
 }
 
+.movie-type-badge{display:inline-flex;align-items:center;gap:5px;margin:3px 0 7px;padding:5px 8px;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-size:.58rem;font-weight:800;letter-spacing:.04em;opacity:.9}.movie-type-badge:has(+ .movie-meta){}
 .movie-card:hover .poster{
     transform:scale(1.06);
 }
@@ -1576,7 +1577,7 @@ body{background:radial-gradient(circle at 20% 0%,var(--premium-glow),transparent
 .premium-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.68),transparent 75%);z-index:-1}
 .hero-kicker{font-size:.75rem;letter-spacing:.22em;font-weight:800;color:var(--premium-accent2);text-transform:uppercase}.hero-title{font-size:clamp(2rem,5vw,4rem);line-height:.95;margin:10px 0;background:linear-gradient(90deg,#fff,var(--premium-accent2));-webkit-background-clip:text;background-clip:text;color:transparent}.hero-copy{max-width:650px;color:rgba(255,255,255,.72);line-height:1.6;margin:12px 0 20px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap}.hero-btn{border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:11px 16px;background:rgba(255,255,255,.07);color:#fff;cursor:pointer;font-weight:800}.hero-btn.primary{background:var(--premium-accent);border-color:transparent;box-shadow:0 8px 25px var(--premium-glow)}
 .theme-switcher{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 18px;padding:10px 12px;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:rgba(255,255,255,.035)}.theme-label{font-size:.72rem;font-weight:800;letter-spacing:.12em;opacity:.7;text-transform:uppercase}.theme-choice{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:inherit;border-radius:999px;padding:7px 11px;cursor:pointer}.theme-choice.active{border-color:var(--premium-accent);box-shadow:0 0 0 2px var(--premium-glow)}
-.continue-section{margin:0 0 22px}.continue-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.continue-head h2{margin:0;font-size:1rem}.continue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}.continue-card{display:flex;gap:10px;align-items:center;padding:10px;border-radius:16px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);cursor:pointer;transition:.2s}.continue-card:hover{transform:translateY(-3px);border-color:var(--premium-accent)}.continue-card img{width:48px;height:68px;object-fit:cover;border-radius:9px}.continue-card strong{font-size:.85rem}.continue-card small{display:block;opacity:.6;margin-top:4px}
+
 body.theme-blue{--premium-accent:#27a7ff;--premium-accent2:#a7e8ff;--premium-glow:rgba(39,167,255,.28)}body.theme-blue .premium-hero{background:linear-gradient(90deg,rgba(3,10,22,.97) 0%,rgba(5,18,38,.84) 42%,rgba(0,30,70,.25) 100%),url("https://image.tmdb.org/t/p/w780/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg") center right/cover no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center}.theme-blue .premium-hero:after{background:linear-gradient(90deg,rgba(0,5,15,.94),rgba(0,20,50,.5),transparent)}
 body.theme-gold{--premium-accent:#d9a441;--premium-accent2:#fff0a8;--premium-glow:rgba(217,164,65,.28)}body.theme-gold .premium-hero{background:linear-gradient(90deg,rgba(12,9,2,.97) 0%,rgba(35,25,4,.82) 42%,rgba(60,45,10,.20) 100%),url("https://image.tmdb.org/t/p/w780/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg") center right/cover no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center}.theme-gold .premium-hero:after{background:linear-gradient(90deg,rgba(10,7,0,.95),rgba(30,20,3,.52),transparent)}
 body.theme-cosmic{--premium-accent:#a855f7;--premium-accent2:#67e8f9;--premium-glow:rgba(168,85,247,.28)}body.theme-cosmic .premium-hero{background:linear-gradient(90deg,rgba(8,4,20,.97) 0%,rgba(24,8,42,.82) 42%,rgba(30,10,55,.22) 100%),url("https://image.tmdb.org/t/p/w780/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg") center right/cover no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center}.theme-cosmic .premium-hero:after{background:linear-gradient(90deg,rgba(8,2,20,.95),rgba(30,5,45,.5),transparent)}
@@ -1703,6 +1704,74 @@ body.light-mode .v3-greeting p{color:#52627a}
 .mcu-v15-row{padding:10px 0;border-bottom:1px solid #333;display:flex;justify-content:space-between;gap:10px;align-items:center}
 @media(max-width:600px){.mcu-v15-grid{grid-template-columns:1fr}.mcu-v15-row{flex-direction:column;align-items:flex-start}}
 </style>
+
+<style id="mcu-v1-integrated-css">
+/* V1 additive styling: keeps the original animation system intact. */
+.mcu-v1-type{display:inline-block;margin-left:6px;padding:3px 7px;border-radius:999px;font-size:.52rem;font-weight:800;border:1px solid rgba(255,255,255,.14);opacity:.9}
+.mcu-v1-importance{display:inline-block;margin-left:6px;padding:3px 7px;border-radius:999px;font-size:.52rem;font-weight:800;border:1px solid rgba(255,255,255,.14)}
+body.theme-gamma{--premium-accent:#39d353;--premium-accent2:#b7ffbf;--premium-glow:rgba(57,211,83,.28)}
+body.theme-gamma .premium-hero{background:linear-gradient(90deg,rgba(3,12,5,.97),rgba(7,28,12,.84),rgba(10,50,20,.22)),url("https://image.tmdb.org/t/p/w780/uxzzxijgPIY7slzFvMotPv8wjKA.jpg") center right/cover no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center}
+body.theme-gamma .premium-hero:after{background:linear-gradient(90deg,rgba(2,10,4,.95),rgba(3,30,10,.52),transparent)}
+</style>
+
+<style id="doomsday-timer-css">
+/* Additive: timer only. Existing tracker cards/layout/animations are untouched. */
+.doomsday-timer{
+  margin:14px 0 18px;
+  padding:14px 16px;
+  border:1px solid rgba(80,255,140,.32);
+  border-radius:16px;
+  background:linear-gradient(180deg,rgba(7,28,17,.92),rgba(3,13,8,.94));
+  box-shadow:0 0 24px rgba(40,255,110,.10),inset 0 0 28px rgba(30,255,100,.035);
+  overflow:hidden;
+}
+.doomsday-timer__title{
+  margin:0;
+  color:#b9ffd0;
+  font-family:"Orbitron",sans-serif;
+  font-weight:900;
+  letter-spacing:.08em;
+  font-size:.78rem;
+  text-transform:uppercase;
+}
+.doomsday-timer__copy{
+  margin:6px 0 10px;
+  color:rgba(220,255,230,.72);
+  font-size:.6rem;
+  line-height:1.55;
+}
+.doomsday-timer__digits{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+.doomsday-timer__unit{
+  min-width:66px;
+  padding:7px 9px;
+  text-align:center;
+  border:1px solid rgba(90,255,150,.22);
+  border-radius:9px;
+  background:rgba(0,0,0,.24);
+}
+.doomsday-timer__unit b{
+  display:block;
+  color:#d4ffe0;
+  font-family:"Orbitron",sans-serif;
+  font-size:.9rem;
+  line-height:1.1;
+  text-shadow:0 0 9px rgba(70,255,120,.5);
+}
+.doomsday-timer__unit span{
+  display:block;
+  margin-top:3px;
+  color:rgba(210,255,225,.55);
+  font-size:.44rem;
+  text-transform:uppercase;
+}
+.doomsday-timer.is-live .doomsday-timer__unit b{animation:ddPulse 1s ease-in-out infinite alternate}
+@keyframes ddPulse{from{opacity:.78}to{opacity:1}}
+@media(max-width:600px){.doomsday-timer{padding:12px}.doomsday-timer__unit{min-width:58px}}
+</style>
 </head>
 
 <body>
@@ -1810,16 +1879,16 @@ body.light-mode .v3-greeting p{color:#52627a}
   <p class="hero-copy">Track every movie, discover what to watch next, manage favorites, and keep your progress in one cinematic dashboard.</p>
   <div class="hero-actions">
     <button class="hero-btn primary" id="heroExploreBtn">🎬 Explore Movies</button>
-    <button class="hero-btn" id="heroContinueBtn">▶ Continue Watching</button>
   </div>
 </section>
 <section class="theme-switcher" aria-label="Hero theme selector">
   <span class="theme-label">Hero Theme</span>
-  <button class="theme-choice active" data-hero-theme="red">🔴 Marvel Red</button>
-  <button class="theme-choice" data-hero-theme="blue">🔵 Multiverse Blue</button>
+  <button class="theme-choice active" data-hero-theme="blue">🔵 Massive Blue</button>
+  <button class="theme-choice" data-hero-theme="red">🔴 Marvel Red</button>
   <button class="theme-choice" data-hero-theme="gold">🟡 Infinity Gold</button>
-  <button class="theme-choice" data-hero-theme="cosmic">🟣 Cosmic</button>
-  <button class="theme-choice" data-hero-theme="ironman">🤖 Iron Man</button>
+  <button class="theme-choice" data-hero-theme="cosmic">🟣 Multiverse Purple</button>
+  <button class="theme-choice" data-hero-theme="ironman">🤖 Stark Black</button>
+  <button class="theme-choice" data-hero-theme="gamma">🟢 Gamma Green</button>
 </section>
 <section class="theme-poster-strip" aria-live="polite">
   <img id="themePoster" src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg" alt="Theme poster">
@@ -1869,10 +1938,6 @@ body.light-mode .v3-greeting p{color:#52627a}
   </div>
 </section>
 
-<section class="continue-section" id="continueSection" hidden>
-  <div class="continue-head"><h2>▶ Continue Watching</h2><span id="continueCount"></span></div>
-  <div class="continue-grid" id="continueGrid"></div>
-</section>
 
 <section id="v9AdminPanel" aria-hidden="true">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
@@ -1912,6 +1977,8 @@ body.light-mode .v3-greeting p{color:#52627a}
         <input id="v10TrailerUrl" placeholder="Trailer URL (official)">
         <input id="v10OfficialUrl" placeholder="Your / official movie link">
         <input id="v10BackdropUrl" placeholder="Backdrop URL (optional)">
+        <input id="v10Phase" placeholder="Phase / Saga">
+        <select id="v10Importance"><option>Must Watch</option><option>Important</option><option>Optional</option></select>
         <textarea id="v10Description" placeholder="Description" style="grid-column:1/-1;min-height:100px"></textarea>
       </div>
 
@@ -2115,6 +2182,20 @@ Admin Panel</h3><div style="font-size:13px;opacity:.75">Role-based catalog manag
 
             <button
                 class="filter-btn"
+                data-filter="movie"
+            >
+                🎬 Movies
+            </button>
+
+            <button
+                class="filter-btn"
+                data-filter="series"
+            >
+                📺 Web Series
+            </button>
+
+            <button
+                class="filter-btn"
                 data-filter="watched"
             >
                 ✅ Watched
@@ -2139,7 +2220,7 @@ Admin Panel</h3><div style="font-size:13px;opacity:.75">Role-based catalog manag
                 <select id="sortSelect">
 
                     <option value="default">
-                        Sort: Default
+                        Timeline: Story Order
                     </option>
 
                     <option value="title">
@@ -2309,394 +2390,606 @@ Admin Panel</h3><div style="font-size:13px;opacity:.75">Role-based catalog manag
 ========================================================= */
 
 const movies = [
-
     {
-        title: "Spider-Man",
-        year: 2002,
-        releaseDate: "May 3, 2002",
-        rating: 7.4,
-        phase: "Pre-MCU / Sony",
-        poster: "https://i.pinimg.com/736x/db/12/82/db1282e0f4a2ca5730037a3669b6ddd6.jpg"
+        "id": "mcu-captain-america-the-first-avenger",
+        "timelineSlot": 1,
+        "title": "Captain America: The First Avenger",
+        "year": 2011,
+        "releaseDate": "2011-07-22",
+        "rating": 7.0,
+        "phase": "Phase 1 • Infinity Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://en.wikipedia.org/wiki/Special:Redirect/file/Captain_America_The_First_Avenger_poster.jpg"
     },
-
     {
-        title: "Spider-Man 2",
-        year: 2004,
-        releaseDate: "June 30, 2004",
-        rating: 7.5,
-        phase: "Pre-MCU / Sony",
-        poster: "https://m.media-amazon.com/images/M/MV5BNGQ0YTQyYTgtNWI2YS00NTE2LWJmNDItNTFlMTUwNmFlZTM0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+        "id": "mcu-captain-marvel",
+        "timelineSlot": 2,
+        "title": "Captain Marvel",
+        "year": 2019,
+        "releaseDate": "2019-03-08",
+        "rating": 7.0,
+        "phase": "Phase 3 • Infinity Saga",
+        "type": "movie",
+        "importance": "Important",
+        "poster": "https://image.tmdb.org/t/p/w500/AtsgWhDnHTq68L0lLsUrCnM7TjG.jpg"
     },
-
     {
-        title: "Spider-Man 3",
-        year: 2007,
-        releaseDate: "May 4, 2007",
-        rating: 6.3,
-        phase: "Pre-MCU / Sony",
-        poster: "https://image.tmdb.org/t/p/w500/qFmwhVUoUSXjkKRmca5yGDEXBIj.jpg"
+        "id": "mcu-iron-man",
+        "timelineSlot": 3,
+        "title": "Iron Man",
+        "year": 2008,
+        "releaseDate": "2008-05-02",
+        "rating": 7.9,
+        "phase": "Phase 1 • Infinity Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg"
     },
-
     {
-        title: "Iron Man",
-        year: 2008,
-        releaseDate: "May 2, 2008",
-        rating: 7.9,
-        phase: "Phase 1",
-        poster: "https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg"
+        "id": "mcu-iron-man-2",
+        "timelineSlot": 4,
+        "title": "Iron Man 2",
+        "year": 2010,
+        "releaseDate": "2010-05-07",
+        "rating": 6.9,
+        "phase": "Phase 1 • Infinity Saga",
+        "type": "movie",
+        "importance": "Important",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Iron_Man_2_poster.jpg"
     },
-
     {
-        title: "The Incredible Hulk",
-        year: 2008,
-        releaseDate: "June 13, 2008",
-        rating: 6.6,
-        phase: "Phase 1",
-        poster: "https://image.tmdb.org/t/p/w500/gKzYx79y0AQTL4UAk1cBQJ3nvrm.jpg"
+        "id": "mcu-the-incredible-hulk",
+        "timelineSlot": 5,
+        "title": "The Incredible Hulk",
+        "year": 2008,
+        "releaseDate": "2008-06-13",
+        "rating": 6.6,
+        "phase": "Phase 1 • Infinity Saga",
+        "type": "movie",
+        "importance": "Optional",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/The_Incredible_Hulk_poster.jpg"
     },
-
     {
-        title: "Iron Man 2",
-        year: 2010,
-        releaseDate: "May 7, 2010",
-        rating: 6.9,
-        phase: "Phase 1",
-        poster: "https://i.ebayimg.com/00/s/MTUwMFgxMDAw/z/S~cAAOSwABxgBctJ/$_57.JPG?set_id=8800005007"
+        "id": "mcu-thor",
+        "timelineSlot": 6,
+        "title": "Thor",
+        "year": 2011,
+        "releaseDate": "2011-05-06",
+        "rating": 7.0,
+        "phase": "Phase 1 • Infinity Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://en.wikipedia.org/wiki/Special:Redirect/file/Thor_(film)_poster.jpg"
     },
-
     {
-        title: "Thor",
-        year: 2011,
-        releaseDate: "May 6, 2011",
-        rating: 7.0,
-        phase: "Phase 1",
-        poster: "https://m.media-amazon.com/images/M/MV5BNjRhNGZjZjEtYTQzYS00OWUxLThjNGEtMTIwMTE2ZDFlZTZkXkEyXkFqcGc@._V1_.jpg"
+        "id": "mcu-the-avengers",
+        "timelineSlot": 7,
+        "title": "The Avengers",
+        "year": 2012,
+        "releaseDate": "2012-05-04",
+        "rating": 8.0,
+        "phase": "Phase 1 • Infinity Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg"
     },
-
     {
-        title: "Captain America: The First Avenger",
-        year: 2011,
-        releaseDate: "July 22, 2011",
-        rating: 7.0,
-        phase: "Phase 1",
-        poster: "https://m.media-amazon.com/images/M/MV5BNzUyM2YyY2MtNzNlMS00MWU5LTgxNjAtNzZlNmI2NjU2NDZlXkEyXkFqcGc@._V1_.jpg"
+        "id": "mcu-iron-man-3",
+        "timelineSlot": 8,
+        "title": "Iron Man 3",
+        "year": 2013,
+        "releaseDate": "2013-05-03",
+        "rating": 7.1,
+        "phase": "Phase 2 • Infinity Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://en.wikipedia.org/wiki/Special:Redirect/file/Iron_Man_3_poster.jpg"
     },
-
     {
-        title: "The Avengers",
-        year: 2012,
-        releaseDate: "May 4, 2012",
-        rating: 8.0,
-        phase: "Phase 1",
-        poster: "https://image.tmdb.org/t/p/w500/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg"
+        "id": "mcu-thor-the-dark-world",
+        "timelineSlot": 9,
+        "title": "Thor: The Dark World",
+        "year": 2013,
+        "releaseDate": "2013-11-08",
+        "rating": 6.7,
+        "phase": "Phase 2 • Infinity Saga",
+        "type": "movie",
+        "importance": "Important",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Thor:_The_Dark_World_poster.jpg"
     },
-
     {
-        title: "The Amazing Spider-Man",
-        year: 2012,
-        releaseDate: "July 3, 2012",
-        rating: 6.9,
-        phase: "Pre-MCU / Sony",
-        poster: "https://i.pinimg.com/736x/e5/b0/d8/e5b0d88bc0f0463a8092c85a56600acb.jpg"
+        "id": "mcu-captain-america-the-winter-soldier",
+        "timelineSlot": 10,
+        "title": "Captain America: The Winter Soldier",
+        "year": 2014,
+        "releaseDate": "2014-04-04",
+        "rating": 7.7,
+        "phase": "Phase 2 • Infinity Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://en.wikipedia.org/wiki/Special:Redirect/file/Captain_America_The_Winter_Soldier_poster.jpg"
     },
-
     {
-        title: "Iron Man 3",
-        year: 2013,
-        releaseDate: "May 3, 2013",
-        rating: 7.1,
-        phase: "Phase 2",
-        poster: "https://m.media-amazon.com/images/M/MV5BMjIzMzAzMjQyM15BMl5BanBnXkFtZTcwNzM2NjcyOQ@@._V1_.jpg"
+        "id": "mcu-guardians-of-the-galaxy",
+        "timelineSlot": 11,
+        "title": "Guardians of the Galaxy",
+        "year": 2014,
+        "releaseDate": "2014-08-01",
+        "rating": 8.0,
+        "phase": "Phase 2 • Infinity Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
     },
-
     {
-        title: "Thor: The Dark World",
-        year: 2013,
-        releaseDate: "November 8, 2013",
-        rating: 6.8,
-        phase: "Phase 2",
-        poster: "https://upload.wikimedia.org/wikipedia/en/7/7f/Thor_The_Dark_World_poster.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original"
+        "id": "mcu-guardians-of-the-galaxy-vol-2",
+        "timelineSlot": 12,
+        "title": "Guardians of the Galaxy Vol. 2",
+        "year": 2017,
+        "releaseDate": "2017-05-05",
+        "rating": 7.6,
+        "phase": "Phase 3 • Infinity Saga",
+        "type": "movie",
+        "importance": "Important",
+        "poster": "https://en.wikipedia.org/wiki/Special:Redirect/file/Guardians_of_the_Galaxy_Vol._2_poster.jpg"
     },
-
     {
-        title: "Captain America: The Winter Soldier",
-        year: 2014,
-        releaseDate: "April 4, 2014",
-        rating: 7.7,
-        phase: "Phase 2",
-        poster: "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Captain_America_The_Winter_Soldier_poster.jpg/250px-Captain_America_The_Winter_Soldier_poster.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail"
+        "id": "mcu-avengers-age-of-ultron",
+        "timelineSlot": 13,
+        "title": "Avengers: Age of Ultron",
+        "year": 2015,
+        "releaseDate": "2015-05-01",
+        "rating": 7.3,
+        "phase": "Phase 2 • Infinity Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/4ssDuvEDkSArWEdyBl2X5EHvYKU.jpg"
     },
-
     {
-        title: "The Amazing Spider-Man 2",
-        year: 2014,
-        releaseDate: "May 2, 2014",
-        rating: 6.6,
-        phase: "Pre-MCU / Sony",
-        poster: "https://image.tmdb.org/t/p/original/c3e9e18SSlvFd1cQaGmUj5tqL5P.jpg"
+        "id": "mcu-ant-man",
+        "timelineSlot": 14,
+        "title": "Ant-Man",
+        "year": 2015,
+        "releaseDate": "2015-07-17",
+        "rating": 7.2,
+        "phase": "Phase 2 • Infinity Saga",
+        "type": "movie",
+        "importance": "Important",
+        "poster": "https://image.tmdb.org/t/p/w500/D6e8RJf2qUstnfkTslTXNTUAlT.jpg"
     },
-
     {
-        title: "Guardians of the Galaxy",
-        year: 2014,
-        releaseDate: "August 1, 2014",
-        rating: 8.0,
-        phase: "Phase 2",
-        poster: "https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
+        "id": "mcu-captain-america-civil-war",
+        "timelineSlot": 15,
+        "title": "Captain America: Civil War",
+        "year": 2016,
+        "releaseDate": "2016-05-06",
+        "rating": 7.8,
+        "phase": "Phase 3 • Infinity Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/rAGiXaUfPzY7CDEyNKUofk3Kw2e.jpg"
     },
-
     {
-        title: "Avengers: Age of Ultron",
-        year: 2015,
-        releaseDate: "May 1, 2015",
-        rating: 7.3,
-        phase: "Phase 2",
-        poster: "https://image.tmdb.org/t/p/w500/4ssDuvEDkSArWEdyBl2X5EHvYKU.jpg"
+        "id": "mcu-black-widow",
+        "timelineSlot": 16,
+        "title": "Black Widow",
+        "year": 2021,
+        "releaseDate": "2021-07-09",
+        "rating": 6.6,
+        "phase": "Phase 4 • Multiverse Saga",
+        "type": "movie",
+        "importance": "Important",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Black_Widow_poster.jpg"
     },
-
     {
-        title: "Ant-Man",
-        year: 2015,
-        releaseDate: "July 17, 2015",
-        rating: 7.2,
-        phase: "Phase 2",
-        poster: "data:image/jpeg;base64,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"
+        "id": "mcu-black-panther",
+        "timelineSlot": 17,
+        "title": "Black Panther",
+        "year": 2018,
+        "releaseDate": "2018-02-16",
+        "rating": 7.3,
+        "phase": "Phase 3 • Infinity Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/uxzzxijgPIY7slzFvMotPv8wjKA.jpg"
     },
-
     {
-        title: "Captain America: Civil War",
-        year: 2016,
-        releaseDate: "May 6, 2016",
-        rating: 7.8,
-        phase: "Phase 3",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr6i16PG2AarVmyWRlqqbTMeduj7vM56jDxqPmoxDYAQ&s=10"
+        "id": "mcu-spider-man-homecoming",
+        "timelineSlot": 18,
+        "title": "Spider-Man: Homecoming",
+        "year": 2017,
+        "releaseDate": "2017-07-07",
+        "rating": 7.4,
+        "phase": "Phase 3 • Infinity Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/c24sv2weTHPsmDa7jEMN0m2P3RT.jpg"
     },
-
     {
-        title: "Doctor Strange",
-        year: 2016,
-        releaseDate: "November 4, 2016",
-        rating: 7.5,
-        phase: "Phase 3",
-        poster: "https://image.tmdb.org/t/p/w500/uGBVj3bEbCoZbDjjl9wTxcygko1.jpg"
+        "id": "mcu-doctor-strange",
+        "timelineSlot": 19,
+        "title": "Doctor Strange",
+        "year": 2016,
+        "releaseDate": "2016-11-04",
+        "rating": 7.5,
+        "phase": "Phase 3 • Infinity Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/uGBVj3bEbCoZbDjjl9wTxcygko1.jpg"
     },
-
     {
-        title: "Guardians of the Galaxy Vol. 2",
-        year: 2017,
-        releaseDate: "May 5, 2017",
-        rating: 7.6,
-        phase: "Phase 3",
-        poster: "https://m.media-amazon.com/images/M/MV5BNWE5MGI3MDctMmU5Ni00YzI2LWEzMTQtZGIyZDA5MzQzNDBhXkEyXkFqcGc@._V1_.jpg"
+        "id": "mcu-thor-ragnarok",
+        "timelineSlot": 20,
+        "title": "Thor: Ragnarok",
+        "year": 2017,
+        "releaseDate": "2017-11-03",
+        "rating": 7.9,
+        "phase": "Phase 3 • Infinity Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/rzRwTcFvttcN1ZpX2xv4j3tSdJu.jpg"
     },
-
     {
-        title: "Spider-Man: Homecoming",
-        year: 2017,
-        releaseDate: "July 7, 2017",
-        rating: 7.4,
-        phase: "Phase 3",
-        poster: "https://image.tmdb.org/t/p/w500/c24sv2weTHPsmDa7jEMN0m2P3RT.jpg"
+        "id": "mcu-ant-man-and-the-wasp",
+        "timelineSlot": 21,
+        "title": "Ant-Man and the Wasp",
+        "year": 2018,
+        "releaseDate": "2018-07-06",
+        "rating": 7.0,
+        "phase": "Phase 3 • Infinity Saga",
+        "type": "movie",
+        "importance": "Important",
+        "poster": "https://en.wikipedia.org/wiki/Special:Redirect/file/Ant-Man_and_the_Wasp_poster.jpg"
     },
-
     {
-        title: "Thor: Ragnarok",
-        year: 2017,
-        releaseDate: "November 3, 2017",
-        rating: 7.9,
-        phase: "Phase 3",
-        poster: "https://image.tmdb.org/t/p/w500/rzRwTcFvttcN1ZpX2xv4j3tSdJu.jpg"
+        "id": "mcu-avengers-infinity-war",
+        "timelineSlot": 22,
+        "title": "Avengers: Infinity War",
+        "year": 2018,
+        "releaseDate": "2018-04-27",
+        "rating": 8.4,
+        "phase": "Phase 3 • Infinity Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
     },
-
     {
-        title: "Black Panther",
-        year: 2018,
-        releaseDate: "February 16, 2018",
-        rating: 7.3,
-        phase: "Phase 3",
-        poster: "https://image.tmdb.org/t/p/w500/uxzzxijgPIY7slzFvMotPv8wjKA.jpg"
+        "id": "mcu-avengers-endgame",
+        "timelineSlot": 23,
+        "title": "Avengers: Endgame",
+        "year": 2019,
+        "releaseDate": "2019-04-26",
+        "rating": 8.4,
+        "phase": "Phase 3 • Infinity Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg"
     },
-
     {
-        title: "Avengers: Infinity War",
-        year: 2018,
-        releaseDate: "April 27, 2018",
-        rating: 8.4,
-        phase: "Phase 3",
-        poster: "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
+        "id": "mcu-wandavision",
+        "timelineSlot": 24,
+        "title": "WandaVision",
+        "year": 2021,
+        "releaseDate": "2021-01-15",
+        "rating": 7.9,
+        "phase": "Phase 4 • Multiverse Saga",
+        "type": "series",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/glKDfE6btIRcVB5zrjspRIs4r52.jpg"
     },
-
     {
-        title: "Ant-Man and the Wasp",
-        year: 2018,
-        releaseDate: "July 6, 2018",
-        rating: 7.0,
-        phase: "Phase 3",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5S4ottdftuBBjhZFSISCPpLDlx68vSasdfFIDvwoljg&s=10"
+        "id": "mcu-the-falcon-and-the-winter-soldier",
+        "timelineSlot": 25,
+        "title": "The Falcon and the Winter Soldier",
+        "year": 2021,
+        "releaseDate": "2021-03-19",
+        "rating": 7.1,
+        "phase": "Phase 4 • Multiverse Saga",
+        "type": "series",
+        "importance": "Important",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/The_Falcon_and_the_Winter_Soldier_poster.jpg"
     },
-
     {
-        title: "Captain Marvel",
-        year: 2019,
-        releaseDate: "March 8, 2019",
-        rating: 6.8,
-        phase: "Phase 3",
-        poster: "https://image.tmdb.org/t/p/w500/AtsgWhDnHTq68L0lLsUrCnM7TjG.jpg"
+        "id": "mcu-loki-season-1",
+        "timelineSlot": 26,
+        "title": "Loki — Season 1",
+        "year": 2021,
+        "releaseDate": "2021-06-09",
+        "rating": 8.2,
+        "phase": "Phase 4 • Multiverse Saga",
+        "type": "series",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/voHUmluYmKyleFkTu3lOXQG702u.jpg"
     },
-
     {
-        title: "Avengers: Endgame",
-        year: 2019,
-        releaseDate: "April 26, 2019",
-        rating: 8.2,
-        phase: "Phase 3",
-        poster: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg"
+        "id": "mcu-spider-man-far-from-home",
+        "timelineSlot": 27,
+        "title": "Spider-Man: Far From Home",
+        "year": 2019,
+        "releaseDate": "2019-07-02",
+        "rating": 7.4,
+        "phase": "Phase 3 • Infinity Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/4q2NNj4S5dG2RLF9CpXsej7yXl.jpg"
     },
-
     {
-        title: "Spider-Man: Far From Home",
-        year: 2019,
-        releaseDate: "July 2, 2019",
-        rating: 7.4,
-        phase: "Phase 3",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTIXXR0UVhX39afgE827bnvCpXi5ud7IJsKIUVJP4cbQ&s=10"
+        "id": "mcu-shang-chi-and-the-legend-of-the-ten-rings",
+        "timelineSlot": 28,
+        "title": "Shang-Chi and the Legend of the Ten Rings",
+        "year": 2021,
+        "releaseDate": "2021-09-03",
+        "rating": 7.3,
+        "phase": "Phase 4 • Multiverse Saga",
+        "type": "movie",
+        "importance": "Important",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Shang-Chi_and_the_Legend_of_the_Ten_Rings_poster.jpg"
     },
-
     {
-        title: "Black Widow",
-        year: 2021,
-        releaseDate: "July 9, 2021",
-        rating: 6.6,
-        phase: "Phase 4",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXwdNHt4xpXJJiLtZFSm5tb4b2bqG3ynPxq3F8dirvbQ&s=10"
+        "id": "mcu-eternals",
+        "timelineSlot": 29,
+        "title": "Eternals",
+        "year": 2021,
+        "releaseDate": "2021-11-05",
+        "rating": 6.3,
+        "phase": "Phase 4 • Multiverse Saga",
+        "type": "movie",
+        "importance": "Optional",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Eternals_poster.jpg"
     },
-
     {
-        title: "Shang-Chi and the Legend of the Ten Rings",
-        year: 2021,
-        releaseDate: "September 3, 2021",
-        rating: 7.4,
-        phase: "Phase 4",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaEwm6mXoI47OxMgvkH4ekMmIXk5t6Lra8sMs1189Sig&s=10"
+        "id": "mcu-spider-man-no-way-home",
+        "timelineSlot": 30,
+        "title": "Spider-Man: No Way Home",
+        "year": 2021,
+        "releaseDate": "2021-12-17",
+        "rating": 8.2,
+        "phase": "Phase 4 • Multiverse Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg"
     },
-
     {
-        title: "Eternals",
-        year: 2021,
-        releaseDate: "November 5, 2021",
-        rating: 6.3,
-        phase: "Phase 4",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-pXR23-SYMdaw3pt98ZUQSrSINQx4Y-L_nD80dMo7BA&s=10"
+        "id": "mcu-doctor-strange-in-the-multiverse-of-madness",
+        "timelineSlot": 31,
+        "title": "Doctor Strange in the Multiverse of Madness",
+        "year": 2022,
+        "releaseDate": "2022-05-06",
+        "rating": 6.9,
+        "phase": "Phase 4 • Multiverse Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://en.wikipedia.org/wiki/Special:Redirect/file/Doctor_Strange_in_the_Multiverse_of_Madness_poster.jpg"
     },
-
     {
-        title: "Spider-Man: No Way Home",
-        year: 2021,
-        releaseDate: "December 17, 2021",
-        rating: 8.0,
-        phase: "Phase 4",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSXkS1c3D69eoutmZyBfvojJGIXXFBljnp7ZSouR7EKw&s=10"
+        "id": "mcu-hawkeye",
+        "timelineSlot": 32,
+        "title": "Hawkeye",
+        "year": 2021,
+        "releaseDate": "2021-11-24",
+        "rating": 7.5,
+        "phase": "Phase 4 • Multiverse Saga",
+        "type": "series",
+        "importance": "Optional",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Hawkeye_poster.jpg"
     },
-
     {
-        title: "Doctor Strange in the Multiverse of Madness",
-        year: 2022,
-        releaseDate: "May 6, 2022",
-        rating: 7.0,
-        phase: "Phase 4",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoEpdxs2poFnYBfM89o6GXoey5o93J0tL9hCKkFy9d9w&s=10"
+        "id": "mcu-moon-knight",
+        "timelineSlot": 33,
+        "title": "Moon Knight",
+        "year": 2022,
+        "releaseDate": "2022-03-30",
+        "rating": 7.3,
+        "phase": "Phase 4 • Multiverse Saga",
+        "type": "series",
+        "importance": "Optional",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Moon_Knight_poster.jpg"
     },
-
     {
-        title: "Thor: Love and Thunder",
-        year: 2022,
-        releaseDate: "July 8, 2022",
-        rating: 6.2,
-        phase: "Phase 4",
-        poster: "https://image.tmdb.org/t/p/w500/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg"
+        "id": "mcu-ms-marvel",
+        "timelineSlot": 34,
+        "title": "Ms. Marvel",
+        "year": 2022,
+        "releaseDate": "2022-06-08",
+        "rating": 6.2,
+        "phase": "Phase 4 • Multiverse Saga",
+        "type": "series",
+        "importance": "Important",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ms._Marvel_poster.jpg"
     },
-
     {
-        title: "Black Panther: Wakanda Forever",
-        year: 2022,
-        releaseDate: "November 11, 2022",
-        rating: 7.0,
-        phase: "Phase 4",
-        poster: "https://image.tmdb.org/t/p/w500/sv1xJUazXeYqALzczSZ3O6nkH75.jpg"
+        "id": "mcu-thor-love-and-thunder",
+        "timelineSlot": 35,
+        "title": "Thor: Love and Thunder",
+        "year": 2022,
+        "releaseDate": "2022-07-08",
+        "rating": 6.2,
+        "phase": "Phase 4 • Multiverse Saga",
+        "type": "movie",
+        "importance": "Important",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Thor:_Love_and_Thunder_poster.jpg"
     },
-
     {
-        title: "Ant-Man and the Wasp: Quantumania",
-        year: 2023,
-        releaseDate: "February 17, 2023",
-        rating: 6.0,
-        phase: "Phase 5",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjoxTPV4fRhWjuNLXrmKqL57N05b0yimqpinpAOl5HwQ&s=10"
+        "id": "mcu-black-panther-wakanda-forever",
+        "timelineSlot": 36,
+        "title": "Black Panther: Wakanda Forever",
+        "year": 2022,
+        "releaseDate": "2022-11-11",
+        "rating": 6.6,
+        "phase": "Phase 4 • Multiverse Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/sv1xJUazXeYqALzczSZ3O6nkH75.jpg"
     },
-
     {
-        title: "Guardians of the Galaxy Vol. 3",
-        year: 2023,
-        releaseDate: "May 5, 2023",
-        rating: 7.9,
-        phase: "Phase 5",
-        poster: "https://image.tmdb.org/t/p/w500/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg"
+        "id": "mcu-werewolf-by-night",
+        "timelineSlot": 37,
+        "title": "Werewolf by Night",
+        "year": 2022,
+        "releaseDate": "2022-10-07",
+        "rating": 6.9,
+        "phase": "Phase 4 • Multiverse Saga",
+        "type": "special",
+        "importance": "Optional",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Werewolf_by_Night_poster.jpg"
     },
-
     {
-        title: "The Marvels",
-        year: 2023,
-        releaseDate: "November 10, 2023",
-        rating: 5.5,
-        phase: "Phase 5",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTikXUr9-aKGcfGcSC-AAc25_74rVL0d8a75tXLk47c5Q&s"
+        "id": "mcu-the-guardians-of-the-galaxy-holiday-special",
+        "timelineSlot": 38,
+        "title": "The Guardians of the Galaxy Holiday Special",
+        "year": 2022,
+        "releaseDate": "2022-11-25",
+        "rating": 6.9,
+        "phase": "Phase 4 • Multiverse Saga",
+        "type": "special",
+        "importance": "Important",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/The_Guardians_of_the_Galaxy_Holiday_Special_poster.jpg"
     },
-
     {
-        title: "Deadpool & Wolverine",
-        year: 2024,
-        releaseDate: "July 26, 2024",
-        rating: 7.6,
-        phase: "Phase 5",
-        poster: "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg"
+        "id": "mcu-ant-man-and-the-wasp-quantumania",
+        "timelineSlot": 39,
+        "title": "Ant-Man and the Wasp: Quantumania",
+        "year": 2023,
+        "releaseDate": "2023-02-17",
+        "rating": 6.0,
+        "phase": "Phase 5 • Multiverse Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ant-Man_and_the_Wasp:_Quantumania_poster.jpg"
     },
-
     {
-        title: "Captain America: Brave New World",
-        year: 2025,
-        releaseDate: "February 14, 2025",
-        rating: 5.7,
-        phase: "Phase 5",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVNEpLOzaeFsjzYS5umXSx7MwC558oRLIlqJEy-nEqEw&s=10"
+        "id": "mcu-guardians-of-the-galaxy-vol-3",
+        "timelineSlot": 40,
+        "title": "Guardians of the Galaxy Vol. 3",
+        "year": 2023,
+        "releaseDate": "2023-05-05",
+        "rating": 7.9,
+        "phase": "Phase 5 • Multiverse Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg"
     },
-
     {
-        title: "Thunderbolts",
-        year: 2025,
-        releaseDate: "May 2, 2025",
-        rating: 7.0,
-        phase: "Phase 5",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVahq_UerB58w7N-EZH6cHy8NyBkbtzJmTKpDHYAPorw&s=10"
+        "id": "mcu-secret-invasion",
+        "timelineSlot": 41,
+        "title": "Secret Invasion",
+        "year": 2023,
+        "releaseDate": "2023-06-21",
+        "rating": 5.9,
+        "phase": "Phase 5 • Multiverse Saga",
+        "type": "series",
+        "importance": "Important",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Secret_Invasion_poster.jpg"
     },
-
     {
-        title: "The Fantastic Four: First Steps",
-        year: 2025,
-        releaseDate: "July 25, 2025",
-        rating: 7.3,
-        phase: "Phase 6",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx6RDAGl5M4dH_fnS7mYxJC_0rdNFNsoY1c6wVVB6csA&s=10"
+        "id": "mcu-loki-season-2",
+        "timelineSlot": 42,
+        "title": "Loki — Season 2",
+        "year": 2023,
+        "releaseDate": "2023-10-05",
+        "rating": 8.2,
+        "phase": "Phase 5 • Multiverse Saga",
+        "type": "series",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/tGdaskDMBdGonOnuvkrAP9sd0mt.jpg"
     },
-
     {
-        title: "Spider-Man: Brand New Day",
-        year: 2026,
-        releaseDate: "July 31, 2026",
-        rating: 8.1,
-        phase: "Phase 6",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRBNPetHukrorY8xN9XZtnwS7oR5mv0xOYiMCTlrv5UA&s=10"
+        "id": "mcu-the-marvels",
+        "timelineSlot": 43,
+        "title": "The Marvels",
+        "year": 2023,
+        "releaseDate": "2023-11-10",
+        "rating": 5.5,
+        "phase": "Phase 5 • Multiverse Saga",
+        "type": "movie",
+        "importance": "Important",
+        "poster": "https://en.wikipedia.org/wiki/Special:Redirect/file/The_Marvels_(film)_poster.jpg"
+    },
+    {
+        "id": "mcu-deadpool-wolverine",
+        "timelineSlot": 44,
+        "title": "Deadpool & Wolverine",
+        "year": 2024,
+        "releaseDate": "2024-07-26",
+        "rating": 7.6,
+        "phase": "Phase 5 • Multiverse Saga",
+        "type": "movie",
+        "importance": "Important",
+        "poster": "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg"
+    },
+    {
+        "id": "mcu-agatha-all-along",
+        "timelineSlot": 45,
+        "title": "Agatha All Along",
+        "year": 2024,
+        "releaseDate": "2024-09-18",
+        "rating": 7.2,
+        "phase": "Phase 5 • Multiverse Saga",
+        "type": "series",
+        "importance": "Important",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Agatha_All_Along_poster.jpg"
+    },
+    {
+        "id": "mcu-captain-america-brave-new-world",
+        "timelineSlot": 46,
+        "title": "Captain America: Brave New World",
+        "year": 2025,
+        "releaseDate": "2025-02-14",
+        "rating": 5.7,
+        "phase": "Phase 5 • Multiverse Saga",
+        "type": "movie",
+        "importance": "Important",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Captain_America:_Brave_New_World_poster.jpg"
+    },
+    {
+        "id": "mcu-daredevil-born-again",
+        "timelineSlot": 47,
+        "title": "Daredevil: Born Again",
+        "year": 2025,
+        "releaseDate": "2025-03-04",
+        "rating": 7.8,
+        "phase": "Phase 5 • Multiverse Saga",
+        "type": "series",
+        "importance": "Important",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Daredevil:_Born_Again_poster.jpg"
+    },
+    {
+        "id": "mcu-thunderbolts",
+        "timelineSlot": 48,
+        "title": "Thunderbolts*",
+        "year": 2025,
+        "releaseDate": "2025-05-02",
+        "rating": 7.2,
+        "phase": "Phase 5 • Multiverse Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Thunderbolts*_poster.jpg"
+    },
+    {
+        "id": "mcu-ironheart",
+        "timelineSlot": 49,
+        "title": "Ironheart",
+        "year": 2025,
+        "releaseDate": "2025-06-24",
+        "rating": 5.8,
+        "phase": "Phase 5 • Multiverse Saga",
+        "type": "series",
+        "importance": "Optional",
+        "poster": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ironheart_poster.jpg"
+    },
+    {
+        "id": "mcu-the-fantastic-four-first-steps",
+        "timelineSlot": 50,
+        "title": "The Fantastic Four: First Steps",
+        "year": 2025,
+        "releaseDate": "2025-07-25",
+        "rating": 7.3,
+        "phase": "Phase 6 • Multiverse Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://image.tmdb.org/t/p/w500/nf5qaSEvyYSNeFH0YhSs5EsBLX9.jpg"
     }
-
 ];
 
 /* =========================================================
@@ -2715,7 +3008,6 @@ movies.forEach(function(movie){
             "https://www.youtube.com/results?search_query=" + query;
     }
 });
-
 /* =========================================================
    PART 2 DATA CHECK
 ========================================================= */
@@ -2767,6 +3059,31 @@ let favorites =
         localStorage.getItem("mcuFavorites")
     ) || {};
 
+/* =========================================================
+   TIMELINE ID MIGRATION
+   Keep existing watched/favorite data attached to the same title
+   after the timeline order changes.
+========================================================= */
+(function migrateLegacyTrackerState(){
+    const oldWatched = watched || {};
+    const oldFavorites = favorites || {};
+    const hasNumericKeys = Object.keys(oldWatched).some(k => /^\d+$/.test(k)) ||
+                           Object.keys(oldFavorites).some(k => /^\d+$/.test(k));
+    if(!hasNumericKeys) return;
+
+    const nextWatched = {};
+    const nextFavorites = {};
+    movies.forEach((movie, i) => {
+        if(oldWatched[i]) nextWatched[movie.id] = true;
+        if(oldFavorites[i]) nextFavorites[movie.id] = true;
+    });
+    watched = {...oldWatched, ...nextWatched};
+    favorites = {...oldFavorites, ...nextFavorites};
+    Object.keys(watched).filter(k => /^\d+$/.test(k)).forEach(k => delete watched[k]);
+    Object.keys(favorites).filter(k => /^\d+$/.test(k)).forEach(k => delete favorites[k]);
+    saveData();
+})();
+
 let soundEnabled =
     localStorage.getItem("mcuSound") !== "false";
 
@@ -2775,6 +3092,33 @@ let currentFilter = "all";
 let currentSearch = "";
 
 let currentSort = "default";
+
+/* =========================================================
+   TIMELINE V2 — STABLE MOVIE KEYS + LEGACY STATE MIGRATION
+   Keeps existing watched/favorite data attached to the same titles
+   even though the timeline order has changed.
+========================================================= */
+const LEGACY_MOVIE_TITLES = ["Spider-Man", "Spider-Man 2", "Spider-Man 3", "Iron Man", "The Incredible Hulk", "Iron Man 2", "Thor", "Captain America: The First Avenger", "The Avengers", "The Amazing Spider-Man", "Iron Man 3", "Thor: The Dark World", "Captain America: The Winter Soldier", "The Amazing Spider-Man 2", "Guardians of the Galaxy", "Avengers: Age of Ultron", "Ant-Man", "Captain America: Civil War", "Doctor Strange", "Guardians of the Galaxy Vol. 2", "Spider-Man: Homecoming", "Thor: Ragnarok", "Black Panther", "Avengers: Infinity War", "Ant-Man and the Wasp", "Captain Marvel", "Avengers: Endgame", "Spider-Man: Far From Home", "Black Widow", "Shang-Chi and the Legend of the Ten Rings", "Eternals", "Spider-Man: No Way Home", "Doctor Strange in the Multiverse of Madness", "Thor: Love and Thunder", "Black Panther: Wakanda Forever", "Ant-Man and the Wasp: Quantumania", "Guardians of the Galaxy Vol. 3", "The Marvels", "Deadpool & Wolverine", "Captain America: Brave New World", "Thunderbolts", "The Fantastic Four: First Steps", "Spider-Man: Brand New Day"];
+function normalizeTrackerMap(source){
+    const input = source && typeof source === "object" ? source : {};
+    const output = {};
+    Object.keys(input).forEach(key => {
+        if(!input[key]) return;
+        let movie = null;
+        if(/^\d+$/.test(key)){
+            const legacyTitle = LEGACY_MOVIE_TITLES[Number(key)];
+            movie = movies.find(m => m.title === legacyTitle);
+        }else{
+            movie = movies.find(m => m.id === key);
+        }
+        if(movie) output[movie.id] = true;
+    });
+    return output;
+}
+watched = normalizeTrackerMap(watched);
+favorites = normalizeTrackerMap(favorites);
+localStorage.setItem("mcuWatched", JSON.stringify(watched));
+localStorage.setItem("mcuFavorites", JSON.stringify(favorites));
 
 
 /* =========================================================
@@ -2865,8 +3209,10 @@ function posterFallback(image){
 
         this.onerror = null;
 
+        const title = this.dataset.posterTitle || "MARVEL";
+        const label = encodeURIComponent(title);
         this.src =
-            "https://placehold.co/500x750/0d1422/00e5ff?text=MARVEL+MOVIE";
+            "https://placehold.co/500x750/0d1422/00e5ff?text=" + label;
 
     };
 
@@ -2905,12 +3251,27 @@ function getFilteredMovies(){
     }
 
 
-    /* FILTER */
+    /* TYPE FILTERS — Movies / Web Series */
 
-    if(currentFilter === "watched"){
+    if(currentFilter === "movie"){
+
+        result = result.filter(movie => movie.type === "movie");
+
+    }
+
+    else if(currentFilter === "series"){
+
+        result = result.filter(movie => movie.type === "series");
+
+    }
+
+
+    /* WATCH / FAVORITE FILTERS */
+
+    else if(currentFilter === "watched"){
 
         result = result.filter(
-            movie => watched[movie.originalIndex]
+            movie => watched[movie.id]
         );
 
     }
@@ -2918,7 +3279,7 @@ function getFilteredMovies(){
     else if(currentFilter === "unwatched"){
 
         result = result.filter(
-            movie => !watched[movie.originalIndex]
+            movie => !watched[movie.id]
         );
 
     }
@@ -2926,15 +3287,25 @@ function getFilteredMovies(){
     else if(currentFilter === "favorites"){
 
         result = result.filter(
-            movie => favorites[movie.originalIndex]
+            movie => favorites[movie.id]
         );
 
     }
 
 
-    /* SORT */
+    /* SORT — DEFAULT = USER TIMELINE / STORY ORDER */
 
-    if(currentSort === "title"){
+    if(currentSort === "default" || currentSort === "timeline"){
+
+        result.sort((a,b) => {
+            const slotA = Number.isFinite(Number(a.timelineSlot)) ? Number(a.timelineSlot) : 9999;
+            const slotB = Number.isFinite(Number(b.timelineSlot)) ? Number(b.timelineSlot) : 9999;
+            return slotA - slotB || a.title.localeCompare(b.title);
+        });
+
+    }
+
+    else if(currentSort === "title"){
 
         result.sort(
             (a,b) =>
@@ -3023,10 +3394,10 @@ function renderMovies(){
             movie.originalIndex;
 
         const isWatched =
-            !!watched[index];
+            !!watched[movie.id];
 
         const isFavorite =
-            !!favorites[index];
+            !!favorites[movie.id];
 
 
         const li =
@@ -3054,7 +3425,7 @@ function renderMovies(){
 
         poster.alt =
             movie.title + " poster";
-
+        poster.dataset.posterTitle = movie.title;
         poster.loading = "lazy";
 
         posterFallback(poster);
@@ -3108,8 +3479,8 @@ function renderMovies(){
 
                 event.stopPropagation();
 
-                favorites[index] =
-                    !favorites[index];
+                favorites[movie.id] =
+                    !favorites[movie.id];
 
                 playButtonSound();
 
@@ -3160,6 +3531,16 @@ function renderMovies(){
                 "0.6";
 
         }
+
+
+        /* TYPE BADGE */
+
+        const typeBadge = document.createElement("span");
+        typeBadge.className = "movie-type-badge";
+        typeBadge.textContent = movie.type === "series" ? "📺 WEB SERIES" : "🎬 MOVIE";
+        if(movie.optional) typeBadge.textContent += " • OPTIONAL";
+        if(movie.mustWatch) typeBadge.textContent += " • MUST WATCH";
+        if(movie.importance && !movie.optional && !movie.mustWatch) typeBadge.textContent += " • " + movie.importance.toUpperCase();
 
 
         /* META */
@@ -3217,6 +3598,13 @@ function renderMovies(){
 
         meta.appendChild(phaseMeta);
 
+        const slotMeta = document.createElement("span");
+        slotMeta.className = "meta-item timeline-slot-meta";
+        slotMeta.textContent = movie.timelineSlot
+            ? "🎬 Slot " + movie.timelineSlot
+            : "";
+        meta.appendChild(slotMeta);
+
 
         /* WATCH ROW */
 
@@ -3268,7 +3656,7 @@ function renderMovies(){
             "change",
             function(){
 
-                watched[index] =
+                watched[movie.id] =
                     checkbox.checked;
 
                 playTickSound();
@@ -3308,6 +3696,7 @@ function renderMovies(){
         /* BUILD */
 
         info.appendChild(title);
+        info.appendChild(typeBadge);
 
         info.appendChild(meta);
 
@@ -3333,7 +3722,7 @@ li.addEventListener("click", function(event){
         return;
     }
 
-    openMovieModal(movie, index);
+    openMovieModal(movie, movie.id);
 
 });
 
@@ -3359,16 +3748,14 @@ function updateStats(){
 
 
     const completed =
-        movies.filter(
-            (_,index) =>
-                !!watched[index]
+        movies.filter(movie =>
+            !!watched[movie.id]
         ).length;
 
 
     const favoritesCount =
-        movies.filter(
-            (_,index) =>
-                !!favorites[index]
+        movies.filter(movie =>
+            !!favorites[movie.id]
         ).length;
 
 
@@ -3533,7 +3920,7 @@ function openMovieModal(movie, index){
     /* WATCHED */
 
     modalWatchBtn.textContent =
-        watched[index]
+        watched[movie.id]
             ? "✓ Watched"
             : "✓ Mark Watched";
 
@@ -3541,7 +3928,7 @@ function openMovieModal(movie, index){
     /* FAVORITE */
 
     modalFavoriteBtn.textContent =
-        favorites[index]
+        favorites[movie.id]
             ? "❤️ Favorited"
             : "♡ Favorite";
 
@@ -3960,18 +4347,6 @@ console.log(
 );
 
 /* PREMIUM V2 JS */
-const continueSection=document.getElementById("continueSection");
-const continueGrid=document.getElementById("continueGrid");
-const continueCount=document.getElementById("continueCount");
-function renderContinue(){
-  if(!continueSection||!continueGrid)return;
-  const items=movies.map((m,i)=>({...m,originalIndex:i})).filter(m=>!watched[m.originalIndex]).slice(0,3);
-  if(!items.length){continueSection.hidden=true;return;}
-  continueSection.hidden=false;
-  continueCount.textContent=`${items.length} suggestions`;
-  continueGrid.innerHTML=items.map(m=>`<article class="continue-card" data-index="${m.originalIndex}"><img src="${m.poster||''}" alt=""><div><strong>${m.title}</strong><small>${m.phase||'MCU'} • ${m.year||'TBA'}</small></div></article>`).join('');
-  continueGrid.querySelectorAll('.continue-card').forEach(card=>card.addEventListener('click',()=>openMovieModal(movies[Number(card.dataset.index)],Number(card.dataset.index))));
-}
 const heroThemeData={
   red:{title:'Avengers: Endgame',subtitle:'Marvel Red • Phase 3',poster:'https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg'},
   blue:{title:'Spider-Man: No Way Home',subtitle:'Multiverse Blue • Phase 4',poster:'https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg'},
@@ -3994,14 +4369,9 @@ function applyHeroTheme(theme){
   if(subtitle)subtitle.textContent=data.subtitle;
 }
 document.querySelectorAll('[data-hero-theme]').forEach(b=>b.addEventListener('click',()=>applyHeroTheme(b.dataset.heroTheme)));
-applyHeroTheme(localStorage.getItem('mcuHeroTheme')||'red');
+applyHeroTheme(localStorage.getItem('mcuHeroTheme')||'blue');
 const heroExploreBtn=document.getElementById('heroExploreBtn');
 if(heroExploreBtn)heroExploreBtn.addEventListener('click',()=>document.getElementById('movieList')?.scrollIntoView({behavior:'smooth'}));
-const heroContinueBtn=document.getElementById('heroContinueBtn');
-if(heroContinueBtn)heroContinueBtn.addEventListener('click',()=>document.getElementById('continueSection')?.scrollIntoView({behavior:'smooth'}));
-const premiumRenderMovies=renderMovies;
-renderMovies=function(){premiumRenderMovies();renderContinue();};
-renderContinue();
 
 
 /* =========================================================
@@ -4014,7 +4384,7 @@ renderContinue();
   const $ = id => document.getElementById(id);
   function movieProgress(){
     const total = movies.length;
-    const done = movies.filter((_,i)=>!!watched[i]).length;
+    const done = movies.filter(m=>!!watched[m.id]).length;
     return total ? Math.round(done/total*100) : 0;
   }
 
@@ -4024,8 +4394,8 @@ renderContinue();
     $('v3Avatar').textContent = name.trim().charAt(0).toUpperCase() || 'S';
     $('v3NameInput').value = name;
 
-    const done = movies.filter((_,i)=>!!watched[i]).length;
-    const favs = movies.filter((_,i)=>!!favorites[i]).length;
+    const done = movies.filter(m=>!!watched[m.id]).length;
+    const favs = movies.filter(m=>!!favorites[m.id]).length;
     const remaining = movies.length - done;
     const percent = movieProgress();
     $('v3Watched').textContent = done;
@@ -4034,14 +4404,14 @@ renderContinue();
     $('v3ProgressText').textContent = percent + '%';
     $('v3ProgressFill').style.width = percent + '%';
 
-    const nextIndex = movies.findIndex((_,i)=>!watched[i]);
+    const nextIndex = movies.findIndex(m=>!watched[m.id]);
     const next = nextIndex >= 0 ? movies[nextIndex] : null;
     if(next){
       $('v3NextPoster').src = next.poster || '';
       $('v3NextPoster').onerror = function(){this.src='https://placehold.co/300x450/0d1422/00e5ff?text=MCU';};
       $('v3NextTitle').textContent = next.title;
       $('v3NextMeta').textContent = `${next.phase || 'MCU'} • ${next.year || 'TBA'} • ⭐ ${next.rating || 'TBA'}`;
-      $('v3NextMovie').onclick = () => openMovieModal(next,nextIndex);
+      $('v3NextMovie').onclick = () => openMovieModal(next,next.id);
     } else {
       $('v3NextTitle').textContent = 'MCU Complete 🎉';
       $('v3NextMeta').textContent = 'You have completed every movie in this tracker.';
@@ -4094,8 +4464,8 @@ window.__mcuTrackerBridge = {
     };
   },
   applyState(state){
-    watched = state?.watched || {};
-    favorites = state?.favorites || {};
+    watched = normalizeTrackerMap(state?.watched || {});
+    favorites = normalizeTrackerMap(state?.favorites || {});
     localStorage.setItem("mcuWatched", JSON.stringify(watched));
     localStorage.setItem("mcuFavorites", JSON.stringify(favorites));
     if(Array.isArray(state?.history)) localStorage.setItem("mcuV3History", JSON.stringify(state.history.slice(0,8)));
@@ -5431,7 +5801,6 @@ if(apps12.length){
  }
  function reorder12(){
    const c=document.querySelector("#personalMCUCommandCenter,#personalCommandCenter,[data-section='personal-command-center']");
-   const w=document.querySelector("#continueWatching,#continue-watching,[data-section='continue-watching']");
    if(c&&w&&w.parentElement)w.parentElement.insertBefore(c,w);
    if(w){
      const cards=w.querySelectorAll(".movie-card,.content-card,.movie-item,[data-movie-card]");
@@ -5699,11 +6068,9 @@ if(apps.length){
  function layout(){
    const h=document.querySelector("#heroThemes,#hero-themes,[data-section='hero-themes']");
    const c=document.querySelector("#personalMCUCommandCenter,#personalCommandCenter,[data-section='personal-command-center']");
-   const w=document.querySelector("#continueWatching,#continue-watching,[data-section='continue-watching']");
    if(h&&c)h.parentElement.insertBefore(c,h.nextSibling);
    if(c&&w)c.parentElement.insertBefore(w,c.nextSibling);
    if(w)w.querySelectorAll(".movie-card,.content-card,.movie-item,[data-movie-card]").forEach((x,i)=>x.style.display=i<3?"":"none");
-   document.querySelectorAll("#recentlyOpened,#recently-opened,[data-section='recently-opened']").forEach(x=>x.remove());
  }
  onAuthStateChanged(auth,async()=>{
    const ok=await admin(),btn=$("authAdminBtn");
@@ -5715,5 +6082,96 @@ if(apps.length){
 }
 </script>
 
+
+<script id="mcu-v1-normalizer">
+(function(){
+  "use strict";
+  function normalize(){
+    if(!Array.isArray(window.movies)) return;
+    window.movies.forEach(function(m,i){
+      if(!m.id) m.id="mcu-"+String(m.title||i).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+      m.timelineSlot=Number(m.timelineSlot)||i+1;
+      m.type=m.type||"movie";
+      m.importance=m.importance||"Important";
+      m.phase=m.phase||"MCU";
+      m.rating=Number(m.rating)||0;
+    });
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",normalize); else normalize();
+})();
+</script>
+
+
+<script id="doomsday-timer-js">
+(function(){
+"use strict";
+function pad(n){ return String(n).padStart(2,"0"); }
+
+/*
+ * Timer only: no movie list, no new guide, no new filters.
+ * Target is configurable so the existing tracker remains the source of truth.
+ * If the target date is changed later, update only this ISO value.
+ */
+var DOOMSDAY_TARGET = "2026-05-01T00:00:00+05:30";
+
+function buildTimer(){
+  if(document.getElementById("doomsday-timer")) return;
+
+  var timer=document.createElement("section");
+  timer.id="doomsday-timer";
+  timer.className="doomsday-timer is-live";
+  timer.setAttribute("aria-label","Avengers Doomsday countdown");
+  timer.innerHTML =
+    '<h3 class="doomsday-timer__title">AVENGERS: DOOMSDAY</h3>'+
+    '<p class="doomsday-timer__copy">Doomsday तक की MCU journey के लिए countdown</p>'+
+    '<div class="doomsday-timer__digits">'+
+      '<div class="doomsday-timer__unit"><b data-dd="d">00</b><span>Days</span></div>'+
+      '<div class="doomsday-timer__unit"><b data-dd="h">00</b><span>Hours</span></div>'+
+      '<div class="doomsday-timer__unit"><b data-dd="m">00</b><span>Minutes</span></div>'+
+      '<div class="doomsday-timer__unit"><b data-dd="s">00</b><span>Seconds</span></div>'+
+    '</div>';
+
+  /* Hero Themes area only: insert immediately after the themes block when found. */
+  var host =
+    document.querySelector(".hero-themes") ||
+    document.querySelector("#heroThemes") ||
+    document.querySelector('[class*="hero"][class*="theme"]') ||
+    document.querySelector('[id*="theme"]');
+
+  if(host && host.parentNode){
+    host.parentNode.insertBefore(timer,host.nextSibling);
+  }else{
+    /* Safe fallback: do not create a new content section in the tracker. */
+    var hero=document.querySelector(".hero")||document.querySelector("#hero");
+    if(hero) hero.appendChild(timer);
+  }
+
+  function tick(){
+    var target=new Date(DOOMSDAY_TARGET).getTime();
+    var diff=Math.max(0,target-Date.now());
+    var total=Math.floor(diff/1000);
+    var d=Math.floor(total/86400); total%=86400;
+    var h=Math.floor(total/3600); total%=3600;
+    var m=Math.floor(total/60); var s=total%60;
+    timer.querySelector('[data-dd="d"]').textContent=String(d);
+    timer.querySelector('[data-dd="h"]').textContent=pad(h);
+    timer.querySelector('[data-dd="m"]').textContent=pad(m);
+    timer.querySelector('[data-dd="s"]').textContent=pad(s);
+    if(diff<=0){
+      timer.classList.remove("is-live");
+      timer.querySelector(".doomsday-timer__copy").textContent="Avengers: Doomsday release date reached.";
+    }
+  }
+  tick();
+  window.setInterval(tick,1000);
+}
+
+if(document.readyState==="loading"){
+  document.addEventListener("DOMContentLoaded",buildTimer);
+}else{
+  buildTimer();
+}
+})();
+</script>
 </body>
 </html>
