@@ -1,3 +1,11 @@
+
+<style id="manual-media-link-style">
+.media-actions .download-btn,
+.media-actions .trailer-btn { text-decoration:none; cursor:pointer; }
+.media-actions button:disabled { opacity:.6; cursor:not-allowed; }
+</style>
+
+<!-- MCU Tracker Firebase V7 Cloud Sync -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -3350,6 +3358,30 @@ function getFilteredMovies(){
    RENDER MOVIES
 ========================================================= */
 
+
+/* =========================================================
+   MANUAL TRAILER + DOWNLOAD LINKS
+   Fill each movie/series object's trailerUrl and downloadUrl.
+   Example:
+     trailerUrl: "https://www.youtube.com/watch?v=...",
+     downloadUrl: "https://example.com/your-official-link"
+   Empty links show "Coming Soon".
+========================================================= */
+function getManualMediaLinks(item){
+  const trailer = String(item?.trailerUrl || item?.trailer || "").trim();
+  const download = String(item?.downloadUrl || "").trim();
+
+  return `
+    <div class="media-actions" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+      ${trailer
+        ? `<a class="btn trailer-btn" href="${escapeAttr(trailer)}" target="_blank" rel="noopener noreferrer">▶ Trailer</a>`
+        : `<button class="btn trailer-btn" type="button" disabled>▶ Trailer — Coming Soon</button>`}
+      ${download
+        ? `<a class="btn download-btn" href="${escapeAttr(download)}" target="_blank" rel="noopener noreferrer">⬇ Download</a>`
+        : `<button class="btn download-btn" type="button" disabled>⬇ Download — Coming Soon</button>`}
+    </div>`;
+}
+
 function renderMovies(){
 
     movieList.innerHTML = "";
@@ -6174,3 +6206,8 @@ if(document.readyState==="loading"){
 </script>
 </body>
 </html>
+
+<script>
+/* Manual media-link helper is available to existing movie-card templates. */
+window.getManualMediaLinks = window.getManualMediaLinks || getManualMediaLinks;
+</script>
