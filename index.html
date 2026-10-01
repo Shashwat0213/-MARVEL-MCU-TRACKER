@@ -6190,73 +6190,45 @@ if(apps.length){
 
 <script id="doomsday-timer-js">
 (function(){
-"use strict";
-function pad(n){ return String(n).padStart(2,"0"); }
+  "use strict";
 
-/*
- * Timer only: no movie list, no new guide, no new filters.
- * Target is configurable so the existing tracker remains the source of truth.
- * If the target date is changed later, update only this ISO value.
- */
-var DOOMSDAY_TARGET = "2026-12-18T00:00:00+05:30";
+  /* Single live countdown: 18 December 2026, 00:00 IST */
+  var TARGET = Date.parse("2026-12-18T00:00:00+05:30");
 
-function buildTimer(){
-  if(document.getElementById("doomsday-timer")) return;
-
-  var timer=document.createElement("section");
-  timer.id="doomsday-timer";
-  timer.className="doomsday-timer is-live";
-  timer.setAttribute("aria-label","Avengers Doomsday countdown");
-  timer.innerHTML =
-    '<h3 class="doomsday-timer__title">AVENGERS: DOOMSDAY</h3>'+
-    '<p class="doomsday-timer__copy">Doomsday तक की MCU journey के लिए countdown</p>'+
-    '<div class="doomsday-timer__digits">'+
-      '<div class="doomsday-timer__unit"><b data-dd="d">00</b><span>Days</span></div>'+
-      '<div class="doomsday-timer__unit"><b data-dd="h">00</b><span>Hours</span></div>'+
-      '<div class="doomsday-timer__unit"><b data-dd="m">00</b><span>Minutes</span></div>'+
-      '<div class="doomsday-timer__unit"><b data-dd="s">00</b><span>Seconds</span></div>'+
-    '</div>';
-
-  /* Hero Themes area only: insert immediately after the themes block when found. */
-  var host =
-    document.querySelector(".hero-themes") ||
-    document.querySelector("#heroThemes") ||
-    document.querySelector('[class*="hero"][class*="theme"]') ||
-    document.querySelector('[id*="theme"]');
-
-  if(host && host.parentNode){
-    host.parentNode.insertBefore(timer,host.nextSibling);
-  }else{
-    /* Safe fallback: do not create a new content section in the tracker. */
-    var hero=document.querySelector(".hero")||document.querySelector("#hero");
-    if(hero) hero.appendChild(timer);
-  }
+  function pad(n){ return String(n).padStart(2,"0"); }
 
   function tick(){
-    var target=new Date(DOOMSDAY_TARGET).getTime();
-    var diff=Math.max(0,target-Date.now());
-    var total=Math.floor(diff/1000);
-    var d=Math.floor(total/86400); total%=86400;
-    var h=Math.floor(total/3600); total%=3600;
-    var m=Math.floor(total/60); var s=total%60;
-    timer.querySelector('[data-dd="d"]').textContent=String(d);
-    timer.querySelector('[data-dd="h"]').textContent=pad(h);
-    timer.querySelector('[data-dd="m"]').textContent=pad(m);
-    timer.querySelector('[data-dd="s"]').textContent=pad(s);
-    if(diff<=0){
-      timer.classList.remove("is-live");
-      timer.querySelector(".doomsday-timer__copy").textContent="Avengers: Doomsday release date reached.";
-    }
-  }
-  tick();
-  window.setInterval(tick,1000);
-}
+    var diff = Math.max(0, TARGET - Date.now());
+    var total = Math.floor(diff / 1000);
 
-if(document.readyState==="loading"){
-  document.addEventListener("DOMContentLoaded",buildTimer);
-}else{
-  buildTimer();
-}
+    var days = Math.floor(total / 86400);
+    total %= 86400;
+    var hours = Math.floor(total / 3600);
+    total %= 3600;
+    var minutes = Math.floor(total / 60);
+    var seconds = total % 60;
+
+    var d = document.getElementById("doomsdayDays");
+    var h = document.getElementById("doomsdayHours");
+    var m = document.getElementById("doomsdayMinutes");
+    var sec = document.getElementById("doomsdaySeconds");
+
+    if(d) d.textContent = String(days).padStart(3,"0");
+    if(h) h.textContent = pad(hours);
+    if(m) m.textContent = pad(minutes);
+    if(sec) sec.textContent = pad(seconds);
+  }
+
+  function start(){
+    tick();
+    window.setInterval(tick, 1000);
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", start, {once:true});
+  }else{
+    start();
+  }
 })();
 </script>
 </body>
