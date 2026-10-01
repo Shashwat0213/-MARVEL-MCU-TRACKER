@@ -1,10 +1,3 @@
-
-<style id="manual-media-link-style">
-.media-actions .download-btn,
-.media-actions .trailer-btn { text-decoration:none; cursor:pointer; }
-.media-actions button:disabled { opacity:.6; cursor:not-allowed; }
-</style>
-
 <!-- MCU Tracker Firebase V7 Cloud Sync -->
 <!DOCTYPE html>
 <html lang="en">
@@ -736,7 +729,6 @@ button{
     transition:.5s ease;
 }
 
-.movie-type-badge{display:inline-flex;align-items:center;gap:5px;margin:3px 0 7px;padding:5px 8px;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-size:.58rem;font-weight:800;letter-spacing:.04em;opacity:.9}.movie-type-badge:has(+ .movie-meta){}
 .movie-card:hover .poster{
     transform:scale(1.06);
 }
@@ -1584,7 +1576,7 @@ body{background:radial-gradient(circle at 20% 0%,var(--premium-glow),transparent
 .premium-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.68),transparent 75%);z-index:-1}
 .hero-kicker{font-size:.75rem;letter-spacing:.22em;font-weight:800;color:var(--premium-accent2);text-transform:uppercase}.hero-title{font-size:clamp(2rem,5vw,4rem);line-height:.95;margin:10px 0;background:linear-gradient(90deg,#fff,var(--premium-accent2));-webkit-background-clip:text;background-clip:text;color:transparent}.hero-copy{max-width:650px;color:rgba(255,255,255,.72);line-height:1.6;margin:12px 0 20px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap}.hero-btn{border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:11px 16px;background:rgba(255,255,255,.07);color:#fff;cursor:pointer;font-weight:800}.hero-btn.primary{background:var(--premium-accent);border-color:transparent;box-shadow:0 8px 25px var(--premium-glow)}
 .theme-switcher{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 18px;padding:10px 12px;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:rgba(255,255,255,.035)}.theme-label{font-size:.72rem;font-weight:800;letter-spacing:.12em;opacity:.7;text-transform:uppercase}.theme-choice{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:inherit;border-radius:999px;padding:7px 11px;cursor:pointer}.theme-choice.active{border-color:var(--premium-accent);box-shadow:0 0 0 2px var(--premium-glow)}
-
+.continue-section{margin:0 0 22px}.continue-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.continue-head h2{margin:0;font-size:1rem}.continue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}.continue-card{display:flex;gap:10px;align-items:center;padding:10px;border-radius:16px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);cursor:pointer;transition:.2s}.continue-card:hover{transform:translateY(-3px);border-color:var(--premium-accent)}.continue-card img{width:48px;height:68px;object-fit:cover;border-radius:9px}.continue-card strong{font-size:.85rem}.continue-card small{display:block;opacity:.6;margin-top:4px}
 body.theme-blue{--premium-accent:#27a7ff;--premium-accent2:#a7e8ff;--premium-glow:rgba(39,167,255,.28)}body.theme-blue .premium-hero{background:linear-gradient(90deg,rgba(3,10,22,.97) 0%,rgba(5,18,38,.84) 42%,rgba(0,30,70,.25) 100%),url("https://image.tmdb.org/t/p/w780/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg") center right/cover no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center}.theme-blue .premium-hero:after{background:linear-gradient(90deg,rgba(0,5,15,.94),rgba(0,20,50,.5),transparent)}
 body.theme-gold{--premium-accent:#d9a441;--premium-accent2:#fff0a8;--premium-glow:rgba(217,164,65,.28)}body.theme-gold .premium-hero{background:linear-gradient(90deg,rgba(12,9,2,.97) 0%,rgba(35,25,4,.82) 42%,rgba(60,45,10,.20) 100%),url("https://image.tmdb.org/t/p/w780/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg") center right/cover no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center}.theme-gold .premium-hero:after{background:linear-gradient(90deg,rgba(10,7,0,.95),rgba(30,20,3,.52),transparent)}
 body.theme-cosmic{--premium-accent:#a855f7;--premium-accent2:#67e8f9;--premium-glow:rgba(168,85,247,.28)}body.theme-cosmic .premium-hero{background:linear-gradient(90deg,rgba(8,4,20,.97) 0%,rgba(24,8,42,.82) 42%,rgba(30,10,55,.22) 100%),url("https://image.tmdb.org/t/p/w780/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg") center right/cover no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center}.theme-cosmic .premium-hero:after{background:linear-gradient(90deg,rgba(8,2,20,.95),rgba(30,5,45,.5),transparent)}
@@ -1610,11 +1602,12 @@ body:not(.theme-blue):not(.theme-gold):not(.theme-cosmic):not(.theme-ironman) .p
 .v3-section{margin:0 0 24px}.v3-section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.v3-section-head h2{font-size:.95rem;margin:0}.v3-section-head span{font-size:.58rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
 
 
-.v3-profile-edit{display:flex;gap:7px;margin-top:12px}.v3-profile-edit input{flex:1;min-width:0;padding:9px 11px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:inherit;outline:none;font-family:inherit;font-size:.65rem}.v3-profile-edit button{padding:9px 12px;border-radius:10px;border:0;background:var(--premium-accent);color:#fff;font-weight:800;cursor:pointer}
-body.light-mode .v3-card{background:rgba(255,255,255,.78);border-color:rgba(80,110,150,.15)}
+.v3-recent{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.v3-recent-item{display:flex;gap:9px;align-items:center;padding:9px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);cursor:pointer}.v3-recent-item img{width:38px;height:54px;object-fit:cover;border-radius:7px}.v3-recent-item strong{font-size:.62rem;line-height:1.35}.v3-recent-item small{display:block;color:var(--muted);font-size:.48rem;margin-top:4px}
+.v3-empty{color:var(--muted);font-size:.65rem;padding:12px 0}.v3-profile-edit{display:flex;gap:7px;margin-top:12px}.v3-profile-edit input{flex:1;min-width:0;padding:9px 11px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:inherit;outline:none;font-family:inherit;font-size:.65rem}.v3-profile-edit button{padding:9px 12px;border-radius:10px;border:0;background:var(--premium-accent);color:#fff;font-weight:800;cursor:pointer}
+body.light-mode .v3-card,body.light-mode .v3-recent-item{background:rgba(255,255,255,.78);border-color:rgba(80,110,150,.15)}
 body.light-mode .v3-greeting p{color:#52627a}
-@media(max-width:900px){.v3-dashboard{grid-template-columns:1fr}}
-@media(max-width:520px){.v3-mini-stats{grid-template-columns:repeat(3,1fr)}.v3-card{padding:15px}}
+@media(max-width:900px){.v3-dashboard{grid-template-columns:1fr}.v3-recent{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.v3-recent{grid-template-columns:1fr}.v3-mini-stats{grid-template-columns:repeat(3,1fr)}.v3-card{padding:15px}}
 
 
 /* ===== PREMIUM LOCAL AUTH UI ===== */
@@ -1710,74 +1703,6 @@ body.light-mode .v3-greeting p{color:#52627a}
 .mcu-v15-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 .mcu-v15-row{padding:10px 0;border-bottom:1px solid #333;display:flex;justify-content:space-between;gap:10px;align-items:center}
 @media(max-width:600px){.mcu-v15-grid{grid-template-columns:1fr}.mcu-v15-row{flex-direction:column;align-items:flex-start}}
-</style>
-
-<style id="mcu-v1-integrated-css">
-/* V1 additive styling: keeps the original animation system intact. */
-.mcu-v1-type{display:inline-block;margin-left:6px;padding:3px 7px;border-radius:999px;font-size:.52rem;font-weight:800;border:1px solid rgba(255,255,255,.14);opacity:.9}
-.mcu-v1-importance{display:inline-block;margin-left:6px;padding:3px 7px;border-radius:999px;font-size:.52rem;font-weight:800;border:1px solid rgba(255,255,255,.14)}
-body.theme-gamma{--premium-accent:#39d353;--premium-accent2:#b7ffbf;--premium-glow:rgba(57,211,83,.28)}
-body.theme-gamma .premium-hero{background:linear-gradient(90deg,rgba(3,12,5,.97),rgba(7,28,12,.84),rgba(10,50,20,.22)),url("https://image.tmdb.org/t/p/w780/uxzzxijgPIY7slzFvMotPv8wjKA.jpg") center right/cover no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center}
-body.theme-gamma .premium-hero:after{background:linear-gradient(90deg,rgba(2,10,4,.95),rgba(3,30,10,.52),transparent)}
-</style>
-
-<style id="doomsday-timer-css">
-/* Additive: timer only. Existing tracker cards/layout/animations are untouched. */
-.doomsday-timer{
-  margin:14px 0 18px;
-  padding:14px 16px;
-  border:1px solid rgba(80,255,140,.32);
-  border-radius:16px;
-  background:linear-gradient(180deg,rgba(7,28,17,.92),rgba(3,13,8,.94));
-  box-shadow:0 0 24px rgba(40,255,110,.10),inset 0 0 28px rgba(30,255,100,.035);
-  overflow:hidden;
-}
-.doomsday-timer__title{
-  margin:0;
-  color:#b9ffd0;
-  font-family:"Orbitron",sans-serif;
-  font-weight:900;
-  letter-spacing:.08em;
-  font-size:.78rem;
-  text-transform:uppercase;
-}
-.doomsday-timer__copy{
-  margin:6px 0 10px;
-  color:rgba(220,255,230,.72);
-  font-size:.6rem;
-  line-height:1.55;
-}
-.doomsday-timer__digits{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-}
-.doomsday-timer__unit{
-  min-width:66px;
-  padding:7px 9px;
-  text-align:center;
-  border:1px solid rgba(90,255,150,.22);
-  border-radius:9px;
-  background:rgba(0,0,0,.24);
-}
-.doomsday-timer__unit b{
-  display:block;
-  color:#d4ffe0;
-  font-family:"Orbitron",sans-serif;
-  font-size:.9rem;
-  line-height:1.1;
-  text-shadow:0 0 9px rgba(70,255,120,.5);
-}
-.doomsday-timer__unit span{
-  display:block;
-  margin-top:3px;
-  color:rgba(210,255,225,.55);
-  font-size:.44rem;
-  text-transform:uppercase;
-}
-.doomsday-timer.is-live .doomsday-timer__unit b{animation:ddPulse 1s ease-in-out infinite alternate}
-@keyframes ddPulse{from{opacity:.78}to{opacity:1}}
-@media(max-width:600px){.doomsday-timer{padding:12px}.doomsday-timer__unit{min-width:58px}}
 </style>
 </head>
 
@@ -1886,23 +1811,26 @@ body.theme-gamma .premium-hero:after{background:linear-gradient(90deg,rgba(2,10,
   <p class="hero-copy">Track every movie, discover what to watch next, manage favorites, and keep your progress in one cinematic dashboard.</p>
   <div class="hero-actions">
     <button class="hero-btn primary" id="heroExploreBtn">🎬 Explore Movies</button>
+    <button class="hero-btn" id="heroContinueBtn">▶ Continue Watching</button>
   </div>
 </section>
 <section class="theme-switcher" aria-label="Hero theme selector">
   <span class="theme-label">Hero Theme</span>
-  <button class="theme-choice active" data-hero-theme="blue">🔵 Massive Blue</button>
-  <button class="theme-choice" data-hero-theme="red">🔴 Marvel Red</button>
+  <button class="theme-choice active" data-hero-theme="red">🔴 Marvel Red</button>
+  <button class="theme-choice" data-hero-theme="blue">🔵 Multiverse Blue</button>
   <button class="theme-choice" data-hero-theme="gold">🟡 Infinity Gold</button>
-  <button class="theme-choice" data-hero-theme="cosmic">🟣 Multiverse Purple</button>
-  <button class="theme-choice" data-hero-theme="ironman">🤖 Stark Black</button>
-  <button class="theme-choice" data-hero-theme="gamma">🟢 Gamma Green</button>
+  <button class="theme-choice" data-hero-theme="cosmic">🟣 Cosmic</button>
+  <button class="theme-choice" data-hero-theme="ironman">🤖 Iron Man</button>
 </section>
 <section class="theme-poster-strip" aria-live="polite">
   <img id="themePoster" src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg" alt="Theme poster">
   <div class="theme-poster-info"><strong id="themePosterTitle">Avengers: Endgame</strong><span id="themePosterSubtitle">Marvel Red • Phase 3</span></div>
   <span class="theme-poster-chip">CINEMATIC THEME</span>
 </section>
-
+<section class="continue-section" id="continueSection" hidden>
+  <div class="continue-head"><h2>▶ Continue Watching</h2><span id="continueCount"></span></div>
+  <div class="continue-grid" id="continueGrid"></div>
+</section>
 
 
 
@@ -1910,7 +1838,7 @@ body.theme-gamma .premium-hero:after{background:linear-gradient(90deg,rgba(2,10,
          MAIN PANEL
     ====================================================== -->
 
-
+    
 <!-- V3 PREMIUM DASHBOARD -->
 <section class="v3-dashboard" aria-label="Personal MCU dashboard">
   <div class="v3-card">
@@ -1945,6 +1873,11 @@ body.theme-gamma .premium-hero:after{background:linear-gradient(90deg,rgba(2,10,
   </div>
 </section>
 
+<section class="v3-section">
+  <div class="v3-section-head"><h2>🕘 Recently Opened</h2><span>Latest activity</span></div>
+  <div class="v3-recent" id="v3Recent"></div>
+</section>
+
 
 <section id="v9AdminPanel" aria-hidden="true">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
@@ -1967,11 +1900,2723 @@ body.theme-gamma .premium-hero:after{background:linear-gradient(90deg,rgba(2,10,
     </div>
 
     <div id="v10OverviewTab">
-      <div style=
-Error Icon
-Message may contain a virus
-Your message wasn't delivered to kumarshashwat200@gmail.com because it may contain a virus. Learn how to check for, and prevent, viruses.
-LEARN MORE
-The response was:
-552 5.7.0 This message was blocked because its content presents a potential security issue. To review our message content and attachment content guidelines, go to https://support.google.com/mail/?p=BlockedMessage 5614622812f47-4c19c1c0847sor1457482b6e.0 - gsmtp
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">
+        <div class="v10-stat"><strong id="v10MovieCount">0</strong><span>Movies</span></div>
+        <div class="v10-stat"><strong id="v10SeriesCount">0</strong><span>Series</span></div>
+        <div class="v10-stat"><strong id="v10UserCount">0</strong><span>Users</span></div>
+      </div>
+    </div>
 
+    <div id="v10ContentTab" style="display:none">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px">
+        <input id="v10ContentId" placeholder="Unique ID">
+        <input id="v10Title" placeholder="Movie / Series title">
+        <select id="v10Type"><option value="movie">Movie</option><option value="series">Series</option></select>
+        <input id="v10ReleaseDate" type="date">
+        <input id="v10PosterUrl" placeholder="Poster URL">
+        <input id="v10TrailerUrl" placeholder="Trailer URL (official)">
+        <input id="v10OfficialUrl" placeholder="Your / official movie link">
+        <input id="v10BackdropUrl" placeholder="Backdrop URL (optional)">
+        <textarea id="v10Description" placeholder="Description" style="grid-column:1/-1;min-height:100px"></textarea>
+      </div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0">
+        <button type="button" id="v10NewContent">New</button>
+        <button type="button" id="v10SaveContent">Save / Update</button>
+        <button type="button" id="v10DeleteContent">Delete</button>
+      </div>
+
+      <input id="v10ContentSearch" placeholder="Search existing movies / series..." style="width:100%;margin:8px 0">
+      <div id="v10ContentList"></div>
+    </div>
+
+    <div id="v10UsersTab" style="display:none">
+      <input id="v10UserSearch" placeholder="Search users..." style="width:100%;margin:8px 0">
+      <div id="v10UserList"></div>
+    </div>
+
+    <p id="v10AdminStatus" style="margin-top:14px"></p>
+  </div>
+</section>
+<style>
+#v10AdminDashboard .v10-stat{padding:18px;border-radius:14px;background:rgba(30,80,180,.10);display:flex;flex-direction:column;gap:6px}
+#v10AdminDashboard .v10-stat strong{font-size:28px}
+#v10AdminDashboard input,#v10AdminDashboard select,#v10AdminDashboard textarea{padding:10px;border-radius:9px;border:1px solid #888}
+#v10AdminDashboard button{padding:9px 13px;border-radius:9px;cursor:pointer}
+.v10-row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(128,128,128,.25)}
+</style>
+
+Admin Panel</h3><div style="font-size:13px;opacity:.75">Role-based catalog management</div></div>
+    <button type="button" id="v9AdminClose" class="auth-logout-btn">Close</button>
+  </div>
+  <div class="v9-row" style="margin-top:14px">
+    <div><label>Movie / Series ID</label><input id="v9CatalogId" placeholder="e.g. iron-man-4"></div>
+    <div><label>Title</label><input id="v9CatalogTitle" placeholder="Title"></div>
+  </div>
+  <div class="v9-row">
+    <div><label>Type</label><input id="v9CatalogType" placeholder="movie or series"></div>
+    <div><label>Release date</label><input id="v9CatalogRelease" placeholder="2027-05-01"></div>
+  </div>
+  <label>Description</label><textarea id="v9CatalogDescription" rows="4" placeholder="Description"></textarea>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button type="button" id="v9CatalogSave" class="auth-logout-btn">Save / Update</button>
+    <button type="button" id="v9CatalogDelete" class="auth-logout-btn">Delete</button>
+  </div>
+  <div id="v9AdminMessage"></div>
+</section>
+<main class="panel">
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <span class="search-icon">
+                🔍
+            </span>
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Search MCU movie..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <!-- =================================================
+             STATS
+        ================================================== -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🎬
+                </div>
+
+                <span
+                    class="stat-number"
+                    id="totalMovies"
+                >
+                    0
+                </span>
+
+                <span class="stat-label">
+                    Total Movies
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <span
+                    class="stat-number"
+                    id="watchedMovies"
+                >
+                    0
+                </span>
+
+                <span class="stat-label">
+                    Watched
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ⏳
+                </div>
+
+                <span
+                    class="stat-number"
+                    id="remainingMovies"
+                >
+                    0
+                </span>
+
+                <span class="stat-label">
+                    Remaining
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ⭐
+                </div>
+
+                <span
+                    class="stat-number"
+                    id="favoriteMovies"
+                >
+                    0
+                </span>
+
+                <span class="stat-label">
+                    Favorites
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROGRESS
+        ================================================== -->
+
+        <section class="progress-section">
+
+            <div class="progress-header">
+
+                <span class="progress-title">
+                    MCU WATCH PROGRESS
+                </span>
+
+                <span
+                    class="progress-percent"
+                    id="progressText"
+                >
+                    0/0 (0%)
+                </span>
+
+            </div>
+
+            <div class="progress">
+
+                <div
+                    class="progress-bar"
+                    id="progressBar"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FILTERS + SORT
+        ================================================== -->
+
+        <div class="filter-bar">
+
+            <button
+                class="filter-btn active"
+                data-filter="all"
+            >
+                🎬 All
+            </button>
+
+            <button
+                class="filter-btn"
+                data-filter="watched"
+            >
+                ✅ Watched
+            </button>
+
+            <button
+                class="filter-btn"
+                data-filter="unwatched"
+            >
+                ⏳ Unwatched
+            </button>
+
+            <button
+                class="filter-btn"
+                data-filter="favorites"
+            >
+                ❤️ Favorites
+            </button>
+
+            <div class="sort-box">
+
+                <select id="sortSelect">
+
+                    <option value="default">
+                        Sort: Default
+                    </option>
+
+                    <option value="title">
+                        Sort: Title
+                    </option>
+
+                    <option value="year">
+                        Sort: Release Year
+                    </option>
+
+                    <option value="rating">
+                        Sort: Rating
+                    </option>
+
+                    <option value="phase">
+                        Sort: Phase
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             MOVIE LIST
+        ================================================== -->
+
+        <ul
+            id="movieList"
+            class="movie-list"
+        >
+
+            <!-- Movie cards will be generated by JavaScript -->
+
+            <li class="empty-state">
+
+                <div class="empty-icon">
+                    🎬
+                </div>
+
+                <p>
+                    Movie data will appear here.
+                </p>
+
+            </li>
+
+        </ul>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        © 2026
+
+        <span class="footer-highlight">
+            Marvel Inspired MCU Tracker
+        </span>
+
+        — Powered by Shashwat
+
+    </footer><!-- =========================================================
+     CINEMATIC MOVIE DETAILS MODAL
+     PART 2
+========================================================= -->
+
+<div
+    class="movie-modal"
+    id="movieModal"
+    aria-hidden="true"
+>
+
+    <div class="movie-modal-content">
+
+        <!-- CLOSE -->
+        <button
+            class="movie-modal-close"
+            id="movieModalClose"
+            aria-label="Close"
+        >
+            ✕
+        </button>
+
+
+        <!-- POSTER -->
+        <img
+            class="movie-modal-poster"
+            id="modalPoster"
+            src=""
+            alt="Movie Poster"
+        >
+
+
+        <!-- DETAILS -->
+        <div class="movie-modal-details">
+
+            <h2
+                class="movie-modal-title"
+                id="modalTitle"
+            >
+                Movie Title
+            </h2>
+
+
+            <div
+                class="movie-modal-meta"
+                id="modalMeta"
+            ></div>
+
+
+            <p
+                class="movie-modal-description"
+                id="modalDescription"
+            >
+                Movie details will appear here.
+            </p>
+
+
+            <div class="movie-modal-actions">
+
+                <button
+                    class="movie-modal-btn trailer-btn"
+                    id="modalTrailerBtn"
+                >
+                    ▶ Trailer
+                </button>
+
+
+                <button
+                    class="movie-modal-btn watch-modal-btn"
+                    id="modalWatchBtn"
+                >
+                    ✓ Mark Watched
+                </button>
+
+
+                <button
+                    class="movie-modal-btn favorite-modal-btn"
+                    id="modalFavoriteBtn"
+                >
+                    ♡ Favorite
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================================================
+     JAVASCRIPT
+     PART 2 + PART 3 WILL BE ADDED HERE
+========================================================= -->
+
+<script>
+/* =========================================================
+   PART 2 — MCU MOVIE DATABASE
+   Poster + Release Date + Rating + Phase
+========================================================= */
+
+const movies = [
+
+    {
+        title: "Spider-Man",
+        year: 2002,
+        releaseDate: "May 3, 2002",
+        rating: 7.4,
+        phase: "Pre-MCU / Sony",
+        poster: "https://i.pinimg.com/736x/db/12/82/db1282e0f4a2ca5730037a3669b6ddd6.jpg"
+    },
+
+    {
+        title: "Spider-Man 2",
+        year: 2004,
+        releaseDate: "June 30, 2004",
+        rating: 7.5,
+        phase: "Pre-MCU / Sony",
+        poster: "https://m.media-amazon.com/images/M/MV5BNGQ0YTQyYTgtNWI2YS00NTE2LWJmNDItNTFlMTUwNmFlZTM0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+    },
+
+    {
+        title: "Spider-Man 3",
+        year: 2007,
+        releaseDate: "May 4, 2007",
+        rating: 6.3,
+        phase: "Pre-MCU / Sony",
+        poster: "https://image.tmdb.org/t/p/w500/qFmwhVUoUSXjkKRmca5yGDEXBIj.jpg"
+    },
+
+    {
+        title: "Iron Man",
+        year: 2008,
+        releaseDate: "May 2, 2008",
+        rating: 7.9,
+        phase: "Phase 1",
+        poster: "https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg"
+    },
+
+    {
+        title: "The Incredible Hulk",
+        year: 2008,
+        releaseDate: "June 13, 2008",
+        rating: 6.6,
+        phase: "Phase 1",
+        poster: "https://image.tmdb.org/t/p/w500/gKzYx79y0AQTL4UAk1cBQJ3nvrm.jpg"
+    },
+
+    {
+        title: "Iron Man 2",
+        year: 2010,
+        releaseDate: "May 7, 2010",
+        rating: 6.9,
+        phase: "Phase 1",
+        poster: "https://i.ebayimg.com/00/s/MTUwMFgxMDAw/z/S~cAAOSwABxgBctJ/$_57.JPG?set_id=8800005007"
+    },
+
+    {
+        title: "Thor",
+        year: 2011,
+        releaseDate: "May 6, 2011",
+        rating: 7.0,
+        phase: "Phase 1",
+        poster: "https://m.media-amazon.com/images/M/MV5BNjRhNGZjZjEtYTQzYS00OWUxLThjNGEtMTIwMTE2ZDFlZTZkXkEyXkFqcGc@._V1_.jpg"
+    },
+
+    {
+        title: "Captain America: The First Avenger",
+        year: 2011,
+        releaseDate: "July 22, 2011",
+        rating: 7.0,
+        phase: "Phase 1",
+        poster: "https://m.media-amazon.com/images/M/MV5BNzUyM2YyY2MtNzNlMS00MWU5LTgxNjAtNzZlNmI2NjU2NDZlXkEyXkFqcGc@._V1_.jpg"
+    },
+
+    {
+        title: "The Avengers",
+        year: 2012,
+        releaseDate: "May 4, 2012",
+        rating: 8.0,
+        phase: "Phase 1",
+        poster: "https://image.tmdb.org/t/p/w500/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg"
+    },
+
+    {
+        title: "The Amazing Spider-Man",
+        year: 2012,
+        releaseDate: "July 3, 2012",
+        rating: 6.9,
+        phase: "Pre-MCU / Sony",
+        poster: "https://i.pinimg.com/736x/e5/b0/d8/e5b0d88bc0f0463a8092c85a56600acb.jpg"
+    },
+
+    {
+        title: "Iron Man 3",
+        year: 2013,
+        releaseDate: "May 3, 2013",
+        rating: 7.1,
+        phase: "Phase 2",
+        poster: "https://m.media-amazon.com/images/M/MV5BMjIzMzAzMjQyM15BMl5BanBnXkFtZTcwNzM2NjcyOQ@@._V1_.jpg"
+    },
+
+    {
+        title: "Thor: The Dark World",
+        year: 2013,
+        releaseDate: "November 8, 2013",
+        rating: 6.8,
+        phase: "Phase 2",
+        poster: "https://upload.wikimedia.org/wikipedia/en/7/7f/Thor_The_Dark_World_poster.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original"
+    },
+
+    {
+        title: "Captain America: The Winter Soldier",
+        year: 2014,
+        releaseDate: "April 4, 2014",
+        rating: 7.7,
+        phase: "Phase 2",
+        poster: "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Captain_America_The_Winter_Soldier_poster.jpg/250px-Captain_America_The_Winter_Soldier_poster.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail"
+    },
+
+    {
+        title: "The Amazing Spider-Man 2",
+        year: 2014,
+        releaseDate: "May 2, 2014",
+        rating: 6.6,
+        phase: "Pre-MCU / Sony",
+        poster: "https://image.tmdb.org/t/p/original/c3e9e18SSlvFd1cQaGmUj5tqL5P.jpg"
+    },
+
+    {
+        title: "Guardians of the Galaxy",
+        year: 2014,
+        releaseDate: "August 1, 2014",
+        rating: 8.0,
+        phase: "Phase 2",
+        poster: "https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
+    },
+
+    {
+        title: "Avengers: Age of Ultron",
+        year: 2015,
+        releaseDate: "May 1, 2015",
+        rating: 7.3,
+        phase: "Phase 2",
+        poster: "https://image.tmdb.org/t/p/w500/4ssDuvEDkSArWEdyBl2X5EHvYKU.jpg"
+    },
+
+    {
+        title: "Ant-Man",
+        year: 2015,
+        releaseDate: "July 17, 2015",
+        rating: 7.2,
+        phase: "Phase 2",
+        poster: "data:image/jpeg;base64,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"
+    },
+
+    {
+        title: "Captain America: Civil War",
+        year: 2016,
+        releaseDate: "May 6, 2016",
+        rating: 7.8,
+        phase: "Phase 3",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr6i16PG2AarVmyWRlqqbTMeduj7vM56jDxqPmoxDYAQ&s=10"
+    },
+
+    {
+        title: "Doctor Strange",
+        year: 2016,
+        releaseDate: "November 4, 2016",
+        rating: 7.5,
+        phase: "Phase 3",
+        poster: "https://image.tmdb.org/t/p/w500/uGBVj3bEbCoZbDjjl9wTxcygko1.jpg"
+    },
+
+    {
+        title: "Guardians of the Galaxy Vol. 2",
+        year: 2017,
+        releaseDate: "May 5, 2017",
+        rating: 7.6,
+        phase: "Phase 3",
+        poster: "https://m.media-amazon.com/images/M/MV5BNWE5MGI3MDctMmU5Ni00YzI2LWEzMTQtZGIyZDA5MzQzNDBhXkEyXkFqcGc@._V1_.jpg"
+    },
+
+    {
+        title: "Spider-Man: Homecoming",
+        year: 2017,
+        releaseDate: "July 7, 2017",
+        rating: 7.4,
+        phase: "Phase 3",
+        poster: "https://image.tmdb.org/t/p/w500/c24sv2weTHPsmDa7jEMN0m2P3RT.jpg"
+    },
+
+    {
+        title: "Thor: Ragnarok",
+        year: 2017,
+        releaseDate: "November 3, 2017",
+        rating: 7.9,
+        phase: "Phase 3",
+        poster: "https://image.tmdb.org/t/p/w500/rzRwTcFvttcN1ZpX2xv4j3tSdJu.jpg"
+    },
+
+    {
+        title: "Black Panther",
+        year: 2018,
+        releaseDate: "February 16, 2018",
+        rating: 7.3,
+        phase: "Phase 3",
+        poster: "https://image.tmdb.org/t/p/w500/uxzzxijgPIY7slzFvMotPv8wjKA.jpg"
+    },
+
+    {
+        title: "Avengers: Infinity War",
+        year: 2018,
+        releaseDate: "April 27, 2018",
+        rating: 8.4,
+        phase: "Phase 3",
+        poster: "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
+    },
+
+    {
+        title: "Ant-Man and the Wasp",
+        year: 2018,
+        releaseDate: "July 6, 2018",
+        rating: 7.0,
+        phase: "Phase 3",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5S4ottdftuBBjhZFSISCPpLDlx68vSasdfFIDvwoljg&s=10"
+    },
+
+    {
+        title: "Captain Marvel",
+        year: 2019,
+        releaseDate: "March 8, 2019",
+        rating: 6.8,
+        phase: "Phase 3",
+        poster: "https://image.tmdb.org/t/p/w500/AtsgWhDnHTq68L0lLsUrCnM7TjG.jpg"
+    },
+
+    {
+        title: "Avengers: Endgame",
+        year: 2019,
+        releaseDate: "April 26, 2019",
+        rating: 8.2,
+        phase: "Phase 3",
+        poster: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg"
+    },
+
+    {
+        title: "Spider-Man: Far From Home",
+        year: 2019,
+        releaseDate: "July 2, 2019",
+        rating: 7.4,
+        phase: "Phase 3",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTIXXR0UVhX39afgE827bnvCpXi5ud7IJsKIUVJP4cbQ&s=10"
+    },
+
+    {
+        title: "Black Widow",
+        year: 2021,
+        releaseDate: "July 9, 2021",
+        rating: 6.6,
+        phase: "Phase 4",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXwdNHt4xpXJJiLtZFSm5tb4b2bqG3ynPxq3F8dirvbQ&s=10"
+    },
+
+    {
+        title: "Shang-Chi and the Legend of the Ten Rings",
+        year: 2021,
+        releaseDate: "September 3, 2021",
+        rating: 7.4,
+        phase: "Phase 4",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaEwm6mXoI47OxMgvkH4ekMmIXk5t6Lra8sMs1189Sig&s=10"
+    },
+
+    {
+        title: "Eternals",
+        year: 2021,
+        releaseDate: "November 5, 2021",
+        rating: 6.3,
+        phase: "Phase 4",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-pXR23-SYMdaw3pt98ZUQSrSINQx4Y-L_nD80dMo7BA&s=10"
+    },
+
+    {
+        title: "Spider-Man: No Way Home",
+        year: 2021,
+        releaseDate: "December 17, 2021",
+        rating: 8.0,
+        phase: "Phase 4",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSXkS1c3D69eoutmZyBfvojJGIXXFBljnp7ZSouR7EKw&s=10"
+    },
+
+    {
+        title: "Doctor Strange in the Multiverse of Madness",
+        year: 2022,
+        releaseDate: "May 6, 2022",
+        rating: 7.0,
+        phase: "Phase 4",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoEpdxs2poFnYBfM89o6GXoey5o93J0tL9hCKkFy9d9w&s=10"
+    },
+
+    {
+        title: "Thor: Love and Thunder",
+        year: 2022,
+        releaseDate: "July 8, 2022",
+        rating: 6.2,
+        phase: "Phase 4",
+        poster: "https://image.tmdb.org/t/p/w500/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg"
+    },
+
+    {
+        title: "Black Panther: Wakanda Forever",
+        year: 2022,
+        releaseDate: "November 11, 2022",
+        rating: 7.0,
+        phase: "Phase 4",
+        poster: "https://image.tmdb.org/t/p/w500/sv1xJUazXeYqALzczSZ3O6nkH75.jpg"
+    },
+
+    {
+        title: "Ant-Man and the Wasp: Quantumania",
+        year: 2023,
+        releaseDate: "February 17, 2023",
+        rating: 6.0,
+        phase: "Phase 5",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjoxTPV4fRhWjuNLXrmKqL57N05b0yimqpinpAOl5HwQ&s=10"
+    },
+
+    {
+        title: "Guardians of the Galaxy Vol. 3",
+        year: 2023,
+        releaseDate: "May 5, 2023",
+        rating: 7.9,
+        phase: "Phase 5",
+        poster: "https://image.tmdb.org/t/p/w500/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg"
+    },
+
+    {
+        title: "The Marvels",
+        year: 2023,
+        releaseDate: "November 10, 2023",
+        rating: 5.5,
+        phase: "Phase 5",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTikXUr9-aKGcfGcSC-AAc25_74rVL0d8a75tXLk47c5Q&s"
+    },
+
+    {
+        title: "Deadpool & Wolverine",
+        year: 2024,
+        releaseDate: "July 26, 2024",
+        rating: 7.6,
+        phase: "Phase 5",
+        poster: "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg"
+    },
+
+    {
+        title: "Captain America: Brave New World",
+        year: 2025,
+        releaseDate: "February 14, 2025",
+        rating: 5.7,
+        phase: "Phase 5",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVNEpLOzaeFsjzYS5umXSx7MwC558oRLIlqJEy-nEqEw&s=10"
+    },
+
+    {
+        title: "Thunderbolts",
+        year: 2025,
+        releaseDate: "May 2, 2025",
+        rating: 7.0,
+        phase: "Phase 5",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVahq_UerB58w7N-EZH6cHy8NyBkbtzJmTKpDHYAPorw&s=10"
+    },
+
+    {
+        title: "The Fantastic Four: First Steps",
+        year: 2025,
+        releaseDate: "July 25, 2025",
+        rating: 7.3,
+        phase: "Phase 6",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx6RDAGl5M4dH_fnS7mYxJC_0rdNFNsoY1c6wVVB6csA&s=10"
+    },
+
+    {
+        title: "Spider-Man: Brand New Day",
+        year: 2026,
+        releaseDate: "July 31, 2026",
+        rating: 8.1,
+        phase: "Phase 6",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRBNPetHukrorY8xN9XZtnwS7oR5mv0xOYiMCTlrv5UA&s=10"
+    }
+
+];
+
+/* =========================================================
+   TRAILER LINKS — SAFE AUTO FALLBACK
+   Uses YouTube search instead of fake video IDs.
+   Hindi trailer is searched first; if unavailable,
+   the user can choose the official English trailer.
+========================================================= */
+movies.forEach(function(movie){
+    if(!movie.trailer){
+        const query = encodeURIComponent(
+            movie.title + " official Hindi trailer"
+        );
+
+        movie.trailer =
+            "https://www.youtube.com/results?search_query=" + query;
+    }
+});
+
+/* =========================================================
+   PART 2 DATA CHECK
+========================================================= */
+
+console.log(
+    `MCU Tracker: ${movies.length} movies loaded.`
+);
+/* =========================================================
+   PART 3 — FULL MCU TRACKER FUNCTIONALITY
+========================================================= */
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const movieList = document.getElementById("movieList");
+const search = document.getElementById("search");
+
+const progressBar = document.getElementById("progressBar");
+const progressText = document.getElementById("progressText");
+
+const totalMovies = document.getElementById("totalMovies");
+const watchedMovies = document.getElementById("watchedMovies");
+const remainingMovies = document.getElementById("remainingMovies");
+const favoriteMovies = document.getElementById("favoriteMovies");
+
+const themeBtn = document.getElementById("themeBtn");
+const soundBtn = document.getElementById("soundBtn");
+const resetBtn = document.getElementById("resetBtn");
+
+const sortSelect = document.getElementById("sortSelect");
+
+const filterButtons =
+    document.querySelectorAll(".filter-btn");
+
+
+/* =========================================================
+   LOCAL STORAGE
+========================================================= */
+
+let watched =
+    JSON.parse(
+        localStorage.getItem("mcuWatched")
+    ) || {};
+
+let favorites =
+    JSON.parse(
+        localStorage.getItem("mcuFavorites")
+    ) || {};
+
+let soundEnabled =
+    localStorage.getItem("mcuSound") !== "false";
+
+let currentFilter = "all";
+
+let currentSearch = "";
+
+let currentSort = "default";
+
+
+/* =========================================================
+   SAVE DATA
+========================================================= */
+
+function saveData(){
+
+    localStorage.setItem(
+        "mcuWatched",
+        JSON.stringify(watched)
+    );
+
+    localStorage.setItem(
+        "mcuFavorites",
+        JSON.stringify(favorites)
+    );
+
+    localStorage.setItem(
+        "mcuSound",
+        soundEnabled
+    );
+}
+
+
+/* =========================================================
+   SOUND EFFECTS
+========================================================= */
+
+function playSound(url, volume = 0.35){
+
+    if(!soundEnabled) return;
+
+    try{
+
+        const audio = new Audio(url);
+
+        audio.volume = volume;
+
+        audio.play().catch(() => {});
+
+    }catch(error){
+
+        console.log("Sound unavailable");
+
+    }
+
+}
+
+
+function playButtonSound(){
+
+    playSound(
+        "https://actions.google.com/sounds/v1/cartoon/pop.ogg",
+        0.35
+    );
+
+}
+
+
+function playTickSound(){
+
+    playSound(
+        "https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg",
+        0.35
+    );
+
+}
+
+
+function playThemeSound(){
+
+    playSound(
+        "https://actions.google.com/sounds/v1/science_fiction/laser_1.ogg",
+        0.3
+    );
+
+}
+
+
+/* =========================================================
+   SAFE POSTER
+========================================================= */
+
+function posterFallback(image){
+
+    image.onerror = function(){
+
+        this.onerror = null;
+
+        this.src =
+            "https://placehold.co/500x750/0d1422/00e5ff?text=MARVEL+MOVIE";
+
+    };
+
+}
+
+
+/* =========================================================
+   GET MOVIES
+========================================================= */
+
+function getFilteredMovies(){
+
+    let result = movies.map(
+        (movie,index) => ({
+            ...movie,
+            originalIndex:index
+        })
+    );
+
+
+    /* SEARCH */
+
+    if(currentSearch){
+
+        const query =
+            currentSearch.toLowerCase().trim();
+
+        result = result.filter(movie =>
+
+            movie.title
+                .toLowerCase()
+                .includes(query)
+
+        );
+
+    }
+
+
+    /* FILTER */
+
+    if(currentFilter === "watched"){
+
+        result = result.filter(
+            movie => watched[movie.originalIndex]
+        );
+
+    }
+
+    else if(currentFilter === "unwatched"){
+
+        result = result.filter(
+            movie => !watched[movie.originalIndex]
+        );
+
+    }
+
+    else if(currentFilter === "favorites"){
+
+        result = result.filter(
+            movie => favorites[movie.originalIndex]
+        );
+
+    }
+
+
+    /* SORT */
+
+    if(currentSort === "title"){
+
+        result.sort(
+            (a,b) =>
+                a.title.localeCompare(b.title)
+        );
+
+    }
+
+    else if(currentSort === "year"){
+
+        result.sort(
+            (a,b) =>
+                a.year - b.year
+        );
+
+    }
+
+    else if(currentSort === "rating"){
+
+        result.sort(
+            (a,b) =>
+                b.rating - a.rating
+        );
+
+    }
+
+    else if(currentSort === "phase"){
+
+        result.sort(
+            (a,b) =>
+                a.phase.localeCompare(b.phase)
+        );
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   RENDER MOVIES
+========================================================= */
+
+function renderMovies(){
+
+    movieList.innerHTML = "";
+
+    const filteredMovies =
+        getFilteredMovies();
+
+
+    /* EMPTY */
+
+    if(filteredMovies.length === 0){
+
+        movieList.innerHTML = `
+
+            <li class="empty-state">
+
+                <div class="empty-icon">
+                    🔍
+                </div>
+
+                <p>
+                    No movies found.
+                </p>
+
+            </li>
+
+        `;
+
+        updateStats();
+
+        return;
+
+    }
+
+
+    /* MOVIE CARDS */
+
+    filteredMovies.forEach(movie => {
+
+        const index =
+            movie.originalIndex;
+
+        const isWatched =
+            !!watched[index];
+
+        const isFavorite =
+            !!favorites[index];
+
+
+        const li =
+            document.createElement("li");
+
+        li.className = "movie-card";
+
+
+        /* POSTER */
+
+        const posterContainer =
+            document.createElement("div");
+
+        posterContainer.className =
+            "poster-container";
+
+
+        const poster =
+            document.createElement("img");
+
+        poster.className = "poster";
+
+        poster.src =
+            movie.poster;
+
+        poster.alt =
+            movie.title + " poster";
+
+        poster.loading = "lazy";
+
+        posterFallback(poster);
+
+
+        /* OVERLAY */
+
+        const overlay =
+            document.createElement("div");
+
+        overlay.className =
+            "poster-overlay";
+
+
+        /* PHASE */
+
+        const phase =
+            document.createElement("div");
+
+        phase.className =
+            "phase-badge";
+
+        phase.textContent =
+            movie.phase;
+
+
+        /* FAVORITE */
+
+        const favorite =
+            document.createElement("button");
+
+        favorite.className =
+            "favorite-btn";
+
+        if(isFavorite){
+
+            favorite.classList.add("active");
+
+        }
+
+        favorite.innerHTML =
+            isFavorite ? "❤️" : "♡";
+
+        favorite.title =
+            "Add to favorites";
+
+
+        favorite.addEventListener(
+            "click",
+            function(event){
+
+                event.stopPropagation();
+
+                favorites[index] =
+                    !favorites[index];
+
+                playButtonSound();
+
+                saveData();
+
+                renderMovies();
+
+            }
+        );
+
+
+        posterContainer.appendChild(poster);
+
+        posterContainer.appendChild(overlay);
+
+        posterContainer.appendChild(phase);
+
+        posterContainer.appendChild(favorite);
+
+
+        /* INFO */
+
+        const info =
+            document.createElement("div");
+
+        info.className =
+            "movie-info";
+
+
+        /* TITLE */
+
+        const title =
+            document.createElement("h2");
+
+        title.className =
+            "movie-title";
+
+        title.textContent =
+            movie.title;
+
+
+        if(isWatched){
+
+            title.style.textDecoration =
+                "line-through";
+
+            title.style.opacity =
+                "0.6";
+
+        }
+
+
+        /* META */
+
+        const meta =
+            document.createElement("div");
+
+        meta.className =
+            "movie-meta";
+
+
+        const year =
+            document.createElement("span");
+
+        year.className =
+            "meta-item";
+
+        year.textContent =
+            "📅 " + movie.releaseDate;
+
+
+        const rating =
+            document.createElement("span");
+
+        rating.className =
+            "meta-item rating";
+
+        if(movie.rating && movie.rating > 0){
+
+            rating.textContent =
+                "⭐ " +
+                Number(movie.rating).toFixed(1);
+
+        }else{
+
+            rating.textContent =
+                "⭐ TBA";
+
+        }
+
+
+        const phaseMeta =
+            document.createElement("span");
+
+        phaseMeta.className =
+            "meta-item";
+
+        phaseMeta.textContent =
+            "⚡ " + movie.phase;
+
+
+        meta.appendChild(year);
+
+        meta.appendChild(rating);
+
+        meta.appendChild(phaseMeta);
+
+
+        /* WATCH ROW */
+
+        const watchRow =
+            document.createElement("div");
+
+        watchRow.className =
+            "watch-row";
+
+
+        const watchLabel =
+            document.createElement("label");
+
+        watchLabel.className =
+            "watch-label";
+
+
+        const checkbox =
+            document.createElement("input");
+
+        checkbox.type =
+            "checkbox";
+
+        checkbox.className =
+            "watch-checkbox";
+
+        checkbox.checked =
+            isWatched;
+
+
+        const watchText =
+            document.createElement("span");
+
+        watchText.textContent =
+            isWatched
+                ? "Watched"
+                : "Mark as watched";
+
+        if(isWatched){
+
+            watchText.classList.add(
+                "watched-text"
+            );
+
+        }
+
+
+        checkbox.addEventListener(
+            "change",
+            function(){
+
+                watched[index] =
+                    checkbox.checked;
+
+                playTickSound();
+
+                saveData();
+
+                renderMovies();
+
+            }
+        );
+
+
+        watchLabel.appendChild(checkbox);
+
+        watchLabel.appendChild(watchText);
+
+
+        /* FAVORITE STATUS */
+
+        const favoriteText =
+            document.createElement("span");
+
+        favoriteText.className =
+            "watch-label";
+
+        favoriteText.textContent =
+            isFavorite
+                ? "❤️ Favorite"
+                : "♡";
+
+
+        watchRow.appendChild(watchLabel);
+
+        watchRow.appendChild(favoriteText);
+
+
+        /* BUILD */
+
+        info.appendChild(title);
+
+        info.appendChild(meta);
+
+        info.appendChild(watchRow);
+
+
+        li.appendChild(posterContainer);
+
+        li.appendChild(info);
+       /* =========================================================
+   MOVIE CARD CLICK → DETAILS MODAL
+   PART 3
+========================================================= */
+
+li.addEventListener("click", function(event){
+
+    /* Buttons / checkbox पर click करने से modal न खुले */
+    if(
+        event.target.closest("button") ||
+        event.target.closest("input") ||
+        event.target.closest("label")
+    ){
+        return;
+    }
+
+    openMovieModal(movie, index);
+
+});
+
+
+        movieList.appendChild(li);
+
+    });
+
+
+    updateStats();
+
+}
+
+
+/* =========================================================
+   UPDATE STATISTICS
+========================================================= */
+
+function updateStats(){
+
+    const total =
+        movies.length;
+
+
+    const completed =
+        movies.filter(
+            (_,index) =>
+                !!watched[index]
+        ).length;
+
+
+    const favoritesCount =
+        movies.filter(
+            (_,index) =>
+                !!favorites[index]
+        ).length;
+
+
+    const remaining =
+        total - completed;
+
+
+    const percent =
+        total > 0
+            ? Math.round(
+                (completed / total) * 100
+            )
+            : 0;
+
+
+    /* NUMBERS */
+
+    totalMovies.textContent =
+        total;
+
+    watchedMovies.textContent =
+        completed;
+
+    remainingMovies.textContent =
+        remaining;
+
+    favoriteMovies.textContent =
+        favoritesCount;
+
+
+    /* PROGRESS */
+
+    progressBar.style.width =
+        percent + "%";
+
+
+    progressText.textContent =
+        `${completed}/${total} (${percent}%)`;
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+search.addEventListener(
+    "input",
+    function(){
+
+        currentSearch =
+            this.value;
+
+        renderMovies();
+
+    }
+);
+/* =========================================================
+   MOVIE DETAILS MODAL
+   PART 4
+========================================================= */
+
+const movieModal =
+    document.getElementById("movieModal");
+
+const movieModalClose =
+    document.getElementById("movieModalClose");
+
+const modalPoster =
+    document.getElementById("modalPoster");
+
+const modalTitle =
+    document.getElementById("modalTitle");
+
+const modalMeta =
+    document.getElementById("modalMeta");
+
+const modalDescription =
+    document.getElementById("modalDescription");
+
+const modalTrailerBtn =
+    document.getElementById("modalTrailerBtn");
+
+const modalWatchBtn =
+    document.getElementById("modalWatchBtn");
+
+const modalFavoriteBtn =
+    document.getElementById("modalFavoriteBtn");
+
+
+let currentModalMovie = null;
+let currentModalIndex = null;
+
+
+/* OPEN MODAL */
+
+function openMovieModal(movie, index){
+
+    currentModalMovie = movie;
+    currentModalIndex = index;
+
+    modalPoster.src = movie.poster || "";
+    modalPoster.alt =
+        movie.title + " poster";
+
+    modalTitle.textContent =
+        movie.title;
+
+
+    /* META */
+
+    modalMeta.innerHTML = "";
+
+    const metaItems = [
+        "📅 " + (movie.releaseDate || movie.year || "TBA"),
+        "⭐ " + (
+            movie.rating && movie.rating > 0
+                ? Number(movie.rating).toFixed(1)
+                : "TBA"
+        ),
+        "⚡ " + (movie.phase || "MCU")
+    ];
+
+
+    metaItems.forEach(function(text){
+
+        const span =
+            document.createElement("span");
+
+        span.textContent = text;
+
+        modalMeta.appendChild(span);
+
+    });
+
+
+    /* DESCRIPTION */
+
+    modalDescription.textContent =
+        movie.description ||
+        "Movie details are not available yet. More information can be added to this movie in the movie data section.";
+
+
+    /* TRAILER */
+
+    if(movie.trailer){
+
+        modalTrailerBtn.style.display =
+            "inline-flex";
+
+        modalTrailerBtn.textContent =
+            "▶ Hindi Trailer";
+
+    }else{
+
+        modalTrailerBtn.style.display =
+            "none";
+
+    }
+
+
+    /* WATCHED */
+
+    modalWatchBtn.textContent =
+        watched[index]
+            ? "✓ Watched"
+            : "✓ Mark Watched";
+
+
+    /* FAVORITE */
+
+    modalFavoriteBtn.textContent =
+        favorites[index]
+            ? "❤️ Favorited"
+            : "♡ Favorite";
+
+
+    /* SHOW */
+
+    movieModal.classList.add("active");
+
+    movieModal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* CLOSE MODAL */
+
+function closeMovieModal(){
+
+    movieModal.classList.remove(
+        "active"
+    );
+
+    movieModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* CLOSE BUTTON */
+
+movieModalClose.addEventListener(
+    "click",
+    closeMovieModal
+);
+
+
+/* CLICK OUTSIDE */
+
+movieModal.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target === movieModal
+        ){
+
+            closeMovieModal();
+
+        }
+
+    }
+);
+
+
+/* ESC KEY */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape" &&
+            movieModal.classList.contains("active")
+        ){
+
+            closeMovieModal();
+
+        }
+
+    }
+);
+
+
+/* TRAILER BUTTON */
+
+modalTrailerBtn.addEventListener(
+    "click",
+    function(){
+
+        if(
+            currentModalMovie &&
+            currentModalMovie.trailer
+        ){
+
+            window.open(
+                currentModalMovie.trailer,
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+        }
+
+    }
+);
+
+
+/* WATCHED BUTTON */
+
+modalWatchBtn.addEventListener(
+    "click",
+    function(){
+
+        if(currentModalIndex === null){
+            return;
+        }
+
+        watched[currentModalIndex] =
+            !watched[currentModalIndex];
+
+        saveData();
+
+        modalWatchBtn.textContent =
+            watched[currentModalIndex]
+                ? "✓ Watched"
+                : "✓ Mark Watched";
+
+        renderMovies();
+
+        playButtonSound();
+
+    }
+);
+
+
+/* FAVORITE BUTTON */
+
+modalFavoriteBtn.addEventListener(
+    "click",
+    function(){
+
+        if(currentModalIndex === null){
+            return;
+        }
+
+        favorites[currentModalIndex] =
+            !favorites[currentModalIndex];
+
+        saveData();
+
+        modalFavoriteBtn.textContent =
+            favorites[currentModalIndex]
+                ? "❤️ Favorited"
+                : "♡ Favorite";
+
+        renderMovies();
+
+        playButtonSound();
+
+    }
+);
+
+/* =========================================================
+   FILTER BUTTONS
+========================================================= */
+
+filterButtons.forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                filterButtons.forEach(
+                    btn =>
+                        btn.classList.remove(
+                            "active"
+                        )
+                );
+
+                this.classList.add(
+                    "active"
+                );
+
+
+                currentFilter =
+                    this.dataset.filter;
+
+
+                playButtonSound();
+
+                renderMovies();
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   SORT
+========================================================= */
+
+sortSelect.addEventListener(
+    "change",
+    function(){
+
+        currentSort =
+            this.value;
+
+        playButtonSound();
+
+        renderMovies();
+
+    }
+);
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function loadTheme(){
+
+    const savedTheme =
+        localStorage.getItem(
+            "mcuTheme"
+        );
+
+
+    if(savedTheme === "light"){
+
+        document.body.classList.add(
+            "light-mode"
+        );
+
+        themeBtn.textContent =
+            "🌙 Dark";
+
+    }else{
+
+        document.body.classList.remove(
+            "light-mode"
+        );
+
+        themeBtn.textContent =
+            "☀️ Light";
+
+    }
+
+}
+
+
+themeBtn.addEventListener(
+    "click",
+    function(){
+
+        playThemeSound();
+
+
+        document.body.classList.toggle(
+            "light-mode"
+        );
+
+
+        const isLight =
+            document.body.classList.contains(
+                "light-mode"
+            );
+
+
+        localStorage.setItem(
+            "mcuTheme",
+            isLight
+                ? "light"
+                : "dark"
+        );
+
+
+        themeBtn.textContent =
+            isLight
+                ? "🌙 Dark"
+                : "☀️ Light";
+
+    }
+);
+
+
+/* =========================================================
+   SOUND BUTTON
+========================================================= */
+
+function updateSoundButton(){
+
+    soundBtn.textContent =
+        soundEnabled
+            ? "🔊 Sound"
+            : "🔇 Sound";
+
+}
+
+
+soundBtn.addEventListener(
+    "click",
+    function(){
+
+        soundEnabled =
+            !soundEnabled;
+
+        saveData();
+
+        updateSoundButton();
+
+        if(soundEnabled){
+
+            playButtonSound();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   RESET BUTTON
+========================================================= */
+
+resetBtn.addEventListener(
+    "click",
+    function(){
+
+        const confirmed =
+            confirm(
+                "Are you sure you want to reset all watched and favorite movies?"
+            );
+
+
+        if(!confirmed){
+
+            return;
+
+        }
+
+
+        watched = {};
+
+        favorites = {};
+
+        saveData();
+
+        playButtonSound();
+
+        renderMovies();
+
+    }
+);
+
+
+/* =========================================================
+   KEYBOARD SHORTCUT
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        /* "/" = focus search */
+
+        if(
+            event.key === "/" &&
+            document.activeElement !== search
+        ){
+
+            event.preventDefault();
+
+            search.focus();
+
+        }
+
+
+        /* Escape = clear search */
+
+        if(
+            event.key === "Escape"
+        ){
+
+            search.value = "";
+
+            currentSearch = "";
+
+            renderMovies();
+
+            search.blur();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+loadTheme();
+
+updateSoundButton();
+
+renderMovies();
+
+updateStats();
+
+
+console.log(
+    "⚡ Marvel MCU Tracker loaded successfully!"
+);
+
+/* PREMIUM V2 JS */
+const continueSection=document.getElementById("continueSection");
+const continueGrid=document.getElementById("continueGrid");
+const continueCount=document.getElementById("continueCount");
+function renderContinue(){
+  if(!continueSection||!continueGrid)return;
+  const items=movies.map((m,i)=>({...m,originalIndex:i})).filter(m=>!watched[m.originalIndex]).slice(0,6);
+  if(!items.length){continueSection.hidden=true;return;}
+  continueSection.hidden=false;
+  continueCount.textContent=`${items.length} suggestions`;
+  continueGrid.innerHTML=items.map(m=>`<article class="continue-card" data-index="${m.originalIndex}"><img src="${m.poster||''}" alt=""><div><strong>${m.title}</strong><small>${m.phase||'MCU'} • ${m.year||'TBA'}</small></div></article>`).join('');
+  continueGrid.querySelectorAll('.continue-card').forEach(card=>card.addEventListener('click',()=>openMovieModal(movies[Number(card.dataset.index)],Number(card.dataset.index))));
+}
+const heroThemeData={
+  red:{title:'Avengers: Endgame',subtitle:'Marvel Red • Phase 3',poster:'https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg'},
+  blue:{title:'Spider-Man: No Way Home',subtitle:'Multiverse Blue • Phase 4',poster:'https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg'},
+  gold:{title:'Avengers: Infinity War',subtitle:'Infinity Gold • Phase 3',poster:'https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg'},
+  cosmic:{title:'Guardians of the Galaxy',subtitle:'Cosmic • Phase 2',poster:'https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg'},
+  ironman:{title:'Iron Man',subtitle:'Iron Man • Phase 1',poster:'https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg'}
+};
+function applyHeroTheme(theme){
+  if(!heroThemeData[theme])theme='red';
+  document.body.classList.remove('theme-blue','theme-gold','theme-cosmic','theme-ironman');
+  if(theme!=='red')document.body.classList.add('theme-'+theme);
+  localStorage.setItem('mcuHeroTheme',theme);
+  document.querySelectorAll('[data-hero-theme]').forEach(b=>b.classList.toggle('active',b.dataset.heroTheme===theme));
+  const data=heroThemeData[theme];
+  const poster=document.getElementById('themePoster');
+  const title=document.getElementById('themePosterTitle');
+  const subtitle=document.getElementById('themePosterSubtitle');
+  if(poster){poster.src=data.poster;poster.alt=data.title+' poster';}
+  if(title)title.textContent=data.title;
+  if(subtitle)subtitle.textContent=data.subtitle;
+}
+document.querySelectorAll('[data-hero-theme]').forEach(b=>b.addEventListener('click',()=>applyHeroTheme(b.dataset.heroTheme)));
+applyHeroTheme(localStorage.getItem('mcuHeroTheme')||'red');
+const heroExploreBtn=document.getElementById('heroExploreBtn');
+if(heroExploreBtn)heroExploreBtn.addEventListener('click',()=>document.getElementById('movieList')?.scrollIntoView({behavior:'smooth'}));
+const heroContinueBtn=document.getElementById('heroContinueBtn');
+if(heroContinueBtn)heroContinueBtn.addEventListener('click',()=>document.getElementById('continueSection')?.scrollIntoView({behavior:'smooth'}));
+const premiumRenderMovies=renderMovies;
+renderMovies=function(){premiumRenderMovies();renderContinue();};
+renderContinue();
+
+
+/* =========================================================
+   MCU TRACKER V3 — DASHBOARD LOGIC
+========================================================= */
+(function(){
+  const V3 = {
+    historyKey: 'mcuV3History',
+    nameKey: 'mcuV3Name'
+  };
+  const $ = id => document.getElementById(id);
+  const getHistory = () => { try { return JSON.parse(localStorage.getItem(V3.historyKey)) || []; } catch(e) { return []; } };
+  const saveHistory = list => localStorage.setItem(V3.historyKey, JSON.stringify(list.slice(0,8)));
+
+  function recordMovie(movie, index){
+    if(!movie) return;
+    let list = getHistory().filter(x => x.index !== index);
+    list.unshift({index, title: movie.title, poster: movie.poster || '', phase: movie.phase || 'MCU', year: movie.year || ''});
+    saveHistory(list);
+  }
+
+  const originalOpenMovieModalV3 = window.openMovieModal;
+  if(typeof originalOpenMovieModalV3 === 'function'){
+    window.openMovieModal = function(movie,index){
+      recordMovie(movie,index);
+      return originalOpenMovieModalV3.apply(this, arguments);
+    };
+  }
+
+  function movieProgress(){
+    const total = movies.length;
+    const done = movies.filter((_,i)=>!!watched[i]).length;
+    return total ? Math.round(done/total*100) : 0;
+  }
+
+  function renderV3(){
+    const name = localStorage.getItem(V3.nameKey) || 'Shashwat';
+    $('v3Greeting').textContent = `Welcome back, ${name} ⚡`;
+    $('v3Avatar').textContent = name.trim().charAt(0).toUpperCase() || 'S';
+    $('v3NameInput').value = name;
+
+    const done = movies.filter((_,i)=>!!watched[i]).length;
+    const favs = movies.filter((_,i)=>!!favorites[i]).length;
+    const remaining = movies.length - done;
+    const percent = movieProgress();
+    $('v3Watched').textContent = done;
+    $('v3Favs').textContent = favs;
+    $('v3Remaining').textContent = remaining;
+    $('v3ProgressText').textContent = percent + '%';
+    $('v3ProgressFill').style.width = percent + '%';
+
+    const nextIndex = movies.findIndex((_,i)=>!watched[i]);
+    const next = nextIndex >= 0 ? movies[nextIndex] : null;
+    if(next){
+      $('v3NextPoster').src = next.poster || '';
+      $('v3NextPoster').onerror = function(){this.src='https://placehold.co/300x450/0d1422/00e5ff?text=MCU';};
+      $('v3NextTitle').textContent = next.title;
+      $('v3NextMeta').textContent = `${next.phase || 'MCU'} • ${next.year || 'TBA'} • ⭐ ${next.rating || 'TBA'}`;
+      $('v3NextMovie').onclick = () => openMovieModal(next,nextIndex);
+    } else {
+      $('v3NextTitle').textContent = 'MCU Complete 🎉';
+      $('v3NextMeta').textContent = 'You have completed every movie in this tracker.';
+    }
+
+    const history=getHistory();
+    $('v3Recent').innerHTML = history.length ? history.map(x=>`<article class="v3-recent-item" data-index="${x.index}"><img src="${x.poster}" alt=""><div><strong>${x.title}</strong><small>${x.phase} • ${x.year}</small></div></article>`).join('') : '<div class="v3-empty">Open a movie to build your recent activity.</div>';
+    $('v3Recent').querySelectorAll('.v3-recent-item').forEach(card=>{
+      card.onclick=()=>{const i=Number(card.dataset.index); if(movies[i]) openMovieModal(movies[i],i);};
+    });
+    $('v3Recent').querySelectorAll('img').forEach(img=>img.onerror=function(){this.src='https://placehold.co/100x150/0d1422/00e5ff?text=MCU';});
+  }
+
+  $('v3SaveName').addEventListener('click',()=>{
+    const value=$('v3NameInput').value.trim() || 'Shashwat';
+    localStorage.setItem(V3.nameKey,value);
+    renderV3();
+  });
+  $('v3NameInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('v3SaveName').click();});
+
+  const originalRenderMoviesV3 = window.renderMovies;
+  if(typeof originalRenderMoviesV3 === 'function'){
+    window.renderMovies = function(){
+      const result=originalRenderMoviesV3.apply(this,arguments);
+      renderV3();
+      return result;
+    };
+  }
+
+  const originalSaveDataV3 = window.saveData;
+  if(typeof originalSaveDataV3 === 'function'){
+    window.saveData = function(){
+      const result=originalSaveDataV3.apply(this,arguments);
+      renderV3();
+      return result;
+    };
+  }
+
+  renderV3();
+})();
+
+
+
+
+/* ---------- FIREBASE DATA BRIDGE ---------- */
+window.__mcuTrackerBridge = {
+  getState(){
+    return {
+      watched: JSON.parse(JSON.stringify(watched || {})),
+      favorites: JSON.parse(JSON.stringify(favorites || {})),
+      history: (() => {
+        try { return JSON.parse(localStorage.getItem("mcuV3History") || "[]"); }
+        catch(e){ return []; }
+      })(),
+      name: localStorage.getItem("mcuV3Name") || ""
+    };
+  },
+  applyState(state){
+    watched = state?.watched || {};
+    favorites = state?.favorites || {};
+    localStorage.setItem("mcuWatched", JSON.stringify(watched));
+    localStorage.setItem("mcuFavorites", JSON.stringify(favorites));
+    if(Array.isArray(state?.history)) localStorage.setItem("mcuV3History", JSON.stringify(state.history.slice(0,8)));
+    if(state?.name) localStorage.setItem("mcuV3Name", state.name);
+    saveData();
+    if(typeof renderMovies === "function") renderMovies();
+    if(typeof window.renderV3 === "function") window.renderV3();
+  }
+};
+
+</script>
+
+
+/* =========================================================
+   
+<script type="module">
+/* =========================================================
+   MCU TRACKER — FIREBASE BACKEND UPGRADE
+   ---------------------------------------------------------
+   Configure FIREBASE_CONFIG with your Firebase Web App values.
+   Enable:
+     - Authentication > Email/Password
+     - Firestore Database
+   Admin access is ONLY granted by a Firebase Auth custom claim:
+     { admin: true }
+   Never place a Firebase service-account/private key in this file.
+========================================================= */
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+  setPersistence,
+  browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  limit,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+
+/* ---------- FIREBASE CONFIG ---------- */
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyAxiho1OLRry1mU8CRm6lQirUGQCVlNDWg",
+  authDomain: "marvel-mcu-tracker.firebaseapp.com",
+  projectId: "marvel-mcu-tracker",
+  storageBucket: "marvel-mcu-tracker.firebasestorage.app",
+  messagingSenderId: "353104751639",
+  appId: "1:353104751639:web:9f5e43501ead4bbedd4052",
+  measurementId: "G-5DJXGHN0NV"
+};
+
+const FIREBASE_READY =
+  FIREBASE_CONFIG.apiKey &&
+  !FIREBASE_CONFIG.apiKey.startsWith("PASTE_") &&
+  FIREBASE_CONFIG.projectId &&
+  !FIREBASE_CONFIG.projectId.startsWith("YOUR_") &&
+  FIREBASE_CONFIG.appId &&
+  !FIREBASE_CONFIG.appId.startsWith("YOUR_");
+
+let firebaseApp = null;
+let auth = null;
+let db = null;
+let activeUser = null;
+let activeAdmin = false;
+let syncing = false;
+
+const $ = id => document.getElementById(id);
+
+function setMessage(message, ok=false){
+  const el = $("authMessage");
+  if(el){
+    el.textContent = message || "";
+    el.style.color = ok ? "#6dff9a" : "#ff7b7b";
+  }
+}
+
+function setSyncStatus(text, state="idle"){
+  const el = $("firebaseSyncStatus");
+  if(!el) return;
+  el.textContent = "Firebase: " + text;
+  el.dataset.state = state;
+  el.style.borderColor =
+    state === "ok" ? "rgba(0,230,118,.45)" :
+    state === "error" ? "rgba(255,80,80,.45)" :
+    "rgba(255,255,255,.12)";
+}
+
+function safeJSON(value){
+  try { return JSON.parse(JSON.stringify(value)); }
+  catch(e){ return {}; }
+}
+
+function getLocalTracker(){
+  if(window.__mcuTrackerBridge){
+    return window.__mcuTrackerBridge.getState();
+  }
+  return {
+    watched: {},
+    favorites: {},
+    history: [],
+    name: ""
+  };
+}
+
+function applyTrackerState(state){
+  if(!state) return;
+  if(window.__mcuTrackerBridge){
+    window.__mcuTrackerBridge.applyState(state);
+    return;
+  }
+}
+
+function closeAuth(){
+  const overlay = $("authOverlay");
+  if(overlay){
+    overlay.classList.remove("open");
+    overlay.setAttribute("aria-hidden","true");
+  }
+}
+
+function openAuth(){
+  const overlay = $("authOverlay");
+  if(!overlay) return;
+  overlay.classList.add("open");
+  overlay.setAttribute("aria-hidden","false");
+  $("authEmail")?.focus();
+}
+
+function setMode(mode){
+  const signup = mode === "signup";
+  document.querySelectorAll(".auth-tab").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.authTab === mode);
+  });
+  $("authTitle").textContent = signup ? "Create your account" : "Welcome back";
+  $("authSubtitle").textContent = signup
+    ? "Create a secure Firebase account for your MCU journey."
+    : "Sign in to sync your MCU tracker across devices.";
+  $("authNameField").style.display = signup ? "grid" : "none";
+  $("authName").required = signup;
+  $("authSubmit").textContent = signup ? "Create account" : "Login";
+  setMessage("");
+}
+
+function updateHeader(){
+  const userBox = $("authUserBox");
+  const loginBtn = $("authOpenBtn");
+  const nameEl = $("authUserName");
+  const avatar = $("authAvatar");
+  const adminBtn = $("authAdminBtn");
+
+  if(activeUser){
+    const name = activeUser.displayName || activeUser.email?.split("@")[0] || "User";
+    userBox.style.display = "flex";
+    loginBtn.style.display = "none";
+    nameEl.textContent = name;
+    avatar.textContent = name.trim().charAt(0).toUpperCase() || "U";
+    adminBtn.style.display = activeAdmin ? "inline-block" : "none";
+  }else{
+    userBox.style.display = "none";
+    loginBtn.style.display = "inline-block";
+    adminBtn.style.display = "none";
+  }
+}
+
+async function loadCloudState(){
+  if(!activeUser || !db) return;
+  setSyncStatus("loading…","idle");
+
+  const profileRef = doc(db, "users", activeUser.uid);
+  const trackerRef = doc(db, "users", activeUser.uid, "private", "tracker");
+
+  const [profileSnap, trackerSnap] = await Promise.all([
+    getDoc(profileRef),
+    getDoc(trackerRef)
+  ]);
+
+  const profile = profileSnap.exists() ? profileSnap.data() : {};
+  const tracker = trackerSnap.exists() ? trackerSnap.data() : null;
+
+  if(profile.displayName && profile.displayName !== activeUser.displayName){
+    try { await updateProfile(activeUser, {displayName: profile.displayName}); } catch(e){}
+  }
+
+  if(tracker){
+    applyTrackerState({
+      watched: tracker.watched || {},
+      favorites: tracker.favorites || {},
+      history: tracker.history || [],
+      name: profile.displayName || tracker.name || ""
+    });
+  }else{
+    await saveCloudState();
+  }
+
+  setSyncStatus("synced","ok");
+}
+
+let cloudSaveInProgress = false;
+let cloudSavePending = false;
+
+async function saveCloudState(){
+  if(!activeUser || !db) return false;
+  if(cloudSaveInProgress){
+    cloudSavePending = true;
+    return false;
+  }
+
+  cloudSaveInProgress = true;
+  syncing = true;
+  try{
+    do{
+      cloudSavePending = false;
+      const state = getLocalTracker();
+      const name = state.name || activeUser.displayName || activeUser.email?.split("@")[0] || "User";
+      const profileRef = doc(db, "users", activeUser.uid);
+      const trackerRef = doc(db, "users", activeUser.uid, "private", "tracker");
+
+      await setDoc(profileRef, {
+        uid: activeUser.uid,
+        email: activeUser.email || "",
+        displayName: name,
+        updatedAt: serverTimestamp()
+      }, {merge:true});
+
+      await setDoc(trackerRef, {
+        watched: state.watched || {},
+        favorites: state.favorites || {},
+        history: Array.isArray(state.history) ? state.history : [],
+        name,
+        updatedAt: serverTimestamp()
+      }, {merge:true});
+
+      setSyncStatus("synced","ok");
+    }while(cloudSavePending);
+    return true;
+  }catch(err){
+    console.error("Cloud save failed:", err);
+    setSyncStatus("sync failed: " + (err?.code || "error"),"error");
+    return false;
+  }finally{
+    syncing = false;
+    cloudSaveInProgress = false;
+  }
+}
+
+async function firebaseSubmit(event){
+  event.preventDefault();
+  if(!FIREBASE_READY || !auth || !db){
+    setMessage("Firebase could not initialize. Please refresh the page and check Firebase Console settings.");
+    console.error("Firebase initialization state:", {configured:FIREBASE_READY, auth:!!auth, db:!!db});
+    return;
+  }
+
+  const mode = document.querySelector(".auth-tab.active")?.dataset.authTab || "login";
+  const email = $("authEmail").value.trim();
+  const password = $("authPassword").value;
+  const name = $("authName").value.trim();
+
+  if(!email || !password) return;
+
+  $("authSubmit").disabled = true;
+  setMessage("Please wait…");
+
+  try{
+    if(mode === "signup"){
+      const cred = await createUserWithEmailAndPassword(auth,email,password);
+
+      if(name){
+        await updateProfile(cred.user,{displayName:name});
+      }
+
+      await setDoc(
+        doc(db,"users",cred.user.uid),
+        {
+          uid:cred.user.uid,
+          email:cred.user.email || email,
+          displayName:name || email.split("@")[0],
+          createdAt:serverTimestamp(),
+          updatedAt:serverTimestamp()
+        },
+        {merge:true}
+      );
+
+      activeUser = cred.user;
+      activeAdmin = (await cred.user.getIdTokenResult(true)).claims?.admin === true;
+      updateHeader();
+      closeAuth();
+      setMessage("",true);
+      await saveCloudState();
+    }else{
+      const cred = await signInWithEmailAndPassword(auth,email,password);
+      activeUser = cred.user;
+      activeAdmin = (await cred.user.getIdTokenResult(true)).claims?.admin === true;
+      updateHeader();
+      closeAuth();
+      await loadCloudState();
+    }
+  }catch(err){
+    console.error(err);
+    const messages = {
+      "auth/invalid-credential":"Email or password is incorrect.",
+      "auth/email-already-in-use":"That email is already registered.",
+      "auth/weak-password":"Password must be at least 6 characters.",
+      "auth/invalid-email":"Please enter a valid email address.",
+      "auth/network-request-failed":"Network error. Check your internet connection.",
+      "auth/operation-not-allowed":"Email/Password sign-in is not enabled in Firebase Authentication.",
+      "auth/unauthorized-domain":"This GitHub Pages domain is not authorized in Firebase Authentication.",
+      "auth/user-disabled":"This account has been disabled.",
+      "permission-denied":"Firestore permission denied. Check your Firestore Security Rules."
+    };
+    setMessage(messages[err.code] || err.message || "Authentication failed.");
+  }finally{
+    $("authSubmit").disabled = false;
+  }
+}
+
+async function firebaseLogout(){
+  if(!auth) return;
+  try{
+    await signOut(auth);
+    activeUser = null;
+    activeAdmin = false;
+    updateHeader();
+    setSyncStatus("not signed in","idle");
+  }catch(err){
+    console.error(err);
+  }
+}
+
+async function manualSync(){
+  if(!FIREBASE_READY){
+    alert("Add your Firebase Web App config to index.html first.");
+    return;
+  }
+  if(!activeUser){
+    openAuth();
+    return;
+  }
+  await saveCloudState();
+}
+
+function exportData(){
+  const payload = {
+    exportedAt: new Date().toISOString(),
+    app: "MCU Tracker",
+    version: "Firebase V6",
+    state: getLocalTracker()
+  };
+
+  const blob = new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "mcu-tracker-backup.json";
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function importData(file){
+  return new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+
+    reader.onload = async () => {
+      try{
+        const payload = JSON.parse(reader.result);
+        const state = payload.state || payload;
+
+        if(typeof state !== "object") throw new Error("Invalid backup.");
+
+        applyTrackerState({
+          watched: state.watched || {},
+          favorites: state.favorites || {},
+          history: Array.isArray(state.history) ? state.history : [],
+          name: state.name || ""
+        });
+
+        if(activeUser) await saveCloudState();
+        alert("Backup restored successfully.");
+        resolve();
+      }catch(err){
+        alert("Could not restore this backup.");
+        reject(err);
+      }
+    };
+
+    reader.onerror = ()=>reject(reader.error);
+    reader.readAsText(file);
+  });
+}
+
+async function openFirebaseAdmin(){
+  if(!activeUser){
+    alert("Please login first.");
+    return;
+  }
+
+  const token = await activeUser.getIdTokenResult(true);
+  if(token.claims?.admin !== true){
+    alert("Admin access required.");
+    return;
+  }
+
+  const overlay = $("adminOverlay");
+  if(!overlay) return;
+
+  overlay.classList.add("open");
+  overlay.setAttribute("aria-hidden","false");
+
+  try{
+    const usersSnap = await getDocs(
+      query(collection(db,"users"),orderBy("createdAt","desc"),limit(200))
+    );
+
+    let users = 0;
+    let admins = 0;
+    let watchedTotal = 0;
+    let favoritesTotal = 0;
+    let rows = "";
+
+    for(const userDoc of usersSnap.docs){
+      users++;
+      const data = userDoc.data() || {};
+      const trackerSnap = await getDoc(
+        doc(db,"users",userDoc.id,"private","tracker")
+      );
+      const tracker = trackerSnap.exists() ? trackerSnap.data() : {};
+
+      const watchedCount = Object.values(tracker.watched || {}).filter(Boolean).length;
+      const favoriteCount = Object.values(tracker.favorites || {}).filter(Boolean).length;
+
+      watchedTotal += watchedCount;
+      favoritesTotal += favoriteCount;
+
+      if(data.admin === true) admins++;
+
+      rows += `
+        <tr>
+          <td><b>${escapeHTML(data.displayName || "User")}</b></td>
+          <td>${escapeHTML(data.email || "")}</td>
+          <td><span class="admin-role ${data.admin === true ? "admin" : ""}">
+            ${data.admin === true ? "admin" : "user"}
+          </span></td>
+          <td>${watchedCount}</td>
+          <td>${favoriteCount}</td>
+          <td><span style="color:#777">Firebase protected</span></td>
+        </tr>`;
+    }
+
+    $("adminUsers").textContent = users;
+    $("adminAdmins").textContent = admins;
+    $("adminWatched").textContent = watchedTotal;
+    $("adminFavorites").textContent = favoritesTotal;
+    $("adminUserRows").innerHTML =
+      rows || '<tr><td colspan="6">No users found.</td></tr>';
+
+  }catch(err){
+    console.error(err);
+    $("adminUserRows").innerHTML =
+      '<tr><td colspan="6">Admin data could not be loaded. Check Firestore rules.</td></tr>';
+  }
+}
+
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  }[char]));
+}
+
+
+/* ---------- UI EVENTS ---------- */
+$("authOpenBtn")?.addEventListener("click",openAuth);
+$("authCloseBtn")?.add
+Preview truncated for large file
