@@ -1721,6 +1721,15 @@ body.theme-gamma .premium-hero{background:linear-gradient(90deg,rgba(3,12,5,.97)
 body.theme-gamma .premium-hero:after{background:linear-gradient(90deg,rgba(2,10,4,.95),rgba(3,30,10,.52),transparent)}
 </style>
 
+
+<style id="doomsday-feature-css">
+.doomsday-feature{display:grid;grid-template-columns:160px 1fr;gap:18px;align-items:center;margin:18px 0 24px;padding:16px;border:1px solid rgba(100,255,150,.35);border-radius:22px;background:radial-gradient(circle at 85% 40%,rgba(40,255,100,.16),transparent 35%),linear-gradient(135deg,#050a07,#10170f 55%,#030604);box-shadow:0 0 35px rgba(30,255,100,.10),inset 0 0 35px rgba(30,255,100,.04);overflow:hidden;position:relative}
+.doomsday-feature:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(120,255,160,.05),transparent);animation:doomsdayScan 4s linear infinite}
+.doomsday-poster-wrap{position:relative;z-index:1}.doomsday-poster{width:160px;height:170px;object-fit:cover;border-radius:13px;border:1px solid rgba(150,255,180,.28);box-shadow:0 0 22px rgba(60,255,110,.22)}
+.doomsday-content{position:relative;z-index:1}.doomsday-kicker{font:800 .62rem/1.2 Orbitron,sans-serif;letter-spacing:.15em;color:#9dffbd}.doomsday-content h2{margin:7px 0 4px;font:900 clamp(1.25rem,4vw,2.2rem)/1 Orbitron,sans-serif;color:#e4ffe9;text-shadow:0 0 16px rgba(80,255,120,.35)}.doomsday-content p{margin:0 0 12px;color:rgba(220,255,230,.68);font-size:.72rem}.doomsday-live-digits{display:flex;gap:7px;flex-wrap:wrap}.doomsday-live-digits>div{min-width:62px;padding:8px 7px;text-align:center;border:1px solid rgba(100,255,150,.25);border-radius:10px;background:rgba(0,0,0,.28)}.doomsday-live-digits b{display:block;font:900 1rem/1 Orbitron,sans-serif;color:#d9ffe3;text-shadow:0 0 10px rgba(80,255,120,.6)}.doomsday-live-digits span{display:block;margin-top:4px;font-size:.45rem;text-transform:uppercase;color:rgba(220,255,230,.52)}.doomsday-date{margin-top:10px;font:800 .55rem/1.2 Orbitron,sans-serif;letter-spacing:.12em;color:#7dffab}@keyframes doomsdayScan{to{transform:translateX(100%)}}
+body.theme-doomsday{--premium-accent:#63ff91;--premium-accent2:#d6ffe1;--premium-glow:rgba(60,255,110,.32)}body.theme-doomsday .premium-hero{background:linear-gradient(90deg,rgba(1,8,4,.98),rgba(4,25,12,.82),rgba(5,50,20,.22)),url("https://images.flickdirect.com/movies/avengers-doomsday/avengers-doomsday-poster.jpg") center right/cover no-repeat;min-height:300px}
+@media(max-width:600px){.doomsday-feature{grid-template-columns:78px 1fr;padding:12px;gap:12px}.doomsday-poster{width:78px;height:112px}.doomsday-live-digits>div{min-width:52px}}
+</style>
 <style id="doomsday-timer-css">
 /* Additive: timer only. Existing tracker cards/layout/animations are untouched. */
 .doomsday-timer{
@@ -1778,37 +1787,6 @@ body.theme-gamma .premium-hero:after{background:linear-gradient(90deg,rgba(2,10,
 .doomsday-timer.is-live .doomsday-timer__unit b{animation:ddPulse 1s ease-in-out infinite alternate}
 @keyframes ddPulse{from{opacity:.78}to{opacity:1}}
 @media(max-width:600px){.doomsday-timer{padding:12px}.doomsday-timer__unit{min-width:58px}}
-</style>
-<style id="mcu-cinematic-themes-v2">
-/* MCU CINEMATIC UI UPGRADE — additive, preserves existing layout */
-:root{--mcu-theme-accent:var(--premium-accent);--mcu-theme-accent2:var(--premium-accent2)}
-.premium-hero,.theme-poster-strip,.theme-switcher,.v3-card,.stat-card,.progress-section,.movie-card,.filter-bar,.search-box{transition:border-color .45s ease,box-shadow .45s ease,background .45s ease,transform .3s ease}
-.premium-hero{border-color:color-mix(in srgb,var(--premium-accent) 42%,transparent);}
-.theme-poster-strip{border-color:color-mix(in srgb,var(--premium-accent) 32%,transparent);box-shadow:0 0 28px var(--premium-glow)}
-.theme-poster-strip img{border-color:var(--premium-accent);box-shadow:0 0 22px var(--premium-glow);transition:opacity .28s ease,transform .35s ease}.theme-poster-strip img:hover{transform:scale(1.04)}
-.theme-choice{position:relative;overflow:hidden}
-.theme-choice:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.16),transparent 80%);transform:translateX(-120%);transition:transform .5s ease}
-.theme-choice:hover:after{transform:translateX(120%)}
-.movie-card{border-color:color-mix(in srgb,var(--premium-accent) 18%,rgba(255,255,255,.08));}
-.movie-card:hover{border-color:color-mix(in srgb,var(--premium-accent) 62%,transparent);box-shadow:0 16px 42px color-mix(in srgb,var(--premium-glow) 70%,transparent),0 0 0 1px color-mix(in srgb,var(--premium-accent) 20%,transparent)}
-.phase-badge,.movie-type-badge,.meta-item.rating,.timeline-slot-meta{border-color:color-mix(in srgb,var(--premium-accent) 45%,transparent)!important;color:var(--premium-accent2)!important}
-.favorite-btn.active{filter:drop-shadow(0 0 8px var(--premium-glow))}
-.progress-bar{background:linear-gradient(90deg,var(--premium-accent),var(--premium-accent2))!important;box-shadow:0 0 18px var(--premium-glow)}
-.search-box:focus-within{border-color:var(--premium-accent)!important;box-shadow:0 0 24px var(--premium-glow)}
-.filter-btn.active{border-color:var(--premium-accent)!important;box-shadow:0 0 16px var(--premium-glow)}
-.theme-poster-chip{box-shadow:0 0 15px var(--premium-glow)}
-body.theme-cyan{--premium-accent:#19d9ff;--premium-accent2:#b8f7ff;--premium-glow:rgba(25,217,255,.30)}
-body.theme-cyan .premium-hero{background:linear-gradient(90deg,rgba(2,10,16,.98),rgba(3,26,36,.84),rgba(0,70,90,.20)),url("https://image.tmdb.org/t/p/w780/78lPtwv72eTNqFW9COBYI0dWDJa.jpg") center right/cover no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 25px 90px rgba(25,217,255,.12),inset 0 0 70px rgba(0,0,0,.35)}
-body.theme-cyan .premium-hero:before{background:radial-gradient(circle at 78% 45%,rgba(185,247,255,.8),transparent 6%),radial-gradient(circle at 78% 45%,rgba(25,217,255,.55),transparent 19%),conic-gradient(from 0deg,transparent 0 18%,#19d9ff 25%,transparent 33%,#b8f7ff 44%,transparent 52%);filter:blur(28px);opacity:.38}
-body.theme-cyan .premium-hero:after{background:linear-gradient(90deg,rgba(0,5,10,.96),rgba(0,20,30,.70),transparent)}
-body.theme-cyan .hero-kicker{color:#b8f7ff;text-shadow:0 0 12px rgba(25,217,255,.55)}
-body.theme-cyan .hero-title{background:linear-gradient(90deg,#fff,#b8f7ff,#19d9ff);-webkit-background-clip:text;background-clip:text}
-body.theme-cyan .hero-btn.primary{background:linear-gradient(135deg,#19d9ff,#087b99);box-shadow:0 8px 30px rgba(25,217,255,.32)}
-body.theme-cyan .theme-choice.active{border-color:#19d9ff;box-shadow:0 0 0 2px rgba(25,217,255,.16),0 0 20px rgba(25,217,255,.22)}
-body.theme-gamma .theme-choice.active{border-color:#39d353;box-shadow:0 0 0 2px rgba(57,211,83,.16),0 0 20px rgba(57,211,83,.22)}
-body.theme-gamma .movie-card:hover{box-shadow:0 16px 42px rgba(57,211,83,.16),0 0 0 1px rgba(57,211,83,.22)}
-.timeline-slot-meta{font-family:"Orbitron",sans-serif;font-weight:800}
-@media(max-width:700px){.theme-switcher{gap:6px}.theme-choice{font-size:.62rem;padding:7px 9px}.premium-hero{padding:28px 20px}}
 </style>
 </head>
 
@@ -1925,16 +1903,48 @@ body.theme-gamma .movie-card:hover{box-shadow:0 16px 42px rgba(57,211,83,.16),0 
   <button class="theme-choice" data-hero-theme="red">🔴 Marvel Red</button>
   <button class="theme-choice" data-hero-theme="gold">🟡 Infinity Gold</button>
   <button class="theme-choice" data-hero-theme="cosmic">🟣 Multiverse Purple</button>
-  <button class="theme-choice" data-hero-theme="cyan">🩵 Arc Reactor Cyan</button>
+  <button class="theme-choice" data-hero-theme="ironman">🤖 Stark Black</button>
   <button class="theme-choice" data-hero-theme="gamma">🟢 Gamma Green</button>
+  <button class="theme-choice" data-hero-theme="doomsday">☠️ Doomsday</button>
 </section>
 <section class="theme-poster-strip" aria-live="polite">
   <img id="themePoster" src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg" alt="Theme poster">
   <div class="theme-poster-info"><strong id="themePosterTitle">Avengers: Endgame</strong><span id="themePosterSubtitle">Marvel Red • Phase 3</span></div>
   <span class="theme-poster-chip">CINEMATIC THEME</span>
 </section>
-
-
+<section class="doomsday-feature" id="doomsdayCountdown" aria-label="Avengers Doomsday countdown">
+  <div class="doomsday-poster-wrap">
+    <img class="doomsday-poster" src="https://images.flickdirect.com/movies/avengers-doomsday/avengers-doomsday-poster.jpg" alt="Avengers: Doomsday poster">
+  </div>
+  <div class="doomsday-content">
+    <div class="doomsday-kicker">⚠ PHASE 6 • FINAL STORY TARGET</div>
+    <h2>AVENGERS: DOOMSDAY</h2>
+    <p>Live countdown to the Doomsday release. Indian Standard Time (IST).</p>
+    <div class="doomsday-live-digits">
+      <div><b id="doomsdayDays">000</b><span>Days</span></div>
+      <div><b id="doomsdayHours">00</b><span>Hours</span></div>
+      <div><b id="doomsdayMinutes">00</b><span>Minutes</span></div>
+      <div><b id="doomsdaySeconds">00</b><span>Seconds</span></div>
+    </div>
+    <div class="doomsday-date">18 DECEMBER 2026 • INDIA TIME</div>
+  </div>
+</section>
+<script>
+(function(){
+  var img=document.querySelector('#doomsdayCountdown .doomsday-poster');
+  if(img){
+    img.style.display='block';
+    img.style.width='100%';
+    img.style.height='100%';
+    img.style.objectFit='cover';
+    img.addEventListener('error',function(){
+      if(this.dataset.fallback) return;
+      this.dataset.fallback='1';
+      this.src='https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg';
+    });
+  }
+})();
+</script>
 
 
     <!-- =====================================================
@@ -3027,6 +3037,18 @@ const movies = [
         "type": "movie",
         "importance": "Must Watch",
         "poster": "https://image.tmdb.org/t/p/w500/nf5qaSEvyYSNeFH0YhSs5EsBLX9.jpg"
+    },
+    {
+        "id": "mcu-spider-man-brand-new-day",
+        "timelineSlot": 51,
+        "title": "Spider-Man: Brand New Day",
+        "year": 2026,
+        "releaseDate": "2026-07-31",
+        "rating": null,
+        "phase": "Phase 6 • Multiverse Saga",
+        "type": "movie",
+        "importance": "Must Watch",
+        "poster": "https://en.wikipedia.org/wiki/Special:Redirect/file/Spider-Man:_Brand_New_Day_poster.jpg"
     }
 ];
 
@@ -3278,14 +3300,13 @@ function getFilteredMovies(){
         const query =
             currentSearch.toLowerCase().trim();
 
-        result = result.filter(movie => {
-            const haystack = [
-                movie.title, movie.type, movie.phase, movie.year,
-                movie.releaseDate, movie.rating, movie.importance,
-                movie.timelineSlot
-            ].filter(v => v !== undefined && v !== null).join(" ").toLowerCase();
-            return haystack.includes(query);
-        });
+        result = result.filter(movie =>
+
+            movie.title
+                .toLowerCase()
+                .includes(query)
+
+        );
 
     }
 
@@ -3664,7 +3685,7 @@ function renderMovies(){
         const slotMeta = document.createElement("span");
         slotMeta.className = "meta-item timeline-slot-meta";
         slotMeta.textContent = movie.timelineSlot
-            ? "#" + String(movie.timelineSlot).padStart(2,"0") + " TIMELINE"
+            ? "🎬 Slot " + movie.timelineSlot
             : "";
         meta.appendChild(slotMeta);
 
@@ -4415,11 +4436,13 @@ const heroThemeData={
   blue:{title:'Spider-Man: No Way Home',subtitle:'Multiverse Blue • Phase 4',poster:'https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg'},
   gold:{title:'Avengers: Infinity War',subtitle:'Infinity Gold • Phase 3',poster:'https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg'},
   cosmic:{title:'Guardians of the Galaxy',subtitle:'Cosmic • Phase 2',poster:'https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg'},
-  ironman:{title:'Iron Man',subtitle:'Iron Man • Phase 1',poster:'https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg'}
+  ironman:{title:'Iron Man',subtitle:'Iron Man • Phase 1',poster:'https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg'},
+  gamma:{title:'Hulk',subtitle:'Gamma Green • Phase 3',poster:'https://image.tmdb.org/t/p/w500/uxzzxijgPIY7slzFvMotPv8wjKA.jpg'},
+  doomsday:{title:'Avengers: Doomsday',subtitle:'Doomsday • Phase 6',poster:'https://images.flickdirect.com/movies/avengers-doomsday/avengers-doomsday-poster.jpg'}
 };
 function applyHeroTheme(theme){
   if(!heroThemeData[theme])theme='red';
-  document.body.classList.remove('theme-blue','theme-gold','theme-cosmic','theme-ironman');
+  document.body.classList.remove('theme-blue','theme-gold','theme-cosmic','theme-ironman','theme-gamma','theme-doomsday');
   if(theme!=='red')document.body.classList.add('theme-'+theme);
   localStorage.setItem('mcuHeroTheme',theme);
   document.querySelectorAll('[data-hero-theme]').forEach(b=>b.classList.toggle('active',b.dataset.heroTheme===theme));
@@ -6175,7 +6198,7 @@ function pad(n){ return String(n).padStart(2,"0"); }
  * Target is configurable so the existing tracker remains the source of truth.
  * If the target date is changed later, update only this ISO value.
  */
-var DOOMSDAY_TARGET = "2026-05-01T00:00:00+05:30";
+var DOOMSDAY_TARGET = "2026-12-18T00:00:00+05:30";
 
 function buildTimer(){
   if(document.getElementById("doomsday-timer")) return;
@@ -6234,34 +6257,6 @@ if(document.readyState==="loading"){
 }else{
   buildTimer();
 }
-})();
-</script>
-<script id="mcu-cinematic-theme-controller">
-(function(){
-  const themes={
-    blue:{title:'Spider-Man: No Way Home',subtitle:'Massive Blue • Phase 4',poster:'https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg'},
-    red:{title:'Avengers: Endgame',subtitle:'Marvel Red • Phase 3',poster:'https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg'},
-    gold:{title:'Avengers: Infinity War',subtitle:'Infinity Gold • Phase 3',poster:'https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg'},
-    cosmic:{title:'Guardians of the Galaxy',subtitle:'Multiverse Purple • Phase 2',poster:'https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg'},
-    cyan:{title:'Iron Man',subtitle:'Arc Reactor Cyan • Phase 1',poster:'https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg'},
-    gamma:{title:'The Incredible Hulk',subtitle:'Gamma Green • Phase 1',poster:'https://image.tmdb.org/t/p/w500/gKzYx79sYTTuE3k6dQ7qY8jY5rQ.jpg'}
-  };
-  const classes=['theme-blue','theme-red','theme-gold','theme-cosmic','theme-cyan','theme-gamma','theme-ironman'];
-  window.applyHeroTheme=function(theme){
-    if(!themes[theme]) theme='blue';
-    document.body.classList.remove(...classes);
-    if(theme!=='red') document.body.classList.add('theme-'+theme);
-    document.documentElement.style.setProperty('--mcu-theme-accent','var(--premium-accent)');
-    localStorage.setItem('mcuHeroTheme',theme);
-    document.querySelectorAll('[data-hero-theme]').forEach(b=>b.classList.toggle('active',b.dataset.heroTheme===theme));
-    const d=themes[theme];
-    const poster=document.getElementById('themePoster'), title=document.getElementById('themePosterTitle'), sub=document.getElementById('themePosterSubtitle');
-    if(poster){poster.style.opacity='0';setTimeout(()=>{poster.src=d.poster;poster.alt=d.title+' poster';poster.onload=()=>poster.style.opacity='1';},120);}
-    if(title) title.textContent=d.title;
-    if(sub) sub.textContent=d.subtitle;
-  };
-  document.querySelectorAll('[data-hero-theme]').forEach(b=>b.addEventListener('click',()=>window.applyHeroTheme(b.dataset.heroTheme)));
-  window.applyHeroTheme(localStorage.getItem('mcuHeroTheme')||'blue');
 })();
 </script>
 </body>
