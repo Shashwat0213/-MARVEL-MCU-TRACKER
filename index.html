@@ -1779,6 +1779,37 @@ body.theme-gamma .premium-hero:after{background:linear-gradient(90deg,rgba(2,10,
 @keyframes ddPulse{from{opacity:.78}to{opacity:1}}
 @media(max-width:600px){.doomsday-timer{padding:12px}.doomsday-timer__unit{min-width:58px}}
 </style>
+<style id="mcu-cinematic-themes-v2">
+/* MCU CINEMATIC UI UPGRADE — additive, preserves existing layout */
+:root{--mcu-theme-accent:var(--premium-accent);--mcu-theme-accent2:var(--premium-accent2)}
+.premium-hero,.theme-poster-strip,.theme-switcher,.v3-card,.stat-card,.progress-section,.movie-card,.filter-bar,.search-box{transition:border-color .45s ease,box-shadow .45s ease,background .45s ease,transform .3s ease}
+.premium-hero{border-color:color-mix(in srgb,var(--premium-accent) 42%,transparent);}
+.theme-poster-strip{border-color:color-mix(in srgb,var(--premium-accent) 32%,transparent);box-shadow:0 0 28px var(--premium-glow)}
+.theme-poster-strip img{border-color:var(--premium-accent);box-shadow:0 0 22px var(--premium-glow);transition:opacity .28s ease,transform .35s ease}.theme-poster-strip img:hover{transform:scale(1.04)}
+.theme-choice{position:relative;overflow:hidden}
+.theme-choice:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.16),transparent 80%);transform:translateX(-120%);transition:transform .5s ease}
+.theme-choice:hover:after{transform:translateX(120%)}
+.movie-card{border-color:color-mix(in srgb,var(--premium-accent) 18%,rgba(255,255,255,.08));}
+.movie-card:hover{border-color:color-mix(in srgb,var(--premium-accent) 62%,transparent);box-shadow:0 16px 42px color-mix(in srgb,var(--premium-glow) 70%,transparent),0 0 0 1px color-mix(in srgb,var(--premium-accent) 20%,transparent)}
+.phase-badge,.movie-type-badge,.meta-item.rating,.timeline-slot-meta{border-color:color-mix(in srgb,var(--premium-accent) 45%,transparent)!important;color:var(--premium-accent2)!important}
+.favorite-btn.active{filter:drop-shadow(0 0 8px var(--premium-glow))}
+.progress-bar{background:linear-gradient(90deg,var(--premium-accent),var(--premium-accent2))!important;box-shadow:0 0 18px var(--premium-glow)}
+.search-box:focus-within{border-color:var(--premium-accent)!important;box-shadow:0 0 24px var(--premium-glow)}
+.filter-btn.active{border-color:var(--premium-accent)!important;box-shadow:0 0 16px var(--premium-glow)}
+.theme-poster-chip{box-shadow:0 0 15px var(--premium-glow)}
+body.theme-cyan{--premium-accent:#19d9ff;--premium-accent2:#b8f7ff;--premium-glow:rgba(25,217,255,.30)}
+body.theme-cyan .premium-hero{background:linear-gradient(90deg,rgba(2,10,16,.98),rgba(3,26,36,.84),rgba(0,70,90,.20)),url("https://image.tmdb.org/t/p/w780/78lPtwv72eTNqFW9COBYI0dWDJa.jpg") center right/cover no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 25px 90px rgba(25,217,255,.12),inset 0 0 70px rgba(0,0,0,.35)}
+body.theme-cyan .premium-hero:before{background:radial-gradient(circle at 78% 45%,rgba(185,247,255,.8),transparent 6%),radial-gradient(circle at 78% 45%,rgba(25,217,255,.55),transparent 19%),conic-gradient(from 0deg,transparent 0 18%,#19d9ff 25%,transparent 33%,#b8f7ff 44%,transparent 52%);filter:blur(28px);opacity:.38}
+body.theme-cyan .premium-hero:after{background:linear-gradient(90deg,rgba(0,5,10,.96),rgba(0,20,30,.70),transparent)}
+body.theme-cyan .hero-kicker{color:#b8f7ff;text-shadow:0 0 12px rgba(25,217,255,.55)}
+body.theme-cyan .hero-title{background:linear-gradient(90deg,#fff,#b8f7ff,#19d9ff);-webkit-background-clip:text;background-clip:text}
+body.theme-cyan .hero-btn.primary{background:linear-gradient(135deg,#19d9ff,#087b99);box-shadow:0 8px 30px rgba(25,217,255,.32)}
+body.theme-cyan .theme-choice.active{border-color:#19d9ff;box-shadow:0 0 0 2px rgba(25,217,255,.16),0 0 20px rgba(25,217,255,.22)}
+body.theme-gamma .theme-choice.active{border-color:#39d353;box-shadow:0 0 0 2px rgba(57,211,83,.16),0 0 20px rgba(57,211,83,.22)}
+body.theme-gamma .movie-card:hover{box-shadow:0 16px 42px rgba(57,211,83,.16),0 0 0 1px rgba(57,211,83,.22)}
+.timeline-slot-meta{font-family:"Orbitron",sans-serif;font-weight:800}
+@media(max-width:700px){.theme-switcher{gap:6px}.theme-choice{font-size:.62rem;padding:7px 9px}.premium-hero{padding:28px 20px}}
+</style>
 </head>
 
 <body>
@@ -1894,7 +1925,7 @@ body.theme-gamma .premium-hero:after{background:linear-gradient(90deg,rgba(2,10,
   <button class="theme-choice" data-hero-theme="red">🔴 Marvel Red</button>
   <button class="theme-choice" data-hero-theme="gold">🟡 Infinity Gold</button>
   <button class="theme-choice" data-hero-theme="cosmic">🟣 Multiverse Purple</button>
-  <button class="theme-choice" data-hero-theme="ironman">🤖 Stark Black</button>
+  <button class="theme-choice" data-hero-theme="cyan">🩵 Arc Reactor Cyan</button>
   <button class="theme-choice" data-hero-theme="gamma">🟢 Gamma Green</button>
 </section>
 <section class="theme-poster-strip" aria-live="polite">
@@ -3247,13 +3278,14 @@ function getFilteredMovies(){
         const query =
             currentSearch.toLowerCase().trim();
 
-        result = result.filter(movie =>
-
-            movie.title
-                .toLowerCase()
-                .includes(query)
-
-        );
+        result = result.filter(movie => {
+            const haystack = [
+                movie.title, movie.type, movie.phase, movie.year,
+                movie.releaseDate, movie.rating, movie.importance,
+                movie.timelineSlot
+            ].filter(v => v !== undefined && v !== null).join(" ").toLowerCase();
+            return haystack.includes(query);
+        });
 
     }
 
@@ -3632,7 +3664,7 @@ function renderMovies(){
         const slotMeta = document.createElement("span");
         slotMeta.className = "meta-item timeline-slot-meta";
         slotMeta.textContent = movie.timelineSlot
-            ? "🎬 Slot " + movie.timelineSlot
+            ? "#" + String(movie.timelineSlot).padStart(2,"0") + " TIMELINE"
             : "";
         meta.appendChild(slotMeta);
 
@@ -6202,6 +6234,34 @@ if(document.readyState==="loading"){
 }else{
   buildTimer();
 }
+})();
+</script>
+<script id="mcu-cinematic-theme-controller">
+(function(){
+  const themes={
+    blue:{title:'Spider-Man: No Way Home',subtitle:'Massive Blue • Phase 4',poster:'https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg'},
+    red:{title:'Avengers: Endgame',subtitle:'Marvel Red • Phase 3',poster:'https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg'},
+    gold:{title:'Avengers: Infinity War',subtitle:'Infinity Gold • Phase 3',poster:'https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg'},
+    cosmic:{title:'Guardians of the Galaxy',subtitle:'Multiverse Purple • Phase 2',poster:'https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg'},
+    cyan:{title:'Iron Man',subtitle:'Arc Reactor Cyan • Phase 1',poster:'https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg'},
+    gamma:{title:'The Incredible Hulk',subtitle:'Gamma Green • Phase 1',poster:'https://image.tmdb.org/t/p/w500/gKzYx79sYTTuE3k6dQ7qY8jY5rQ.jpg'}
+  };
+  const classes=['theme-blue','theme-red','theme-gold','theme-cosmic','theme-cyan','theme-gamma','theme-ironman'];
+  window.applyHeroTheme=function(theme){
+    if(!themes[theme]) theme='blue';
+    document.body.classList.remove(...classes);
+    if(theme!=='red') document.body.classList.add('theme-'+theme);
+    document.documentElement.style.setProperty('--mcu-theme-accent','var(--premium-accent)');
+    localStorage.setItem('mcuHeroTheme',theme);
+    document.querySelectorAll('[data-hero-theme]').forEach(b=>b.classList.toggle('active',b.dataset.heroTheme===theme));
+    const d=themes[theme];
+    const poster=document.getElementById('themePoster'), title=document.getElementById('themePosterTitle'), sub=document.getElementById('themePosterSubtitle');
+    if(poster){poster.style.opacity='0';setTimeout(()=>{poster.src=d.poster;poster.alt=d.title+' poster';poster.onload=()=>poster.style.opacity='1';},120);}
+    if(title) title.textContent=d.title;
+    if(sub) sub.textContent=d.subtitle;
+  };
+  document.querySelectorAll('[data-hero-theme]').forEach(b=>b.addEventListener('click',()=>window.applyHeroTheme(b.dataset.heroTheme)));
+  window.applyHeroTheme(localStorage.getItem('mcuHeroTheme')||'blue');
 })();
 </script>
 </body>
