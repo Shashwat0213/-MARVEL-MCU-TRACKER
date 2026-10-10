@@ -1,25 +1,21 @@
-
 <style id="manual-media-link-style">
-.media-actions .download-btn,
+ .media-actions .download-btn,
 .media-actions .trailer-btn { text-decoration:none; cursor:pointer; }
 .media-actions button:disabled { opacity:.6; cursor:not-allowed; }
 </style>
-
 <!-- MCU Tracker Firebase V7 Cloud Sync -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta name="theme-version" content="V10 • Admin Control Center">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Marvel Cinematic Universe Tracker — Firebase Edition</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-
-/* =========================================================
+ <head>
+  <meta content="V10 • Admin Control Center" name="theme-version"/>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Marvel Cinematic Universe Tracker — Firebase Edition
+  </title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+  <style>
+   /* =========================================================
    GLOBAL
 ========================================================= */
 
@@ -1643,11 +1639,9 @@ body.light-mode .v3-greeting p{color:#52627a}
 .auth-login-btn,.auth-logout-btn,.auth-admin-btn{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:inherit;border-radius:12px;padding:10px 14px;cursor:pointer;font-weight:700}.auth-admin-btn{background:linear-gradient(135deg,#d9a441,#8f5d00);color:#111}
 .auth-overlay{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.78);backdrop-filter:blur(12px)}.auth-overlay.open{display:flex}.auth-card{width:min(460px,100%);padding:28px;border-radius:24px;background:linear-gradient(145deg,#161616,#090909);border:1px solid rgba(255,255,255,.14);box-shadow:0 25px 80px rgba(0,0,0,.55);position:relative}.auth-close{position:absolute;right:14px;top:10px;background:none;border:0;color:#aaa;font-size:28px;cursor:pointer}.auth-brand{font-size:12px;letter-spacing:2px;color:var(--premium-accent,#e50914);font-weight:800;margin-bottom:10px}.auth-card h2{font-size:30px;margin-bottom:5px}.auth-card p{color:#aaa;margin-bottom:18px}.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}.auth-tab{padding:11px;border-radius:10px;border:1px solid #333;background:#111;color:#aaa;cursor:pointer}.auth-tab.active{color:#fff;border-color:var(--premium-accent,#e50914);background:rgba(229,9,20,.12)}.auth-form{display:grid;gap:13px}.auth-field{display:grid;gap:6px}.auth-field label{font-size:12px;color:#aaa}.auth-field input{width:100%;padding:13px;border-radius:10px;border:1px solid #333;background:#080808;color:#fff;outline:none}.auth-field input:focus{border-color:var(--premium-accent,#e50914)}.auth-submit{padding:13px;border:0;border-radius:11px;background:linear-gradient(135deg,var(--premium-accent,#e50914),#7d0000);color:#fff;font-weight:800;cursor:pointer}.auth-message{min-height:18px;color:#ff7b7b;font-size:13px}.auth-note{margin-top:16px;color:#777;font-size:11px;line-height:1.5}
 .admin-overlay{position:fixed;inset:0;z-index:9998;display:none;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);padding:20px;overflow:auto}.admin-overlay.open{display:block}.admin-panel{width:min(1100px,100%);margin:30px auto;background:#0d0d0d;border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:22px;box-shadow:0 30px 100px #000}.admin-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}.admin-head h2{margin:0}.admin-close{border:0;background:#222;color:#fff;border-radius:10px;padding:9px 12px;cursor:pointer}.admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.admin-stat{background:#151515;border:1px solid #262626;border-radius:14px;padding:16px}.admin-stat b{display:block;font-size:25px}.admin-stat span{color:#888;font-size:12px}.admin-table-wrap{overflow:auto;border:1px solid #252525;border-radius:14px}.admin-table{width:100%;border-collapse:collapse;min-width:700px}.admin-table th,.admin-table td{padding:12px;border-bottom:1px solid #222;text-align:left;font-size:13px}.admin-table th{color:#aaa;background:#141414}.admin-table td{color:#ddd}.admin-role{font-size:10px;padding:4px 7px;border-radius:999px;background:#222}.admin-role.admin{background:rgba(217,164,65,.18);color:#ffd979}.admin-actions{display:flex;gap:6px;flex-wrap:wrap}.admin-actions button{border:1px solid #333;background:#171717;color:#ddd;border-radius:8px;padding:7px 9px;cursor:pointer}.admin-actions button.danger{color:#ff8c8c}.admin-footer{color:#777;font-size:11px;margin-top:14px;line-height:1.5}@media(max-width:700px){.admin-stats{grid-template-columns:1fr 1fr}.auth-bar{justify-content:center}}
-
-</style>
-
-<style id="v8-autosync-ui">
-  #firebaseSyncBtn,
+  </style>
+  <style id="v8-autosync-ui">
+   #firebaseSyncBtn,
   #firebaseBackupBtn,
   #firebaseRestoreBtn,
   #firebaseFileInput {
@@ -1661,29 +1655,9 @@ body.light-mode .v3-greeting p{color:#52627a}
     font-size: 12px;
     opacity: .9;
   }
-</style>
-
-
-<style id="v9-role-admin-css">
-  #v9AdminPanel { display:none; margin:20px 0; padding:18px; border:1px solid rgba(255,255,255,.12); border-radius:14px; background:rgba(0,0,0,.18); }
-  #v9AdminPanel input, #v9AdminPanel textarea { width:100%; box-sizing:border-box; padding:10px; border-radius:9px; margin:5px 0 10px; }
-  #v9AdminPanel .v9-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  @media(max-width:700px){ #v9AdminPanel .v9-row{grid-template-columns:1fr;} }
-  #v9AdminMessage { margin-top:10px; font-size:13px; }
-</style>
-
-
-<style id="v9-2-theme-order">
-/*
-  V9.2 THEME ORDER
-  The original Red theme is moved to position #3.
-  Massive Blue is NOT forced as the default theme.
-*/
-</style>
-
-
-<style id="v12-responsive">
-@media (max-width:600px){
+  </style>
+  <style id="v12-responsive">
+   @media (max-width:600px){
   #v3Stats,.stats-grid,.tracker-stats{gap:6px!important}
   #v3Stats>*,.stats-grid>*,.tracker-stats>*{min-width:0!important;padding:8px 6px!important;border-radius:10px!important}
   #v3Stats strong,#v3Stats b,.stats-grid strong,.stats-grid b{font-size:16px!important}
@@ -1691,47 +1665,25 @@ body.light-mode .v3-greeting p{color:#52627a}
 }
 .v12-avatar{width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.25)}
 .v12-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-</style>
-
-
-<style id="v13-working">
-.v13-admin-tools{margin:12px 0;padding:14px;border:1px solid #444;border-radius:14px}
-.v13-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px}
-.v13-grid input,.v13-grid select,.v13-grid textarea{width:100%;box-sizing:border-box;padding:10px;border-radius:9px;border:1px solid #777;background:#181818;color:#fff}
-.v13-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-.v13-result{padding:10px 0;border-bottom:1px solid #333;display:flex;justify-content:space-between;gap:8px;align-items:center}
-@media(max-width:600px){.v13-grid{grid-template-columns:1fr}.v13-result{align-items:flex-start;flex-direction:column}}
-</style>
-
-<style id="mcu-v15">
-.mcu-v15-admin{margin:14px 0;padding:16px;border:1px solid #444;border-radius:16px}
-.mcu-v15-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px}
-.mcu-v15-grid input,.mcu-v15-grid select,.mcu-v15-grid textarea{width:100%;box-sizing:border-box;padding:10px;border-radius:9px;border:1px solid #777;background:#181818;color:#fff}
-.mcu-v15-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-.mcu-v15-row{padding:10px 0;border-bottom:1px solid #333;display:flex;justify-content:space-between;gap:10px;align-items:center}
-@media(max-width:600px){.mcu-v15-grid{grid-template-columns:1fr}.mcu-v15-row{flex-direction:column;align-items:flex-start}}
-</style>
-
-<style id="mcu-v1-integrated-css">
-/* V1 additive styling: keeps the original animation system intact. */
+  </style>
+  <style id="mcu-v1-integrated-css">
+   /* V1 additive styling: keeps the original animation system intact. */
 .mcu-v1-type{display:inline-block;margin-left:6px;padding:3px 7px;border-radius:999px;font-size:.52rem;font-weight:800;border:1px solid rgba(255,255,255,.14);opacity:.9}
 .mcu-v1-importance{display:inline-block;margin-left:6px;padding:3px 7px;border-radius:999px;font-size:.52rem;font-weight:800;border:1px solid rgba(255,255,255,.14)}
 body.theme-gamma{--premium-accent:#39d353;--premium-accent2:#b7ffbf;--premium-glow:rgba(57,211,83,.28)}
 body.theme-gamma .premium-hero{background:linear-gradient(90deg,rgba(3,12,5,.97),rgba(7,28,12,.84),rgba(10,50,20,.22)),url("https://image.tmdb.org/t/p/w780/uxzzxijgPIY7slzFvMotPv8wjKA.jpg") center right/cover no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center}
 body.theme-gamma .premium-hero:after{background:linear-gradient(90deg,rgba(2,10,4,.95),rgba(3,30,10,.52),transparent)}
-</style>
-
-
-<style id="doomsday-feature-css">
-.doomsday-feature{display:grid;grid-template-columns:160px 1fr;gap:18px;align-items:center;margin:18px 0 24px;padding:16px;border:1px solid rgba(100,255,150,.35);border-radius:22px;background:radial-gradient(circle at 85% 40%,rgba(40,255,100,.16),transparent 35%),linear-gradient(135deg,#050a07,#10170f 55%,#030604);box-shadow:0 0 35px rgba(30,255,100,.10),inset 0 0 35px rgba(30,255,100,.04);overflow:hidden;position:relative}
+  </style>
+  <style id="doomsday-feature-css">
+   .doomsday-feature{display:grid;grid-template-columns:160px 1fr;gap:18px;align-items:center;margin:18px 0 24px;padding:16px;border:1px solid rgba(100,255,150,.35);border-radius:22px;background:radial-gradient(circle at 85% 40%,rgba(40,255,100,.16),transparent 35%),linear-gradient(135deg,#050a07,#10170f 55%,#030604);box-shadow:0 0 35px rgba(30,255,100,.10),inset 0 0 35px rgba(30,255,100,.04);overflow:hidden;position:relative}
 .doomsday-feature:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(120,255,160,.05),transparent);animation:doomsdayScan 4s linear infinite}
 .doomsday-poster-wrap{position:relative;z-index:1}.doomsday-poster{width:160px;height:170px;object-fit:cover;border-radius:13px;border:1px solid rgba(150,255,180,.28);box-shadow:0 0 22px rgba(60,255,110,.22)}
 .doomsday-content{position:relative;z-index:1}.doomsday-kicker{font:800 .62rem/1.2 Orbitron,sans-serif;letter-spacing:.15em;color:#9dffbd}.doomsday-content h2{margin:7px 0 4px;font:900 clamp(1.25rem,4vw,2.2rem)/1 Orbitron,sans-serif;color:#e4ffe9;text-shadow:0 0 16px rgba(80,255,120,.35)}.doomsday-content p{margin:0 0 12px;color:rgba(220,255,230,.68);font-size:.72rem}.doomsday-live-digits{display:flex;gap:7px;flex-wrap:wrap}.doomsday-live-digits>div{min-width:62px;padding:8px 7px;text-align:center;border:1px solid rgba(100,255,150,.25);border-radius:10px;background:rgba(0,0,0,.28)}.doomsday-live-digits b{display:block;font:900 1rem/1 Orbitron,sans-serif;color:#d9ffe3;text-shadow:0 0 10px rgba(80,255,120,.6)}.doomsday-live-digits span{display:block;margin-top:4px;font-size:.45rem;text-transform:uppercase;color:rgba(220,255,230,.52)}.doomsday-date{margin-top:10px;font:800 .55rem/1.2 Orbitron,sans-serif;letter-spacing:.12em;color:#7dffab}@keyframes doomsdayScan{to{transform:translateX(100%)}}
 body.theme-doomsday{--premium-accent:#63ff91;--premium-accent2:#d6ffe1;--premium-glow:rgba(60,255,110,.32)}body.theme-doomsday .premium-hero{background:linear-gradient(90deg,rgba(1,8,4,.98),rgba(4,25,12,.82),rgba(5,50,20,.22)),url("https://images.flickdirect.com/movies/avengers-doomsday/avengers-doomsday-poster.jpg") center right/cover no-repeat;min-height:300px}
 @media(max-width:600px){.doomsday-feature{grid-template-columns:78px 1fr;padding:12px;gap:12px}.doomsday-poster{width:78px;height:112px}.doomsday-live-digits>div{min-width:52px}}
-</style>
-<style id="doomsday-timer-css">
-/* Additive: timer only. Existing tracker cards/layout/animations are untouched. */
+  </style>
+  <style id="doomsday-timer-css">
+   /* Additive: timer only. Existing tracker cards/layout/animations are untouched. */
 .doomsday-timer{
   margin:14px 0 18px;
   padding:14px 16px;
@@ -1787,150 +1739,219 @@ body.theme-doomsday{--premium-accent:#63ff91;--premium-accent2:#d6ffe1;--premium
 .doomsday-timer.is-live .doomsday-timer__unit b{animation:ddPulse 1s ease-in-out infinite alternate}
 @keyframes ddPulse{from{opacity:.78}to{opacity:1}}
 @media(max-width:600px){.doomsday-timer{padding:12px}.doomsday-timer__unit{min-width:58px}}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-    <!-- =====================================================
+  </style>
+ </head>
+ <body>
+  <div class="container">
+   <!-- =====================================================
          HEADER
     ====================================================== -->
-
-    <header>
-
-        <h1 class="logo">
-
-            ⚡ MARVEL MCU TRACKER
-
-            <span class="powered">
-                POWERED BY SHASHWAT
-            </span>
-
-        </h1>
-
-        <div class="topbar">
-
-            <button
-                class="top-btn"
-                id="themeBtn"
-            >
-                🌙 Dark
-            </button>
-
-            <button
-                class="top-btn"
-                id="soundBtn"
-            >
-                🔊 Sound
-            </button>
-
-            <button
-                class="reset-btn"
-                id="resetBtn"
-            >
-                🔄 Reset
-            </button>
-
-        </div>
-
-    </header>
-
-
-<!-- ===== AUTHENTICATION UI ===== -->
-<div class="auth-bar" id="authBar">
-  <div class="auth-user" id="authUserBox">
-    <span class="auth-avatar" id="authAvatar">S</span>
-    <strong id="authUserName">Guest</strong>
-    <button class="auth-logout-btn" id="authLogoutBtn">Logout</button><button class="auth-admin-btn" id="authAdminBtn" style="display:none">🛡️ Admin</button>
-  </div>
-  <button class="auth-login-btn" id="authOpenBtn">👤 Login</button>
-</div>
-
-<div class="auth-overlay" id="authOverlay" aria-hidden="true">
-  <section class="auth-card" role="dialog" aria-modal="true" aria-labelledby="authTitle">
-    <button class="auth-close" id="authCloseBtn" aria-label="Close">×</button>
-    <div class="auth-brand">⚡ MCU TRACKER ACCOUNT</div>
-    <h2 id="authTitle">Welcome back</h2>
-    <p id="authSubtitle">Sign in to keep your MCU journey tied to your account.</p>
-    <div class="auth-tabs">
-      <button class="auth-tab active" data-auth-tab="login">Login</button>
-      <button class="auth-tab" data-auth-tab="signup">Create account</button>
+   <header>
+    <h1 class="logo">
+     ⚡ MARVEL MCU TRACKER
+     <span class="powered">
+      POWERED BY SHASHWAT
+     </span>
+    </h1>
+    <div class="topbar">
+     <button class="top-btn" id="themeBtn">
+      🌙 Dark
+     </button>
+     <button class="top-btn" id="soundBtn">
+      🔊 Sound
+     </button>
+     <button class="reset-btn" id="resetBtn">
+      🔄 Reset
+     </button>
     </div>
-    <form class="auth-form" id="authForm">
+   </header>
+   <!-- ===== AUTHENTICATION UI ===== -->
+   <div class="auth-bar" id="authBar">
+    <div class="auth-user" id="authUserBox">
+     <span class="auth-avatar" id="authAvatar">
+      S
+     </span>
+     <strong id="authUserName">
+      Guest
+     </strong>
+     <button class="auth-logout-btn" id="authLogoutBtn">
+      Logout
+     </button>
+     <button class="auth-admin-btn" id="authAdminBtn" style="display:none">
+      🛡️ Admin
+     </button>
+    </div>
+    <button class="auth-login-btn" id="authOpenBtn">
+     👤 Login
+    </button>
+   </div>
+   <div aria-hidden="true" class="auth-overlay" id="authOverlay">
+    <section aria-labelledby="authTitle" aria-modal="true" class="auth-card" role="dialog">
+     <button aria-label="Close" class="auth-close" id="authCloseBtn">
+      ×
+     </button>
+     <div class="auth-brand">
+      ⚡ MCU TRACKER ACCOUNT
+     </div>
+     <h2 id="authTitle">
+      Welcome back
+     </h2>
+     <p id="authSubtitle">
+      Sign in to keep your MCU journey tied to your account.
+     </p>
+     <div class="auth-tabs">
+      <button class="auth-tab active" data-auth-tab="login">
+       Login
+      </button>
+      <button class="auth-tab" data-auth-tab="signup">
+       Create account
+      </button>
+     </div>
+     <form class="auth-form" id="authForm">
       <div class="auth-field" id="authNameField" style="display:none">
-        <label for="authName">Display name</label>
-        <input id="authName" maxlength="24" autocomplete="name" placeholder="Your name">
+       <label for="authName">
+        Display name
+       </label>
+       <input autocomplete="name" id="authName" maxlength="24" placeholder="Your name"/>
       </div>
       <div class="auth-field">
-        <label for="authEmail">Email</label>
-        <input id="authEmail" type="email" autocomplete="email" required placeholder="you@example.com">
+       <label for="authEmail">
+        Email
+       </label>
+       <input autocomplete="email" id="authEmail" placeholder="you@example.com" required="" type="email"/>
       </div>
       <div class="auth-field">
-        <label for="authPassword">Password</label>
-        <input id="authPassword" type="password" minlength="6" autocomplete="current-password" required placeholder="Minimum 6 characters">
+       <label for="authPassword">
+        Password
+       </label>
+       <input autocomplete="current-password" id="authPassword" minlength="6" placeholder="Minimum 6 characters" required="" type="password"/>
       </div>
-      <div class="auth-message" id="authMessage"></div>
-      <button class="auth-submit" id="authSubmit" type="submit">Login</button>
-<button type="button" id="v9GoogleBtn" class="auth-logout-btn" style="width:100%;margin-top:8px">Continue with Google</button>
-
-    </form>
-    <div class="auth-note">Your account is secured by Firebase Authentication. Your tracker progress and favorites can sync across devices when Firebase is configured.</div>
-  </section>
-</div>
-
-<!-- ===== V4 ADMIN DASHBOARD ===== -->
-<div class="admin-overlay" id="adminOverlay" aria-hidden="true">
-<section class="admin-panel" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
-<div class="admin-head"><div><div class="auth-brand">MCU TRACKER V6</div><h2 id="adminTitle">🛡️ Admin Dashboard</h2></div><button class="admin-close" id="adminCloseBtn">✕ Close</button></div>
-<div class="admin-stats"><div class="admin-stat"><b id="adminUsers">0</b><span>Total Users</span></div><div class="admin-stat"><b id="adminAdmins">0</b><span>Admins</span></div><div class="admin-stat"><b id="adminWatched">0</b><span>Watched Items</span></div><div class="admin-stat"><b id="adminFavorites">0</b><span>Favorites</span></div></div>
-<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>User</th><th>Email</th><th>Role</th><th>Watched</th><th>Favorites</th><th>Actions</th></tr></thead><tbody id="adminUserRows"></tbody></table></div>
-<div class="admin-footer">Local admin mode: accounts are stored in this browser. This is not production authentication. For real multi-device accounts, connect Supabase/Firebase.</div>
-</section></div>
-
-<section class="premium-hero" aria-label="Premium MCU dashboard">
-  <div class="hero-kicker">Marvel Inspired • Personal Watch Tracker</div>
-  <h2 class="hero-title">Your MCU. Your Timeline.</h2>
-  <p class="hero-copy">Track every movie, discover what to watch next, manage favorites, and keep your progress in one cinematic dashboard.</p>
-  <div class="hero-actions">
-    <button class="hero-btn primary" id="heroExploreBtn">🎬 Explore Movies</button>
-  </div>
-</section>
-<section class="theme-switcher" aria-label="Hero theme selector">
-  <span class="theme-label">Hero Theme</span>
-  <button class="theme-choice active" data-hero-theme="blue">🔵 Massive Blue</button>
-  <button class="theme-choice" data-hero-theme="red">🔴 Marvel Red</button>
-  <button class="theme-choice" data-hero-theme="gold">🟡 Infinity Gold</button>
-  <button class="theme-choice" data-hero-theme="cosmic">🟣 Multiverse Purple</button>
-  <button class="theme-choice" data-hero-theme="ironman">🤖 Stark Black</button>
-  <button class="theme-choice" data-hero-theme="gamma">🟢 Gamma Green</button>
-  <button class="theme-choice" data-hero-theme="doomsday">☠️ Doomsday</button>
-</section>
-<section class="theme-poster-strip" aria-live="polite">
-  <img id="themePoster" src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg" alt="Theme poster">
-  <div class="theme-poster-info"><strong id="themePosterTitle">Avengers: Endgame</strong><span id="themePosterSubtitle">Marvel Red • Phase 3</span></div>
-  <span class="theme-poster-chip">CINEMATIC THEME</span>
-</section>
-<section class="doomsday-feature" id="doomsdayCountdown" aria-label="Avengers Doomsday countdown">
-  <div class="doomsday-poster-wrap">
-    <img class="doomsday-poster" src="https://images.flickdirect.com/movies/avengers-doomsday/avengers-doomsday-poster.jpg" alt="Avengers: Doomsday poster">
-  </div>
-  <div class="doomsday-content">
-    <div class="doomsday-kicker">⚠ PHASE 6 • FINAL STORY TARGET</div>
-    <h2>AVENGERS: DOOMSDAY</h2>
-    <p>Live countdown to the Doomsday release. Indian Standard Time (IST).</p>
-    <div class="doomsday-live-digits">
-      <div><b id="doomsdayDays">000</b><span>Days</span></div>
-      <div><b id="doomsdayHours">00</b><span>Hours</span></div>
-      <div><b id="doomsdayMinutes">00</b><span>Minutes</span></div>
-      <div><b id="doomsdaySeconds">00</b><span>Seconds</span></div>
+      <div class="auth-message" id="authMessage">
+      </div>
+      <button class="auth-submit" id="authSubmit" type="submit">
+       Login
+      </button>
+      <button class="auth-logout-btn" id="v9GoogleBtn" style="width:100%;margin-top:8px" type="button">
+       Continue with Google
+      </button>
+     </form>
+     <div class="auth-note">
+      Your account is secured by Firebase Authentication. Your tracker progress and favorites can sync across devices when Firebase is configured.
+     </div>
+    </section>
+   </div>
+   <!-- ===== V4 ADMIN DASHBOARD ===== -->
+   <section aria-label="Premium MCU dashboard" class="premium-hero">
+    <div class="hero-kicker">
+     Marvel Inspired • Personal Watch Tracker
     </div>
-    <div class="doomsday-date">18 DECEMBER 2026 • INDIA TIME</div>
-  </div>
-</section>
-<script>
-(function(){
+    <h2 class="hero-title">
+     Your MCU. Your Timeline.
+    </h2>
+    <p class="hero-copy">
+     Track every movie, discover what to watch next, manage favorites, and keep your progress in one cinematic dashboard.
+    </p>
+    <div class="hero-actions">
+     <button class="hero-btn primary" id="heroExploreBtn">
+      🎬 Explore Movies
+     </button>
+    </div>
+   </section>
+   <section aria-label="Hero theme selector" class="theme-switcher">
+    <span class="theme-label">
+     Hero Theme
+    </span>
+    <button class="theme-choice active" data-hero-theme="blue">
+     🔵 Massive Blue
+    </button>
+    <button class="theme-choice" data-hero-theme="red">
+     🔴 Marvel Red
+    </button>
+    <button class="theme-choice" data-hero-theme="gold">
+     🟡 Infinity Gold
+    </button>
+    <button class="theme-choice" data-hero-theme="cosmic">
+     🟣 Multiverse Purple
+    </button>
+    <button class="theme-choice" data-hero-theme="ironman">
+     🤖 Stark Black
+    </button>
+    <button class="theme-choice" data-hero-theme="gamma">
+     🟢 Gamma Green
+    </button>
+    <button class="theme-choice" data-hero-theme="doomsday">
+     ☠️ Doomsday
+    </button>
+   </section>
+   <section aria-live="polite" class="theme-poster-strip">
+    <img alt="Theme poster" id="themePoster" src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg"/>
+    <div class="theme-poster-info">
+     <strong id="themePosterTitle">
+      Avengers: Endgame
+     </strong>
+     <span id="themePosterSubtitle">
+      Marvel Red • Phase 3
+     </span>
+    </div>
+    <span class="theme-poster-chip">
+     CINEMATIC THEME
+    </span>
+   </section>
+   <section aria-label="Avengers Doomsday countdown" class="doomsday-feature" id="doomsdayCountdown">
+    <div class="doomsday-poster-wrap">
+     <img alt="Avengers: Doomsday poster" class="doomsday-poster" src="https://images.flickdirect.com/movies/avengers-doomsday/avengers-doomsday-poster.jpg"/>
+    </div>
+    <div class="doomsday-content">
+     <div class="doomsday-kicker">
+      ⚠ PHASE 6 • FINAL STORY TARGET
+     </div>
+     <h2>
+      AVENGERS: DOOMSDAY
+     </h2>
+     <p>
+      Live countdown to the Doomsday release. Indian Standard Time (IST).
+     </p>
+     <div class="doomsday-live-digits">
+      <div>
+       <b id="doomsdayDays">
+        000
+       </b>
+       <span>
+        Days
+       </span>
+      </div>
+      <div>
+       <b id="doomsdayHours">
+        00
+       </b>
+       <span>
+        Hours
+       </span>
+      </div>
+      <div>
+       <b id="doomsdayMinutes">
+        00
+       </b>
+       <span>
+        Minutes
+       </span>
+      </div>
+      <div>
+       <b id="doomsdaySeconds">
+        00
+       </b>
+       <span>
+        Seconds
+       </span>
+      </div>
+     </div>
+     <div class="doomsday-date">
+      18 DECEMBER 2026 • INDIA TIME
+     </div>
+    </div>
+   </section>
+   <script>
+    (function(){
   var img=document.querySelector('#doomsdayCountdown .doomsday-poster');
   if(img){
     img.style.display='block';
@@ -1944,495 +1965,276 @@ body.theme-doomsday{--premium-accent:#63ff91;--premium-accent2:#d6ffe1;--premium
     });
   }
 })();
-</script>
-
-
-    <!-- =====================================================
+   </script>
+   <!-- =====================================================
          MAIN PANEL
     ====================================================== -->
-
-    
-<!-- V3 PREMIUM DASHBOARD -->
-<section class="v3-dashboard" aria-label="Personal MCU dashboard">
-  <div class="v3-card">
-    <div class="v3-profile">
+   <!-- V3 PREMIUM DASHBOARD -->
+   <section aria-label="Personal MCU dashboard" class="v3-dashboard">
+    <div class="v3-card">
+     <div class="v3-profile">
       <div class="v3-greeting">
-        <small>Personal MCU Command Center</small>
-        <h2 id="v3Greeting">Welcome back, Shashwat ⚡</h2>
-        <p>Your cinematic journey and progress — all in one place.</p>
+       <small>
+        Personal MCU Command Center
+       </small>
+       <h2 id="v3Greeting">
+        Welcome back, Shashwat ⚡
+       </h2>
+       <p>
+        Your cinematic journey and progress — all in one place.
+       </p>
       </div>
-      <div class="v3-avatar" id="v3Avatar">S</div>
+      <div class="v3-avatar" id="v3Avatar">
+       S
+      </div>
+     </div>
+     <div class="v3-mini-stats">
+      <div class="v3-mini-stat">
+       <strong id="v3Watched">
+        0
+       </strong>
+       <span>
+        Watched
+       </span>
+      </div>
+      <div class="v3-mini-stat">
+       <strong id="v3Favs">
+        0
+       </strong>
+       <span>
+        Favorites
+       </span>
+      </div>
+      <div class="v3-mini-stat">
+       <strong id="v3Remaining">
+        0
+       </strong>
+       <span>
+        Remaining
+       </span>
+      </div>
+     </div>
+     <div class="v3-progress">
+      <div class="v3-progress-row">
+       <span>
+        MCU Journey
+       </span>
+       <b id="v3ProgressText">
+        0%
+       </b>
+      </div>
+      <div class="v3-progress-track">
+       <div class="v3-progress-fill" id="v3ProgressFill">
+       </div>
+      </div>
+     </div>
+     <div class="v3-profile-edit">
+      <input id="v3NameInput" maxlength="24" placeholder="Your display name"/>
+      <button id="v3SaveName">
+       Save
+      </button>
+     </div>
     </div>
-    <div class="v3-mini-stats">
-      <div class="v3-mini-stat"><strong id="v3Watched">0</strong><span>Watched</span></div>
-      <div class="v3-mini-stat"><strong id="v3Favs">0</strong><span>Favorites</span></div>
-      <div class="v3-mini-stat"><strong id="v3Remaining">0</strong><span>Remaining</span></div>
-    </div>
-    <div class="v3-progress">
-      <div class="v3-progress-row"><span>MCU Journey</span><b id="v3ProgressText">0%</b></div>
-      <div class="v3-progress-track"><div class="v3-progress-fill" id="v3ProgressFill"></div></div>
-    </div>
-    <div class="v3-profile-edit">
-      <input id="v3NameInput" maxlength="24" placeholder="Your display name">
-      <button id="v3SaveName">Save</button>
-    </div>
-  </div>
-  <div class="v3-card">
-    <div class="v3-next-title">Recommended Next</div>
-    <div class="v3-next-movie" id="v3NextMovie">
-      <img id="v3NextPoster" src="" alt="Next movie poster">
-      <div><strong id="v3NextTitle">Loading...</strong><span id="v3NextMeta">Your next unwatched movie</span></div>
-    </div>
-  </div>
-</section>
-
-
-<section id="v9AdminPanel" aria-hidden="true">
-  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-    <div><h3 style="margin:0">🛡️ 
-<!-- ===== V10 ADMIN CONTROL CENTER ===== -->
-<section id="v10AdminDashboard" class="admin-overlay" aria-hidden="true" style="display:none">
-  <div class="admin-modal" style="max-width:1100px;width:96%;margin:3vh auto;padding:22px;border-radius:18px">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+    <div class="v3-card">
+     <div class="v3-next-title">
+      Recommended Next
+     </div>
+     <div class="v3-next-movie" id="v3NextMovie">
+      <img alt="Next movie poster" id="v3NextPoster" src=""/>
       <div>
-        <h2 style="margin:0">🛡️ MCU Tracker Admin Control Center</h2>
-        <p style="margin:6px 0 0;opacity:.75">Manage users, movies and series from one place.</p>
+       <strong id="v3NextTitle">
+        Loading...
+       </strong>
+       <span id="v3NextMeta">
+        Your next unwatched movie
+       </span>
       </div>
-      <button type="button" id="v10AdminClose">✕</button>
+     </div>
     </div>
-
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:18px 0">
-      <button type="button" data-v10-tab="overview">Overview</button>
-      <button type="button" data-v10-tab="content">Movies & Series</button>
-      <button type="button" data-v10-tab="users">Users</button>
+   </section>
+   <main class="panel">
+    <!-- SEARCH -->
+    <div class="search-box">
+     <span class="search-icon">
+      🔍
+     </span>
+     <input autocomplete="off" id="search" placeholder="Search MCU movie..." type="text"/>
     </div>
-
-    <div id="v10OverviewTab">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">
-        <div class="v10-stat"><strong id="v10MovieCount">0</strong><span>Movies</span></div>
-        <div class="v10-stat"><strong id="v10SeriesCount">0</strong><span>Series</span></div>
-        <div class="v10-stat"><strong id="v10UserCount">0</strong><span>Users</span></div>
-      </div>
-    </div>
-
-    <div id="v10ContentTab" style="display:none">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px">
-        <input id="v10ContentId" placeholder="Unique ID">
-        <input id="v10Title" placeholder="Movie / Series title">
-        <select id="v10Type"><option value="movie">Movie</option><option value="series">Series</option></select>
-        <input id="v10ReleaseDate" type="date">
-        <input id="v10PosterUrl" placeholder="Poster URL">
-        <input id="v10TrailerUrl" placeholder="Trailer URL (official)">
-        <input id="v10OfficialUrl" placeholder="Your / official movie link">
-        <input id="v10BackdropUrl" placeholder="Backdrop URL (optional)">
-        <input id="v10Phase" placeholder="Phase / Saga">
-        <select id="v10Importance"><option>Must Watch</option><option>Important</option><option>Optional</option></select>
-        <textarea id="v10Description" placeholder="Description" style="grid-column:1/-1;min-height:100px"></textarea>
-      </div>
-
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0">
-        <button type="button" id="v10NewContent">New</button>
-        <button type="button" id="v10SaveContent">Save / Update</button>
-        <button type="button" id="v10DeleteContent">Delete</button>
-      </div>
-
-      <input id="v10ContentSearch" placeholder="Search existing movies / series..." style="width:100%;margin:8px 0">
-      <div id="v10ContentList"></div>
-    </div>
-
-    <div id="v10UsersTab" style="display:none">
-      <input id="v10UserSearch" placeholder="Search users..." style="width:100%;margin:8px 0">
-      <div id="v10UserList"></div>
-    </div>
-
-    <p id="v10AdminStatus" style="margin-top:14px"></p>
-  </div>
-</section>
-<style>
-#v10AdminDashboard .v10-stat{padding:18px;border-radius:14px;background:rgba(30,80,180,.10);display:flex;flex-direction:column;gap:6px}
-#v10AdminDashboard .v10-stat strong{font-size:28px}
-#v10AdminDashboard input,#v10AdminDashboard select,#v10AdminDashboard textarea{padding:10px;border-radius:9px;border:1px solid #888}
-#v10AdminDashboard button{padding:9px 13px;border-radius:9px;cursor:pointer}
-.v10-row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(128,128,128,.25)}
-</style>
-
-Admin Panel</h3><div style="font-size:13px;opacity:.75">Role-based catalog management</div></div>
-    <button type="button" id="v9AdminClose" class="auth-logout-btn">Close</button>
-  </div>
-  <div class="v9-row" style="margin-top:14px">
-    <div><label>Movie / Series ID</label><input id="v9CatalogId" placeholder="e.g. iron-man-4"></div>
-    <div><label>Title</label><input id="v9CatalogTitle" placeholder="Title"></div>
-  </div>
-  <div class="v9-row">
-    <div><label>Type</label><input id="v9CatalogType" placeholder="movie or series"></div>
-    <div><label>Release date</label><input id="v9CatalogRelease" placeholder="2027-05-01"></div>
-  </div>
-  <label>Description</label><textarea id="v9CatalogDescription" rows="4" placeholder="Description"></textarea>
-  <div style="display:flex;gap:8px;flex-wrap:wrap">
-    <button type="button" id="v9CatalogSave" class="auth-logout-btn">Save / Update</button>
-    <button type="button" id="v9CatalogDelete" class="auth-logout-btn">Delete</button>
-  </div>
-  <div id="v9AdminMessage"></div>
-</section>
-<main class="panel">
-
-        <!-- SEARCH -->
-
-        <div class="search-box">
-
-            <span class="search-icon">
-                🔍
-            </span>
-
-            <input
-                type="text"
-                id="search"
-                placeholder="Search MCU movie..."
-                autocomplete="off"
-            >
-
-        </div>
-
-
-        <!-- =================================================
+    <!-- =================================================
              STATS
         ================================================== -->
-
-        <section class="stats">
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    🎬
-                </div>
-
-                <span
-                    class="stat-number"
-                    id="totalMovies"
-                >
-                    0
-                </span>
-
-                <span class="stat-label">
-                    Total Movies
-                </span>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    ✅
-                </div>
-
-                <span
-                    class="stat-number"
-                    id="watchedMovies"
-                >
-                    0
-                </span>
-
-                <span class="stat-label">
-                    Watched
-                </span>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    ⏳
-                </div>
-
-                <span
-                    class="stat-number"
-                    id="remainingMovies"
-                >
-                    0
-                </span>
-
-                <span class="stat-label">
-                    Remaining
-                </span>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    ⭐
-                </div>
-
-                <span
-                    class="stat-number"
-                    id="favoriteMovies"
-                >
-                    0
-                </span>
-
-                <span class="stat-label">
-                    Favorites
-                </span>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
+    <section class="stats">
+     <div class="stat-card">
+      <div class="stat-icon">
+       🎬
+      </div>
+      <span class="stat-number" id="totalMovies">
+       0
+      </span>
+      <span class="stat-label">
+       Total Movies
+      </span>
+     </div>
+     <div class="stat-card">
+      <div class="stat-icon">
+       ✅
+      </div>
+      <span class="stat-number" id="watchedMovies">
+       0
+      </span>
+      <span class="stat-label">
+       Watched
+      </span>
+     </div>
+     <div class="stat-card">
+      <div class="stat-icon">
+       ⏳
+      </div>
+      <span class="stat-number" id="remainingMovies">
+       0
+      </span>
+      <span class="stat-label">
+       Remaining
+      </span>
+     </div>
+     <div class="stat-card">
+      <div class="stat-icon">
+       ⭐
+      </div>
+      <span class="stat-number" id="favoriteMovies">
+       0
+      </span>
+      <span class="stat-label">
+       Favorites
+      </span>
+     </div>
+    </section>
+    <!-- =================================================
              PROGRESS
         ================================================== -->
-
-        <section class="progress-section">
-
-            <div class="progress-header">
-
-                <span class="progress-title">
-                    MCU WATCH PROGRESS
-                </span>
-
-                <span
-                    class="progress-percent"
-                    id="progressText"
-                >
-                    0/0 (0%)
-                </span>
-
-            </div>
-
-            <div class="progress">
-
-                <div
-                    class="progress-bar"
-                    id="progressBar"
-                ></div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
+    <section class="progress-section">
+     <div class="progress-header">
+      <span class="progress-title">
+       MCU WATCH PROGRESS
+      </span>
+      <span class="progress-percent" id="progressText">
+       0/0 (0%)
+      </span>
+     </div>
+     <div class="progress">
+      <div class="progress-bar" id="progressBar">
+      </div>
+     </div>
+    </section>
+    <!-- =================================================
              FILTERS + SORT
         ================================================== -->
-
-        <div class="filter-bar">
-
-            <button
-                class="filter-btn active"
-                data-filter="all"
-            >
-                🎬 All
-            </button>
-
-            <button
-                class="filter-btn"
-                data-filter="movie"
-            >
-                🎬 Movies
-            </button>
-
-            <button
-                class="filter-btn"
-                data-filter="series"
-            >
-                📺 Web Series
-            </button>
-
-            <button
-                class="filter-btn"
-                data-filter="watched"
-            >
-                ✅ Watched
-            </button>
-
-            <button
-                class="filter-btn"
-                data-filter="unwatched"
-            >
-                ⏳ Unwatched
-            </button>
-
-            <button
-                class="filter-btn"
-                data-filter="favorites"
-            >
-                ❤️ Favorites
-            </button>
-
-            <div class="sort-box">
-
-                <select id="sortSelect">
-
-                    <option value="default">
-                        Timeline: Story Order
-                    </option>
-
-                    <option value="title">
-                        Sort: Title
-                    </option>
-
-                    <option value="year">
-                        Sort: Release Year
-                    </option>
-
-                    <option value="rating">
-                        Sort: Rating
-                    </option>
-
-                    <option value="phase">
-                        Sort: Phase
-                    </option>
-
-                </select>
-
-            </div>
-
-        </div>
-
-
-        <!-- =================================================
+    <div class="filter-bar">
+     <button class="filter-btn active" data-filter="all">
+      🎬 All
+     </button>
+     <button class="filter-btn" data-filter="movie">
+      🎬 Movies
+     </button>
+     <button class="filter-btn" data-filter="series">
+      📺 Web Series
+     </button>
+     <button class="filter-btn" data-filter="watched">
+      ✅ Watched
+     </button>
+     <button class="filter-btn" data-filter="unwatched">
+      ⏳ Unwatched
+     </button>
+     <button class="filter-btn" data-filter="favorites">
+      ❤️ Favorites
+     </button>
+     <div class="sort-box">
+      <select id="sortSelect">
+       <option value="default">
+        Timeline: Story Order
+       </option>
+       <option value="title">
+        Sort: Title
+       </option>
+       <option value="year">
+        Sort: Release Year
+       </option>
+       <option value="rating">
+        Sort: Rating
+       </option>
+       <option value="phase">
+        Sort: Phase
+       </option>
+      </select>
+     </div>
+    </div>
+    <!-- =================================================
              MOVIE LIST
         ================================================== -->
-
-        <ul
-            id="movieList"
-            class="movie-list"
-        >
-
-            <!-- Movie cards will be generated by JavaScript -->
-
-            <li class="empty-state">
-
-                <div class="empty-icon">
-                    🎬
-                </div>
-
-                <p>
-                    Movie data will appear here.
-                </p>
-
-            </li>
-
-        </ul>
-
-    </main>
-
-
-    <!-- =====================================================
+    <ul class="movie-list" id="movieList">
+     <!-- Movie cards will be generated by JavaScript -->
+     <li class="empty-state">
+      <div class="empty-icon">
+       🎬
+      </div>
+      <p>
+       Movie data will appear here.
+      </p>
+     </li>
+    </ul>
+   </main>
+   <!-- =====================================================
          FOOTER
     ====================================================== -->
-
-    <footer>
-
-        © 2026
-
-        <span class="footer-highlight">
-            Marvel Inspired MCU Tracker
-        </span>
-
-        — Powered by Shashwat
-
-    </footer><!-- =========================================================
+   <footer>
+    © 2026
+    <span class="footer-highlight">
+     Marvel Inspired MCU Tracker
+    </span>
+    — Powered by Shashwat
+   </footer>
+   <!-- =========================================================
      CINEMATIC MOVIE DETAILS MODAL
      PART 2
 ========================================================= -->
-
-<div
-    class="movie-modal"
-    id="movieModal"
-    aria-hidden="true"
->
-
+   <div aria-hidden="true" class="movie-modal" id="movieModal">
     <div class="movie-modal-content">
-
-        <!-- CLOSE -->
-        <button
-            class="movie-modal-close"
-            id="movieModalClose"
-            aria-label="Close"
-        >
-            ✕
-        </button>
-
-
-        <!-- POSTER -->
-        <img
-            class="movie-modal-poster"
-            id="modalPoster"
-            src=""
-            alt="Movie Poster"
-        >
-
-
-        <!-- DETAILS -->
-        <div class="movie-modal-details">
-
-            <h2
-                class="movie-modal-title"
-                id="modalTitle"
-            >
-                Movie Title
-            </h2>
-
-
-            <div
-                class="movie-modal-meta"
-                id="modalMeta"
-            ></div>
-
-
-            <p
-                class="movie-modal-description"
-                id="modalDescription"
-            >
-                Movie details will appear here.
-            </p>
-
-
-            <div class="movie-modal-actions">
-
-                <button
-                    class="movie-modal-btn trailer-btn"
-                    id="modalTrailerBtn"
-                >
-                    ▶ Trailer
-                </button>
-
-
-                <button
-                    class="movie-modal-btn watch-modal-btn"
-                    id="modalWatchBtn"
-                >
-                    ✓ Mark Watched
-                </button>
-
-
-                <button
-                    class="movie-modal-btn favorite-modal-btn"
-                    id="modalFavoriteBtn"
-                >
-                    ♡ Favorite
-                </button>
-
-            </div>
-
-        </div>
-
+     <!-- CLOSE -->
+     <button aria-label="Close" class="movie-modal-close" id="movieModalClose">
+      ✕
+     </button>
+     <!-- POSTER -->
+     <img alt="Movie Poster" class="movie-modal-poster" id="modalPoster" src=""/>
+     <!-- DETAILS -->
+     <div class="movie-modal-details">
+      <h2 class="movie-modal-title" id="modalTitle">
+       Movie Title
+      </h2>
+      <div class="movie-modal-meta" id="modalMeta">
+      </div>
+      <p class="movie-modal-description" id="modalDescription">
+       Movie details will appear here.
+      </p>
+      <div class="movie-modal-actions">
+       <button class="movie-modal-btn trailer-btn" id="modalTrailerBtn">
+        ▶ Trailer
+       </button>
+       <button class="movie-modal-btn watch-modal-btn" id="modalWatchBtn">
+        ✓ Mark Watched
+       </button>
+       <button class="movie-modal-btn favorite-modal-btn" id="modalFavoriteBtn">
+        ♡ Favorite
+       </button>
+      </div>
+     </div>
     </div>
-
-</div>
-
-<!-- =========================================================
+   </div>
+   <!-- =========================================================
      JAVASCRIPT
      PART 2 + PART 3 WILL BE ADDED HERE
 ========================================================= -->
-
-<script>
-/* =========================================================
+   <script>
+    /* =========================================================
    PART 2 — MCU MOVIE DATABASE
    Poster + Release Date + Rating + Phase
 ========================================================= */
@@ -4561,14 +4363,10 @@ window.__mcuTrackerBridge = {
     if(typeof window.renderV3 === "function") window.renderV3();
   }
 };
-
-</script>
-
-
-/* =========================================================
-   
-<script type="module">
-/* =========================================================
+   </script>
+   /* =========================================================
+   <script type="module">
+    /* =========================================================
    MCU TRACKER — FIREBASE BACKEND UPGRADE
    ---------------------------------------------------------
    Configure FIREBASE_CONFIG with your Firebase Web App values.
@@ -4632,7 +4430,6 @@ let firebaseApp = null;
 let auth = null;
 let db = null;
 let activeUser = null;
-let activeAdmin = false;
 let syncing = false;
 
 const $ = id => document.getElementById(id);
@@ -4717,19 +4514,15 @@ function updateHeader(){
   const loginBtn = $("authOpenBtn");
   const nameEl = $("authUserName");
   const avatar = $("authAvatar");
-  const adminBtn = $("authAdminBtn");
-
   if(activeUser){
     const name = activeUser.displayName || activeUser.email?.split("@")[0] || "User";
     userBox.style.display = "flex";
     loginBtn.style.display = "none";
     nameEl.textContent = name;
     avatar.textContent = name.trim().charAt(0).toUpperCase() || "U";
-    adminBtn.style.display = activeAdmin ? "inline-block" : "none";
   }else{
     userBox.style.display = "none";
     loginBtn.style.display = "inline-block";
-    adminBtn.style.display = "none";
   }
 }
 
@@ -4853,7 +4646,6 @@ async function firebaseSubmit(event){
       );
 
       activeUser = cred.user;
-      activeAdmin = (await cred.user.getIdTokenResult(true)).claims?.admin === true;
       updateHeader();
       closeAuth();
       setMessage("",true);
@@ -4861,7 +4653,6 @@ async function firebaseSubmit(event){
     }else{
       const cred = await signInWithEmailAndPassword(auth,email,password);
       activeUser = cred.user;
-      activeAdmin = (await cred.user.getIdTokenResult(true)).claims?.admin === true;
       updateHeader();
       closeAuth();
       await loadCloudState();
@@ -4890,7 +4681,6 @@ async function firebaseLogout(){
   try{
     await signOut(auth);
     activeUser = null;
-    activeAdmin = false;
     updateHeader();
     setSyncStatus("not signed in","idle");
   }catch(err){
@@ -4959,87 +4749,9 @@ function importData(file){
   });
 }
 
-async function openFirebaseAdmin(){
-  if(!activeUser){
-    alert("Please login first.");
-    return;
-  }
 
-  const token = await activeUser.getIdTokenResult(true);
-  if(token.claims?.admin !== true){
-    alert("Admin access required.");
-    return;
-  }
 
-  const overlay = $("adminOverlay");
-  if(!overlay) return;
 
-  overlay.classList.add("open");
-  overlay.setAttribute("aria-hidden","false");
-
-  try{
-    const usersSnap = await getDocs(
-      query(collection(db,"users"),orderBy("createdAt","desc"),limit(200))
-    );
-
-    let users = 0;
-    let admins = 0;
-    let watchedTotal = 0;
-    let favoritesTotal = 0;
-    let rows = "";
-
-    for(const userDoc of usersSnap.docs){
-      users++;
-      const data = userDoc.data() || {};
-      const trackerSnap = await getDoc(
-        doc(db,"users",userDoc.id,"private","tracker")
-      );
-      const tracker = trackerSnap.exists() ? trackerSnap.data() : {};
-
-      const watchedCount = Object.values(tracker.watched || {}).filter(Boolean).length;
-      const favoriteCount = Object.values(tracker.favorites || {}).filter(Boolean).length;
-
-      watchedTotal += watchedCount;
-      favoritesTotal += favoriteCount;
-
-      if(data.admin === true) admins++;
-
-      rows += `
-        <tr>
-          <td><b>${escapeHTML(data.displayName || "User")}</b></td>
-          <td>${escapeHTML(data.email || "")}</td>
-          <td><span class="admin-role ${data.admin === true ? "admin" : ""}">
-            ${data.admin === true ? "admin" : "user"}
-          </span></td>
-          <td>${watchedCount}</td>
-          <td>${favoriteCount}</td>
-          <td><span style="color:#777">Firebase protected</span></td>
-        </tr>`;
-    }
-
-    $("adminUsers").textContent = users;
-    $("adminAdmins").textContent = admins;
-    $("adminWatched").textContent = watchedTotal;
-    $("adminFavorites").textContent = favoritesTotal;
-    $("adminUserRows").innerHTML =
-      rows || '<tr><td colspan="6">No users found.</td></tr>';
-
-  }catch(err){
-    console.error(err);
-    $("adminUserRows").innerHTML =
-      '<tr><td colspan="6">Admin data could not be loaded. Check Firestore rules.</td></tr>';
-  }
-}
-
-function escapeHTML(value){
-  return String(value).replace(/[&<>"']/g, char => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#039;"
-  }[char]));
-}
 
 
 /* ---------- UI EVENTS ---------- */
@@ -5056,19 +4768,6 @@ document.querySelectorAll(".auth-tab").forEach(btn=>{
 
 $("authForm")?.addEventListener("submit",firebaseSubmit);
 $("authLogoutBtn")?.addEventListener("click",firebaseLogout);
-$("authAdminBtn")?.addEventListener("click",openFirebaseAdmin);
-$("adminCloseBtn")?.addEventListener("click",()=>{
-  $("adminOverlay")?.classList.remove("open");
-  $("adminOverlay")?.setAttribute("aria-hidden","true");
-});
-
-$("adminOverlay")?.addEventListener("click",event=>{
-  if(event.target === $("adminOverlay")){
-    $("adminOverlay").classList.remove("open");
-    $("adminOverlay").setAttribute("aria-hidden","true");
-  }
-});
-
 
 /* ---------- BACKUP / RESTORE / SYNC CONTROLS ---------- */
 const authBar = $("authBar");
@@ -5143,8 +4842,7 @@ if(FIREBASE_READY){
 
     onAuthStateChanged(auth,async user=>{
       activeUser = user;
-      activeAdmin = false;
-      updateHeader();
+        updateHeader();
 
       if(!user){
         setSyncStatus("not signed in","idle");
@@ -5152,8 +4850,7 @@ if(FIREBASE_READY){
       }
 
       try{
-        activeAdmin = (await user.getIdTokenResult(true)).claims?.admin === true;
-        updateHeader();
+          updateHeader();
         await loadCloudState();
       }catch(err){
         console.error(err);
@@ -5175,7 +4872,6 @@ window.mcuFirebase = {
   manualSync,
   exportData,
   importData,
-  openAdmin: openFirebaseAdmin,
   get user(){ return activeUser; },
   get configured(){ return FIREBASE_READY; }
 };
@@ -5194,76 +4890,9 @@ status.style.cssText =
   "font:700 10px Arial,sans-serif;color:#fff;" +
   "backdrop-filter:blur(10px)";
 document.body.appendChild(status);
-
-</script>
-
-
-<script>
-(function(){
-  const status = () => document.getElementById("v8CloudStatusText");
-
-  function setV8Status(text){
-    const el = status();
-    if(el) el.textContent = text;
-  }
-
-  if(typeof window.saveCloudState === "function" && !window.__v8SaveWrapped){
-    const originalSave = window.saveCloudState;
-    window.saveCloudState = async function(){
-      setV8Status("Saving…");
-      try{
-        const result = await originalSave.apply(this, arguments);
-        setV8Status("Synced");
-        return result;
-      }catch(err){
-        setV8Status("Sync failed");
-        throw err;
-      }
-    };
-    window.__v8SaveWrapped = true;
-  }
-
-  if(typeof window.loadCloudState === "function" && !window.__v8LoadWrapped){
-    const originalLoad = window.loadCloudState;
-    window.loadCloudState = async function(){
-      setV8Status("Loading…");
-      try{
-        const result = await originalLoad.apply(this, arguments);
-        setV8Status("Synced");
-        return result;
-      }catch(err){
-        setV8Status("Sync failed");
-        throw err;
-      }
-    };
-    window.__v8LoadWrapped = true;
-  }
-
-  if(typeof window.saveData === "function" && !window.__v8DataWrapped){
-    const originalDataSave = window.saveData;
-    window.saveData = function(){
-      const result = originalDataSave.apply(this, arguments);
-      try{
-        if(window.mcuFirebase && window.mcuFirebase.user &&
-           typeof window.saveCloudState === "function"){
-          window.saveCloudState();
-        }
-      }catch(e){
-        console.warn("V8 auto-sync queue failed:", e);
-      }
-      return result;
-    };
-    window.__v8DataWrapped = true;
-  }
-
-  setV8Status("Cloud sync ready");
-})();
-</script>
-
-
-
-<script id="mcu-v1-normalizer">
-(function(){
+   </script>
+   <script id="mcu-v1-normalizer">
+    (function(){
   "use strict";
   function normalize(){
     if(!Array.isArray(window.movies)) return;
@@ -5278,223 +4907,296 @@ document.body.appendChild(status);
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",normalize); else normalize();
 })();
-</script>
-
-
-<script id="doomsday-timer-js">
-(function(){
-  "use strict";
-
-  /* Single live countdown: 18 December 2026, 00:00 IST */
-  var TARGET = Date.parse("2026-12-18T00:00:00+05:30");
-
-  function pad(n){ return String(n).padStart(2,"0"); }
-
-  function tick(){
-    var diff = Math.max(0, TARGET - Date.now());
-    var total = Math.floor(diff / 1000);
-
-    var days = Math.floor(total / 86400);
-    total %= 86400;
-    var hours = Math.floor(total / 3600);
-    total %= 3600;
-    var minutes = Math.floor(total / 60);
-    var seconds = total % 60;
-
-    var d = document.getElementById("doomsdayDays");
-    var h = document.getElementById("doomsdayHours");
-    var m = document.getElementById("doomsdayMinutes");
-    var sec = document.getElementById("doomsdaySeconds");
-
-    if(d) d.textContent = String(days).padStart(3,"0");
-    if(h) h.textContent = pad(hours);
-    if(m) m.textContent = pad(minutes);
-    if(sec) sec.textContent = pad(seconds);
-  }
-
-  function start(){
-    tick();
-    window.setInterval(tick, 1000);
-  }
-
-  if(document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", start, {once:true});
-  }else{
-    start();
-  }
-})();
-</script> ═══════════════════════════════════════════════════════════════ -->
-<!--                    MASTER ADMIN PANEL V25                      -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section id="mcuMasterAdmin" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(2,4,10,.96);backdrop-filter:blur(20px);overflow-y:auto;font-family:'Orbitron',sans-serif;-webkit-overflow-scrolling:touch">
-  <div style="max-width:1400px;margin:14px auto;background:linear-gradient(145deg,#0a1220,#050810);border:1px solid #1e3a5f;border-radius:22px;color:#fff;overflow:hidden;box-shadow:0 30px 120px rgba(0,229,255,.18)">
-
-    <!-- HEADER -->
-    <header style="padding:16px 20px;border-bottom:1px solid #1e3a5f;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;background:linear-gradient(90deg,rgba(0,229,255,.07),transparent)">
+   </script>
+   ═══════════════════════════════════════════════════════════════ --&gt;
+   <!--                    MASTER ADMIN PANEL V25                      -->
+   <!-- ═══════════════════════════════════════════════════════════════ -->
+   <section id="mcuMasterAdmin" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(2,4,10,.96);backdrop-filter:blur(20px);overflow-y:auto;font-family:'Orbitron',sans-serif;-webkit-overflow-scrolling:touch">
+    <div style="max-width:1400px;margin:14px auto;background:linear-gradient(145deg,#0a1220,#050810);border:1px solid #1e3a5f;border-radius:22px;color:#fff;overflow:hidden;box-shadow:0 30px 120px rgba(0,229,255,.18)">
+     <!-- HEADER -->
+     <header style="padding:16px 20px;border-bottom:1px solid #1e3a5f;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;background:linear-gradient(90deg,rgba(0,229,255,.07),transparent)">
       <div style="display:flex;align-items:center;gap:12px;min-width:0">
-        <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#00e5ff,#0077ff);display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 0 25px rgba(0,229,255,.5);flex-shrink:0">⚡</div>
-        <div style="min-width:0">
-          <h1 style="margin:0;color:#00e5ff;font-size:17px;letter-spacing:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">MASTER ADMIN V25</h1>
-          <p style="margin:2px 0 0;font-size:10px;opacity:.65;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="maWhoami">Loading…</p>
-        </div>
+       <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#00e5ff,#0077ff);display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 0 25px rgba(0,229,255,.5);flex-shrink:0">
+        ⚡
+       </div>
+       <div style="min-width:0">
+        <h1 style="margin:0;color:#00e5ff;font-size:17px;letter-spacing:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
+         MASTER ADMIN V25
+        </h1>
+        <p id="maWhoami" style="margin:2px 0 0;font-size:10px;opacity:.65;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
+         Loading…
+        </p>
+       </div>
       </div>
       <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
-        <span id="maSyncBadge" style="padding:5px 10px;border-radius:999px;background:rgba(0,230,118,.15);color:#6dff9a;font-size:10px;font-weight:800;border:1px solid rgba(0,230,118,.3)">● LIVE</span>
-        <button id="maClose" style="padding:9px 14px;border:1px solid #ff1744;background:#ff1744;color:#fff;border-radius:10px;cursor:pointer;font-weight:800;font-size:13px">✕</button>
+       <span id="maSyncBadge" style="padding:5px 10px;border-radius:999px;background:rgba(0,230,118,.15);color:#6dff9a;font-size:10px;font-weight:800;border:1px solid rgba(0,230,118,.3)">
+        ● LIVE
+       </span>
+       <button id="maClose" style="padding:9px 14px;border:1px solid #ff1744;background:#ff1744;color:#fff;border-radius:10px;cursor:pointer;font-weight:800;font-size:13px">
+        ✕
+       </button>
       </div>
-    </header>
-
-    <!-- TABS -->
-    <nav style="display:flex;gap:4px;padding:8px 14px;border-bottom:1px solid #1e3a5f;flex-wrap:nowrap;background:#070c15;overflow-x:auto;-webkit-overflow-scrolling:touch">
-      <button class="maTab active" data-matab="dashboard">📊</button>
-      <button class="maTab" data-matab="add">➕ Add</button>
-      <button class="maTab" data-matab="catalog">🎬 Catalog</button>
-      <button class="maTab" data-matab="bulk">📥 Bulk</button>
-      <button class="maTab" data-matab="timers">⏱️ Timers</button>
-      <button class="maTab" data-matab="users">👥 Users</button>
-      <button class="maTab" data-matab="logs">📜 Logs</button>
-    </nav>
-
-    <!-- DASHBOARD -->
-    <div id="maTab-dashboard" class="maPanel" style="padding:18px">
+     </header>
+     <!-- TABS -->
+     <nav style="display:flex;gap:4px;padding:8px 14px;border-bottom:1px solid #1e3a5f;flex-wrap:nowrap;background:#070c15;overflow-x:auto;-webkit-overflow-scrolling:touch">
+      <button class="maTab active" data-matab="dashboard">
+       📊
+      </button>
+      <button class="maTab" data-matab="add">
+       ➕ Add
+      </button>
+      <button class="maTab" data-matab="catalog">
+       🎬 Catalog
+      </button>
+      <button class="maTab" data-matab="bulk">
+       📥 Bulk
+      </button>
+      <button class="maTab" data-matab="timers">
+       ⏱️ Timers
+      </button>
+      <button class="maTab" data-matab="users">
+       👥 Users
+      </button>
+      <button class="maTab" data-matab="logs">
+       📜 Logs
+      </button>
+     </nav>
+     <!-- DASHBOARD -->
+     <div class="maPanel" id="maTab-dashboard" style="padding:18px">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px">
-        <div class="maStat"><b id="maStatUsers">0</b><span>Users</span></div>
-        <div class="maStat"><b id="maStatMovies">0</b><span>Movies/Series</span></div>
-        <div class="maStat"><b id="maStatWatched">0</b><span>Total Watched</span></div>
-        <div class="maStat"><b id="maStatFavs">0</b><span>Favorites</span></div>
+       <div class="maStat">
+        <b id="maStatUsers">
+         0
+        </b>
+        <span>
+         Users
+        </span>
+       </div>
+       <div class="maStat">
+        <b id="maStatMovies">
+         0
+        </b>
+        <span>
+         Movies/Series
+        </span>
+       </div>
+       <div class="maStat">
+        <b id="maStatWatched">
+         0
+        </b>
+        <span>
+         Total Watched
+        </span>
+       </div>
+       <div class="maStat">
+        <b id="maStatFavs">
+         0
+        </b>
+        <span>
+         Favorites
+        </span>
+       </div>
       </div>
       <div class="maCard" style="margin-bottom:14px">
-        <h3 style="margin:0 0 12px;font-size:13px;color:#00e5ff">🏆 Top Watched</h3>
-        <div id="maTopMovies" style="font-size:12px"></div>
+       <h3 style="margin:0 0 12px;font-size:13px;color:#00e5ff">
+        🏆 Top Watched
+       </h3>
+       <div id="maTopMovies" style="font-size:12px">
+       </div>
       </div>
       <div class="maCard">
-        <h3 style="margin:0 0 12px;font-size:13px;color:#00e5ff">⚡ Recent Activity</h3>
-        <div id="maRecentActivity" style="font-size:11px;max-height:240px;overflow:auto"></div>
+       <h3 style="margin:0 0 12px;font-size:13px;color:#00e5ff">
+        ⚡ Recent Activity
+       </h3>
+       <div id="maRecentActivity" style="font-size:11px;max-height:240px;overflow:auto">
+       </div>
       </div>
-    </div>
-
-    <!-- ADD MOVIE -->
-    <div id="maTab-add" class="maPanel" style="padding:18px;display:none">
+     </div>
+     <!-- ADD MOVIE -->
+     <div class="maPanel" id="maTab-add" style="padding:18px;display:none">
       <div class="maCard" style="margin-bottom:14px;background:linear-gradient(135deg,rgba(0,229,255,.06),rgba(0,119,255,.03))">
-        <h3 style="margin:0 0 10px;color:#00e5ff;font-size:14px">🔍 TMDB Auto-Fill</h3>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
-          <input id="maTmdbKey" placeholder="Paste TMDB API key (v3)" style="flex:1;min-width:180px;padding:9px;border-radius:8px;border:1px solid #1e3a5f;background:#0a0f1a;color:#fff;font-size:11px">
-          <button id="maSaveTmdbKey" style="padding:9px 14px;border:0;background:#00e5ff;color:#000;border-radius:8px;cursor:pointer;font-size:11px;font-weight:800">Save Key</button>
-        </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <select id="maTmdbType" style="padding:10px;border-radius:9px;border:1px solid #1e3a5f;background:#0a0f1a;color:#fff">
-            <option value="movie">🎬 Movie</option>
-            <option value="tv">📺 TV</option>
-          </select>
-          <input id="maTmdbQuery" placeholder="Search title…" style="flex:2;min-width:180px;padding:10px;border-radius:9px;border:1px solid #1e3a5f;background:#0a0f1a;color:#fff">
-          <button id="maTmdbSearch" style="padding:10px 18px;background:linear-gradient(135deg,#00e5ff,#0077ff);border:0;color:#fff;border-radius:9px;cursor:pointer;font-weight:800;font-size:12px">🔍 Search</button>
-        </div>
-        <div id="maTmdbResults" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:12px;max-height:400px;overflow:auto"></div>
-      </div>
-
-      <div class="maCard">
-        <h3 style="margin:0 0 12px;color:#00e5ff;font-size:14px">📝 Movie Details</h3>
-
-        <p style="font-size:10px;opacity:.6;margin:0 0 6px">BASIC INFO</p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px">
-          <input id="maId" placeholder="Unique ID (auto from title)">
-          <input id="maTitle" placeholder="Title">
-          <select id="maType"><option value="movie">🎬 Movie</option><option value="series">📺 Series</option><option value="special">⭐ Special</option></select>
-          <input id="maYear" type="number" placeholder="Year">
-          <input id="maReleaseDate" type="date">
-          <input id="maRating" type="number" step="0.1" placeholder="Rating 0-10">
-          <input id="maPhase" placeholder="Phase (e.g. Phase 5)">
-          <select id="maImportance"><option>Must Watch</option><option>Important</option><option>Optional</option></select>
-          <input id="maSlot" type="number" placeholder="Timeline Slot #">
-          <input id="maRuntime" type="number" placeholder="Runtime min">
-        </div>
-
-        <p style="font-size:10px;opacity:.6;margin:14px 0 6px">🖼️ MEDIA LINKS</p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px">
-          <input id="maPoster" placeholder="Poster URL">
-          <input id="maBackdrop" placeholder="Backdrop URL">
-          <input id="maTrailer" placeholder="🎬 YouTube Trailer URL">
-          <input id="maDownload" placeholder="⬇️ Download URL">
-          <input id="maWatch" placeholder="▶️ Watch / Streaming URL">
-        </div>
-
-        <p style="font-size:10px;opacity:.6;margin:14px 0 6px">📖 DETAILS</p>
-        <textarea id="maDescription" placeholder="Description / Overview" style="width:100%;min-height:80px;padding:10px;border-radius:9px;border:1px solid #1e3a5f;background:#0a0f1a;color:#fff;box-sizing:border-box;font-family:inherit;font-size:12px"></textarea>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin-top:8px">
-          <input id="maCast" placeholder="Cast (comma separated)">
-          <input id="maGenres" placeholder="Genres (comma separated)">
-        </div>
-
-        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
-          <button id="maSaveMovie" style="padding:11px 20px;background:linear-gradient(135deg,#00e676,#00c853);border:0;color:#000;border-radius:10px;cursor:pointer;font-weight:800;font-size:13px">💾 Save &amp; Publish</button>
-          <button id="maSaveDraft" style="padding:11px 20px;background:linear-gradient(135deg,#ffd54a,#ffab00);border:0;color:#000;border-radius:10px;cursor:pointer;font-weight:800;font-size:13px">📝 Save Draft</button>
-          <button id="maClearForm" style="padding:11px 18px;background:#1e3a5f;border:0;color:#fff;border-radius:10px;cursor:pointer;font-weight:700;font-size:13px">🧹 Clear</button>
-        </div>
-        <p id="maSaveStatus" style="margin-top:10px;font-size:12px;min-height:18px"></p>
-      </div>
-    </div>
-
-    <!-- CATALOG -->
-    <div id="maTab-catalog" class="maPanel" style="padding:18px;display:none">
-      <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">
-        <input id="maCatalogSearch" placeholder="🔍 Search…" style="flex:1;min-width:180px;padding:10px;border-radius:10px;border:1px solid #1e3a5f;background:#0a0f1a;color:#fff">
-        <select id="maCatalogFilter" style="padding:10px;border-radius:10px;border:1px solid #1e3a5f;background:#0a0f1a;color:#fff;font-size:12px">
-          <option value="all">All</option>
-          <option value="published">Published</option>
-          <option value="draft">Drafts</option>
-          <option value="movie">Movies</option>
-          <option value="series">Series</option>
+       <h3 style="margin:0 0 10px;color:#00e5ff;font-size:14px">
+        🔍 TMDB Auto-Fill
+       </h3>
+       <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+        <input id="maTmdbKey" placeholder="Paste TMDB API key (v3)" style="flex:1;min-width:180px;padding:9px;border-radius:8px;border:1px solid #1e3a5f;background:#0a0f1a;color:#fff;font-size:11px"/>
+        <button id="maSaveTmdbKey" style="padding:9px 14px;border:0;background:#00e5ff;color:#000;border-radius:8px;cursor:pointer;font-size:11px;font-weight:800">
+         Save Key
+        </button>
+       </div>
+       <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <select id="maTmdbType" style="padding:10px;border-radius:9px;border:1px solid #1e3a5f;background:#0a0f1a;color:#fff">
+         <option value="movie">
+          🎬 Movie
+         </option>
+         <option value="tv">
+          📺 TV
+         </option>
         </select>
+        <input id="maTmdbQuery" placeholder="Search title…" style="flex:2;min-width:180px;padding:10px;border-radius:9px;border:1px solid #1e3a5f;background:#0a0f1a;color:#fff"/>
+        <button id="maTmdbSearch" style="padding:10px 18px;background:linear-gradient(135deg,#00e5ff,#0077ff);border:0;color:#fff;border-radius:9px;cursor:pointer;font-weight:800;font-size:12px">
+         🔍 Search
+        </button>
+       </div>
+       <div id="maTmdbResults" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:12px;max-height:400px;overflow:auto">
+       </div>
       </div>
-      <div id="maCatalogList" style="max-height:600px;overflow:auto"></div>
-    </div>
-
-    <!-- BULK IMPORT -->
-    <div id="maTab-bulk" class="maPanel" style="padding:18px;display:none">
       <div class="maCard">
-        <h3 style="margin:0 0 10px;color:#00e5ff;font-size:14px">📥 Bulk Import (JSON)</h3>
-        <p style="font-size:11px;opacity:.7;margin:0 0 10px">Format: <code style="background:#0a0f1a;padding:2px 6px;border-radius:4px">[{"id":"x","title":"Y","poster":"..."}]</code></p>
-        <textarea id="maBulkText" placeholder='[{"id":"sample-1","title":"Sample Movie","type":"movie","year":2026,"poster":"url","trailer":"url","downloadUrl":"url","description":"..."}]' style="width:100%;min-height:260px;padding:12px;border-radius:10px;border:1px solid #1e3a5f;background:#0a0f1a;color:#fff;font-family:monospace;font-size:11px;box-sizing:border-box"></textarea>
-        <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
-          <button id="maBulkImport" style="padding:11px 20px;background:linear-gradient(135deg,#00e676,#00c853);border:0;color:#000;border-radius:10px;cursor:pointer;font-weight:800;font-size:13px">⬆️ Import All</button>
-          <input type="file" id="maBulkFile" accept=".json" style="padding:9px;color:#9db4d1;font-size:11px">
-        </div>
-        <p id="maBulkStatus" style="margin-top:10px;font-size:12px"></p>
+       <h3 style="margin:0 0 12px;color:#00e5ff;font-size:14px">
+        📝 Movie Details
+       </h3>
+       <p style="font-size:10px;opacity:.6;margin:0 0 6px">
+        BASIC INFO
+       </p>
+       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px">
+        <input id="maId" placeholder="Unique ID (auto from title)"/>
+        <input id="maTitle" placeholder="Title"/>
+        <select id="maType">
+         <option value="movie">
+          🎬 Movie
+         </option>
+         <option value="series">
+          📺 Series
+         </option>
+         <option value="special">
+          ⭐ Special
+         </option>
+        </select>
+        <input id="maYear" placeholder="Year" type="number"/>
+        <input id="maReleaseDate" type="date"/>
+        <input id="maRating" placeholder="Rating 0-10" step="0.1" type="number"/>
+        <input id="maPhase" placeholder="Phase (e.g. Phase 5)"/>
+        <select id="maImportance">
+         <option>
+          Must Watch
+         </option>
+         <option>
+          Important
+         </option>
+         <option>
+          Optional
+         </option>
+        </select>
+        <input id="maSlot" placeholder="Timeline Slot #" type="number"/>
+        <input id="maRuntime" placeholder="Runtime min" type="number"/>
+       </div>
+       <p style="font-size:10px;opacity:.6;margin:14px 0 6px">
+        🖼️ MEDIA LINKS
+       </p>
+       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px">
+        <input id="maPoster" placeholder="Poster URL"/>
+        <input id="maBackdrop" placeholder="Backdrop URL"/>
+        <input id="maTrailer" placeholder="🎬 YouTube Trailer URL"/>
+        <input id="maDownload" placeholder="⬇️ Download URL"/>
+        <input id="maWatch" placeholder="▶️ Watch / Streaming URL"/>
+       </div>
+       <p style="font-size:10px;opacity:.6;margin:14px 0 6px">
+        📖 DETAILS
+       </p>
+       <textarea id="maDescription" placeholder="Description / Overview" style="width:100%;min-height:80px;padding:10px;border-radius:9px;border:1px solid #1e3a5f;background:#0a0f1a;color:#fff;box-sizing:border-box;font-family:inherit;font-size:12px"></textarea>
+       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin-top:8px">
+        <input id="maCast" placeholder="Cast (comma separated)"/>
+        <input id="maGenres" placeholder="Genres (comma separated)"/>
+       </div>
+       <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+        <button id="maSaveMovie" style="padding:11px 20px;background:linear-gradient(135deg,#00e676,#00c853);border:0;color:#000;border-radius:10px;cursor:pointer;font-weight:800;font-size:13px">
+         💾 Save &amp; Publish
+        </button>
+        <button id="maSaveDraft" style="padding:11px 20px;background:linear-gradient(135deg,#ffd54a,#ffab00);border:0;color:#000;border-radius:10px;cursor:pointer;font-weight:800;font-size:13px">
+         📝 Save Draft
+        </button>
+        <button id="maClearForm" style="padding:11px 18px;background:#1e3a5f;border:0;color:#fff;border-radius:10px;cursor:pointer;font-weight:700;font-size:13px">
+         🧹 Clear
+        </button>
+       </div>
+       <p id="maSaveStatus" style="margin-top:10px;font-size:12px;min-height:18px">
+       </p>
       </div>
-    </div>
-
-    <!-- TIMERS -->
-    <div id="maTab-timers" class="maPanel" style="padding:18px;display:none">
+     </div>
+     <!-- CATALOG -->
+     <div class="maPanel" id="maTab-catalog" style="padding:18px;display:none">
+      <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">
+       <input id="maCatalogSearch" placeholder="🔍 Search…" style="flex:1;min-width:180px;padding:10px;border-radius:10px;border:1px solid #1e3a5f;background:#0a0f1a;color:#fff"/>
+       <select id="maCatalogFilter" style="padding:10px;border-radius:10px;border:1px solid #1e3a5f;background:#0a0f1a;color:#fff;font-size:12px">
+        <option value="all">
+         All
+        </option>
+        <option value="published">
+         Published
+        </option>
+        <option value="draft">
+         Drafts
+        </option>
+        <option value="movie">
+         Movies
+        </option>
+        <option value="series">
+         Series
+        </option>
+       </select>
+      </div>
+      <div id="maCatalogList" style="max-height:600px;overflow:auto">
+      </div>
+     </div>
+     <!-- BULK IMPORT -->
+     <div class="maPanel" id="maTab-bulk" style="padding:18px;display:none">
+      <div class="maCard">
+       <h3 style="margin:0 0 10px;color:#00e5ff;font-size:14px">
+        📥 Bulk Import (JSON)
+       </h3>
+       <p style="font-size:11px;opacity:.7;margin:0 0 10px">
+        Format:
+        <code style="background:#0a0f1a;padding:2px 6px;border-radius:4px">
+         [{"id":"x","title":"Y","poster":"..."}]
+        </code>
+       </p>
+       <textarea id="maBulkText" placeholder='[{"id":"sample-1","title":"Sample Movie","type":"movie","year":2026,"poster":"url","trailer":"url","downloadUrl":"url","description":"..."}]' style="width:100%;min-height:260px;padding:12px;border-radius:10px;border:1px solid #1e3a5f;background:#0a0f1a;color:#fff;font-family:monospace;font-size:11px;box-sizing:border-box"></textarea>
+       <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <button id="maBulkImport" style="padding:11px 20px;background:linear-gradient(135deg,#00e676,#00c853);border:0;color:#000;border-radius:10px;cursor:pointer;font-weight:800;font-size:13px">
+         ⬆️ Import All
+        </button>
+        <input accept=".json" id="maBulkFile" style="padding:9px;color:#9db4d1;font-size:11px" type="file"/>
+       </div>
+       <p id="maBulkStatus" style="margin-top:10px;font-size:12px">
+       </p>
+      </div>
+     </div>
+     <!-- TIMERS -->
+     <div class="maPanel" id="maTab-timers" style="padding:18px;display:none">
       <div class="maCard" style="margin-bottom:14px">
-        <h3 style="margin:0 0 10px;color:#00e5ff;font-size:14px">⏱️ Countdown Timer</h3>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px">
-          <input id="maTimerTitle" placeholder="Timer Title">
-          <input id="maTimerDate" type="datetime-local">
-          <input id="maTimerPoster" placeholder="Poster URL">
-          <input id="maTimerSubtitle" placeholder="Subtitle">
-        </div>
-        <button id="maSaveTimer" style="margin-top:10px;padding:11px 20px;background:linear-gradient(135deg,#00e676,#00c853);border:0;color:#000;border-radius:10px;cursor:pointer;font-weight:800;font-size:13px">💾 Save Timer</button>
-        <p id="maTimerStatus" style="margin-top:8px;font-size:12px"></p>
+       <h3 style="margin:0 0 10px;color:#00e5ff;font-size:14px">
+        ⏱️ Countdown Timer
+       </h3>
+       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px">
+        <input id="maTimerTitle" placeholder="Timer Title"/>
+        <input id="maTimerDate" type="datetime-local"/>
+        <input id="maTimerPoster" placeholder="Poster URL"/>
+        <input id="maTimerSubtitle" placeholder="Subtitle"/>
+       </div>
+       <button id="maSaveTimer" style="margin-top:10px;padding:11px 20px;background:linear-gradient(135deg,#00e676,#00c853);border:0;color:#000;border-radius:10px;cursor:pointer;font-weight:800;font-size:13px">
+        💾 Save Timer
+       </button>
+       <p id="maTimerStatus" style="margin-top:8px;font-size:12px">
+       </p>
       </div>
-      <div id="maTimerList"></div>
+      <div id="maTimerList">
+      </div>
+     </div>
+     <!-- USERS -->
+     <div class="maPanel" id="maTab-users" style="padding:18px;display:none">
+      <input id="maUserSearch" placeholder="🔍 Search users…" style="width:100%;padding:10px;border-radius:10px;border:1px solid #1e3a5f;background:#0a0f1a;color:#fff;margin-bottom:12px;box-sizing:border-box"/>
+      <div id="maUserList" style="max-height:600px;overflow:auto">
+      </div>
+     </div>
+     <!-- LOGS -->
+     <div class="maPanel" id="maTab-logs" style="padding:18px;display:none">
+      <div id="maLogList" style="max-height:600px;overflow:auto;font-size:11px">
+      </div>
+     </div>
     </div>
-
-    <!-- USERS -->
-    <div id="maTab-users" class="maPanel" style="padding:18px;display:none">
-      <input id="maUserSearch" placeholder="🔍 Search users…" style="width:100%;padding:10px;border-radius:10px;border:1px solid #1e3a5f;background:#0a0f1a;color:#fff;margin-bottom:12px;box-sizing:border-box">
-      <div id="maUserList" style="max-height:600px;overflow:auto"></div>
-    </div>
-
-    <!-- LOGS -->
-    <div id="maTab-logs" class="maPanel" style="padding:18px;display:none">
-      <div id="maLogList" style="max-height:600px;overflow:auto;font-size:11px"></div>
-    </div>
-
-  </div>
-</section>
-
-<style>
-#mcuMasterAdmin *{box-sizing:border-box}
+   </section>
+   <style>
+    #mcuMasterAdmin *{box-sizing:border-box}
 #mcuMasterAdmin .maTab{padding:9px 12px;border-radius:9px;border:1px solid #1e3a5f;background:transparent;color:#9db4d1;font-weight:700;cursor:pointer;font-family:inherit;font-size:12px;transition:.2s;white-space:nowrap}
 #mcuMasterAdmin .maTab:hover{border-color:#00e5ff;color:#fff}
 #mcuMasterAdmin .maTab.active{background:#00e5ff;color:#000;border-color:#00e5ff;box-shadow:0 0 18px rgba(0,229,255,.35)}
@@ -5526,10 +5228,9 @@ document.body.appendChild(status);
   #mcuMasterAdmin input,#mcuMasterAdmin select,#mcuMasterAdmin textarea{font-size:14px}
   #mcuMasterAdmin .maTab{padding:8px 10px;font-size:11px}
 }
-</style>
-
-<script type="module">
-/* ═══════════════ MASTER ADMIN V25 — FULL LOGIC ═══════════════ */
+   </style>
+   <script type="module">
+    /* ═══════════════ MASTER ADMIN V25 — FULL LOGIC ═══════════════ */
 import { getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import {
@@ -5966,11 +5667,10 @@ if (!app) {
 
   console.log("✅ Master Admin V25 loaded.");
 }
-</script>
-
-<!-- ═══════════ PUBLIC TIMER LOADER ═══════════ -->
-<script type="module">
-import { getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+   </script>
+   <!-- ═══════════ PUBLIC TIMER LOADER ═══════════ -->
+   <script type="module">
+    import { getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
 const app = getApps()[0];
@@ -5981,10 +5681,10 @@ if (app) {
       const snap = await getDocs(collection(db, "timers"));
       const timers = [];
       snap.forEach(d => timers.push({ id: d.id, ...d.data() }));
-      if (!timers.length) return;
       timers.sort((a, b) => new Date(a.targetDate) - new Date(b.targetDate));
-      const timer = timers[0];
-      const target = new Date(timer.targetDate).getTime();
+      const target = timers.length
+        ? new Date(timers[0].targetDate).getTime()
+        : Date.parse("2026-12-18T00:00:00+05:30");
       const upd = () => {
         const diff = Math.max(0, target - Date.now());
         const total = Math.floor(diff / 1000);
@@ -6009,12 +5709,13 @@ if (app) {
       console.log("⏱️ Public timer active:", timer.title);
     } catch(e) { console.warn("Timer load skipped:", e); }
   })();
-}</script>
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!--                  GOOGLE LOGIN — FIX                          -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<script type="module">
-import { getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+}
+   </script>
+   <!-- ═══════════════════════════════════════════════════════════ -->
+   <!--                  GOOGLE LOGIN — FIX                          -->
+   <!-- ═══════════════════════════════════════════════════════════ -->
+   <script type="module">
+    import { getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -6131,11 +5832,11 @@ if (!app) {
     console.warn("Google button (v9GoogleBtn) not found");
   }
 }
-</script>
-</body>
+   </script>
+  </div>
+ </body>
 </html>
-
 <script>
-/* Manual media-link helper is available to existing movie-card templates. */
+ /* Manual media-link helper is available to existing movie-card templates. */
 window.getManualMediaLinks = window.getManualMediaLinks || getManualMediaLinks;
 </script>
