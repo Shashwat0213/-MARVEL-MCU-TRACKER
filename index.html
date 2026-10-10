@@ -6010,6 +6010,128 @@ if (app) {
     } catch(e) { console.warn("Timer load skipped:", e); }
   })();
 }</script>
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--                  GOOGLE LOGIN — FIX                          -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<script type="module">
+import { getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {
+  getFirestore, doc, getDoc, setDoc, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const app = getApps()[0];
+if (!app) {
+  console.warn("Google login: Firebase not initialized");
+} else {
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const googleBtn = document.getElementById("v9GoogleBtn");
+
+  // Mobile detect karo — mobile pe popup block hota hai, redirect use karo
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+
+  async function saveUserProfile(user) {
+    try {
+      const ref = doc(db, "users", user.uid);
+      const snap = await getDoc(ref);
+      if (!snap.exists()) {
+        await setDoc(ref, {
+          uid: user.uid,
+          email: user.email || "",
+          displayName: user.displayName || (user.email || "").split("@")[0] || "User",
+          photoURL: user.photoURL || "",
+          role: "user",
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+      } else {
+        await setDoc(ref, {
+          email: user.email || snap.data().email || "",
+          displayName: user.displayName || snap.data().displayName || "",
+          photoURL: user.photoURL || snap.data().photoURL || "",
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+      }
+    } catch (e) {
+      console.warn("Could not save user profile:", e);
+    }
+  }
+
+  async function handleGoogleLogin() {
+    if (!googleBtn) return;
+    const originalText = googleBtn.textContent;
+
+    try {
+      googleBtn.disabled = true;
+      googleBtn.textContent = "Signing in…";
+
+      const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
+
+      if (isMobile) {
+        // Mobile: redirect flow (popup often blocked)
+        await signInWithRedirect(auth, provider);
+      } else {
+        // Desktop: popup flow
+        const result = await signInWithPopup(auth, provider);
+        if (result.user) await saveUserProfile(result.user);
+
+        const overlay = document.getElementById("authOverlay");
+        if (overlay) {
+          overlay.classList.remove("open");
+          overlay.setAttribute("aria-hidden", "true");
+        }
+      }
+    } catch (err) {
+      console.error("Google login error:", err);
+      const messages = {
+        "auth/popup-blocked": "Popup blocked. Please allow popups and try again.",
+        "auth/popup-closed-by-user": "Google sign-in was cancelled.",
+        "auth/cancelled-popup-request": "Another sign-in is in progress. Please wait.",
+        "auth/unauthorized-domain": "This domain is not authorized in Firebase Console.",
+        "auth/network-request-failed": "Network error. Check your internet connection.",
+        "auth/account-exists-with-different-credential": "This email already uses another sign-in method.",
+        "auth/operation-not-allowed": "Google sign-in is not enabled in Firebase Console."
+      };
+      alert(messages[err.code] || err.message || "Google sign-in failed.");
+      googleBtn.textContent = originalText;
+    } finally {
+      googleBtn.disabled = false;
+      if (!isMobile) googleBtn.textContent = originalText;
+    }
+  }
+
+  // Handle redirect result (mobile flow ke baad)
+  try {
+    const result = await getRedirectResult(auth);
+    if (result && result.user) {
+      await saveUserProfile(result.user);
+      const overlay = document.getElementById("authOverlay");
+      if (overlay) {
+        overlay.classList.remove("open");
+        overlay.setAttribute("aria-hidden", "true");
+      }
+    }
+  } catch (err) {
+    if (err && err.code) console.warn("Redirect result:", err.code);
+  }
+
+  // Attach click handler
+  if (googleBtn) {
+    googleBtn.addEventListener("click", handleGoogleLogin);
+    console.log("✅ Google login ready");
+  } else {
+    console.warn("Google button (v9GoogleBtn) not found");
+  }
+}
+</script>
 </body>
 </html>
 
