@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════
-   MCU TRACKER — PREMIUM THEME SYSTEM
-   7 new themes — full website color change
+   MCU TRACKER — PREMIUM DYNAMIC THEMES
+   7 themes with unique backgrounds + animated posters
    ═══════════════════════════════════════════════════════════ */
 
 (function() {
@@ -16,17 +16,17 @@
       subtitle: "Cosmos • Phase 2",
       poster: "https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
     },
+    arcreactor: {
+      label: "Arc Reactor",
+      title: "Iron Man",
+      subtitle: "Arc Reactor • Phase 1",
+      poster: "https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg"
+    },
     inferno: {
       label: "Inferno",
       title: "Avengers: Endgame",
       subtitle: "Inferno • Phase 3",
       poster: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg"
-    },
-    infinity: {
-      label: "Infinity",
-      title: "Avengers: Infinity War",
-      subtitle: "Infinity • Phase 3",
-      poster: "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
     },
     vibranium: {
       label: "Vibranium",
@@ -60,11 +60,11 @@
 
     // Flash animation
     document.body.classList.add("theme-switching");
-    setTimeout(() => document.body.classList.remove("theme-switching"), 500);
+    setTimeout(() => document.body.classList.remove("theme-switching"), 600);
 
     // Remove all theme classes
     document.body.classList.remove(
-      "theme-cosmos", "theme-inferno", "theme-infinity",
+      "theme-cosmos", "theme-arcreactor", "theme-inferno",
       "theme-vibranium", "theme-bifrost", "theme-doomsday", "theme-noir"
     );
 
@@ -100,7 +100,6 @@
     console.log(`🎨 Found ${buttons.length} theme buttons`);
 
     buttons.forEach(btn => {
-      // Clone to remove old listeners
       const newBtn = btn.cloneNode(true);
       btn.parentNode.replaceChild(newBtn, btn);
     });
@@ -120,7 +119,6 @@
     });
   }
 
-  /* ═══════════ LOAD SAVED THEME ═══════════ */
   function loadSavedTheme() {
     let saved = "cosmos";
     try { saved = localStorage.getItem("mcuHeroTheme") || "cosmos"; } catch (e) {}
@@ -154,7 +152,7 @@
 
   loadDarkMode();
 
-  /* ═══════════ SOUND TOGGLE ═══════════ */
+  /* ═══════════ SOUND ═══════════ */
   const soundBtn = $("soundBtn");
   let soundEnabled = true;
   try { soundEnabled = localStorage.getItem("mcuSound") !== "false"; } catch (e) {}
@@ -191,7 +189,7 @@
     });
   }
 
-  /* ═══════════ V3 DASHBOARD NAME ═══════════ */
+  /* ═══════════ V3 NAME ═══════════ */
   const V3 = { nameKey: "mcuV3Name" };
 
   function renderV3Name() {
@@ -293,14 +291,13 @@
 
     tick();
     setInterval(tick, 1000);
-    console.log("⏱️ Doomsday countdown active");
   })();
 
   /* ═══════════ INIT ═══════════ */
   function init() {
     bindThemeButtons();
     loadSavedTheme();
-    console.log("✅ Premium theme system initialized");
+    console.log("✅ Premium dynamic themes initialized");
   }
 
   if (document.readyState === "loading") {
@@ -313,5 +310,4 @@
   setTimeout(loadSavedTheme, 600);
 
   window.applyTheme = applyTheme;
-  console.log("✅ Theme module loaded");
 })();
