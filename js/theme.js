@@ -8,17 +8,17 @@
 
   const $ = id => document.getElementById(id);
 
-  /* ═══════════ HERO THEMES ═══════════ */
+  /* ═══════════ HERO THEMES DATA ═══════════ */
   const heroThemeData = {
-    red: {
-      title: "Avengers: Endgame",
-      subtitle: "Marvel Red • Phase 3",
-      poster: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg"
-    },
     blue: {
       title: "Spider-Man: No Way Home",
       subtitle: "Multiverse Blue • Phase 4",
       poster: "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg"
+    },
+    red: {
+      title: "Avengers: Endgame",
+      subtitle: "Marvel Red • Phase 3",
+      poster: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg"
     },
     gold: {
       title: "Avengers: Infinity War",
@@ -47,25 +47,30 @@
     }
   };
 
+  /* ═══════════ APPLY THEME ═══════════ */
   function applyHeroTheme(theme) {
     if (!heroThemeData[theme]) theme = "blue";
 
+    // Remove all theme- classes
     document.body.classList.remove(
       "theme-blue", "theme-red", "theme-gold",
       "theme-cosmic", "theme-ironman",
       "theme-gamma", "theme-doomsday"
     );
 
+    // Add active theme class (except blue which is default)
     if (theme !== "blue") {
       document.body.classList.add("theme-" + theme);
     }
 
     try { localStorage.setItem("mcuHeroTheme", theme); } catch (e) {}
 
+    // Update active state on buttons
     document.querySelectorAll("[data-hero-theme]").forEach(btn => {
       btn.classList.toggle("active", btn.dataset.heroTheme === theme);
     });
 
+    // Update hero poster + text
     const data = heroThemeData[theme];
     const poster = $("themePoster");
     const title = $("themePosterTitle");
@@ -74,18 +79,50 @@
     if (poster) { poster.src = data.poster; poster.alt = data.title + " poster"; }
     if (title) title.textContent = data.title;
     if (subtitle) subtitle.textContent = data.subtitle;
+
+    console.log("🎨 Theme applied:", theme);
   }
 
-  document.querySelectorAll("[data-hero-theme]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      applyHeroTheme(btn.dataset.heroTheme);
-      if (window.showToast) window.showToast("✓ Theme: " + btn.textContent.trim(), "ok");
-    });
-  });
+  /* ═══════════ BIND HERO THEME BUTTONS ═══════════ */
+  function bindThemeButtons() {
+    const buttons = document.querySelectorAll("[data-hero-theme]");
+    console.log(`🎨 Found ${buttons.length} theme buttons`);
 
-  let savedTheme = "blue";
-  try { savedTheme = localStorage.getItem("mcuHeroTheme") || "blue"; } catch (e) {}
-  applyHeroTheme(savedTheme);
+    buttons.forEach(btn => {
+      // Remove old listener if any
+      btn.replaceWith(btn.cloneNode(true));
+    });
+
+    // Re-bind after clone
+    document.querySelectorAll("[data-hero-theme]").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const theme = btn.dataset.heroTheme;
+        applyHeroTheme(theme);
+
+        // Show toast
+        if (window.showToast) {
+          const themeNames = {
+            blue: "Massive Blue",
+            red: "Marvel Red",
+            gold: "Infinity Gold",
+            cosmic: "Multiverse Purple",
+            ironman: "Stark Black",
+            gamma: "Gamma Green",
+            doomsday: "Doomsday"
+          };
+          window.showToast("✓ Theme: " + (themeNames[theme] || theme), "ok");
+        }
+      });
+    });
+  }
+
+  /* ═══════════ LOAD SAVED THEME ═══════════ */
+  function loadSavedTheme() {
+    let saved = "blue";
+    try { saved = localStorage.getItem("mcuHeroTheme") || "blue"; } catch (e) {}
+    applyHeroTheme(saved);
+  }
 
   /* ═══════════ DARK / LIGHT TOGGLE ═══════════ */
   const themeBtn = $("themeBtn");
@@ -255,6 +292,28 @@
     setInterval(tick, 1000);
     console.log("⏱️ Doomsday countdown active");
   })();
+
+  /* ═══════════ INIT ═══════════ */
+  function init() {
+    bindThemeButtons();
+    loadSavedTheme();
+    console.log("✅ Theme module initialized");
+  }
+
+  // Run on DOM ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    // DOM already loaded
+    init();
+  }
+
+  // Also bind after a short delay (in case elements load later)
+  setTimeout(bindThemeButtons, 500);
+  setTimeout(loadSavedTheme, 600);
+
+  // Public API
+  window.applyHeroTheme = applyHeroTheme;
 
   console.log("✅ Theme module loaded");
 })();
