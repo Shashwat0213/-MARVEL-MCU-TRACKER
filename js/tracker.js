@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════
    MCU TRACKER — TRACKER STATE
-   Watched + Favorites — Local + Firestore sync
+   Watched + Favorites — Local storage + Firestore sync
    ═══════════════════════════════════════════════════════════ */
 
 import {
@@ -21,7 +21,7 @@ if (!auth || !db) {
   let favorites = {};
   let saveTimer = null;
 
-  // Load local state immediately (so UI works offline)
+  // Load local state (works offline)
   try {
     watched = JSON.parse(localStorage.getItem("mcuWatched") || "{}");
     favorites = JSON.parse(localStorage.getItem("mcuFavorites") || "{}");
@@ -43,7 +43,7 @@ if (!auth || !db) {
     }
   }
 
-  /* ═══════════ FIRESTORE SAVE (debounced) ═══════════ */
+  /* ═══════════ CLOUD SAVE (debounced) ═══════════ */
   async function saveCloud() {
     const user = auth.currentUser;
     if (!user) return;
@@ -59,7 +59,7 @@ if (!auth || !db) {
       if (window.setSyncStatus) window.setSyncStatus("synced", "ok");
     } catch (e) {
       console.error("Cloud save failed:", e);
-      if (window.setSyncStatus) window.setSyncStatus("sync failed", "error");
+      if (window.setSyncStatus) window.setSyncStatus("save failed", "error");
     }
   }
 
@@ -70,7 +70,7 @@ if (!auth || !db) {
     }, 500);
   }
 
-  /* ═══════════ LOAD FROM FIRESTORE ═══════════ */
+  /* ═══════════ CLOUD LOAD ═══════════ */
   async function loadCloud() {
     const user = auth.currentUser;
     if (!user) return;
@@ -90,6 +90,7 @@ if (!auth || !db) {
         if (window.setSyncStatus) window.setSyncStatus("synced", "ok");
         document.dispatchEvent(new CustomEvent("tracker-updated"));
       } else {
+        // First time — save local state to cloud
         await saveCloud();
       }
     } catch (e) {
@@ -145,7 +146,7 @@ if (!auth || !db) {
   window.toggleFavorite = toggleFavorite;
   window.resetTracker = resetTracker;
 
-  /* ═══════════ AUTH STATE — LOAD ON LOGIN ═══════════ */
+  /* ═══════════ EVENTS ═══════════ */
   document.addEventListener("user-logged-in", () => {
     loadCloud();
   });
