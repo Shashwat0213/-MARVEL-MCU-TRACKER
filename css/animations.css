@@ -1,6 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
    MCU TRACKER — ANIMATIONS
-   All keyframes and motion effects
    ═══════════════════════════════════════════════════════════ */
 
 /* ═══════════ CORE KEYFRAMES ═══════════ */
@@ -39,11 +38,6 @@
   to { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-30px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-6px); }
@@ -68,21 +62,10 @@
 }
 
 
-/* ═══════════ BACKGROUND ANIMATIONS ═══════════ */
+/* ═══════════ BACKGROUND ═══════════ */
 @keyframes gridMove {
   from { transform: translateY(0); }
   to { transform: translateY(40px); }
-}
-
-@keyframes glowFloat1 {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
-  33% { transform: translate(40px, -30px) scale(1.1); opacity: 0.55; }
-  66% { transform: translate(-30px, 20px) scale(0.95); opacity: 0.35; }
-}
-
-@keyframes glowFloat2 {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.35; }
-  50% { transform: translate(-50px, -40px) scale(1.15); opacity: 0.5; }
 }
 
 @keyframes starTwinkle {
@@ -91,7 +74,7 @@
 }
 
 
-/* ═══════════ HERO ANIMATIONS ═══════════ */
+/* ═══════════ HERO ═══════════ */
 @keyframes heroSpin {
   to { transform: rotate(360deg); }
 }
@@ -120,7 +103,7 @@
 }
 
 
-/* ═══════════ LOGO / TEXT ANIMATIONS ═══════════ */
+/* ═══════════ LOGO ═══════════ */
 @keyframes logoGlow {
   from { text-shadow: 0 0 10px var(--primary, #00e5ff); }
   to {
@@ -152,7 +135,7 @@
 }
 
 
-/* ═══════════ CARD ANIMATIONS ═══════════ */
+/* ═══════════ CARDS ═══════════ */
 @keyframes cardFadeIn {
   from {
     opacity: 0;
@@ -161,15 +144,6 @@
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes cardGlow {
-  0%, 100% { box-shadow: 0 0 20px var(--primary-glow, rgba(0,229,255,.3)); }
-  50% {
-    box-shadow:
-      0 0 40px var(--primary-glow, rgba(0,229,255,.3)),
-      0 0 80px var(--primary-glow, rgba(0,229,255,.3));
   }
 }
 
@@ -196,7 +170,6 @@
   animation: heroSpin 18s linear infinite, heroGlow 6s ease-in-out infinite;
 }
 
-.premium-hero .hero-badge,
 .hero-badge {
   animation: heroBadgePulse 2s ease-in-out infinite;
 }
@@ -223,12 +196,7 @@
 }
 
 
-/* ═══════════ MODAL ANIMATIONS ═══════════ */
-@keyframes modalBackdrop {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
+/* ═══════════ MODALS ═══════════ */
 @keyframes modalSlideUp {
   from {
     opacity: 0;
@@ -253,33 +221,8 @@
 }
 
 
-/* ═══════════ BUTTON ANIMATIONS ═══════════ */
-@keyframes btnShimmer {
-  from { left: -100%; }
-  to { left: 100%; }
-}
-
-.btn {
-  position: relative;
-  overflow: hidden;
-}
-
-.btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.6s ease;
-  pointer-events: none;
-}
-
-.btn:hover::before {
-  left: 100%;
-}
-
+/* ═══════════ BUTTONS ═══════════ */
+.btn::before,
 .top-btn::before,
 .auth-submit::before,
 .hero-btn::before,
@@ -295,6 +238,7 @@
   pointer-events: none;
 }
 
+.btn:hover::before,
 .top-btn:hover::before,
 .auth-submit:hover::before,
 .hero-btn:hover::before,
@@ -302,8 +246,13 @@
   left: 100%;
 }
 
+.btn, .top-btn, .auth-submit, .hero-btn, .movie-modal-btn {
+  position: relative;
+  overflow: hidden;
+}
 
-/* ═══════════ TOAST ANIMATIONS ═══════════ */
+
+/* ═══════════ TOAST ═══════════ */
 @keyframes toastSlideUp {
   from {
     transform: translateX(-50%) translateY(120px);
@@ -320,7 +269,7 @@
 }
 
 
-/* ═══════════ FORM ANIMATIONS ═══════════ */
+/* ═══════════ FORM ═══════════ */
 @keyframes inputFocusPulse {
   0% { box-shadow: 0 0 0 0 var(--primary-glow, rgba(0,229,255,.3)); }
   50% { box-shadow: 0 0 0 6px var(--primary-glow, rgba(0,229,255,.3)); }
@@ -338,7 +287,7 @@ textarea:focus {
 }
 
 
-/* ═══════════ FAVORITE HEART BEAT ═══════════ */
+/* ═══════════ FAVORITE HEARTBEAT ═══════════ */
 @keyframes heartBeat {
   0%, 100% { transform: scale(1); }
   10% { transform: scale(1.3); }
@@ -352,7 +301,7 @@ textarea:focus {
 }
 
 
-/* ═══════════ CHECKBOX CHECK ═══════════ */
+/* ═══════════ CHECKBOX ═══════════ */
 @keyframes checkBounce {
   0% { transform: scale(0.8); }
   50% { transform: scale(1.2); }
@@ -364,16 +313,10 @@ textarea:focus {
 }
 
 
-/* ═══════════ MODAL META CHIP ENTRY ═══════════ */
+/* ═══════════ MODAL CHIPS ═══════════ */
 @keyframes chipEnter {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(10px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .movie-modal-meta span {
@@ -386,7 +329,7 @@ textarea:focus {
 .movie-modal-meta span:nth-child(4) { animation-delay: 0.2s; }
 
 
-/* ═══════════ ADMIN PANEL ANIMATIONS ═══════════ */
+/* ═══════════ ADMIN ═══════════ */
 @keyframes adminSlideIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -410,7 +353,7 @@ textarea:focus {
 }
 
 
-/* ═══════════ TMDB RESULT CARDS ═══════════ */
+/* ═══════════ TMDB ═══════════ */
 .tmdb-result {
   animation: cardFadeIn 0.4s ease backwards;
 }
@@ -421,8 +364,6 @@ textarea:focus {
 .tmdb-result:nth-child(4) { animation-delay: 0.12s; }
 .tmdb-result:nth-child(5) { animation-delay: 0.15s; }
 .tmdb-result:nth-child(6) { animation-delay: 0.18s; }
-.tmdb-result:nth-child(7) { animation-delay: 0.21s; }
-.tmdb-result:nth-child(8) { animation-delay: 0.24s; }
 
 
 /* ═══════════ NUMBER COUNTER ═══════════ */
@@ -438,23 +379,133 @@ textarea:focus {
 }
 
 
-/* ═══════════ LOADING SKELETON ═══════════ */
-@keyframes skeletonShimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-.skeleton {
-  background: linear-gradient(90deg, var(--card, #0d1422) 0%, var(--card-2, #111b2f) 50%, var(--card, #0d1422) 100%);
-  background-size: 200% 100%;
-  animation: skeletonShimmer 1.5s ease infinite;
-  border-radius: 12px;
-}
-
-
-/* ═══════════ FLOATING ═══════════ */
+/* ═══════════ FLOAT ═══════════ */
 .float-anim {
   animation: float 3s ease-in-out infinite;
+}
+
+
+/* ═══════════ DOOMSDAY COUNTDOWN ═══════════ */
+.doomsday-feature {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 18px;
+  align-items: center;
+  margin: 18px 0 24px;
+  padding: 16px;
+  border: 1px solid rgba(100, 255, 150, .35);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 85% 40%, rgba(40, 255, 100, .16), transparent 35%),
+    linear-gradient(135deg, #050a07, #10170f 55%, #030604);
+  box-shadow:
+    0 0 35px rgba(30, 255, 100, .10),
+    inset 0 0 35px rgba(30, 255, 100, .04);
+  overflow: hidden;
+  position: relative;
+}
+
+.doomsday-feature::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(120, 255, 160, .05), transparent);
+  animation: doomsdayScan 4s linear infinite;
+  pointer-events: none;
+}
+
+.doomsday-poster-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.doomsday-poster {
+  width: 160px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 13px;
+  border: 1px solid rgba(150, 255, 180, .28);
+  box-shadow: 0 0 22px rgba(60, 255, 110, .22);
+}
+
+.doomsday-content {
+  position: relative;
+  z-index: 1;
+}
+
+.doomsday-kicker {
+  font: 800 .62rem/1.2 "Orbitron", sans-serif;
+  letter-spacing: .15em;
+  color: #9dffbd;
+}
+
+.doomsday-content h2 {
+  margin: 7px 0 4px;
+  font: 900 clamp(1.25rem, 4vw, 2.2rem)/1 "Orbitron", sans-serif;
+  color: #e4ffe9;
+  text-shadow: 0 0 16px rgba(80, 255, 120, .35);
+}
+
+.doomsday-content p {
+  margin: 0 0 12px;
+  color: rgba(220, 255, 230, .68);
+  font-size: .72rem;
+}
+
+.doomsday-live-digits {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.doomsday-live-digits > div {
+  min-width: 62px;
+  padding: 8px 7px;
+  text-align: center;
+  border: 1px solid rgba(100, 255, 150, .25);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, .28);
+}
+
+.doomsday-live-digits b {
+  display: block;
+  font: 900 1rem/1 "Orbitron", sans-serif;
+  color: #d9ffe3;
+  text-shadow: 0 0 10px rgba(80, 255, 120, .6);
+}
+
+.doomsday-live-digits span {
+  display: block;
+  margin-top: 4px;
+  font-size: .45rem;
+  text-transform: uppercase;
+  color: rgba(220, 255, 230, .52);
+}
+
+.doomsday-date {
+  margin-top: 10px;
+  font: 800 .55rem/1.2 "Orbitron", sans-serif;
+  letter-spacing: .12em;
+  color: #7dffab;
+}
+
+@keyframes doomsdayScan {
+  to { transform: translateX(100%); }
+}
+
+@media (max-width: 600px) {
+  .doomsday-feature {
+    grid-template-columns: 78px 1fr;
+    padding: 12px;
+    gap: 12px;
+  }
+  .doomsday-poster {
+    width: 78px;
+    height: 112px;
+  }
+  .doomsday-live-digits > div {
+    min-width: 52px;
+  }
 }
 
 
@@ -471,50 +522,6 @@ textarea:focus {
 }
 
 
-/* ═══════════ TYPING DOTS ═══════════ */
-@keyframes typingDots {
-  0%, 20% { content: "."; }
-  40% { content: ".."; }
-  60%, 100% { content: "..."; }
-}
-
-.loader-text::after {
-  content: "";
-  animation: typingDots 1.5s steps(4) infinite;
-}
-
-
-/* ═══════════ BADGE PULSE ═══════════ */
-@keyframes badgePulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.85; transform: scale(1.05); }
-}
-
-.badge-published,
-.badge-draft,
-.badge-admin {
-  animation: badgePulse 2s ease-in-out infinite;
-}
-
-
-/* ═══════════ HOVER FALLBACK (touch) ═══════════ */
-@media (hover: none) {
-  .movie-card:hover {
-    transform: none;
-  }
-  .movie-card:active {
-    transform: scale(0.98);
-    transition: transform 0.1s ease;
-  }
-  .btn:hover {
-    transform: none;
-  }
-  .btn:active {
-    transform: scale(0.96);
-  }
-}
-
-
 /* ═══════════ REDUCED MOTION ═══════════ */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -525,24 +532,23 @@ textarea:focus {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
 
-  body::before,
-  .premium-hero::before,
-  .hero-badge,
-  .logo,
-  .powered {
-    animation: none !important;
+
+/* ═══════════ TOUCH DEVICE ═══════════ */
+@media (hover: none) {
+  .movie-card:hover { transform: none; }
+  .movie-card:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
   }
+  .btn:hover { transform: none; }
+  .btn:active { transform: scale(0.96); }
 }
 
 
 /* ═══════════ MOBILE TWEAKS ═══════════ */
 @media (max-width: 700px) {
-  .movie-card {
-    animation-duration: 0.35s;
-  }
-
-  .premium-hero::before {
-    animation-duration: 60s;
-  }
+  .movie-card { animation-duration: 0.35s; }
+  .premium-hero::before { animation-duration: 60s; }
 }
