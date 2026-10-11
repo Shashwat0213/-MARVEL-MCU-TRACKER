@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════
    MCU TRACKER — THEME SYSTEM
-   Hero themes + Dark/Light toggle + Sound toggle
+   Hero themes + Dark/Light toggle + Sound + Doomsday countdown
    ═══════════════════════════════════════════════════════════ */
 
 (function() {
@@ -47,11 +47,9 @@
     }
   };
 
-  /* ═══════════ APPLY HERO THEME ═══════════ */
   function applyHeroTheme(theme) {
     if (!heroThemeData[theme]) theme = "blue";
 
-    // Remove all theme- classes from body
     document.body.classList.remove(
       "theme-blue", "theme-red", "theme-gold",
       "theme-cosmic", "theme-ironman",
@@ -78,7 +76,6 @@
     if (subtitle) subtitle.textContent = data.subtitle;
   }
 
-  /* ═══════════ BIND HERO THEME BUTTONS ═══════════ */
   document.querySelectorAll("[data-hero-theme]").forEach(btn => {
     btn.addEventListener("click", () => {
       applyHeroTheme(btn.dataset.heroTheme);
@@ -86,7 +83,6 @@
     });
   });
 
-  // Load saved theme
   let savedTheme = "blue";
   try { savedTheme = localStorage.getItem("mcuHeroTheme") || "blue"; } catch (e) {}
   applyHeroTheme(savedTheme);
@@ -226,6 +222,39 @@
 
   document.addEventListener("movies-loaded", renderV3Next);
   document.addEventListener("tracker-updated", renderV3Next);
+
+  /* ═══════════ DOOMSDAY COUNTDOWN ═══════════ */
+  (function initDoomsdayTimer() {
+    const TARGET = Date.parse("2026-12-18T00:00:00+05:30");
+
+    function pad(n) { return String(n).padStart(2, "0"); }
+
+    function tick() {
+      const diff = Math.max(0, TARGET - Date.now());
+      const total = Math.floor(diff / 1000);
+
+      const days = Math.floor(total / 86400);
+      let rest = total % 86400;
+      const hours = Math.floor(rest / 3600);
+      rest %= 3600;
+      const minutes = Math.floor(rest / 60);
+      const seconds = rest % 60;
+
+      const d = $("doomsdayDays");
+      const h = $("doomsdayHours");
+      const m = $("doomsdayMinutes");
+      const s = $("doomsdaySeconds");
+
+      if (d) d.textContent = String(days).padStart(3, "0");
+      if (h) h.textContent = pad(hours);
+      if (m) m.textContent = pad(minutes);
+      if (s) s.textContent = pad(seconds);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+    console.log("⏱️ Doomsday countdown active");
+  })();
 
   console.log("✅ Theme module loaded");
 })();
