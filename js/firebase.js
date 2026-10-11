@@ -1,7 +1,6 @@
 /* ═══════════════════════════════════════════════════════════
    MCU TRACKER — FIREBASE INITIALIZATION
    Single global instance — no conflicts
-   Email/Password + Google + Firestore (movies, users, trackers, timers)
    ═══════════════════════════════════════════════════════════ */
 
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
@@ -46,7 +45,6 @@ console.log("✅ Firebase initialized (single instance)");
 
 /**
  * Show a toast notification
- * Usage: window.showToast("Message") or window.showToast("Error", "error")
  */
 window.showToast = function(message, type = "ok") {
   const toast = document.getElementById("toast");
@@ -78,7 +76,7 @@ window.escapeHTML = function(str) {
 };
 
 /**
- * Escape for use in HTML attributes (same as escapeHTML)
+ * Escape for use in HTML attributes
  */
 window.escapeAttr = window.escapeHTML;
 
@@ -97,7 +95,6 @@ window.hideLoader = function() {
 
 /**
  * Log admin activity to Firestore
- * Usage: await window.logActivity("action", "details")
  */
 window.logActivity = async function(action, details) {
   try {
@@ -136,7 +133,6 @@ statusPill.style.cssText = `
   pointer-events: none;
 `;
 statusPill.textContent = "Firebase: connecting…";
-statusPill.style.borderColor = "rgba(255, 255, 255, 0.12)";
 
 if (document.body) {
   document.body.appendChild(statusPill);
@@ -148,7 +144,6 @@ if (document.body) {
 
 /**
  * Update the status pill
- * Usage: window.setSyncStatus("synced", "ok")
  */
 window.setSyncStatus = function(text, state = "idle") {
   const el = document.getElementById("firebaseStatus");
