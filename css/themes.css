@@ -1,10 +1,10 @@
 /* ═══════════════════════════════════════════════════════════
    MCU TRACKER — THEME SYSTEM
-   6 complete themes
+   Full-body themes that change entire website colors
    ═══════════════════════════════════════════════════════════ */
 
-/* ═══════════ THEME 1: MIDNIGHT (default) ═══════════ */
-body[data-theme="midnight"] {
+/* ═══════════ DEFAULT (Massive Blue / Midnight) ═══════════ */
+body {
   --bg: #05070d;
   --bg-2: #0a0f1a;
   --card: #0d1422;
@@ -23,56 +23,108 @@ body[data-theme="midnight"] {
   --danger: #ff1744;
   --gold: #ffd54a;
   --hero-bg: linear-gradient(135deg, #0d1422 0%, #0a1a2e 50%, #05070d 100%);
+
+  /* Premium accent (hero theme) */
+  --premium-accent: #27a7ff;
+  --premium-accent2: #a7e8ff;
+  --premium-glow: rgba(39, 167, 255, .28);
 }
 
-/* ═══════════ THEME 2: STARK ═══════════ */
-body[data-theme="stark"] {
+/* ═══════════ 🔴 MARVEL RED ═══════════ */
+body.theme-red {
   --bg: #0a0505;
-  --bg-2: #150808;
-  --card: #1a0d0d;
+  --card: #1a0a0a;
   --card-2: #241010;
   --header-bg: rgba(10, 5, 5, 0.85);
-  --primary: #ffcc00;
-  --primary-glow: rgba(255, 204, 0, 0.35);
-  --secondary: #e10600;
-  --accent: #ff6b00;
-  --accent-glow: rgba(255, 107, 0, 0.35);
+  --primary: #ff3d3d;
+  --primary-glow: rgba(255, 61, 61, 0.35);
+  --secondary: #e62429;
+  --accent: #ffd54a;
+  --accent-glow: rgba(255, 213, 74, 0.35);
   --text: #ffffff;
   --muted: #d1a888;
-  --border: #3a1a1a;
-  --grid-line: rgba(255, 204, 0, 0.04);
-  --success: #00e676;
-  --danger: #ff1744;
-  --gold: #ffcc00;
-  --hero-bg: linear-gradient(135deg, #1a0d0d 0%, #2a0f0f 50%, #0a0505 100%);
+  --border: #4a1a1a;
+  --grid-line: rgba(255, 61, 61, 0.04);
+  --gold: #ffd54a;
+  --hero-bg: linear-gradient(135deg, #1a0808 0%, #2a0f0f 50%, #0a0505 100%);
+
+  --premium-accent: #e62429;
+  --premium-accent2: #ffd54a;
+  --premium-glow: rgba(230, 36, 41, .28);
 }
 
-/* ═══════════ THEME 3: WAKANDA ═══════════ */
-body[data-theme="wakanda"] {
-  --bg: #050a0f;
-  --bg-2: #0a0f15;
-  --card: #0d1520;
-  --card-2: #111b28;
-  --header-bg: rgba(5, 10, 15, 0.85);
+/* ═══════════ 🟡 INFINITY GOLD ═══════════ */
+body.theme-gold {
+  --bg: #0a0705;
+  --card: #1f150d;
+  --card-2: #2a1d12;
+  --header-bg: rgba(10, 7, 5, 0.85);
+  --primary: #fbbf24;
+  --primary-glow: rgba(251, 191, 36, 0.35);
+  --secondary: #f59e0b;
+  --accent: #ef4444;
+  --accent-glow: rgba(239, 68, 68, 0.35);
+  --text: #ffffff;
+  --muted: #d1b997;
+  --border: #3a2a1a;
+  --grid-line: rgba(251, 191, 36, 0.04);
+  --gold: #fbbf24;
+  --hero-bg: linear-gradient(135deg, #1f150d 0%, #2a1a0d 50%, #0a0705 100%);
+
+  --premium-accent: #d9a441;
+  --premium-accent2: #fff0a8;
+  --premium-glow: rgba(217, 164, 65, .28);
+}
+
+/* ═══════════ 🟣 MULTIVERSE PURPLE (Cosmic) ═══════════ */
+body.theme-cosmic {
+  --bg: #08040f;
+  --card: #140d20;
+  --card-2: #1b1128;
+  --header-bg: rgba(8, 4, 15, 0.85);
   --primary: #a855f7;
   --primary-glow: rgba(168, 85, 247, 0.35);
   --secondary: #7c3aed;
   --accent: #22d3ee;
   --accent-glow: rgba(34, 211, 238, 0.35);
   --text: #ffffff;
-  --muted: #a899c9;
-  --border: #2a1e4a;
+  --muted: #c9b3d9;
+  --border: #2a1a3a;
   --grid-line: rgba(168, 85, 247, 0.04);
-  --success: #00e676;
-  --danger: #ff1744;
-  --gold: #c4b5fd;
-  --hero-bg: linear-gradient(135deg, #0d1520 0%, #1a0f2e 50%, #050a0f 100%);
+  --gold: #fbbf24;
+  --hero-bg: linear-gradient(135deg, #140d20 0%, #1f0f2e 50%, #08040f 100%);
+
+  --premium-accent: #a855f7;
+  --premium-accent2: #67e8f9;
+  --premium-glow: rgba(168, 85, 247, .28);
 }
 
-/* ═══════════ THEME 4: GAMMA ═══════════ */
-body[data-theme="gamma"] {
+/* ═══════════ 🤖 STARK BLACK (Iron Man) ═══════════ */
+body.theme-ironman {
+  --bg: #0a0a0a;
+  --card: #1a1a1a;
+  --card-2: #242424;
+  --header-bg: rgba(10, 10, 10, 0.85);
+  --primary: #ffcc00;
+  --primary-glow: rgba(255, 204, 0, 0.35);
+  --secondary: #e10600;
+  --accent: #ff6b00;
+  --accent-glow: rgba(255, 107, 0, 0.35);
+  --text: #ffffff;
+  --muted: #b8b8b8;
+  --border: #333333;
+  --grid-line: rgba(255, 204, 0, 0.04);
+  --gold: #ffcc00;
+  --hero-bg: linear-gradient(135deg, #1a0808 0%, #2a0f0f 50%, #0a0a0a 100%);
+
+  --premium-accent: #e10600;
+  --premium-accent2: #ffcc66;
+  --premium-glow: rgba(225, 6, 0, .32);
+}
+
+/* ═══════════ 🟢 GAMMA GREEN (Hulk) ═══════════ */
+body.theme-gamma {
   --bg: #050f08;
-  --bg-2: #0a150c;
   --card: #0d1f12;
   --card-2: #112a18;
   --header-bg: rgba(5, 15, 8, 0.85);
@@ -86,86 +138,180 @@ body[data-theme="gamma"] {
   --border: #1e3b26;
   --grid-line: rgba(57, 211, 83, 0.04);
   --success: #39d353;
-  --danger: #ff1744;
   --gold: #fbbf24;
   --hero-bg: linear-gradient(135deg, #0d1f12 0%, #0f2a18 50%, #050f08 100%);
+
+  --premium-accent: #39d353;
+  --premium-accent2: #b7ffbf;
+  --premium-glow: rgba(57, 211, 83, .28);
 }
 
-/* ═══════════ THEME 5: COSMIC ═══════════ */
-body[data-theme="cosmic"] {
-  --bg: #08040f;
-  --bg-2: #0f0818;
-  --card: #140d20;
-  --card-2: #1b1128;
-  --header-bg: rgba(8, 4, 15, 0.85);
-  --primary: #f472b6;
-  --primary-glow: rgba(244, 114, 182, 0.35);
-  --secondary: #a855f7;
-  --accent: #22d3ee;
-  --accent-glow: rgba(34, 211, 238, 0.35);
+/* ═══════════ ☠️ DOOMSDAY ═══════════ */
+body.theme-doomsday {
+  --bg: #050a07;
+  --card: #10170f;
+  --card-2: #16241a;
+  --header-bg: rgba(5, 10, 7, 0.85);
+  --primary: #63ff91;
+  --primary-glow: rgba(99, 255, 145, 0.35);
+  --secondary: #22c55e;
+  --accent: #a3e635;
+  --accent-glow: rgba(163, 230, 53, 0.35);
   --text: #ffffff;
-  --muted: #c9b3d9;
-  --border: #2a1a3a;
-  --grid-line: rgba(244, 114, 182, 0.04);
-  --success: #00e676;
-  --danger: #ff1744;
+  --muted: #b8d9c4;
+  --border: #1e3b26;
+  --grid-line: rgba(99, 255, 145, 0.04);
+  --success: #63ff91;
   --gold: #fbbf24;
-  --hero-bg: linear-gradient(135deg, #140d20 0%, #1f0f2e 50%, #08040f 100%);
-}
+  --hero-bg: linear-gradient(135deg, #050a07 0%, #10170f 50%, #030604 100%);
 
-/* ═══════════ THEME 6: INFINITY ═══════════ */
-body[data-theme="infinity"] {
-  --bg: #0a0705;
-  --bg-2: #150e08;
-  --card: #1f150d;
-  --card-2: #2a1d12;
-  --header-bg: rgba(10, 7, 5, 0.85);
-  --primary: #fbbf24;
-  --primary-glow: rgba(251, 191, 36, 0.35);
-  --secondary: #f59e0b;
-  --accent: #ef4444;
-  --accent-glow: rgba(239, 68, 68, 0.35);
-  --text: #ffffff;
-  --muted: #d1b997;
-  --border: #3a2a1a;
-  --grid-line: rgba(251, 191, 36, 0.04);
-  --success: #00e676;
-  --danger: #ff1744;
-  --gold: #fbbf24;
-  --hero-bg: linear-gradient(135deg, #1f150d 0%, #2a1a0d 50%, #0a0705 100%);
+  --premium-accent: #63ff91;
+  --premium-accent2: #d6ffe1;
+  --premium-glow: rgba(60, 255, 110, .32);
 }
 
 
-/* ═══════════ THEME PREVIEW SWATCHES ═══════════ */
-.theme-swatch[data-theme-preview="midnight"] .theme-swatch-preview {
-  background: linear-gradient(135deg, #00e5ff 0%, #0077ff 50%, #0d1422 100%);
+/* ═══════════════════════════════════════════════════════════
+   HERO THEME BACKGROUNDS
+   ═══════════════════════════════════════════════════════════ */
+
+/* Default Blue */
+.premium-hero {
+  background:
+    linear-gradient(90deg, rgba(3,10,22,.97) 0%, rgba(5,18,38,.84) 42%, rgba(0,30,70,.25) 100%),
+    url("https://image.tmdb.org/t/p/w780/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg") center right/cover no-repeat;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.5s ease;
 }
-.theme-swatch[data-theme-preview="stark"] .theme-swatch-preview {
-  background: linear-gradient(135deg, #ffcc00 0%, #e10600 50%, #1a0d0d 100%);
+
+/* Marvel Red */
+body.theme-red .premium-hero {
+  background:
+    linear-gradient(90deg, rgba(12,3,5,.97) 0%, rgba(35,6,10,.82) 42%, rgba(70,8,14,.18) 100%),
+    url("https://image.tmdb.org/t/p/w780/or06FN3Dka5tukK1e9sl16pB3iy.jpg") center right/cover no-repeat;
 }
-.theme-swatch[data-theme-preview="wakanda"] .theme-swatch-preview {
-  background: linear-gradient(135deg, #a855f7 0%, #7c3aed 50%, #0d1520 100%);
+
+/* Infinity Gold */
+body.theme-gold .premium-hero {
+  background:
+    linear-gradient(90deg, rgba(12,9,2,.97) 0%, rgba(35,25,4,.82) 42%, rgba(60,45,10,.20) 100%),
+    url("https://image.tmdb.org/t/p/w780/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg") center right/cover no-repeat;
 }
-.theme-swatch[data-theme-preview="gamma"] .theme-swatch-preview {
-  background: linear-gradient(135deg, #39d353 0%, #16a34a 50%, #0d1f12 100%);
+
+/* Multiverse Purple */
+body.theme-cosmic .premium-hero {
+  background:
+    linear-gradient(90deg, rgba(8,4,20,.97) 0%, rgba(24,8,42,.82) 42%, rgba(30,10,55,.22) 100%),
+    url("https://image.tmdb.org/t/p/w780/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg") center right/cover no-repeat;
 }
-.theme-swatch[data-theme-preview="cosmic"] .theme-swatch-preview {
-  background: linear-gradient(135deg, #f472b6 0%, #a855f7 50%, #140d20 100%);
+
+/* Stark Black */
+body.theme-ironman .premium-hero {
+  background:
+    linear-gradient(90deg, rgba(4,5,8,.96) 0%, rgba(8,9,13,.82) 42%, rgba(20,8,5,.30) 100%),
+    url("https://image.tmdb.org/t/p/w780/78lPtwv72eTNqFW9COBYI0dWDJa.jpg") center right/cover no-repeat;
+  border-color: rgba(255,190,80,.22);
+  box-shadow:
+    0 25px 90px rgba(225,6,0,.18),
+    inset 0 0 70px rgba(0,0,0,.35);
 }
-.theme-swatch[data-theme-preview="infinity"] .theme-swatch-preview {
-  background: linear-gradient(135deg, #fbbf24 0%, #ef4444 50%, #1f150d 100%);
+
+/* Gamma Green */
+body.theme-gamma .premium-hero {
+  background:
+    linear-gradient(90deg, rgba(3,12,5,.97), rgba(7,28,12,.84), rgba(10,50,20,.22)),
+    url("https://image.tmdb.org/t/p/w780/uxzzxijgPIY7slzFvMotPv8wjKA.jpg") center right/cover no-repeat;
+}
+
+/* Doomsday */
+body.theme-doomsday .premium-hero {
+  background:
+    linear-gradient(90deg, rgba(1,8,4,.98), rgba(4,25,12,.82), rgba(5,50,20,.22)),
+    url("https://images.flickdirect.com/movies/avengers-doomsday/avengers-doomsday-poster.jpg") center right/cover no-repeat;
 }
 
 
-/* ═══════════ SMOOTH THEME TRANSITION ═══════════ */
+/* ═══════════════════════════════════════════════════════════
+   THEME-SPECIFIC HERO TEXT
+   ═══════════════════════════════════════════════════════════ */
+
+body.theme-ironman .hero-kicker {
+  color: #ffcc66;
+  text-shadow: 0 0 12px rgba(255,204,102,.55);
+}
+
+body.theme-ironman .hero-title {
+  background: linear-gradient(90deg, #fff 0%, #ffcc66 55%, #e10600 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+body.theme-wakanda .hero-title,
+body.theme-cosmic .hero-title {
+  background: linear-gradient(90deg, var(--premium-accent), var(--premium-accent2), var(--premium-accent));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 4s ease infinite;
+}
+
+body.theme-ironman .hero-btn.primary {
+  background: linear-gradient(135deg, #e10600, #9b0000);
+  box-shadow: 0 8px 30px rgba(225,6,0,.38);
+}
+
+body.theme-ironman .theme-choice.active {
+  border-color: #ffcc66;
+  box-shadow:
+    0 0 0 2px rgba(255,204,102,.16),
+    0 0 20px rgba(225,6,0,.22);
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   THEME-SPECIFIC EFFECTS
+   ═══════════════════════════════════════════════════════════ */
+
+body.theme-ironman .logo-icon {
+  filter: drop-shadow(0 0 15px var(--primary));
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+body.theme-gamma .hero-badge {
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+body.theme-infinity .hero-stat strong {
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 3s ease infinite;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   SMOOTH THEME TRANSITION
+   ═══════════════════════════════════════════════════════════ */
+
 body,
 .site-header,
+header,
+.panel,
 .movie-card,
 .admin-card,
 .modal,
+.auth-card,
 .btn,
+.top-btn,
 .icon-btn,
 .hero-inner,
+.premium-hero,
 .countdown-inner,
 .hero-stat,
 .admin-stat,
@@ -177,8 +323,11 @@ input,
 select,
 textarea,
 .search-box input,
-.filter-chip,
-.admin-tab {
+.filter-btn,
+.admin-tab,
+.stat-card,
+.v3-card,
+footer {
   transition:
     background-color 0.5s ease,
     background 0.5s ease,
@@ -188,107 +337,32 @@ textarea,
 }
 
 
-/* ═══════════ PER-THEME SPECIAL EFFECTS ═══════════ */
-body[data-theme="stark"] .logo-icon {
-  filter: drop-shadow(0 0 15px var(--primary));
-  animation: pulse 1.5s ease-in-out infinite;
+/* ═══════════════════════════════════════════════════════════
+   THEME FLASH ANIMATION
+   ═══════════════════════════════════════════════════════════ */
+
+@keyframes themeFlash {
+  0% { opacity: 0; }
+  30% { opacity: 0.5; }
+  100% { opacity: 0; }
 }
 
-body[data-theme="wakanda"] .hero-title {
-  background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: gradientShift 4s ease infinite;
-}
-
-body[data-theme="gamma"] .hero-badge {
-  animation: pulse 1.8s ease-in-out infinite;
-}
-
-body[data-theme="cosmic"] .bg-stars .star {
-  opacity: 0.9;
-  animation: starTwinkle 2s ease-in-out infinite;
-}
-
-body[data-theme="infinity"] .hero-stat strong {
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: gradientShift 3s ease infinite;
+body.theme-switching::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: var(--primary, #00e5ff);
+  pointer-events: none;
+  z-index: 99999;
+  animation: themeFlash 0.5s ease;
 }
 
 
-/* ═══════════ TEXT CONTRAST FIXES ═══════════ */
-body[data-theme="stark"] .meta-item,
-body[data-theme="wakanda"] .meta-item,
-body[data-theme="gamma"] .meta-item,
-body[data-theme="cosmic"] .meta-item,
-body[data-theme="infinity"] .meta-item {
-  color: var(--muted);
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+  .theme-poster-chip { display: none; }
+  .theme-poster-strip img { width: 48px; height: 68px; }
 }
-
-body[data-theme="stark"] .btn-primary,
-body[data-theme="wakanda"] .btn-primary,
-body[data-theme="gamma"] .btn-primary,
-body[data-theme="cosmic"] .btn-primary,
-body[data-theme="infinity"] .btn-primary {
-  color: #05070d;
-  font-weight: 900;
-}
-
-
-/* ═══════════ THEME BORDER GLOW ═══════════ */
-body[data-theme="stark"] .movie-card:hover {
-  box-shadow:
-    0 0 40px rgba(255, 204, 0, 0.4),
-    0 0 80px rgba(225, 6, 0, 0.2),
-    0 20px 40px rgba(0, 0, 0, 0.5);
-}
-
-body[data-theme="wakanda"] .movie-card:hover {
-  box-shadow:
-    0 0 40px rgba(168, 85, 247, 0.4),
-    0 0 80px rgba(34, 211, 238, 0.2),
-    0 20px 40px rgba(0, 0, 0, 0.5);
-}
-
-body[data-theme="gamma"] .movie-card:hover {
-  box-shadow:
-    0 0 40px rgba(57, 211, 83, 0.4),
-    0 0 80px rgba(163, 230, 53, 0.2),
-    0 20px 40px rgba(0, 0, 0, 0.5);
-}
-
-body[data-theme="cosmic"] .movie-card:hover {
-  box-shadow:
-    0 0 40px rgba(244, 114, 182, 0.4),
-    0 0 80px rgba(34, 211, 238, 0.2),
-    0 20px 40px rgba(0, 0, 0, 0.5);
-}
-
-body[data-theme="infinity"] .movie-card:hover {
-  box-shadow:
-    0 0 40px rgba(251, 191, 36, 0.4),
-    0 0 80px rgba(239, 68, 68, 0.2),
-    0 20px 40px rgba(0, 0, 0, 0.5);
-}
-
-
-/* ═══════════ SCROLLBAR PER-THEME ═══════════ */
-body[data-theme="stark"] ::-webkit-scrollbar-thumb { background: #ffcc00; }
-body[data-theme="wakanda"] ::-webkit-scrollbar-thumb { background: #a855f7; }
-body[data-theme="gamma"] ::-webkit-scrollbar-thumb { background: #39d353; }
-body[data-theme="cosmic"] ::-webkit-scrollbar-thumb { background: #f472b6; }
-body[data-theme="infinity"] ::-webkit-scrollbar-thumb { background: #fbbf24; }
-
-
-/* ═══════════ SELECTION COLOR PER-THEME ═══════════ */
-body[data-theme="stark"] ::selection { background: #ffcc00; color: #0a0505; }
-body[data-theme="wakanda"] ::selection { background: #a855f7; color: #050a0f; }
-body[data-theme="gamma"] ::selection { background: #39d353; color: #050f08; }
-body[data-theme="cosmic"] ::selection { background: #f472b6; color: #08040f; }
-body[data-theme="infinity"] ::selection { background: #fbbf24; color: #0a0705; }
