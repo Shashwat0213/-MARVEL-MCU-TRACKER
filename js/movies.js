@@ -6,12 +6,11 @@
 
 import {
   collection,
-  getDocs,
-  query,
-  orderBy
+  getDocs
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
 const db = window.__mcuDb;
+
 if (!db) {
   console.error("❌ movies.js: Firebase not initialized");
 } else {
@@ -23,8 +22,6 @@ if (!db) {
   let currentSearch = "";
   let currentSort = "timeline";
 
-  window.__mcuMovies = allMovies;
-
   /* ═══════════ LOAD MOVIES FROM FIRESTORE ═══════════ */
   async function loadMoviesFromFirestore() {
     try {
@@ -32,7 +29,6 @@ if (!db) {
       const movies = [];
       snap.forEach(d => {
         const data = d.data();
-        // Only show published movies to normal users
         if (!data.status || data.status === "published") {
           movies.push({ id: d.id, ...data });
         }
@@ -51,7 +47,6 @@ if (!db) {
   function getFilteredMovies() {
     let result = [...allMovies];
 
-    // Search
     if (currentSearch) {
       const q = currentSearch.toLowerCase().trim();
       result = result.filter(m =>
@@ -61,7 +56,6 @@ if (!db) {
       );
     }
 
-    // Filter by type/status
     const watched = window.__mcuWatched || {};
     const favorites = window.__mcuFavorites || {};
 
@@ -77,7 +71,6 @@ if (!db) {
       result = result.filter(m => favorites[m.id]);
     }
 
-    // Sort
     switch (currentSort) {
       case "title":
         result.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
@@ -104,7 +97,6 @@ if (!db) {
   /* ═══════════ RENDER MOVIE CARDS ═══════════ */
   function renderMovies() {
     const grid = $("moviesGrid");
-    const emptyState = $("emptyState");
     if (!grid) return;
 
     const filtered = getFilteredMovies();
@@ -124,7 +116,7 @@ if (!db) {
 
     grid.innerHTML = "";
 
-    filtered.forEach((movie, index) => {
+    filtered.forEach(movie => {
       const isWatched = !!(window.__mcuWatched || {})[movie.id];
       const isFavorite = !!(window.__mcuFavorites || {})[movie.id];
 
@@ -144,7 +136,7 @@ if (!db) {
       li.innerHTML = `
         <div class="poster-container">
           <img class="poster" src="${window.escapeAttr(posterSrc)}" alt="${title}" loading="lazy"
-               onerror="this.src='https://placehold.co/500x750/0d1422/00e5ff?text=${encodeURIComponent(movie.title || 'MCU')}'; this.onerror=null;">
+               onerror="this.onerror=null; this.src='https://placehold.co/500x750/0d1422/00e5ff?text=${encodeURIComponent(movie.title || 'MCU')}';">
           <div class="poster-overlay"></div>
           <div class="phase-badge">${phase}</div>
           <button class="favorite-btn ${isFavorite ? "active" : ""}" data-action="favorite" data-id="${window.escapeAttr(movie.id)}" title="Favorite">
@@ -176,21 +168,19 @@ if (!db) {
 
   /* ═══════════ CARD EVENT DELEGATION ═══════════ */
   document.addEventListener("click", e => {
-    // Favorite button
     const favBtn = e.target.closest('[data-action="favorite"]');
     if (favBtn) {
       e.stopPropagation();
       const id = favBtn.dataset.id;
-      window.toggleFavorite?.(id);
+      if (window.toggleFavorite) window.toggleFavorite(id);
       return;
     }
 
-    // Movie card click (open modal)
     const card = e.target.closest(".movie-card");
     if (card && !e.target.closest("button") && !e.target.closest("input") && !e.target.closest("label")) {
       const id = card.dataset.movieId;
       const movie = allMovies.find(m => m.id === id);
-      if (movie) window.openMovieModal?.(movie);
+      if (movie && window.openMovieModal) window.openMovieModal(movie);
     }
   });
 
@@ -199,7 +189,7 @@ if (!db) {
     const cb = e.target.closest('[data-action="watched"]');
     if (cb) {
       const id = cb.dataset.id;
-      window.toggleWatched?.(id, cb.checked);
+      if (window.toggleWatched) window.toggleWatched(id, cb.checked);
     }
   });
 
@@ -280,7 +270,7 @@ if (!db) {
       poster.src = movie.poster || "";
       poster.alt = movie.title || "";
       poster.onerror = () => {
-        poster.src = `https://placehold.co/500x750/0d1422/00e5ff?text=${encodeURIComponent(movie.title || "MCU")}`;
+        poster.src = "https://placehold.co/500x750/0d1422/00e5ff?text=" + encodeURIComponent(movie.title || "MCU");
       };
     }
     if (title) title.textContent = movie.title || movie.id;
@@ -288,10 +278,10 @@ if (!db) {
     if (meta) {
       meta.innerHTML = "";
       const items = [
-        `📅 ${movie.releaseDate || movie.year || "TBA"}`,
-        `⭐ ${movie.rating && movie.rating > 0 ? Number(movie.rating).toFixed(1) : "TBA"}`,
-        `⚡ ${movie.phase || "MCU"}`,
-        movie.runtime ? `⏱️ ${movie.runtime} min` : null
+        "📅 " + (movie.releaseDate || movie.year || "TBA"),
+        "⭐ " + (movie.rating && movie.rating > 0 ? Number(movie.rating).toFixed(1) : "TBA"),
+        "⚡ " + (movie.phase || "MCU"),
+        movie.runtime ? "⏱️ " + movie.runtime + " min" : null
       ].filter(Boolean);
       items.forEach(text => {
         const span = document.createElement("span");
@@ -317,7 +307,7 @@ if (!db) {
     }
 
     if (cast) {
-      cast.textContent = movie.cast ? `Cast: ${movie.cast}` : "";
+      cast.textContent = movie.cast ? "Cast: " + movie.cast : "";
     }
 
     if (trailerBtn) {
@@ -342,7 +332,7 @@ if (!db) {
       const isWatched = !!watched[movie.id];
       watchBtn.textContent = isWatched ? "✓ Watched" : "✓ Mark Watched";
       watchBtn.onclick = () => {
-        window.toggleWatched?.(movie.id, !watched[movie.id]);
+        if (window.toggleWatched) window.toggleWatched(movie.id, !watched[movie.id]);
         watchBtn.textContent = watched[movie.id] ? "✓ Watched" : "✓ Mark Watched";
       };
     }
@@ -352,7 +342,7 @@ if (!db) {
       favBtn.textContent = isFav ? "❤️ Favorited" : "♡ Favorite";
       favBtn.classList.toggle("active", isFav);
       favBtn.onclick = () => {
-        window.toggleFavorite?.(movie.id);
+        if (window.toggleFavorite) window.toggleFavorite(movie.id);
         const nowFav = !!(window.__mcuFavorites || {})[movie.id];
         favBtn.textContent = nowFav ? "❤️ Favorited" : "♡ Favorite";
         favBtn.classList.toggle("active", nowFav);
@@ -362,19 +352,6 @@ if (!db) {
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
-
-    // Close handlers
-    const closeBtn = modal.querySelector("[data-close-modal]");
-    if (closeBtn && !closeBtn._bound) {
-      closeBtn._bound = true;
-      closeBtn.onclick = () => closeMovieModal();
-    }
-    if (!modal._bound) {
-      modal._bound = true;
-      modal.addEventListener("click", e => {
-        if (e.target === modal) closeMovieModal();
-      });
-    }
   }
 
   function closeMovieModal() {
@@ -387,6 +364,22 @@ if (!db) {
 
   window.openMovieModal = openMovieModal;
   window.closeMovieModal = closeMovieModal;
+
+  /* ═══════════ MOVIE MODAL CLOSE HANDLERS ═══════════ */
+  const movieModal = $("movieModal");
+  if (movieModal) {
+    const closeBtn = movieModal.querySelector("[data-close-modal]");
+    if (closeBtn) closeBtn.addEventListener("click", closeMovieModal);
+    movieModal.addEventListener("click", e => {
+      if (e.target === movieModal) closeMovieModal();
+    });
+  }
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && movieModal && movieModal.classList.contains("open")) {
+      closeMovieModal();
+    }
+  });
 
   /* ═══════════ PUBLIC API ═══════════ */
   window.MCU = window.MCU || {};
@@ -401,8 +394,8 @@ if (!db) {
   (async () => {
     await loadMoviesFromFirestore();
     renderMovies();
-    window.hideLoader?.();
-    window.dispatchEvent(new CustomEvent("movies-loaded"));
+    if (window.hideLoader) window.hideLoader();
+    document.dispatchEvent(new CustomEvent("movies-loaded"));
   })();
 
   /* ═══════════ RELOAD WHEN TRACKER STATE CHANGES ═══════════ */
