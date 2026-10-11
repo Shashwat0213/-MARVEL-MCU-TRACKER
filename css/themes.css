@@ -1,0 +1,294 @@
+/* ═══════════════════════════════════════════════════════════
+   MCU TRACKER — THEME SYSTEM
+   6 complete themes
+   ═══════════════════════════════════════════════════════════ */
+
+/* ═══════════ THEME 1: MIDNIGHT (default) ═══════════ */
+body[data-theme="midnight"] {
+  --bg: #05070d;
+  --bg-2: #0a0f1a;
+  --card: #0d1422;
+  --card-2: #111b2f;
+  --header-bg: rgba(5, 7, 13, 0.85);
+  --primary: #00e5ff;
+  --primary-glow: rgba(0, 229, 255, 0.3);
+  --secondary: #0077ff;
+  --accent: #ff3d00;
+  --accent-glow: rgba(255, 61, 0, 0.3);
+  --text: #ffffff;
+  --muted: #9db4d1;
+  --border: #18345b;
+  --grid-line: rgba(0, 229, 255, 0.035);
+  --success: #00e676;
+  --danger: #ff1744;
+  --gold: #ffd54a;
+  --hero-bg: linear-gradient(135deg, #0d1422 0%, #0a1a2e 50%, #05070d 100%);
+}
+
+/* ═══════════ THEME 2: STARK ═══════════ */
+body[data-theme="stark"] {
+  --bg: #0a0505;
+  --bg-2: #150808;
+  --card: #1a0d0d;
+  --card-2: #241010;
+  --header-bg: rgba(10, 5, 5, 0.85);
+  --primary: #ffcc00;
+  --primary-glow: rgba(255, 204, 0, 0.35);
+  --secondary: #e10600;
+  --accent: #ff6b00;
+  --accent-glow: rgba(255, 107, 0, 0.35);
+  --text: #ffffff;
+  --muted: #d1a888;
+  --border: #3a1a1a;
+  --grid-line: rgba(255, 204, 0, 0.04);
+  --success: #00e676;
+  --danger: #ff1744;
+  --gold: #ffcc00;
+  --hero-bg: linear-gradient(135deg, #1a0d0d 0%, #2a0f0f 50%, #0a0505 100%);
+}
+
+/* ═══════════ THEME 3: WAKANDA ═══════════ */
+body[data-theme="wakanda"] {
+  --bg: #050a0f;
+  --bg-2: #0a0f15;
+  --card: #0d1520;
+  --card-2: #111b28;
+  --header-bg: rgba(5, 10, 15, 0.85);
+  --primary: #a855f7;
+  --primary-glow: rgba(168, 85, 247, 0.35);
+  --secondary: #7c3aed;
+  --accent: #22d3ee;
+  --accent-glow: rgba(34, 211, 238, 0.35);
+  --text: #ffffff;
+  --muted: #a899c9;
+  --border: #2a1e4a;
+  --grid-line: rgba(168, 85, 247, 0.04);
+  --success: #00e676;
+  --danger: #ff1744;
+  --gold: #c4b5fd;
+  --hero-bg: linear-gradient(135deg, #0d1520 0%, #1a0f2e 50%, #050a0f 100%);
+}
+
+/* ═══════════ THEME 4: GAMMA ═══════════ */
+body[data-theme="gamma"] {
+  --bg: #050f08;
+  --bg-2: #0a150c;
+  --card: #0d1f12;
+  --card-2: #112a18;
+  --header-bg: rgba(5, 15, 8, 0.85);
+  --primary: #39d353;
+  --primary-glow: rgba(57, 211, 83, 0.35);
+  --secondary: #16a34a;
+  --accent: #a3e635;
+  --accent-glow: rgba(163, 230, 53, 0.35);
+  --text: #ffffff;
+  --muted: #a8d1b4;
+  --border: #1e3b26;
+  --grid-line: rgba(57, 211, 83, 0.04);
+  --success: #39d353;
+  --danger: #ff1744;
+  --gold: #fbbf24;
+  --hero-bg: linear-gradient(135deg, #0d1f12 0%, #0f2a18 50%, #050f08 100%);
+}
+
+/* ═══════════ THEME 5: COSMIC ═══════════ */
+body[data-theme="cosmic"] {
+  --bg: #08040f;
+  --bg-2: #0f0818;
+  --card: #140d20;
+  --card-2: #1b1128;
+  --header-bg: rgba(8, 4, 15, 0.85);
+  --primary: #f472b6;
+  --primary-glow: rgba(244, 114, 182, 0.35);
+  --secondary: #a855f7;
+  --accent: #22d3ee;
+  --accent-glow: rgba(34, 211, 238, 0.35);
+  --text: #ffffff;
+  --muted: #c9b3d9;
+  --border: #2a1a3a;
+  --grid-line: rgba(244, 114, 182, 0.04);
+  --success: #00e676;
+  --danger: #ff1744;
+  --gold: #fbbf24;
+  --hero-bg: linear-gradient(135deg, #140d20 0%, #1f0f2e 50%, #08040f 100%);
+}
+
+/* ═══════════ THEME 6: INFINITY ═══════════ */
+body[data-theme="infinity"] {
+  --bg: #0a0705;
+  --bg-2: #150e08;
+  --card: #1f150d;
+  --card-2: #2a1d12;
+  --header-bg: rgba(10, 7, 5, 0.85);
+  --primary: #fbbf24;
+  --primary-glow: rgba(251, 191, 36, 0.35);
+  --secondary: #f59e0b;
+  --accent: #ef4444;
+  --accent-glow: rgba(239, 68, 68, 0.35);
+  --text: #ffffff;
+  --muted: #d1b997;
+  --border: #3a2a1a;
+  --grid-line: rgba(251, 191, 36, 0.04);
+  --success: #00e676;
+  --danger: #ff1744;
+  --gold: #fbbf24;
+  --hero-bg: linear-gradient(135deg, #1f150d 0%, #2a1a0d 50%, #0a0705 100%);
+}
+
+
+/* ═══════════ THEME PREVIEW SWATCHES ═══════════ */
+.theme-swatch[data-theme-preview="midnight"] .theme-swatch-preview {
+  background: linear-gradient(135deg, #00e5ff 0%, #0077ff 50%, #0d1422 100%);
+}
+.theme-swatch[data-theme-preview="stark"] .theme-swatch-preview {
+  background: linear-gradient(135deg, #ffcc00 0%, #e10600 50%, #1a0d0d 100%);
+}
+.theme-swatch[data-theme-preview="wakanda"] .theme-swatch-preview {
+  background: linear-gradient(135deg, #a855f7 0%, #7c3aed 50%, #0d1520 100%);
+}
+.theme-swatch[data-theme-preview="gamma"] .theme-swatch-preview {
+  background: linear-gradient(135deg, #39d353 0%, #16a34a 50%, #0d1f12 100%);
+}
+.theme-swatch[data-theme-preview="cosmic"] .theme-swatch-preview {
+  background: linear-gradient(135deg, #f472b6 0%, #a855f7 50%, #140d20 100%);
+}
+.theme-swatch[data-theme-preview="infinity"] .theme-swatch-preview {
+  background: linear-gradient(135deg, #fbbf24 0%, #ef4444 50%, #1f150d 100%);
+}
+
+
+/* ═══════════ SMOOTH THEME TRANSITION ═══════════ */
+body,
+.site-header,
+.movie-card,
+.admin-card,
+.modal,
+.btn,
+.icon-btn,
+.hero-inner,
+.countdown-inner,
+.hero-stat,
+.admin-stat,
+.admin-header,
+.admin-tabs,
+.theme-panel,
+.theme-swatch,
+input,
+select,
+textarea,
+.search-box input,
+.filter-chip,
+.admin-tab {
+  transition:
+    background-color 0.5s ease,
+    background 0.5s ease,
+    border-color 0.5s ease,
+    color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+
+/* ═══════════ PER-THEME SPECIAL EFFECTS ═══════════ */
+body[data-theme="stark"] .logo-icon {
+  filter: drop-shadow(0 0 15px var(--primary));
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+body[data-theme="wakanda"] .hero-title {
+  background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 4s ease infinite;
+}
+
+body[data-theme="gamma"] .hero-badge {
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+body[data-theme="cosmic"] .bg-stars .star {
+  opacity: 0.9;
+  animation: starTwinkle 2s ease-in-out infinite;
+}
+
+body[data-theme="infinity"] .hero-stat strong {
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 3s ease infinite;
+}
+
+
+/* ═══════════ TEXT CONTRAST FIXES ═══════════ */
+body[data-theme="stark"] .meta-item,
+body[data-theme="wakanda"] .meta-item,
+body[data-theme="gamma"] .meta-item,
+body[data-theme="cosmic"] .meta-item,
+body[data-theme="infinity"] .meta-item {
+  color: var(--muted);
+}
+
+body[data-theme="stark"] .btn-primary,
+body[data-theme="wakanda"] .btn-primary,
+body[data-theme="gamma"] .btn-primary,
+body[data-theme="cosmic"] .btn-primary,
+body[data-theme="infinity"] .btn-primary {
+  color: #05070d;
+  font-weight: 900;
+}
+
+
+/* ═══════════ THEME BORDER GLOW ═══════════ */
+body[data-theme="stark"] .movie-card:hover {
+  box-shadow:
+    0 0 40px rgba(255, 204, 0, 0.4),
+    0 0 80px rgba(225, 6, 0, 0.2),
+    0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="wakanda"] .movie-card:hover {
+  box-shadow:
+    0 0 40px rgba(168, 85, 247, 0.4),
+    0 0 80px rgba(34, 211, 238, 0.2),
+    0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="gamma"] .movie-card:hover {
+  box-shadow:
+    0 0 40px rgba(57, 211, 83, 0.4),
+    0 0 80px rgba(163, 230, 53, 0.2),
+    0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="cosmic"] .movie-card:hover {
+  box-shadow:
+    0 0 40px rgba(244, 114, 182, 0.4),
+    0 0 80px rgba(34, 211, 238, 0.2),
+    0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="infinity"] .movie-card:hover {
+  box-shadow:
+    0 0 40px rgba(251, 191, 36, 0.4),
+    0 0 80px rgba(239, 68, 68, 0.2),
+    0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+
+/* ═══════════ SCROLLBAR PER-THEME ═══════════ */
+body[data-theme="stark"] ::-webkit-scrollbar-thumb { background: #ffcc00; }
+body[data-theme="wakanda"] ::-webkit-scrollbar-thumb { background: #a855f7; }
+body[data-theme="gamma"] ::-webkit-scrollbar-thumb { background: #39d353; }
+body[data-theme="cosmic"] ::-webkit-scrollbar-thumb { background: #f472b6; }
+body[data-theme="infinity"] ::-webkit-scrollbar-thumb { background: #fbbf24; }
+
+
+/* ═══════════ SELECTION COLOR PER-THEME ═══════════ */
+body[data-theme="stark"] ::selection { background: #ffcc00; color: #0a0505; }
+body[data-theme="wakanda"] ::selection { background: #a855f7; color: #050a0f; }
+body[data-theme="gamma"] ::selection { background: #39d353; color: #050f08; }
+body[data-theme="cosmic"] ::selection { background: #f472b6; color: #08040f; }
+body[data-theme="infinity"] ::selection { background: #fbbf24; color: #0a0705; }
