@@ -1,6 +1,7 @@
 /* ═══════════════════════════════════════════════════════════
    MCU TRACKER — AUTHENTICATION
-   Email/Password + Google Sign-in + Profile sync
+   Email/Password + Google Sign-in (fixed for mobile)
+   + Profile sync + Admin role check
    ═══════════════════════════════════════════════════════════ */
 
 import {
@@ -26,28 +27,35 @@ import {
 const auth = window.__mcuAuth;
 const db = window.__mcuDb;
 
+/* ═══════════ ADMIN EMAIL ═══════════
+   Aapka admin Gmail — iske saath login hone par admin banega
+*/
+const ADMIN_EMAIL = "mcutrackersupport@gmail.com";
+
 if (!auth || !db) {
   console.error("❌ auth.js: Firebase not initialized");
 } else {
   const $ = id => document.getElementById(id);
 
-  /* ═══════════ ELEMENT REFS ═══════════ */
-  const authModal = $("authModal");
-  const authArea = $("authArea");
+  const authModal = $("authOverlay");
   const authForm = $("authForm");
   const authName = $("authName");
   const authEmail = $("authEmail");
   const authPassword = $("authPassword");
-  const authNameField = $("nameField");
+  const authNameField = $("authNameField");
   const authMessage = $("authMessage");
-  const authSubmitBtn = $("authSubmitBtn");
+  const authSubmitBtn = $("authSubmit");
   const authTitle = $("authTitle");
   const authSubtitle = $("authSubtitle");
-  const googleLoginBtn = $("googleLoginBtn");
+  const googleBtn = $("googleBtn");
+  const authUserBox = $("authUserBox");
+  const authUserName = $("authUserName");
+  const authAvatar = $("authAvatar");
+  const authOpenBtn = $("authOpenBtn");
 
   let currentUser = null;
 
-  /* ═══════════ MODAL CONTROLS ═══════════ */
+  /* ═══════════ MODAL ═══════════ */
   function openAuthModal() {
     if (!authModal) return;
     authModal.classList.add("open");
@@ -63,7 +71,6 @@ if (!auth || !db) {
     authModal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
     if (authMessage) authMessage.textContent = "";
-    if (authForm) authForm.reset();
   }
 
   function setAuthMode(mode) {
@@ -71,28 +78,29 @@ if (!auth || !db) {
       tab.classList.toggle("active", tab.dataset.authTab === mode);
     });
     const isSignup = mode === "signup";
-    if (authNameField) authNameField.style.display = isSignup ? "flex" : "none";
+    if (authNameField) authNameField.style.display = isSignup ? "grid" : "none";
     if (authName) authName.required = isSignup;
-    if (authTitle) authTitle.textContent = isSignup ? "Create Account" : "Welcome Back";
+    if (authTitle) authTitle.textContent = isSignup ? "Create account" : "Welcome back";
     if (authSubtitle) authSubtitle.textContent = isSignup
-      ? "Create a new MCU Tracker account"
-      : "Sign in to sync your progress";
-    if (authSubmitBtn) authSubmitBtn.textContent = isSignup ? "Create Account" : "Login";
+      ? "Create a secure account for your MCU journey."
+      : "Sign in to sync your MCU tracker across devices.";
+    if (authSubmitBtn) authSubmitBtn.textContent = isSignup ? "Create account" : "Login";
     if (authMessage) authMessage.textContent = "";
   }
 
-  function showAuthMessage(msg, ok = false) {
+  function showMessage(msg, ok = false) {
     if (!authMessage) return;
     authMessage.textContent = msg;
     authMessage.classList.toggle("success", ok);
   }
 
-  /* ═══════════ PROFILE MANAGEMENT ═══════════ */
+  /* ═══════════ PROFILE SAVE ═══════════ */
   async function saveUserProfile(user) {
     if (!user) return;
     try {
       const ref = doc(db, "users", user.uid);
       const snap = await getDoc(ref);
+      const isAdminEmail = (user.email || "").toLowerCase() === ADMIN_EMAIL.toLowerCase();
 
       if (!snap.exists()) {
         await setDoc(ref, {
@@ -100,7 +108,7 @@ if (!auth || !db) {
           email: user.email || "",
           displayName: user.displayName || (user.email || "").split("@")[0] || "User",
           photoURL: user.photoURL || "",
-          role: "user",
+          role: isAdminEmail ? "admin" : "user",
           createdAt: serverTimestamp(),
           updatedAt: serverTimestamp()
         });
@@ -121,18 +129,19 @@ if (!auth || !db) {
     if (!user) return "user";
     try {
       const snap = await getDoc(doc(db, "users", user.uid));
-      return snap.exists() && snap.data().role === "admin" ? "admin" : "user";
+      if (snap.exists() && snap.data().role === "admin") return "admin";
+      // Fallback: check admin email
+      if ((user.email || "").toLowerCase() === ADMIN_EMAIL.toLowerCase()) return "admin";
+      return "user";
     } catch (e) {
       return "user";
     }
   }
 
-  /* ═══════════ UI UPDATE ═══════════ */
+  /* ═══════════ UPDATE UI ═══════════ */
   async function updateAuthUI(user) {
     currentUser = user;
     window.__mcuUser = user;
-
-    if (!authArea) return;
 
     if (user) {
       const role = await getUserRole(user);
@@ -141,33 +150,26 @@ if (!auth || !db) {
       const name = user.displayName || (user.email ? user.email.split("@")[0] : "User");
       const initial = name.trim().charAt(0).toUpperCase() || "U";
 
-      authArea.innerHTML = `
-        <div class="user-chip">
-          <div class="user-avatar">
-            ${user.photoURL
-              ? `<img src="${user.photoURL}" alt="${window.escapeHTML(name)}">`
-              : window.escapeHTML(initial)}
-          </div>
-          <span class="user-name">${window.escapeHTML(name)}</span>
-          ${role === "admin" ? `<button class="icon-btn-mini" id="openAdminBtn" title="Admin Panel">🛡️</button>` : ""}
-          <button class="icon-btn-mini" id="logoutBtn" title="Logout">🚪</button>
-        </div>
-      `;
-
-      const logoutBtn = document.getElementById("logoutBtn");
-      if (logoutBtn) logoutBtn.onclick = handleLogout;
-
-      const openAdminBtn = document.getElementById("openAdminBtn");
-      if (openAdminBtn) {
-        openAdminBtn.onclick = () => {
-          document.dispatchEvent(new CustomEvent("admin-open"));
-        };
+      if (authUserBox) authUserBox.style.display = "flex";
+      if (authOpenBtn) authOpenBtn.style.display = "none";
+      if (authUserName) authUserName.textContent = name;
+      if (authAvatar) {
+        if (user.photoURL) {
+          authAvatar.innerHTML = `<img src="${window.escapeHTML(user.photoURL)}" alt="${window.escapeHTML(name)}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`;
+        } else {
+          authAvatar.textContent = initial;
+        }
       }
+
+      const adminBtn = $("authAdminBtn");
+      if (adminBtn) adminBtn.style.display = role === "admin" ? "inline-block" : "none";
+
+      window.setSyncStatus("synced", "ok");
     } else {
       window.__mcuUserRole = null;
-      authArea.innerHTML = `<button class="btn btn-primary" id="loginBtn">👤 Login</button>`;
-      const newLoginBtn = document.getElementById("loginBtn");
-      if (newLoginBtn) newLoginBtn.onclick = openAuthModal;
+      if (authUserBox) authUserBox.style.display = "none";
+      if (authOpenBtn) authOpenBtn.style.display = "inline-block";
+      window.setSyncStatus("not signed in", "idle");
     }
   }
 
@@ -186,7 +188,7 @@ if (!auth || !db) {
 
     authSubmitBtn.disabled = true;
     authSubmitBtn.textContent = "Please wait…";
-    showAuthMessage("");
+    showMessage("");
 
     try {
       if (mode === "signup") {
@@ -204,56 +206,63 @@ if (!auth || !db) {
         await updateAuthUI(cred.user);
 
         closeAuthModal();
-        if (window.showToast) window.showToast("✓ Account created successfully!", "ok");
+        window.showToast("✓ Account created successfully!", "ok");
+        document.dispatchEvent(new CustomEvent("user-logged-in", { detail: { user: cred.user } }));
       } else {
         const cred = await signInWithEmailAndPassword(auth, email, password);
         await updateAuthUI(cred.user);
 
         closeAuthModal();
-        if (window.showToast) window.showToast("✓ Logged in successfully!", "ok");
+        window.showToast("✓ Logged in successfully!", "ok");
+        document.dispatchEvent(new CustomEvent("user-logged-in", { detail: { user: cred.user } }));
       }
     } catch (err) {
       console.error("Auth error:", err);
       const messages = {
         "auth/invalid-credential": "Email or password is incorrect.",
-        "auth/email-already-in-use": "This email is already registered.",
+        "auth/email-already-in-use": "That email is already registered.",
         "auth/weak-password": "Password must be at least 6 characters.",
         "auth/invalid-email": "Please enter a valid email address.",
         "auth/network-request-failed": "Network error. Check your connection.",
-        "auth/operation-not-allowed": "Email/Password sign-in is not enabled.",
-        "auth/unauthorized-domain": "This domain is not authorized in Firebase.",
+        "auth/operation-not-allowed": "Email/Password sign-in is not enabled in Firebase.",
+        "auth/unauthorized-domain": "This domain is not authorized in Firebase Authentication.",
         "auth/user-disabled": "This account has been disabled.",
-        "permission-denied": "Permission denied. Check Firestore rules."
+        "permission-denied": "Firestore permission denied. Check rules."
       };
-      showAuthMessage(messages[err.code] || err.message || "Authentication failed.");
+      showMessage(messages[err.code] || err.message || "Authentication failed.");
     } finally {
       authSubmitBtn.disabled = false;
-      authSubmitBtn.textContent = mode === "signup" ? "Create Account" : "Login";
+      authSubmitBtn.textContent = mode === "signup" ? "Create account" : "Login";
     }
   }
 
-  /* ═══════════ GOOGLE SIGN-IN ═══════════ */
+  /* ═══════════ GOOGLE LOGIN (FIXED — Mobile + Desktop) ═══════════ */
   async function handleGoogleLogin() {
-    if (!googleLoginBtn) return;
+    if (!googleBtn) return;
 
-    const originalHTML = googleLoginBtn.innerHTML;
-    googleLoginBtn.disabled = true;
-    googleLoginBtn.innerHTML = "Signing in…";
+    const originalHTML = googleBtn.innerHTML;
+    googleBtn.disabled = true;
+    googleBtn.innerHTML = "Signing in…";
 
     const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
 
     try {
       if (isMobile) {
+        // Mobile: redirect flow (popup block issue)
         await signInWithRedirect(auth, provider);
+        // Page reload hoga. getRedirectResult() niche handle karega.
       } else {
+        // Desktop: popup
         const result = await signInWithPopup(auth, provider);
         if (result.user) {
           await saveUserProfile(result.user);
           await updateAuthUI(result.user);
           closeAuthModal();
-          if (window.showToast) window.showToast("✓ Logged in with Google!", "ok");
+          window.showToast("✓ Logged in with Google!", "ok");
+          document.dispatchEvent(new CustomEvent("user-logged-in", { detail: { user: result.user } }));
         }
       }
     } catch (err) {
@@ -262,15 +271,14 @@ if (!auth || !db) {
         "auth/popup-blocked": "Popup blocked. Please allow popups and try again.",
         "auth/popup-closed-by-user": "Sign-in cancelled.",
         "auth/cancelled-popup-request": "Another sign-in is in progress.",
-        "auth/unauthorized-domain": "Domain not authorized in Firebase.",
+        "auth/unauthorized-domain": "This domain is not authorized in Firebase Console → Authentication → Settings → Authorized domains.",
         "auth/network-request-failed": "Network error. Check your connection.",
         "auth/account-exists-with-different-credential": "This email uses another sign-in method.",
-        "auth/operation-not-allowed": "Google sign-in is not enabled."
+        "auth/operation-not-allowed": "Google sign-in is not enabled in Firebase."
       };
-      showAuthMessage(messages[err.code] || err.message || "Google sign-in failed.");
-    } finally {
-      googleLoginBtn.disabled = false;
-      googleLoginBtn.innerHTML = originalHTML;
+      showMessage(messages[err.code] || err.message || "Google sign-in failed.");
+      googleBtn.disabled = false;
+      googleBtn.innerHTML = originalHTML;
     }
   }
 
@@ -278,25 +286,20 @@ if (!auth || !db) {
   async function handleLogout() {
     try {
       await signOut(auth);
-      if (window.showToast) window.showToast("✓ Logged out", "ok");
+      window.showToast("✓ Logged out", "ok");
+      document.dispatchEvent(new CustomEvent("user-logged-out"));
     } catch (err) {
       console.error("Logout error:", err);
-      if (window.showToast) window.showToast("Logout failed", "error");
+      window.showToast("Logout failed", "error");
     }
   }
 
   /* ═══════════ EVENT BINDINGS ═══════════ */
-  const initialLoginBtn = $("loginBtn");
-  if (initialLoginBtn) initialLoginBtn.onclick = openAuthModal;
-
-  document.querySelectorAll("[data-close-modal]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      // Only close auth modal when the auth modal is open
-      if (authModal && authModal.classList.contains("open")) {
-        closeAuthModal();
-      }
-    });
-  });
+  if (authOpenBtn) authOpenBtn.addEventListener("click", openAuthModal);
+  const authCloseBtn = $("authCloseBtn");
+  if (authCloseBtn) authCloseBtn.addEventListener("click", closeAuthModal);
+  const authLogoutBtn = $("authLogoutBtn");
+  if (authLogoutBtn) authLogoutBtn.addEventListener("click", handleLogout);
 
   if (authModal) {
     authModal.addEventListener("click", e => {
@@ -315,7 +318,14 @@ if (!auth || !db) {
   });
 
   if (authForm) authForm.addEventListener("submit", handleAuthSubmit);
-  if (googleLoginBtn) googleLoginBtn.addEventListener("click", handleGoogleLogin);
+  if (googleBtn) googleBtn.addEventListener("click", handleGoogleLogin);
+
+  const adminBtn = $("authAdminBtn");
+  if (adminBtn) {
+    adminBtn.addEventListener("click", () => {
+      document.dispatchEvent(new CustomEvent("admin-open"));
+    });
+  }
 
   /* ═══════════ PERSISTENCE ═══════════ */
   try {
@@ -330,7 +340,8 @@ if (!auth || !db) {
     if (redirectResult && redirectResult.user) {
       await saveUserProfile(redirectResult.user);
       await updateAuthUI(redirectResult.user);
-      if (window.showToast) window.showToast("✓ Logged in with Google!", "ok");
+      window.showToast("✓ Logged in with Google!", "ok");
+      document.dispatchEvent(new CustomEvent("user-logged-in", { detail: { user: redirectResult.user } }));
     }
   } catch (e) {
     if (e && e.code) console.warn("Redirect result:", e.code);
@@ -341,10 +352,8 @@ if (!auth || !db) {
     await updateAuthUI(user);
 
     if (user) {
-      window.setSyncStatus("synced", "ok");
       document.dispatchEvent(new CustomEvent("user-logged-in", { detail: { user } }));
     } else {
-      window.setSyncStatus("not signed in", "idle");
       document.dispatchEvent(new CustomEvent("user-logged-out"));
     }
   });
