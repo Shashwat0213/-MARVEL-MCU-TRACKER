@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════
-   MCU TRACKER — THEME SYSTEM
-   Hero themes + Dark/Light toggle + Sound + Doomsday countdown
+   MCU TRACKER — PREMIUM THEME SYSTEM
+   7 new themes — full website color change
    ═══════════════════════════════════════════════════════════ */
 
 (function() {
@@ -8,70 +8,81 @@
 
   const $ = id => document.getElementById(id);
 
-  /* ═══════════ HERO THEMES DATA ═══════════ */
-  const heroThemeData = {
-    blue: {
-      title: "Spider-Man: No Way Home",
-      subtitle: "Multiverse Blue • Phase 4",
-      poster: "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg"
-    },
-    red: {
-      title: "Avengers: Endgame",
-      subtitle: "Marvel Red • Phase 3",
-      poster: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg"
-    },
-    gold: {
-      title: "Avengers: Infinity War",
-      subtitle: "Infinity Gold • Phase 3",
-      poster: "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
-    },
-    cosmic: {
+  /* ═══════════ THEME DATA ═══════════ */
+  const themeData = {
+    cosmos: {
+      label: "Cosmos",
       title: "Guardians of the Galaxy",
-      subtitle: "Cosmic • Phase 2",
+      subtitle: "Cosmos • Phase 2",
       poster: "https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
     },
-    ironman: {
-      title: "Iron Man",
-      subtitle: "Iron Man • Phase 1",
-      poster: "https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg"
+    inferno: {
+      label: "Inferno",
+      title: "Avengers: Endgame",
+      subtitle: "Inferno • Phase 3",
+      poster: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg"
     },
-    gamma: {
-      title: "Hulk",
-      subtitle: "Gamma Green • Phase 3",
-      poster: "https://image.tmdb.org/t/p/w500/uxzzxijgPIY7slzFvMotPv8wjKA.jpg"
+    infinity: {
+      label: "Infinity",
+      title: "Avengers: Infinity War",
+      subtitle: "Infinity • Phase 3",
+      poster: "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
+    },
+    vibranium: {
+      label: "Vibranium",
+      title: "Black Panther: Wakanda Forever",
+      subtitle: "Vibranium • Phase 4",
+      poster: "https://image.tmdb.org/t/p/w500/sv1xJUazXeYqALzczSZ3O6nkH75.jpg"
+    },
+    bifrost: {
+      label: "Bifrost",
+      title: "Thor: Ragnarok",
+      subtitle: "Bifrost • Phase 3",
+      poster: "https://image.tmdb.org/t/p/w500/rzRwTcFvttcN1ZpX2xv4j3tSdJu.jpg"
     },
     doomsday: {
+      label: "Doomsday",
       title: "Avengers: Doomsday",
       subtitle: "Doomsday • Phase 6",
       poster: "https://images.flickdirect.com/movies/avengers-doomsday/avengers-doomsday-poster.jpg"
+    },
+    noir: {
+      label: "Noir",
+      title: "Iron Man",
+      subtitle: "Noir • Phase 1",
+      poster: "https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg"
     }
   };
 
   /* ═══════════ APPLY THEME ═══════════ */
-  function applyHeroTheme(theme) {
-    if (!heroThemeData[theme]) theme = "blue";
+  function applyTheme(themeId) {
+    if (!themeData[themeId]) themeId = "cosmos";
 
-    // Remove all theme- classes
+    // Flash animation
+    document.body.classList.add("theme-switching");
+    setTimeout(() => document.body.classList.remove("theme-switching"), 500);
+
+    // Remove all theme classes
     document.body.classList.remove(
-      "theme-blue", "theme-red", "theme-gold",
-      "theme-cosmic", "theme-ironman",
-      "theme-gamma", "theme-doomsday"
+      "theme-cosmos", "theme-inferno", "theme-infinity",
+      "theme-vibranium", "theme-bifrost", "theme-doomsday", "theme-noir"
     );
 
-    // Add active theme class (except blue which is default)
-    if (theme !== "blue") {
-      document.body.classList.add("theme-" + theme);
+    // Add active theme class (except cosmos which is default)
+    if (themeId !== "cosmos") {
+      document.body.classList.add("theme-" + themeId);
     }
 
-    try { localStorage.setItem("mcuHeroTheme", theme); } catch (e) {}
+    // Save preference
+    try { localStorage.setItem("mcuHeroTheme", themeId); } catch (e) {}
 
-    // Update active state on buttons
+    // Update button active state
     document.querySelectorAll("[data-hero-theme]").forEach(btn => {
-      btn.classList.toggle("active", btn.dataset.heroTheme === theme);
+      btn.classList.toggle("active", btn.dataset.heroTheme === themeId);
     });
 
     // Update hero poster + text
-    const data = heroThemeData[theme];
+    const data = themeData[themeId];
     const poster = $("themePoster");
     const title = $("themePosterTitle");
     const subtitle = $("themePosterSubtitle");
@@ -80,38 +91,30 @@
     if (title) title.textContent = data.title;
     if (subtitle) subtitle.textContent = data.subtitle;
 
-    console.log("🎨 Theme applied:", theme);
+    console.log("🎨 Theme applied:", themeId);
   }
 
-  /* ═══════════ BIND HERO THEME BUTTONS ═══════════ */
+  /* ═══════════ BIND THEME BUTTONS ═══════════ */
   function bindThemeButtons() {
     const buttons = document.querySelectorAll("[data-hero-theme]");
     console.log(`🎨 Found ${buttons.length} theme buttons`);
 
     buttons.forEach(btn => {
-      // Remove old listener if any
-      btn.replaceWith(btn.cloneNode(true));
+      // Clone to remove old listeners
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
     });
 
-    // Re-bind after clone
     document.querySelectorAll("[data-hero-theme]").forEach(btn => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
+        e.stopPropagation();
         const theme = btn.dataset.heroTheme;
-        applyHeroTheme(theme);
+        applyTheme(theme);
 
-        // Show toast
         if (window.showToast) {
-          const themeNames = {
-            blue: "Massive Blue",
-            red: "Marvel Red",
-            gold: "Infinity Gold",
-            cosmic: "Multiverse Purple",
-            ironman: "Stark Black",
-            gamma: "Gamma Green",
-            doomsday: "Doomsday"
-          };
-          window.showToast("✓ Theme: " + (themeNames[theme] || theme), "ok");
+          const data = themeData[theme];
+          window.showToast("✓ Theme: " + (data ? data.label : theme), "ok");
         }
       });
     });
@@ -119,9 +122,9 @@
 
   /* ═══════════ LOAD SAVED THEME ═══════════ */
   function loadSavedTheme() {
-    let saved = "blue";
-    try { saved = localStorage.getItem("mcuHeroTheme") || "blue"; } catch (e) {}
-    applyHeroTheme(saved);
+    let saved = "cosmos";
+    try { saved = localStorage.getItem("mcuHeroTheme") || "cosmos"; } catch (e) {}
+    applyTheme(saved);
   }
 
   /* ═══════════ DARK / LIGHT TOGGLE ═══════════ */
@@ -171,7 +174,7 @@
 
   updateSoundBtn();
 
-  /* ═══════════ RESET BUTTON ═══════════ */
+  /* ═══════════ RESET ═══════════ */
   const resetBtn = $("resetBtn");
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
@@ -179,7 +182,7 @@
     });
   }
 
-  /* ═══════════ EXPLORE BUTTON ═══════════ */
+  /* ═══════════ EXPLORE ═══════════ */
   const heroExploreBtn = $("heroExploreBtn");
   if (heroExploreBtn) {
     heroExploreBtn.addEventListener("click", () => {
@@ -247,7 +250,7 @@
     if (poster) {
       poster.src = movie.poster || "";
       poster.onerror = () => {
-        poster.src = "https://placehold.co/300x450/0d1422/00e5ff?text=MCU";
+        poster.src = "https://placehold.co/300x450/16102a/22d3ee?text=MCU";
       };
     }
     if (title) title.textContent = movie.title || movie.id;
@@ -297,23 +300,18 @@
   function init() {
     bindThemeButtons();
     loadSavedTheme();
-    console.log("✅ Theme module initialized");
+    console.log("✅ Premium theme system initialized");
   }
 
-  // Run on DOM ready
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
-    // DOM already loaded
     init();
   }
 
-  // Also bind after a short delay (in case elements load later)
   setTimeout(bindThemeButtons, 500);
   setTimeout(loadSavedTheme, 600);
 
-  // Public API
-  window.applyHeroTheme = applyHeroTheme;
-
+  window.applyTheme = applyTheme;
   console.log("✅ Theme module loaded");
 })();
