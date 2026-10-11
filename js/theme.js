@@ -6,8 +6,6 @@
 (function() {
   "use strict";
 
-  const $ = id => document.getElementById(id);
-
   const THEMES = [
     { id: "midnight", name: "Midnight" },
     { id: "stark", name: "Stark" },
@@ -19,126 +17,95 @@
 
   const STORAGE_KEY = "mcuTheme";
 
-  /* ═══════════ APPLY THEME ═══════════ */
   function applyTheme(themeId) {
     const valid = THEMES.some(t => t.id === themeId) ? themeId : "midnight";
     document.body.setAttribute("data-theme", valid);
     try { localStorage.setItem(STORAGE_KEY, valid); } catch (e) {}
-
-    // Update swatch active state
-    document.querySelectorAll(".theme-swatch").forEach(swatch => {
-      swatch.classList.toggle("active", swatch.dataset.themePreview === valid);
+    document.querySelectorAll(".theme-swatch").forEach(s => {
+      s.classList.toggle("active", s.dataset.themePreview === valid);
     });
-
-    // Update theme-color meta
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) {
       const colors = {
-        midnight: "#05070d",
-        stark: "#0a0505",
-        wakanda: "#050a0f",
-        gamma: "#050f08",
-        cosmic: "#08040f",
-        infinity: "#0a0705"
+        midnight: "#05070d", stark: "#0a0505", wakanda: "#050a0f",
+        gamma: "#050f08", cosmic: "#08040f", infinity: "#0a0705"
       };
       metaTheme.setAttribute("content", colors[valid] || "#05070d");
     }
   }
 
-  /* ═══════════ BUILD SWATCHES ═══════════ */
-  function buildThemeSwatches() {
-    const grid = $("themeGrid");
+  function buildSwatches() {
+    const grid = document.getElementById("themeGrid");
     if (!grid) return;
-
     grid.innerHTML = "";
-
     THEMES.forEach(theme => {
-      const swatch = document.createElement("button");
-      swatch.type = "button";
-      swatch.className = "theme-swatch";
-      swatch.dataset.themePreview = theme.id;
-      swatch.innerHTML = `
-        <div class="theme-swatch-preview"></div>
-        <div class="theme-swatch-name">${theme.name}</div>
-      `;
-      swatch.addEventListener("click", () => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "theme-swatch";
+      btn.dataset.themePreview = theme.id;
+      btn.innerHTML = `<div class="theme-swatch-preview"></div><div class="theme-swatch-name">${theme.name}</div>`;
+      btn.addEventListener("click", () => {
         applyTheme(theme.id);
-        window.showToast && window.showToast(`✓ Theme: ${theme.name}`, "ok");
+        if (window.showToast) window.showToast(`✓ Theme: ${theme.name}`, "ok");
       });
-      grid.appendChild(swatch);
+      grid.appendChild(btn);
     });
   }
 
-  /* ═══════════ THEME PANEL TOGGLE ═══════════ */
-  function setupThemePanel() {
-    const toggleBtn = $("themeToggle");
-    const panel = $("themePanel");
-    if (!toggleBtn || !panel) return;
-
-    toggleBtn.addEventListener("click", e => {
+  function setupPanel() {
+    const toggle = document.getElementById("themeToggle");
+    const panel = document.getElementById("themePanel");
+    if (!toggle || !panel) return;
+    toggle.addEventListener("click", e => {
       e.stopPropagation();
       panel.classList.toggle("open");
     });
-
     document.addEventListener("click", e => {
       if (!panel.classList.contains("open")) return;
-      if (panel.contains(e.target) || toggleBtn.contains(e.target)) return;
+      if (panel.contains(e.target) || toggle.contains(e.target)) return;
       panel.classList.remove("open");
     });
-
-    document.addEventListener("keydown", e => {
-      if (e.key === "Escape" && panel.classList.contains("open")) {
-        panel.classList.remove("open");
-      }
-    });
   }
 
-  /* ═══════════ SOUND TOGGLE ═══════════ */
-  function setupSoundToggle() {
-    const btn = $("soundToggle");
-    const icon = $("soundIcon");
+  function setupSound() {
+    const btn = document.getElementById("soundToggle");
+    const icon = document.getElementById("soundIcon");
     if (!btn || !icon) return;
-
-    let soundOn = true;
-    try { soundOn = localStorage.getItem("mcuSound") !== "false"; } catch (e) {}
-    icon.textContent = soundOn ? "🔊" : "🔇";
-
+    let on = true;
+    try { on = localStorage.getItem("mcuSound") !== "false"; } catch (e) {}
+    icon.textContent = on ? "🔊" : "🔇";
     btn.addEventListener("click", () => {
-      soundOn = !soundOn;
-      try { localStorage.setItem("mcuSound", soundOn); } catch (e) {}
-      icon.textContent = soundOn ? "🔊" : "🔇";
-      window.showToast && window.showToast(soundOn ? "🔊 Sound on" : "🔇 Sound off", "ok");
+      on = !on;
+      try { localStorage.setItem("mcuSound", on); } catch (e) {}
+      icon.textContent = on ? "🔊" : "🔇";
+      if (window.showToast) window.showToast(on ? "🔊 Sound on" : "🔇 Sound off", "ok");
     });
   }
 
-  /* ═══════════ BACKGROUND STARS ═══════════ */
-  function createStars() {
-    const container = $("bgStars");
-    if (!container) return;
-    container.innerHTML = "";
+  function makeStars() {
+    const box = document.getElementById("bgStars");
+    if (!box) return;
+    box.innerHTML = "";
     const count = window.innerWidth < 700 ? 30 : 60;
     for (let i = 0; i < count; i++) {
-      const star = document.createElement("div");
-      star.className = "star";
-      star.style.left = Math.random() * 100 + "%";
-      star.style.top = Math.random() * 100 + "%";
-      star.style.animationDelay = (Math.random() * 3).toFixed(2) + "s";
-      container.appendChild(star);
+      const s = document.createElement("div");
+      s.className = "star";
+      s.style.left = Math.random() * 100 + "%";
+      s.style.top = Math.random() * 100 + "%";
+      s.style.animationDelay = (Math.random() * 3).toFixed(2) + "s";
+      box.appendChild(s);
     }
   }
 
-  /* ═══════════ INIT ═══════════ */
   function init() {
-    buildThemeSwatches();
-    setupThemePanel();
-    setupSoundToggle();
-    createStars();
-
+    buildSwatches();
+    setupPanel();
+    setupSound();
+    makeStars();
     let saved = "midnight";
     try { saved = localStorage.getItem(STORAGE_KEY) || "midnight"; } catch (e) {}
     applyTheme(saved);
-
-    console.log("✅ Theme system ready");
+    console.log("✅ Theme ready");
   }
 
   if (document.readyState === "loading") {
@@ -146,6 +113,4 @@
   } else {
     init();
   }
-
-  window.applyTheme = applyTheme;
 })();
