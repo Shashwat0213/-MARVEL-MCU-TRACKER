@@ -1,10 +1,9 @@
 /* ═══════════════════════════════════════════════════════════
    MCU TRACKER — ANIMATIONS
-   All keyframes, transitions, and motion effects
+   All keyframes and motion effects
    ═══════════════════════════════════════════════════════════ */
 
 /* ═══════════ CORE KEYFRAMES ═══════════ */
-
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -20,36 +19,14 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeOut {
-  from { opacity: 1; transform: translateY(0); }
-  to { opacity: 0; transform: translateY(10px); }
-}
-
 @keyframes scaleIn {
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }
 }
 
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(30px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-30px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
 @keyframes slideInUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes bounceIn {
-  0% { opacity: 0; transform: scale(0.3); }
-  50% { opacity: 1; transform: scale(1.05); }
-  70% { transform: scale(0.95); }
-  100% { transform: scale(1); }
 }
 
 @keyframes shake {
@@ -65,7 +42,6 @@
 
 
 /* ═══════════ CARD ANIMATIONS ═══════════ */
-
 @keyframes cardFadeIn {
   from {
     opacity: 0;
@@ -88,28 +64,20 @@
   }
 }
 
-@keyframes cardHoverLift {
-  from { transform: translateY(0) scale(1); }
-  to { transform: translateY(-8px) scale(1.02); }
-}
-
 /* Stagger animation for movie cards */
 .movie-card:nth-child(1) { animation-delay: 0.02s; }
 .movie-card:nth-child(2) { animation-delay: 0.04s; }
 .movie-card:nth-child(3) { animation-delay: 0.06s; }
 .movie-card:nth-child(4) { animation-delay: 0.08s; }
-.movie-card:nth-child(5) { animation-delay: 0.1s; }
+.movie-card:nth-child(5) { animation-delay: 0.10s; }
 .movie-card:nth-child(6) { animation-delay: 0.12s; }
 .movie-card:nth-child(7) { animation-delay: 0.14s; }
 .movie-card:nth-child(8) { animation-delay: 0.16s; }
 .movie-card:nth-child(9) { animation-delay: 0.18s; }
-.movie-card:nth-child(10) { animation-delay: 0.2s; }
-.movie-card:nth-child(11) { animation-delay: 0.22s; }
-.movie-card:nth-child(12) { animation-delay: 0.24s; }
+.movie-card:nth-child(10) { animation-delay: 0.20s; }
 
 
 /* ═══════════ LOADER ANIMATIONS ═══════════ */
-
 @keyframes loaderRingRotate {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -149,7 +117,6 @@
 
 
 /* ═══════════ BACKGROUND ANIMATIONS ═══════════ */
-
 @keyframes gridMove {
   from { transform: translateY(0); }
   to { transform: translateY(48px); }
@@ -186,11 +153,6 @@
   50% { opacity: 1; transform: scale(1.5); }
 }
 
-@keyframes starDrift {
-  from { transform: translateY(0); }
-  to { transform: translateY(-100vh); }
-}
-
 .bg-grid {
   animation: gridMove 30s linear infinite;
 }
@@ -205,12 +167,10 @@
 
 .star {
   animation: starTwinkle 3s ease-in-out infinite;
-  animation-delay: var(--star-delay, 0s);
 }
 
 
 /* ═══════════ HERO ANIMATIONS ═══════════ */
-
 @keyframes heroGlow {
   0%, 100% { opacity: 0.12; }
   50% { opacity: 0.25; }
@@ -261,7 +221,6 @@
 
 
 /* ═══════════ MODAL ANIMATIONS ═══════════ */
-
 @keyframes modalBackdrop {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -278,17 +237,6 @@
   }
 }
 
-@keyframes modalSlideDown {
-  from {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(40px) scale(0.94);
-  }
-}
-
 .modal-overlay.open {
   animation: modalBackdrop 0.3s ease;
 }
@@ -299,18 +247,6 @@
 
 
 /* ═══════════ BUTTON ANIMATIONS ═══════════ */
-
-@keyframes btnRipple {
-  from {
-    transform: scale(0);
-    opacity: 0.6;
-  }
-  to {
-    transform: scale(2.5);
-    opacity: 0;
-  }
-}
-
 @keyframes btnShimmer {
   from { left: -100%; }
   to { left: 100%; }
@@ -342,13 +278,8 @@
   left: 100%;
 }
 
-.btn-primary:hover {
-  animation: cardGlow 1.5s ease infinite;
-}
-
 
 /* ═══════════ TOAST ANIMATIONS ═══════════ */
-
 @keyframes toastSlideUp {
   from {
     transform: translateX(-50%) translateY(120px);
@@ -360,45 +291,16 @@
   }
 }
 
-@keyframes toastSlideDown {
-  from {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(-50%) translateY(120px);
-    opacity: 0;
-  }
-}
-
 .toast.show {
   animation: toastSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 
 /* ═══════════ FORM ANIMATIONS ═══════════ */
-
 @keyframes inputFocusPulse {
-  0% {
-    box-shadow: 0 0 0 0 var(--primary-glow);
-  }
-  50% {
-    box-shadow: 0 0 0 6px var(--primary-glow);
-  }
-  100% {
-    box-shadow: 0 0 0 0 var(--primary-glow);
-  }
-}
-
-@keyframes labelFloat {
-  from {
-    transform: translateY(0);
-    color: var(--muted);
-  }
-  to {
-    transform: translateY(-4px);
-    color: var(--primary);
-  }
+  0% { box-shadow: 0 0 0 0 var(--primary-glow); }
+  50% { box-shadow: 0 0 0 6px var(--primary-glow); }
+  100% { box-shadow: 0 0 0 0 var(--primary-glow); }
 }
 
 input:focus,
@@ -407,20 +309,12 @@ textarea:focus {
   animation: inputFocusPulse 1.5s ease;
 }
 
-
-/* ═══════════ ERROR SHAKE ═══════════ */
-
 .auth-message:not(:empty) {
-  animation: shake 0.4s ease;
-}
-
-.form-status.error {
   animation: shake 0.4s ease;
 }
 
 
 /* ═══════════ FAVORITE HEART BEAT ═══════════ */
-
 @keyframes heartBeat {
   0%, 100% { transform: scale(1); }
   10% { transform: scale(1.3); }
@@ -435,7 +329,6 @@ textarea:focus {
 
 
 /* ═══════════ CHECKBOX CHECK ANIMATION ═══════════ */
-
 @keyframes checkBounce {
   0% { transform: scale(0.8); }
   50% { transform: scale(1.2); }
@@ -448,7 +341,6 @@ textarea:focus {
 
 
 /* ═══════════ MODAL META CHIP ENTRY ═══════════ */
-
 @keyframes chipEnter {
   from {
     opacity: 0;
@@ -471,24 +363,11 @@ textarea:focus {
 
 
 /* ═══════════ COUNTDOWN DIGIT FLIP ═══════════ */
-
 @keyframes digitFlip {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  51% {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-20px); opacity: 0; }
+  51% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
 .cd-unit b.flip {
@@ -497,7 +376,6 @@ textarea:focus {
 
 
 /* ═══════════ ADMIN PANEL ANIMATIONS ═══════════ */
-
 @keyframes adminSlideIn {
   from {
     opacity: 0;
@@ -522,13 +400,8 @@ textarea:focus {
 .admin-stat:nth-child(3) { animation-delay: 0.15s; }
 .admin-stat:nth-child(4) { animation-delay: 0.2s; }
 
-.admin-row {
-  animation: slideInRight 0.3s ease backwards;
-}
-
 
 /* ═══════════ TMDB RESULT CARDS ═══════════ */
-
 .tmdb-result {
   animation: cardFadeIn 0.4s ease backwards;
 }
@@ -539,45 +412,9 @@ textarea:focus {
 .tmdb-result:nth-child(4) { animation-delay: 0.12s; }
 .tmdb-result:nth-child(5) { animation-delay: 0.15s; }
 .tmdb-result:nth-child(6) { animation-delay: 0.18s; }
-.tmdb-result:nth-child(7) { animation-delay: 0.21s; }
-.tmdb-result:nth-child(8) { animation-delay: 0.24s; }
-
-
-/* ═══════════ SEARCH BOX FOCUS GLOW ═══════════ */
-
-.search-box input:focus {
-  animation: inputFocusPulse 1.5s ease;
-}
-
-.search-box input:not(:placeholder-shown) {
-  border-color: var(--primary);
-}
-
-
-/* ═══════════ FILTER CHIP ANIMATIONS ═══════════ */
-
-.filter-chip {
-  position: relative;
-  overflow: hidden;
-}
-
-.filter-chip::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--primary);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.filter-chip:active::after {
-  opacity: 0.15;
-}
 
 
 /* ═══════════ THEME SWITCH TRANSITION ═══════════ */
-
 @keyframes themeFlash {
   0% { opacity: 0; }
   30% { opacity: 0.5; }
@@ -595,8 +432,7 @@ body.theme-switching::after {
 }
 
 
-/* ═══════════ NUMBER COUNTER (stats) ═══════════ */
-
+/* ═══════════ NUMBER COUNTER ═══════════ */
 @keyframes numberPop {
   0% { transform: scale(1); }
   50% { transform: scale(1.15); }
@@ -609,14 +445,9 @@ body.theme-switching::after {
 
 
 /* ═══════════ LOADING SKELETON ═══════════ */
-
 @keyframes skeletonShimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
 .skeleton {
@@ -632,38 +463,7 @@ body.theme-switching::after {
 }
 
 
-/* ═══════════ SCROLL REVEAL ═══════════ */
-
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-/* ═══════════ TYPING EFFECT (loader text) ═══════════ */
-
-@keyframes typingDots {
-  0%, 20% { content: "."; }
-  40% { content: ".."; }
-  60%, 100% { content: "..."; }
-}
-
-.loader-text::after {
-  content: "";
-  animation: typingDots 1.5s steps(4) infinite;
-}
-
-
 /* ═══════════ FLOATING ELEMENTS ═══════════ */
-
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
@@ -675,7 +475,6 @@ body.theme-switching::after {
 
 
 /* ═══════════ NEON GLOW PULSE ═══════════ */
-
 @keyframes neonPulse {
   0%, 100% {
     text-shadow:
@@ -696,20 +495,7 @@ body.theme-switching::after {
 }
 
 
-/* ═══════════ CARD 3D TILT ═══════════ */
-
-@keyframes tiltIn {
-  from { transform: perspective(1000px) rotateX(5deg); }
-  to { transform: perspective(1000px) rotateX(0deg); }
-}
-
-.movie-card {
-  animation: cardFadeIn 0.5s ease backwards;
-}
-
-
 /* ═══════════ REDUCED MOTION ═══════════ */
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -731,41 +517,19 @@ body.theme-switching::after {
 }
 
 
-/* ═══════════ MOBILE-SPECIFIC ANIMATION TWEAKS ═══════════ */
-
+/* ═══════════ MOBILE TWEAKS ═══════════ */
 @media (max-width: 700px) {
-  .movie-card {
-    animation-duration: 0.35s;
-  }
-
+  .movie-card { animation-duration: 0.35s; }
   .bg-glow-1,
-  .bg-glow-2 {
-    animation-duration: 20s;
-  }
-
-  .hero-inner::before {
-    animation-duration: 60s;
-  }
+  .bg-glow-2 { animation-duration: 20s; }
+  .hero-inner::before { animation-duration: 60s; }
 }
 
 
-/* ═══════════ HOVER FALLBACK (touch devices) ═══════════ */
-
+/* ═══════════ TOUCH DEVICE FALLBACK ═══════════ */
 @media (hover: none) {
-  .movie-card:hover {
-    transform: none;
-  }
-
-  .movie-card:active {
-    transform: scale(0.98);
-    transition: transform 0.1s ease;
-  }
-
-  .btn:hover {
-    transform: none;
-  }
-
-  .btn:active {
-    transform: scale(0.96);
-  }
+  .movie-card:hover { transform: none; }
+  .movie-card:active { transform: scale(0.98); transition: transform 0.1s ease; }
+  .btn:hover { transform: none; }
+  .btn:active { transform: scale(0.96); }
 }
