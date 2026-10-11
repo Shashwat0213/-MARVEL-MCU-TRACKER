@@ -1,7 +1,6 @@
 /* ═══════════════════════════════════════════════════════════
    MCU TRACKER — AUTHENTICATION
-   Email/Password + Google Sign-in (FORCED redirect flow)
-   Works on mobile + desktop — no popup
+   Email/Password + Google Sign-In (Popup Flow)
    ═══════════════════════════════════════════════════════════ */
 
 import {
@@ -9,8 +8,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signInWithRedirect,
-  getRedirectResult,
   GoogleAuthProvider,
   signOut,
   updateProfile,
@@ -224,42 +221,34 @@ if (!auth || !db) {
     }
   }
 
-  /* ═══════════ GOOGLE LOGIN — FORCED REDIRECT ═══════════ */
+  /* ═══════════ GOOGLE LOGIN — POPUP FLOW (Forced) ═══════════ */
   async function handleGoogleLogin() {
     if (!googleBtn) return;
 
     const originalHTML = googleBtn.innerHTML;
     googleBtn.disabled = true;
-    googleBtn.innerHTML = "Redirecting to Google…";
-
-    // ✅ FORCE redirect — mobile + desktop dono pe
-    const isMobile = true;
+    googleBtn.innerHTML = "Signing in…";
 
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
 
     try {
-      if (isMobile) {
-        // Force redirect flow (popup block issue — never open popup)
-        await signInWithRedirect(auth, provider);
-        // Page will reload; result handled by getRedirectResult() below
-      } else {
-        const result = await signInWithPopup(auth, provider);
-        if (result.user) {
-          await saveUserProfile(result.user);
-          await updateAuthUI(result.user);
-          closeAuthModal();
-          window.showToast("✓ Logged in with Google!", "ok");
-          document.dispatchEvent(new CustomEvent("user-logged-in", { detail: { user: result.user } }));
-        }
+      // Popup flow — works when user gesture is direct click
+      const result = await signInWithPopup(auth, provider);
+      if (result.user) {
+        await saveUserProfile(result.user);
+        await updateAuthUI(result.user);
+        closeAuthModal();
+        window.showToast("✓ Logged in with Google!", "ok");
+        document.dispatchEvent(new CustomEvent("user-logged-in", { detail: { user: result.user } }));
       }
     } catch (err) {
       console.error("Google login error:", err);
       const messages = {
-        "auth/popup-blocked": "Popup blocked. Please allow popups and try again.",
-        "auth/popup-closed-by-user": "Sign-in cancelled.",
-        "auth/cancelled-popup-request": "Another sign-in is in progress.",
-        "auth/unauthorized-domain": "This domain is not authorized in Firebase Console → Authentication → Settings → Authorized domains.",
+        "auth/popup-blocked": "Popup blocked. Please allow popups for this site and try again.",
+        "auth/popup-closed-by-user": "Sign-in cancelled. Please try again.",
+        "auth/cancelled-popup-request": "Another sign-in is in progress. Wait a moment.",
+        "auth/unauthorized-domain": "This domain is not authorized in Firebase.",
         "auth/network-request-failed": "Network error. Check your connection.",
         "auth/account-exists-with-different-credential": "This email uses another sign-in method.",
         "auth/operation-not-allowed": "Google sign-in is not enabled in Firebase."
@@ -319,19 +308,6 @@ if (!auth || !db) {
     await setPersistence(auth, browserLocalPersistence);
   } catch (e) {
     console.warn("Persistence setup failed:", e);
-  }
-
-  /* ═══════════ HANDLE REDIRECT RESULT ═══════════ */
-  try {
-    const redirectResult = await getRedirectResult(auth);
-    if (redirectResult && redirectResult.user) {
-      await saveUserProfile(redirectResult.user);
-      await updateAuthUI(redirectResult.user);
-      window.showToast("✓ Logged in with Google!", "ok");
-      document.dispatchEvent(new CustomEvent("user-logged-in", { detail: { user: redirectResult.user } }));
-    }
-  } catch (e) {
-    if (e && e.code) console.warn("Redirect result:", e.code);
   }
 
   /* ═══════════ AUTH STATE LISTENER ═══════════ */
