@@ -63,9 +63,7 @@
 <aside class="theme-panel" id="themePanel">
   <div class="theme-panel-inner">
     <h3>Choose Theme</h3>
-    <div class="theme-grid" id="themeGrid">
-      <!-- Populated by theme.js -->
-    </div>
+    <div class="theme-grid" id="themeGrid"></div>
   </div>
 </aside>
 
@@ -123,14 +121,11 @@
 
 <!-- ═══════════ MAIN CONTENT ═══════════ -->
 <main class="main-content">
-
-  <!-- TOOLBAR -->
   <section class="toolbar">
     <div class="search-box">
       <span class="search-icon">🔍</span>
       <input type="text" id="searchInput" placeholder="Search movies, series…" autocomplete="off">
     </div>
-
     <div class="filter-bar" id="filterBar">
       <button class="filter-chip active" data-filter="all">🎬 All</button>
       <button class="filter-chip" data-filter="movie">🎬 Movies</button>
@@ -139,7 +134,6 @@
       <button class="filter-chip" data-filter="unwatched">⏳ Unwatched</button>
       <button class="filter-chip" data-filter="favorites">❤️ Favorites</button>
     </div>
-
     <div class="sort-box">
       <select id="sortSelect">
         <option value="timeline">Sort: Story Order</option>
@@ -150,7 +144,6 @@
     </div>
   </section>
 
-  <!-- MOVIE GRID -->
   <section class="movies-section">
     <ul class="movies-grid" id="moviesGrid">
       <li class="empty-state" id="emptyState">
@@ -159,12 +152,6 @@
       </li>
     </ul>
   </section>
-
-  <!-- LOAD MORE -->
-  <div class="load-more-wrap">
-    <button class="btn btn-secondary" id="loadMoreBtn" style="display:none">Load More</button>
-  </div>
-
 </main>
 
 <!-- ═══════════ FOOTER ═══════════ -->
@@ -386,8 +373,7 @@
 <!-- ═══════════ TOAST ═══════════ -->
 <div class="toast" id="toast" role="alert"></div>
 
-<!-- ═══════════ FIREBASE (MODULES) ══════
-
+<!-- ═══════════ FIREBASE (MODULES) ═══════════ -->
 <script type="module" src="js/firebase.js"></script>
 <script type="module" src="js/theme.js"></script>
 <script type="module" src="js/auth.js"></script>
