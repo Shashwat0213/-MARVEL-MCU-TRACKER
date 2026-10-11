@@ -1,6 +1,7 @@
 /* ═══════════════════════════════════════════════════════════
    MCU TRACKER — AUTHENTICATION
-   Email/Password + Google Sign-in (mobile redirect + desktop popup)
+   Email/Password + Google Sign-in (FORCED redirect flow)
+   Works on mobile + desktop — no popup
    ═══════════════════════════════════════════════════════════ */
 
 import {
@@ -223,26 +224,26 @@ if (!auth || !db) {
     }
   }
 
-  /* ═══════════ GOOGLE LOGIN — Mobile + Desktop Fixed ═══════════ */
+  /* ═══════════ GOOGLE LOGIN — FORCED REDIRECT ═══════════ */
   async function handleGoogleLogin() {
     if (!googleBtn) return;
 
     const originalHTML = googleBtn.innerHTML;
     googleBtn.disabled = true;
-    googleBtn.innerHTML = "Signing in…";
+    googleBtn.innerHTML = "Redirecting to Google…";
 
-    // IMPROVED mobile detection
-    const isMobile = /Android|iPhone|iPad|iPod|Mobile|Tablet|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 900;
+    // ✅ FORCE redirect — mobile + desktop dono pe
+    const isMobile = true;
 
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
 
     try {
       if (isMobile) {
-        // Mobile/tablet: redirect flow (popup block issue)
+        // Force redirect flow (popup block issue — never open popup)
         await signInWithRedirect(auth, provider);
+        // Page will reload; result handled by getRedirectResult() below
       } else {
-        // Desktop: popup flow
         const result = await signInWithPopup(auth, provider);
         if (result.user) {
           await saveUserProfile(result.user);
@@ -320,7 +321,7 @@ if (!auth || !db) {
     console.warn("Persistence setup failed:", e);
   }
 
-  /* ═══════════ HANDLE REDIRECT RESULT (mobile) ═══════════ */
+  /* ═══════════ HANDLE REDIRECT RESULT ═══════════ */
   try {
     const redirectResult = await getRedirectResult(auth);
     if (redirectResult && redirectResult.user) {
