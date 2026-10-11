@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05070d">
-<title>MCU Tracker — Marvel Cinematic Universe</title>
+<title>Marvel Cinematic Universe Tracker — Firebase Edition</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,366 +14,387 @@
 <link rel="stylesheet" href="css/themes.css">
 <link rel="stylesheet" href="css/animations.css">
 </head>
-<body data-theme="midnight">
 
-<!-- ═══════════ ANIMATED BACKGROUND ═══════════ -->
-<div class="bg-layer">
-  <div class="bg-grid"></div>
-  <div class="bg-glow bg-glow-1"></div>
-  <div class="bg-glow bg-glow-2"></div>
-  <div class="bg-stars" id="bgStars"></div>
-</div>
+<body>
 
-<!-- ═══════════ LOADING SCREEN ═══════════ -->
-<div class="loader" id="loader">
-  <div class="loader-inner">
-    <div class="loader-ring"></div>
-    <div class="loader-ring loader-ring-2"></div>
-    <div class="loader-core">⚡</div>
-  </div>
-  <p class="loader-text">INITIALIZING</p>
-</div>
+<div class="container">
 
-<!-- ═══════════ HEADER ═══════════ -->
-<header class="site-header">
-  <div class="header-inner">
-    <a href="#" class="logo">
-      <span class="logo-icon">⚡</span>
-      <span class="logo-text">
-        <strong>MCU TRACKER</strong>
-        <small>Marvel Cinematic Universe</small>
-      </span>
-    </a>
+    <!-- ═══════════ HEADER ═══════════ -->
+    <header>
+        <h1 class="logo">
+            ⚡ MARVEL MCU TRACKER
+            <span class="powered">POWERED BY SHASHWAT</span>
+        </h1>
 
-    <nav class="header-nav">
-      <button class="icon-btn" id="themeToggle" title="Change Theme">
-        <span id="themeIcon">🎨</span>
-      </button>
-      <button class="icon-btn" id="soundToggle" title="Toggle Sound">
-        <span id="soundIcon">🔊</span>
-      </button>
-      <div class="auth-area" id="authArea">
-        <button class="btn btn-primary" id="loginBtn">👤 Login</button>
-      </div>
-    </nav>
-  </div>
-</header>
+        <div class="topbar">
+            <button class="top-btn" id="themeBtn">🌙 Dark</button>
+            <button class="top-btn" id="soundBtn">🔊 Sound</button>
+            <button class="reset-btn" id="resetBtn">🔄 Reset</button>
+        </div>
+    </header>
 
-<!-- ═══════════ THEME PANEL ═══════════ -->
-<aside class="theme-panel" id="themePanel">
-  <div class="theme-panel-inner">
-    <h3>Choose Theme</h3>
-    <div class="theme-grid" id="themeGrid"></div>
-  </div>
-</aside>
-
-<!-- ═══════════ HERO SECTION ═══════════ -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-badge">⚡ Season 6 • Multiverse Saga</div>
-    <h1 class="hero-title">
-      Your MCU.<br>
-      Your Timeline.
-    </h1>
-    <p class="hero-copy">
-      Track every movie, manage favorites, discover what to watch next — all in one cinematic dashboard powered by Firebase.
-    </p>
-    <div class="hero-stats" id="heroStats">
-      <div class="hero-stat">
-        <strong id="statTotal">0</strong>
-        <span>Total Movies</span>
-      </div>
-      <div class="hero-stat">
-        <strong id="statWatched">0</strong>
-        <span>Watched</span>
-      </div>
-      <div class="hero-stat">
-        <strong id="statFavorites">0</strong>
-        <span>Favorites</span>
-      </div>
-      <div class="hero-stat">
-        <strong id="statProgress">0%</strong>
-        <span>Progress</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ COUNTDOWN SECTION ═══════════ -->
-<section class="countdown-section" id="countdownSection" style="display:none">
-  <div class="countdown-inner">
-    <div class="countdown-poster">
-      <img id="countdownPoster" src="" alt="Countdown Poster" onerror="this.style.display='none'">
-    </div>
-    <div class="countdown-content">
-      <div class="countdown-kicker" id="countdownKicker">⚠ Upcoming Release</div>
-      <h2 id="countdownTitle">Loading…</h2>
-      <p id="countdownSubtitle">Countdown to release</p>
-      <div class="countdown-digits">
-        <div class="cd-unit"><b id="cdDays">000</b><span>Days</span></div>
-        <div class="cd-unit"><b id="cdHours">00</b><span>Hours</span></div>
-        <div class="cd-unit"><b id="cdMinutes">00</b><span>Minutes</span></div>
-        <div class="cd-unit"><b id="cdSeconds">00</b><span>Seconds</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ MAIN CONTENT ═══════════ -->
-<main class="main-content">
-  <section class="toolbar">
-    <div class="search-box">
-      <span class="search-icon">🔍</span>
-      <input type="text" id="searchInput" placeholder="Search movies, series…" autocomplete="off">
-    </div>
-    <div class="filter-bar" id="filterBar">
-      <button class="filter-chip active" data-filter="all">🎬 All</button>
-      <button class="filter-chip" data-filter="movie">🎬 Movies</button>
-      <button class="filter-chip" data-filter="series">📺 Series</button>
-      <button class="filter-chip" data-filter="watched">✅ Watched</button>
-      <button class="filter-chip" data-filter="unwatched">⏳ Unwatched</button>
-      <button class="filter-chip" data-filter="favorites">❤️ Favorites</button>
-    </div>
-    <div class="sort-box">
-      <select id="sortSelect">
-        <option value="timeline">Sort: Story Order</option>
-        <option value="title">Sort: Title</option>
-        <option value="year">Sort: Year</option>
-        <option value="rating">Sort: Rating</option>
-      </select>
-    </div>
-  </section>
-
-  <section class="movies-section">
-    <ul class="movies-grid" id="moviesGrid">
-      <li class="empty-state" id="emptyState">
-        <div class="empty-icon">🎬</div>
-        <p>Loading movies…</p>
-      </li>
-    </ul>
-  </section>
-</main>
-
-<!-- ═══════════ FOOTER ═══════════ -->
-<footer class="site-footer">
-  <p>© 2026 <strong>MCU Tracker</strong> — Powered by Firebase</p>
-  <p class="footer-small">Fan-made tracker. Not affiliated with Marvel Studios.</p>
-</footer>
-
-<!-- ═══════════ AUTH MODAL ═══════════ -->
-<div class="modal-overlay" id="authModal" aria-hidden="true">
-  <div class="modal auth-modal">
-    <button class="modal-close" data-close-modal aria-label="Close">✕</button>
-    <div class="modal-brand">⚡ MCU TRACKER</div>
-    <h2 id="authTitle">Welcome Back</h2>
-    <p id="authSubtitle" class="modal-subtitle">Sign in to sync your progress</p>
-
-    <div class="auth-tabs">
-      <button class="auth-tab active" data-auth-tab="login">Login</button>
-      <button class="auth-tab" data-auth-tab="signup">Create Account</button>
+    <!-- ═══════════ AUTH UI ═══════════ -->
+    <div class="auth-bar" id="authBar">
+        <div class="auth-user" id="authUserBox">
+            <span class="auth-avatar" id="authAvatar">S</span>
+            <strong id="authUserName">Guest</strong>
+            <button class="auth-logout-btn" id="authLogoutBtn">Logout</button>
+            <button class="auth-admin-btn" id="authAdminBtn" style="display:none">🛡️ Admin</button>
+        </div>
+        <button class="auth-login-btn" id="authOpenBtn">👤 Login</button>
     </div>
 
-    <form class="auth-form" id="authForm">
-      <div class="form-field" id="nameField" style="display:none">
-        <label>Display Name</label>
-        <input type="text" id="authName" placeholder="Your name" maxlength="30">
-      </div>
-      <div class="form-field">
-        <label>Email</label>
-        <input type="email" id="authEmail" placeholder="you@example.com" required>
-      </div>
-      <div class="form-field">
-        <label>Password</label>
-        <input type="password" id="authPassword" placeholder="Minimum 6 characters" minlength="6" required>
-      </div>
-      <div class="auth-message" id="authMessage"></div>
-      <button type="submit" class="btn btn-primary btn-block" id="authSubmitBtn">Login</button>
-    </form>
+    <!-- ═══════════ AUTH MODAL ═══════════ -->
+    <div class="auth-overlay" id="authOverlay" aria-hidden="true">
+        <section class="auth-card" role="dialog" aria-modal="true">
+            <button class="auth-close" id="authCloseBtn" aria-label="Close">×</button>
+            <div class="auth-brand">⚡ MCU TRACKER ACCOUNT</div>
+            <h2 id="authTitle">Welcome back</h2>
+            <p id="authSubtitle">Sign in to keep your MCU journey tied to your account.</p>
 
-    <div class="divider"><span>or</span></div>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-auth-tab="login">Login</button>
+                <button class="auth-tab" data-auth-tab="signup">Create account</button>
+            </div>
 
-    <button type="button" class="btn btn-google btn-block" id="googleLoginBtn">
-      <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.92c1.7-1.57 2.68-3.88 2.68-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.92-2.26c-.8.54-1.84.86-3.04.86-2.34 0-4.32-1.58-5.03-3.7H.96v2.32A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.72A5.4 5.4 0 0 1 3.68 9c0-.6.1-1.18.28-1.72V4.96H.96A9 9 0 0 0 0 9c0 1.45.35 2.82.96 4.04l3-2.32z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.9 11.42 0 9 0A9 9 0 0 0 .96 4.96l3 2.32C4.68 5.16 6.66 3.58 9 3.58z"/></svg>
-      Continue with Google
-    </button>
+            <form class="auth-form" id="authForm">
+                <div class="auth-field" id="authNameField" style="display:none">
+                    <label for="authName">Display name</label>
+                    <input id="authName" maxlength="24" autocomplete="name" placeholder="Your name">
+                </div>
+                <div class="auth-field">
+                    <label for="authEmail">Email</label>
+                    <input id="authEmail" type="email" autocomplete="email" required placeholder="you@example.com">
+                </div>
+                <div class="auth-field">
+                    <label for="authPassword">Password</label>
+                    <input id="authPassword" type="password" minlength="6" autocomplete="current-password" required placeholder="Minimum 6 characters">
+                </div>
+                <div class="auth-message" id="authMessage"></div>
+                <button class="auth-submit" id="authSubmit" type="submit">Login</button>
+                <button type="button" id="googleBtn" class="auth-logout-btn" style="width:100%;margin-top:8px">🔵 Continue with Google</button>
+            </form>
 
-    <p class="modal-note">Your account is secured by Firebase Authentication.</p>
-  </div>
+            <div class="auth-note">Your account is secured by Firebase Authentication.</div>
+        </section>
+    </div>
+
+    <!-- ═══════════ PREMIUM HERO ═══════════ -->
+    <section class="premium-hero" aria-label="Premium MCU dashboard">
+        <div class="hero-kicker">Marvel Inspired • Personal Watch Tracker</div>
+        <h2 class="hero-title">Your MCU. Your Timeline.</h2>
+        <p class="hero-copy">Track every movie, discover what to watch next, manage favorites, and keep your progress in one cinematic dashboard.</p>
+        <div class="hero-actions">
+            <button class="hero-btn primary" id="heroExploreBtn">🎬 Explore Movies</button>
+        </div>
+    </section>
+
+    <!-- ═══════════ THEME SWITCHER ═══════════ -->
+    <section class="theme-switcher" aria-label="Hero theme selector">
+        <span class="theme-label">Hero Theme</span>
+        <button class="theme-choice active" data-hero-theme="blue">🔵 Massive Blue</button>
+        <button class="theme-choice" data-hero-theme="red">🔴 Marvel Red</button>
+        <button class="theme-choice" data-hero-theme="gold">🟡 Infinity Gold</button>
+        <button class="theme-choice" data-hero-theme="cosmic">🟣 Multiverse Purple</button>
+        <button class="theme-choice" data-hero-theme="ironman">🤖 Stark Black</button>
+        <button class="theme-choice" data-hero-theme="gamma">🟢 Gamma Green</button>
+        <button class="theme-choice" data-hero-theme="doomsday">☠️ Doomsday</button>
+    </section>
+
+    <!-- ═══════════ THEME POSTER STRIP ═══════════ -->
+    <section class="theme-poster-strip" aria-live="polite">
+        <img id="themePoster" src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg" alt="Theme poster">
+        <div class="theme-poster-info">
+            <strong id="themePosterTitle">Avengers: Endgame</strong>
+            <span id="themePosterSubtitle">Marvel Red • Phase 3</span>
+        </div>
+        <span class="theme-poster-chip">CINEMATIC THEME</span>
+    </section>
+
+    <!-- ═══════════ V3 DASHBOARD ═══════════ -->
+    <section class="v3-dashboard" aria-label="Personal MCU dashboard">
+        <div class="v3-card">
+            <div class="v3-profile">
+                <div class="v3-greeting">
+                    <small>Personal MCU Command Center</small>
+                    <h2 id="v3Greeting">Welcome back, Shashwat ⚡</h2>
+                    <p>Your cinematic journey and progress — all in one place.</p>
+                </div>
+                <div class="v3-avatar" id="v3Avatar">S</div>
+            </div>
+            <div class="v3-mini-stats">
+                <div class="v3-mini-stat"><strong id="v3Watched">0</strong><span>Watched</span></div>
+                <div class="v3-mini-stat"><strong id="v3Favs">0</strong><span>Favorites</span></div>
+                <div class="v3-mini-stat"><strong id="v3Remaining">0</strong><span>Remaining</span></div>
+            </div>
+            <div class="v3-progress">
+                <div class="v3-progress-row"><span>MCU Journey</span><b id="v3ProgressText">0%</b></div>
+                <div class="v3-progress-track"><div class="v3-progress-fill" id="v3ProgressFill"></div></div>
+            </div>
+            <div class="v3-profile-edit">
+                <input id="v3NameInput" maxlength="24" placeholder="Your display name">
+                <button id="v3SaveName">Save</button>
+            </div>
+        </div>
+        <div class="v3-card">
+            <div class="v3-next-title">Recommended Next</div>
+            <div class="v3-next-movie" id="v3NextMovie">
+                <img id="v3NextPoster" src="" alt="Next movie poster">
+                <div>
+                    <strong id="v3NextTitle">Loading...</strong>
+                    <span id="v3NextMeta">Your next unwatched movie</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ MAIN PANEL ═══════════ -->
+    <main class="panel">
+
+        <!-- SEARCH -->
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search" placeholder="Search MCU movie..." autocomplete="off">
+        </div>
+
+        <!-- STATS -->
+        <section class="stats">
+            <div class="stat-card">
+                <div class="stat-icon">🎬</div>
+                <span class="stat-number" id="totalMovies">0</span>
+                <span class="stat-label">Total Movies</span>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <span class="stat-number" id="watchedMovies">0</span>
+                <span class="stat-label">Watched</span>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⏳</div>
+                <span class="stat-number" id="remainingMovies">0</span>
+                <span class="stat-label">Remaining</span>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⭐</div>
+                <span class="stat-number" id="favoriteMovies">0</span>
+                <span class="stat-label">Favorites</span>
+            </div>
+        </section>
+
+        <!-- PROGRESS -->
+        <section class="progress-section">
+            <div class="progress-header">
+                <span class="progress-title">MCU WATCH PROGRESS</span>
+                <span class="progress-percent" id="progressText">0/0 (0%)</span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </section>
+
+        <!-- FILTERS + SORT -->
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">🎬 All</button>
+            <button class="filter-btn" data-filter="movie">🎬 Movies</button>
+            <button class="filter-btn" data-filter="series">📺 Web Series</button>
+            <button class="filter-btn" data-filter="watched">✅ Watched</button>
+            <button class="filter-btn" data-filter="unwatched">⏳ Unwatched</button>
+            <button class="filter-btn" data-filter="favorites">❤️ Favorites</button>
+            <div class="sort-box">
+                <select id="sortSelect">
+                    <option value="default">Timeline: Story Order</option>
+                    <option value="title">Sort: Title</option>
+                    <option value="year">Sort: Release Year</option>
+                    <option value="rating">Sort: Rating</option>
+                    <option value="phase">Sort: Phase</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- MOVIE LIST -->
+        <ul id="movieList" class="movie-list">
+            <li class="empty-state">
+                <div class="empty-icon">🎬</div>
+                <p>Loading movies…</p>
+            </li>
+        </ul>
+
+    </main>
+
+    <!-- ═══════════ FOOTER ═══════════ -->
+    <footer>
+        © 2026 <span class="footer-highlight">Marvel Inspired MCU Tracker</span> — Powered by Shashwat
+    </footer>
+
 </div>
 
 <!-- ═══════════ MOVIE DETAILS MODAL ═══════════ -->
-<div class="modal-overlay" id="movieModal" aria-hidden="true">
-  <div class="modal movie-modal">
-    <button class="modal-close" data-close-modal aria-label="Close">✕</button>
+<div class="movie-modal" id="movieModal" aria-hidden="true">
     <div class="movie-modal-content">
-      <div class="movie-modal-poster-wrap">
-        <img class="movie-modal-poster" id="modalPoster" src="" alt="">
-      </div>
-      <div class="movie-modal-details">
-        <div class="modal-meta-top" id="modalMetaTop"></div>
-        <h2 id="modalTitle">Movie Title</h2>
-        <div class="modal-meta-row" id="modalMeta"></div>
-        <p class="modal-description" id="modalDescription"></p>
-        <div class="modal-genres" id="modalGenres"></div>
-        <div class="modal-cast" id="modalCast"></div>
-        <div class="modal-actions">
-          <button class="btn btn-trailer" id="modalTrailerBtn" style="display:none">▶ Watch Trailer</button>
-          <a class="btn btn-download" id="modalDownloadBtn" style="display:none" target="_blank" rel="noopener">⬇ Download</a>
-          <button class="btn btn-watch" id="modalWatchBtn">✓ Mark Watched</button>
-          <button class="btn btn-favorite" id="modalFavoriteBtn">♡ Favorite</button>
+        <button class="movie-modal-close" id="movieModalClose" aria-label="Close">✕</button>
+        <img class="movie-modal-poster" id="modalPoster" src="" alt="Movie Poster">
+        <div class="movie-modal-details">
+            <h2 class="movie-modal-title" id="modalTitle">Movie Title</h2>
+            <div class="movie-modal-meta" id="modalMeta"></div>
+            <p class="movie-modal-description" id="modalDescription">Movie details will appear here.</p>
+            <div class="modal-genres" id="modalGenres"></div>
+            <div class="modal-cast" id="modalCast"></div>
+            <div class="movie-modal-actions">
+                <button class="movie-modal-btn trailer-btn" id="modalTrailerBtn" style="display:none">▶ Trailer</button>
+                <a class="movie-modal-btn download-btn" id="modalDownloadBtn" style="display:none" target="_blank" rel="noopener">⬇ Download</a>
+                <button class="movie-modal-btn watch-modal-btn" id="modalWatchBtn">✓ Mark Watched</button>
+                <button class="movie-modal-btn favorite-modal-btn" id="modalFavoriteBtn">♡ Favorite</button>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
-<!-- ═══════════ ADMIN PANEL ═══════════ -->
+<!-- ═══════════ ADMIN PANEL (NAYA) ═══════════ -->
 <section class="admin-panel" id="adminPanel" aria-hidden="true">
-  <div class="admin-inner">
-    <header class="admin-header">
-      <div class="admin-brand">
-        <span>⚡</span>
-        <div>
-          <h2>Master Admin</h2>
-          <p id="adminWhoami">Loading…</p>
+    <div class="admin-inner">
+
+        <header class="admin-header">
+            <div class="admin-brand">
+                <span>⚡</span>
+                <div>
+                    <h2>🛡️ Master Admin</h2>
+                    <p id="adminWhoami">Loading…</p>
+                </div>
+            </div>
+            <button class="icon-btn admin-close" id="adminClose">✕</button>
+        </header>
+
+        <nav class="admin-tabs">
+            <button class="admin-tab active" data-admin-tab="dashboard">📊 Dashboard</button>
+            <button class="admin-tab" data-admin-tab="add">➕ Add Movie</button>
+            <button class="admin-tab" data-admin-tab="catalog">🎬 Catalog</button>
+            <button class="admin-tab" data-admin-tab="timers">⏱️ Timers</button>
+            <button class="admin-tab" data-admin-tab="users">👥 Users</button>
+        </nav>
+
+        <!-- Dashboard -->
+        <div class="admin-pane active" data-admin-pane="dashboard">
+            <div class="admin-stats">
+                <div class="admin-stat"><b id="adminStatUsers">0</b><span>Users</span></div>
+                <div class="admin-stat"><b id="adminStatMovies">0</b><span>Movies</span></div>
+                <div class="admin-stat"><b id="adminStatWatched">0</b><span>Watched</span></div>
+                <div class="admin-stat"><b id="adminStatFavs">0</b><span>Favorites</span></div>
+            </div>
+            <div class="admin-card">
+                <h3>🏆 Top Watched</h3>
+                <div id="adminTopMovies"></div>
+            </div>
         </div>
-      </div>
-      <button class="icon-btn admin-close" id="adminClose" aria-label="Close">✕</button>
-    </header>
 
-    <nav class="admin-tabs" id="adminTabs">
-      <button class="admin-tab active" data-admin-tab="dashboard">📊 Dashboard</button>
-      <button class="admin-tab" data-admin-tab="add">➕ Add Movie</button>
-      <button class="admin-tab" data-admin-tab="catalog">🎬 Catalog</button>
-      <button class="admin-tab" data-admin-tab="timers">⏱️ Timers</button>
-      <button class="admin-tab" data-admin-tab="users">👥 Users</button>
-    </nav>
+        <!-- Add Movie -->
+        <div class="admin-pane" data-admin-pane="add">
+            <div class="admin-card tmdb-card">
+                <h3>🔍 TMDB Auto-Fill</h3>
+                <div class="tmdb-key-row">
+                    <input type="text" id="tmdbKey" placeholder="Paste TMDB API key (v3)">
+                    <button class="btn btn-secondary" id="tmdbKeySave">Save Key</button>
+                </div>
+                <div class="tmdb-search-row">
+                    <select id="tmdbType">
+                        <option value="movie">🎬 Movie</option>
+                        <option value="tv">📺 TV Series</option>
+                    </select>
+                    <input type="text" id="tmdbQuery" placeholder="Search English title…">
+                    <button class="btn btn-primary" id="tmdbSearch">🔍 Search</button>
+                </div>
+                <div class="tmdb-results" id="tmdbResults"></div>
+            </div>
 
-    <!-- TAB: DASHBOARD -->
-    <div class="admin-pane active" data-admin-pane="dashboard">
-      <div class="admin-stats">
-        <div class="admin-stat"><b id="adminStatUsers">0</b><span>Users</span></div>
-        <div class="admin-stat"><b id="adminStatMovies">0</b><span>Movies</span></div>
-        <div class="admin-stat"><b id="adminStatWatched">0</b><span>Watched</span></div>
-        <div class="admin-stat"><b id="adminStatFavs">0</b><span>Favorites</span></div>
-      </div>
-      <div class="admin-card">
-        <h3>🏆 Top Watched</h3>
-        <div id="adminTopMovies"></div>
-      </div>
+            <div class="admin-card">
+                <h3>📝 Movie Details</h3>
+                <div class="form-grid">
+                    <input type="text" id="mId" placeholder="Unique ID (auto)">
+                    <input type="text" id="mTitle" placeholder="Title *">
+                    <select id="mType">
+                        <option value="movie">🎬 Movie</option>
+                        <option value="series">📺 Series</option>
+                        <option value="special">⭐ Special</option>
+                    </select>
+                    <input type="number" id="mYear" placeholder="Year">
+                    <input type="date" id="mReleaseDate">
+                    <input type="number" id="mRating" step="0.1" placeholder="Rating 0-10">
+                    <input type="text" id="mPhase" placeholder="Phase">
+                    <select id="mImportance">
+                        <option>Must Watch</option>
+                        <option>Important</option>
+                        <option>Optional</option>
+                    </select>
+                    <input type="number" id="mSlot" placeholder="Timeline Slot #">
+                    <input type="text" id="mPoster" placeholder="Poster URL">
+                    <input type="text" id="mBackdrop" placeholder="Backdrop URL">
+                    <input type="text" id="mTrailer" placeholder="🎬 YouTube Trailer URL">
+                    <input type="text" id="mDownload" placeholder="⬇ Download URL">
+                    <input type="text" id="mWatchUrl" placeholder="▶ Watch URL">
+                    <input type="text" id="mCast" placeholder="Cast (comma separated)">
+                    <input type="text" id="mGenres" placeholder="Genres (comma separated)">
+                </div>
+                <textarea id="mDescription" placeholder="Description / Overview" rows="4"></textarea>
+                <div class="form-actions">
+                    <button class="btn btn-primary" id="movieSavePublish">💾 Save & Publish</button>
+                    <button class="btn btn-secondary" id="movieSaveDraft">📝 Save Draft</button>
+                    <button class="btn btn-ghost" id="movieFormClear">🧹 Clear</button>
+                </div>
+                <p class="form-status" id="movieFormStatus"></p>
+            </div>
+        </div>
+
+        <!-- Catalog -->
+        <div class="admin-pane" data-admin-pane="catalog">
+            <div class="admin-card">
+                <div class="catalog-toolbar">
+                    <input type="text" id="catalogSearch" placeholder="🔍 Search catalog…">
+                    <select id="catalogFilter">
+                        <option value="all">All</option>
+                        <option value="published">Published</option>
+                        <option value="draft">Drafts</option>
+                    </select>
+                </div>
+                <div id="catalogList" class="catalog-list"></div>
+            </div>
+        </div>
+
+        <!-- Timers -->
+        <div class="admin-pane" data-admin-pane="timers">
+            <div class="admin-card">
+                <h3>⏱️ Create Countdown</h3>
+                <div class="form-grid">
+                    <input type="text" id="timerTitle" placeholder="Timer Title">
+                    <input type="datetime-local" id="timerDate">
+                    <input type="text" id="timerPoster" placeholder="Poster URL">
+                    <input type="text" id="timerSubtitle" placeholder="Subtitle">
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary" id="timerSave">💾 Save Timer</button>
+                    <button class="btn btn-ghost" id="timerClear">🧹 Clear</button>
+                </div>
+                <p class="form-status" id="timerStatus"></p>
+            </div>
+            <div class="admin-card">
+                <h3>Active Timers</h3>
+                <div id="timerList"></div>
+            </div>
+        </div>
+
+        <!-- Users -->
+        <div class="admin-pane" data-admin-pane="users">
+            <div class="admin-card">
+                <input type="text" id="userSearch" placeholder="🔍 Search users…" class="search-full">
+                <div id="userList" class="user-list"></div>
+            </div>
+        </div>
+
     </div>
-
-    <!-- TAB: ADD MOVIE -->
-    <div class="admin-pane" data-admin-pane="add">
-      <div class="admin-card tmdb-card">
-        <h3>🔍 TMDB Auto-Fill</h3>
-        <div class="tmdb-key-row">
-          <input type="text" id="tmdbKey" placeholder="Paste TMDB API key (v3)">
-          <button class="btn btn-secondary" id="tmdbKeySave">Save Key</button>
-        </div>
-        <div class="tmdb-search-row">
-          <select id="tmdbType">
-            <option value="movie">🎬 Movie</option>
-            <option value="tv">📺 TV Series</option>
-          </select>
-          <input type="text" id="tmdbQuery" placeholder="Search English title…">
-          <button class="btn btn-primary" id="tmdbSearch">🔍 Search</button>
-        </div>
-        <div class="tmdb-results" id="tmdbResults"></div>
-      </div>
-
-      <div class="admin-card">
-        <h3>📝 Movie Details</h3>
-        <form id="movieForm" class="admin-form">
-          <div class="form-grid">
-            <input type="text" id="mId" placeholder="Unique ID (auto)">
-            <input type="text" id="mTitle" placeholder="Title *">
-            <select id="mType">
-              <option value="movie">🎬 Movie</option>
-              <option value="series">📺 Series</option>
-              <option value="special">⭐ Special</option>
-            </select>
-            <input type="number" id="mYear" placeholder="Year">
-            <input type="date" id="mReleaseDate">
-            <input type="number" id="mRating" step="0.1" placeholder="Rating 0-10">
-            <input type="text" id="mPhase" placeholder="Phase">
-            <select id="mImportance">
-              <option>Must Watch</option>
-              <option>Important</option>
-              <option>Optional</option>
-            </select>
-            <input type="number" id="mSlot" placeholder="Timeline Slot #">
-            <input type="text" id="mPoster" placeholder="Poster URL">
-            <input type="text" id="mBackdrop" placeholder="Backdrop URL">
-            <input type="text" id="mTrailer" placeholder="🎬 YouTube Trailer URL">
-            <input type="text" id="mDownload" placeholder="⬇ Download URL">
-            <input type="text" id="mWatchUrl" placeholder="▶ Watch / Streaming URL">
-            <input type="text" id="mCast" placeholder="Cast (comma separated)">
-            <input type="text" id="mGenres" placeholder="Genres (comma separated)">
-          </div>
-          <textarea id="mDescription" placeholder="Description / Overview" rows="4"></textarea>
-          <div class="form-actions">
-            <button type="button" class="btn btn-primary" id="movieSavePublish">💾 Save & Publish</button>
-            <button type="button" class="btn btn-secondary" id="movieSaveDraft">📝 Save Draft</button>
-            <button type="button" class="btn btn-ghost" id="movieFormClear">🧹 Clear</button>
-          </div>
-          <p class="form-status" id="movieFormStatus"></p>
-        </form>
-      </div>
-    </div>
-
-    <!-- TAB: CATALOG -->
-    <div class="admin-pane" data-admin-pane="catalog">
-      <div class="admin-card">
-        <div class="catalog-toolbar">
-          <input type="text" id="catalogSearch" placeholder="🔍 Search catalog…">
-          <select id="catalogFilter">
-            <option value="all">All</option>
-            <option value="published">Published</option>
-            <option value="draft">Drafts</option>
-          </select>
-        </div>
-        <div id="catalogList" class="catalog-list"></div>
-      </div>
-    </div>
-
-    <!-- TAB: TIMERS -->
-    <div class="admin-pane" data-admin-pane="timers">
-      <div class="admin-card">
-        <h3>⏱️ Create Countdown</h3>
-        <div class="form-grid">
-          <input type="text" id="timerTitle" placeholder="Timer Title">
-          <input type="datetime-local" id="timerDate">
-          <input type="text" id="timerPoster" placeholder="Poster URL">
-          <input type="text" id="timerSubtitle" placeholder="Subtitle">
-        </div>
-        <div class="form-actions">
-          <button type="button" class="btn btn-primary" id="timerSave">💾 Save Timer</button>
-          <button type="button" class="btn btn-ghost" id="timerClear">🧹 Clear</button>
-        </div>
-        <p class="form-status" id="timerStatus"></p>
-      </div>
-      <div class="admin-card">
-        <h3>Active Timers</h3>
-        <div id="timerList"></div>
-      </div>
-    </div>
-
-    <!-- TAB: USERS -->
-    <div class="admin-pane" data-admin-pane="users">
-      <div class="admin-card">
-        <input type="text" id="userSearch" placeholder="🔍 Search users…" class="search-full">
-        <div id="userList" class="user-list"></div>
-      </div>
-    </div>
-
-  </div>
 </section>
 
 <!-- ═══════════ TOAST ═══════════ -->
 <div class="toast" id="toast" role="alert"></div>
 
-<!-- ═══════════ FIREBASE (MODULES) ═══════════ -->
+<!-- ═══════════ JS MODULES ═══════════ -->
 <script type="module" src="js/firebase.js"></script>
 <script type="module" src="js/theme.js"></script>
 <script type="module" src="js/auth.js"></script>
