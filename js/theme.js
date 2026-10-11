@@ -1,167 +1,231 @@
 /* ═══════════════════════════════════════════════════════════
    MCU TRACKER — THEME SYSTEM
-   6 complete themes
+   Hero themes + Dark/Light toggle + Sound toggle
    ═══════════════════════════════════════════════════════════ */
 
-(function () {
+(function() {
   "use strict";
 
   const $ = id => document.getElementById(id);
 
-  const THEMES = [
-    { id: "midnight", name: "Midnight" },
-    { id: "stark", name: "Stark" },
-    { id: "wakanda", name: "Wakanda" },
-    { id: "gamma", name: "Gamma" },
-    { id: "cosmic", name: "Cosmic" },
-    { id: "infinity", name: "Infinity" }
-  ];
+  /* ═══════════ HERO THEMES ═══════════ */
+  const heroThemeData = {
+    red: {
+      title: "Avengers: Endgame",
+      subtitle: "Marvel Red • Phase 3",
+      poster: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg"
+    },
+    blue: {
+      title: "Spider-Man: No Way Home",
+      subtitle: "Multiverse Blue • Phase 4",
+      poster: "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg"
+    },
+    gold: {
+      title: "Avengers: Infinity War",
+      subtitle: "Infinity Gold • Phase 3",
+      poster: "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
+    },
+    cosmic: {
+      title: "Guardians of the Galaxy",
+      subtitle: "Cosmic • Phase 2",
+      poster: "https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg"
+    },
+    ironman: {
+      title: "Iron Man",
+      subtitle: "Iron Man • Phase 1",
+      poster: "https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg"
+    },
+    gamma: {
+      title: "Hulk",
+      subtitle: "Gamma Green • Phase 3",
+      poster: "https://image.tmdb.org/t/p/w500/uxzzxijgPIY7slzFvMotPv8wjKA.jpg"
+    },
+    doomsday: {
+      title: "Avengers: Doomsday",
+      subtitle: "Doomsday • Phase 6",
+      poster: "https://images.flickdirect.com/movies/avengers-doomsday/avengers-doomsday-poster.jpg"
+    }
+  };
 
-  const STORAGE_KEY = "mcuTheme";
+  /* ═══════════ APPLY HERO THEME ═══════════ */
+  function applyHeroTheme(theme) {
+    if (!heroThemeData[theme]) theme = "blue";
 
-  /* ═══════════ APPLY THEME ═══════════ */
-  function applyTheme(themeId) {
-    const valid = THEMES.some(t => t.id === themeId) ? themeId : "midnight";
+    // Remove all theme- classes from body
+    document.body.classList.remove(
+      "theme-blue", "theme-red", "theme-gold",
+      "theme-cosmic", "theme-ironman",
+      "theme-gamma", "theme-doomsday"
+    );
 
-    // Flash animation
-    document.body.classList.add("theme-switching");
-    setTimeout(() => document.body.classList.remove("theme-switching"), 500);
+    if (theme !== "blue") {
+      document.body.classList.add("theme-" + theme);
+    }
 
-    // Set data attribute
-    document.body.setAttribute("data-theme", valid);
-    try { localStorage.setItem(STORAGE_KEY, valid); } catch (e) {}
+    try { localStorage.setItem("mcuHeroTheme", theme); } catch (e) {}
 
-    // Update swatch active state
-    document.querySelectorAll(".theme-swatch").forEach(swatch => {
-      swatch.classList.toggle("active", swatch.dataset.themePreview === valid);
+    document.querySelectorAll("[data-hero-theme]").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.heroTheme === theme);
     });
 
-    // Update theme-color meta for mobile
-    const metaTheme = document.querySelector('meta[name="theme-color"]');
-    if (metaTheme) {
-      const colors = {
-        midnight: "#05070d",
-        stark: "#0a0505",
-        wakanda: "#050a0f",
-        gamma: "#050f08",
-        cosmic: "#08040f",
-        infinity: "#0a0705"
-      };
-      metaTheme.setAttribute("content", colors[valid] || "#05070d");
+    const data = heroThemeData[theme];
+    const poster = $("themePoster");
+    const title = $("themePosterTitle");
+    const subtitle = $("themePosterSubtitle");
+
+    if (poster) { poster.src = data.poster; poster.alt = data.title + " poster"; }
+    if (title) title.textContent = data.title;
+    if (subtitle) subtitle.textContent = data.subtitle;
+  }
+
+  /* ═══════════ BIND HERO THEME BUTTONS ═══════════ */
+  document.querySelectorAll("[data-hero-theme]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      applyHeroTheme(btn.dataset.heroTheme);
+      if (window.showToast) window.showToast("✓ Theme: " + btn.textContent.trim(), "ok");
+    });
+  });
+
+  // Load saved theme
+  let savedTheme = "blue";
+  try { savedTheme = localStorage.getItem("mcuHeroTheme") || "blue"; } catch (e) {}
+  applyHeroTheme(savedTheme);
+
+  /* ═══════════ DARK / LIGHT TOGGLE ═══════════ */
+  const themeBtn = $("themeBtn");
+
+  function loadDarkMode() {
+    let saved = null;
+    try { saved = localStorage.getItem("mcuTheme"); } catch (e) {}
+    if (saved === "light") {
+      document.body.classList.add("light-mode");
+      if (themeBtn) themeBtn.textContent = "🌙 Dark";
+    } else {
+      document.body.classList.remove("light-mode");
+      if (themeBtn) themeBtn.textContent = "☀️ Light";
     }
   }
 
-  /* ═══════════ BUILD SWATCHES ═══════════ */
-  function buildThemeSwatches() {
-    const grid = $("themeGrid");
-    if (!grid) return;
-
-    grid.innerHTML = "";
-
-    THEMES.forEach(theme => {
-      const swatch = document.createElement("button");
-      swatch.type = "button";
-      swatch.className = "theme-swatch";
-      swatch.dataset.themePreview = theme.id;
-      swatch.innerHTML = `
-        <div class="theme-swatch-preview"></div>
-        <div class="theme-swatch-name">${theme.name}</div>
-      `;
-      swatch.addEventListener("click", () => {
-        applyTheme(theme.id);
-        if (window.showToast) window.showToast(`✓ Theme: ${theme.name}`, "ok");
-      });
-      grid.appendChild(swatch);
+  if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      const isLight = document.body.classList.contains("light-mode");
+      try { localStorage.setItem("mcuTheme", isLight ? "light" : "dark"); } catch (e) {}
+      themeBtn.textContent = isLight ? "🌙 Dark" : "☀️ Light";
+      if (window.showToast) window.showToast(isLight ? "☀️ Light mode" : "🌙 Dark mode", "ok");
     });
   }
 
-  /* ═══════════ THEME PANEL TOGGLE ═══════════ */
-  function setupThemePanel() {
-    const toggleBtn = $("themeToggle");
-    const panel = $("themePanel");
-
-    if (!toggleBtn || !panel) return;
-
-    toggleBtn.addEventListener("click", e => {
-      e.stopPropagation();
-      panel.classList.toggle("open");
-    });
-
-    document.addEventListener("click", e => {
-      if (!panel.classList.contains("open")) return;
-      if (panel.contains(e.target) || toggleBtn.contains(e.target)) return;
-      panel.classList.remove("open");
-    });
-
-    document.addEventListener("keydown", e => {
-      if (e.key === "Escape" && panel.classList.contains("open")) {
-        panel.classList.remove("open");
-      }
-    });
-  }
+  loadDarkMode();
 
   /* ═══════════ SOUND TOGGLE ═══════════ */
-  function setupSoundToggle() {
-    const btn = $("soundToggle");
-    const icon = $("soundIcon");
-    if (!btn || !icon) return;
+  const soundBtn = $("soundBtn");
+  let soundEnabled = true;
+  try { soundEnabled = localStorage.getItem("mcuSound") !== "false"; } catch (e) {}
 
-    let soundOn = true;
-    try { soundOn = localStorage.getItem("mcuSound") !== "false"; } catch (e) {}
-    icon.textContent = soundOn ? "🔊" : "🔇";
+  function updateSoundBtn() {
+    if (soundBtn) soundBtn.textContent = soundEnabled ? "🔊 Sound" : "🔇 Sound";
+  }
 
-    btn.addEventListener("click", () => {
-      soundOn = !soundOn;
-      try { localStorage.setItem("mcuSound", soundOn); } catch (e) {}
-      icon.textContent = soundOn ? "🔊" : "🔇";
-      if (window.showToast) {
-        window.showToast(soundOn ? "🔊 Sound on" : "🔇 Sound off", "ok");
-      }
+  if (soundBtn) {
+    soundBtn.addEventListener("click", () => {
+      soundEnabled = !soundEnabled;
+      try { localStorage.setItem("mcuSound", soundEnabled); } catch (e) {}
+      updateSoundBtn();
+      if (window.showToast) window.showToast(soundEnabled ? "🔊 Sound on" : "🔇 Sound off", "ok");
     });
   }
 
-  /* ═══════════ BACKGROUND STARS ═══════════ */
-  function createStars() {
-    const container = $("bgStars");
-    if (!container) return;
+  updateSoundBtn();
 
-    container.innerHTML = "";
-    const count = window.innerWidth < 700 ? 30 : 60;
+  /* ═══════════ RESET BUTTON ═══════════ */
+  const resetBtn = $("resetBtn");
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      if (window.resetTracker) window.resetTracker();
+    });
+  }
 
-    for (let i = 0; i < count; i++) {
-      const star = document.createElement("div");
-      star.className = "star";
-      star.style.left = Math.random() * 100 + "%";
-      star.style.top = Math.random() * 100 + "%";
-      star.style.animationDelay = (Math.random() * 3).toFixed(2) + "s";
-      star.style.opacity = (0.3 + Math.random() * 0.6).toFixed(2);
-      container.appendChild(star);
+  /* ═══════════ EXPLORE BUTTON ═══════════ */
+  const heroExploreBtn = $("heroExploreBtn");
+  if (heroExploreBtn) {
+    heroExploreBtn.addEventListener("click", () => {
+      const movieList = $("movieList");
+      if (movieList) movieList.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  /* ═══════════ V3 DASHBOARD NAME ═══════════ */
+  const V3 = { nameKey: "mcuV3Name" };
+
+  function renderV3Name() {
+    let name = "Shashwat";
+    try { name = localStorage.getItem(V3.nameKey) || "Shashwat"; } catch (e) {}
+
+    const greeting = $("v3Greeting");
+    const avatar = $("v3Avatar");
+    const nameInput = $("v3NameInput");
+
+    if (greeting) greeting.textContent = "Welcome back, " + name + " ⚡";
+    if (avatar) avatar.textContent = (name.trim().charAt(0).toUpperCase()) || "S";
+    if (nameInput) nameInput.value = name;
+  }
+
+  const v3SaveName = $("v3SaveName");
+  if (v3SaveName) {
+    v3SaveName.addEventListener("click", () => {
+      const input = $("v3NameInput");
+      const value = (input && input.value.trim()) || "Shashwat";
+      try { localStorage.setItem(V3.nameKey, value); } catch (e) {}
+      renderV3Name();
+      if (window.showToast) window.showToast("✓ Name saved", "ok");
+    });
+  }
+
+  const v3NameInput = $("v3NameInput");
+  if (v3NameInput) {
+    v3NameInput.addEventListener("keydown", e => {
+      if (e.key === "Enter" && v3SaveName) v3SaveName.click();
+    });
+  }
+
+  renderV3Name();
+
+  /* ═══════════ V3 NEXT MOVIE ═══════════ */
+  function renderV3Next() {
+    const movies = window.MCU && window.MCU.getMovies ? window.MCU.getMovies() : [];
+    if (!movies.length) {
+      const t = $("v3NextTitle");
+      const m = $("v3NextMeta");
+      if (t) t.textContent = "No movies yet";
+      if (m) m.textContent = "Admin can add from the admin panel";
+      return;
+    }
+
+    const watched = window.__mcuWatched || {};
+    const next = movies.find(m => !watched[m.id]);
+    const movie = next || movies[0];
+
+    const poster = $("v3NextPoster");
+    const title = $("v3NextTitle");
+    const meta = $("v3NextMeta");
+    const box = $("v3NextMovie");
+
+    if (poster) {
+      poster.src = movie.poster || "";
+      poster.onerror = () => {
+        poster.src = "https://placehold.co/300x450/0d1422/00e5ff?text=MCU";
+      };
+    }
+    if (title) title.textContent = movie.title || movie.id;
+    if (meta) meta.textContent = (movie.phase || "MCU") + " • " + (movie.year || "TBA") + " • ⭐ " + (movie.rating || "TBA");
+    if (box && window.openMovieModal) {
+      box.onclick = () => window.openMovieModal(movie);
     }
   }
 
-  /* ═══════════ INIT ═══════════ */
-  function init() {
-    buildThemeSwatches();
-    setupThemePanel();
-    setupSoundToggle();
-    createStars();
+  document.addEventListener("movies-loaded", renderV3Next);
+  document.addEventListener("tracker-updated", renderV3Next);
 
-    // Apply saved theme
-    let saved = "midnight";
-    try { saved = localStorage.getItem(STORAGE_KEY) || "midnight"; } catch (e) {}
-    applyTheme(saved);
-
-    console.log("✅ Theme system ready");
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
-  }
-
-  /* ═══════════ PUBLIC API ═══════════ */
-  window.applyTheme = applyTheme;
-  window.MCU = window.MCU || {};
-  window.MCU.getTheme = () => document.body.getAttribute("data-theme");
+  console.log("✅ Theme module loaded");
 })();
