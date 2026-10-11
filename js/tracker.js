@@ -56,10 +56,10 @@ if (!auth || !db) {
         updatedAt: serverTimestamp()
       }, { merge: true });
 
-      window.setSyncStatus("synced", "ok");
+      if (window.setSyncStatus) window.setSyncStatus("synced", "ok");
     } catch (e) {
       console.error("Cloud save failed:", e);
-      window.setSyncStatus("sync failed", "error");
+      if (window.setSyncStatus) window.setSyncStatus("sync failed", "error");
     }
   }
 
@@ -76,7 +76,7 @@ if (!auth || !db) {
     if (!user) return;
 
     try {
-      window.setSyncStatus("loading…", "idle");
+      if (window.setSyncStatus) window.setSyncStatus("loading…", "idle");
       const ref = doc(db, "users", user.uid, "private", "tracker");
       const snap = await getDoc(ref);
 
@@ -87,15 +87,14 @@ if (!auth || !db) {
         window.__mcuWatched = watched;
         window.__mcuFavorites = favorites;
         saveLocal();
-        window.setSyncStatus("synced", "ok");
+        if (window.setSyncStatus) window.setSyncStatus("synced", "ok");
         document.dispatchEvent(new CustomEvent("tracker-updated"));
       } else {
-        // First time — save current local state
         await saveCloud();
       }
     } catch (e) {
       console.error("Cloud load failed:", e);
-      window.setSyncStatus("load failed", "error");
+      if (window.setSyncStatus) window.setSyncStatus("load failed", "error");
     }
   }
 
@@ -103,8 +102,11 @@ if (!auth || !db) {
   function toggleWatched(movieId, forceState) {
     if (!movieId) return;
     const newVal = typeof forceState === "boolean" ? forceState : !watched[movieId];
-    watched[movieId] = newVal;
-    if (!newVal) delete watched[movieId];
+    if (newVal) {
+      watched[movieId] = true;
+    } else {
+      delete watched[movieId];
+    }
 
     window.__mcuWatched = watched;
     saveLocal();
@@ -114,8 +116,11 @@ if (!auth || !db) {
 
   function toggleFavorite(movieId) {
     if (!movieId) return;
-    favorites[movieId] = !favorites[movieId];
-    if (!favorites[movieId]) delete favorites[movieId];
+    if (favorites[movieId]) {
+      delete favorites[movieId];
+    } else {
+      favorites[movieId] = true;
+    }
 
     window.__mcuFavorites = favorites;
     saveLocal();
@@ -132,7 +137,7 @@ if (!auth || !db) {
     saveLocal();
     scheduleCloudSave();
     document.dispatchEvent(new CustomEvent("tracker-updated"));
-    window.showToast?.("✓ Tracker reset", "ok");
+    if (window.showToast) window.showToast("✓ Tracker reset", "ok");
   }
 
   /* ═══════════ EXPORTS ═══════════ */
@@ -141,14 +146,12 @@ if (!auth || !db) {
   window.resetTracker = resetTracker;
 
   /* ═══════════ AUTH STATE — LOAD ON LOGIN ═══════════ */
-  auth.onAuthStateChanged?.(() => {}); // Already handled in auth.js
   document.addEventListener("user-logged-in", () => {
     loadCloud();
   });
 
   document.addEventListener("user-logged-out", () => {
-    // Keep local state on logout (user may come back)
-    window.setSyncStatus("not signed in", "idle");
+    if (window.setSyncStatus) window.setSyncStatus("not signed in", "idle");
   });
 
   console.log("✅ Tracker module loaded");
