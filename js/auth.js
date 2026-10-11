@@ -29,11 +29,10 @@ const db = window.__mcuDb;
 if (!auth || !db) {
   console.error("❌ auth.js: Firebase not initialized");
 } else {
-  /* ═══════════ ELEMENT REFS ═══════════ */
   const $ = id => document.getElementById(id);
 
+  /* ═══════════ ELEMENT REFS ═══════════ */
   const authModal = $("authModal");
-  const loginBtn = $("loginBtn");
   const authArea = $("authArea");
   const authForm = $("authForm");
   const authName = $("authName");
@@ -55,7 +54,7 @@ if (!auth || !db) {
     authModal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
     setAuthMode("login");
-    setTimeout(() => authEmail?.focus(), 250);
+    setTimeout(() => authEmail && authEmail.focus(), 250);
   }
 
   function closeAuthModal() {
@@ -96,7 +95,6 @@ if (!auth || !db) {
       const snap = await getDoc(ref);
 
       if (!snap.exists()) {
-        // New user
         await setDoc(ref, {
           uid: user.uid,
           email: user.email || "",
@@ -107,7 +105,6 @@ if (!auth || !db) {
           updatedAt: serverTimestamp()
         });
       } else {
-        // Existing user — update profile only (never overwrite role)
         await setDoc(ref, {
           email: user.email || snap.data().email || "",
           displayName: user.displayName || snap.data().displayName || "",
@@ -141,7 +138,7 @@ if (!auth || !db) {
       const role = await getUserRole(user);
       window.__mcuUserRole = role;
 
-      const name = user.displayName || user.email?.split("@")[0] || "User";
+      const name = user.displayName || (user.email ? user.email.split("@")[0] : "User");
       const initial = name.trim().charAt(0).toUpperCase() || "U";
 
       authArea.innerHTML = `
@@ -163,13 +160,7 @@ if (!auth || !db) {
       const openAdminBtn = document.getElementById("openAdminBtn");
       if (openAdminBtn) {
         openAdminBtn.onclick = () => {
-          const panel = document.getElementById("adminPanel");
-          if (panel) {
-            panel.classList.add("open");
-            panel.setAttribute("aria-hidden", "false");
-            document.body.style.overflow = "hidden";
-            window.dispatchEvent(new CustomEvent("admin-open"));
-          }
+          document.dispatchEvent(new CustomEvent("admin-open"));
         };
       }
     } else {
@@ -185,10 +176,11 @@ if (!auth || !db) {
     e.preventDefault();
     if (!authForm) return;
 
-    const mode = document.querySelector(".auth-tab.active")?.dataset.authTab || "login";
+    const activeTab = document.querySelector(".auth-tab.active");
+    const mode = activeTab ? activeTab.dataset.authTab : "login";
     const email = authEmail.value.trim();
     const password = authPassword.value;
-    const name = authName?.value.trim() || "";
+    const name = authName && authName.value ? authName.value.trim() : "";
 
     if (!email || !password) return;
 
@@ -212,13 +204,13 @@ if (!auth || !db) {
         await updateAuthUI(cred.user);
 
         closeAuthModal();
-        window.showToast("✓ Account created successfully!", "ok");
+        if (window.showToast) window.showToast("✓ Account created successfully!", "ok");
       } else {
         const cred = await signInWithEmailAndPassword(auth, email, password);
         await updateAuthUI(cred.user);
 
         closeAuthModal();
-        window.showToast("✓ Logged in successfully!", "ok");
+        if (window.showToast) window.showToast("✓ Logged in successfully!", "ok");
       }
     } catch (err) {
       console.error("Auth error:", err);
@@ -254,17 +246,14 @@ if (!auth || !db) {
 
     try {
       if (isMobile) {
-        // Mobile: use redirect (popup often blocked)
         await signInWithRedirect(auth, provider);
-        // Page will reload; result handled by getRedirectResult below
       } else {
-        // Desktop: popup
         const result = await signInWithPopup(auth, provider);
         if (result.user) {
           await saveUserProfile(result.user);
           await updateAuthUI(result.user);
           closeAuthModal();
-          window.showToast("✓ Logged in with Google!", "ok");
+          if (window.showToast) window.showToast("✓ Logged in with Google!", "ok");
         }
       }
     } catch (err) {
@@ -289,18 +278,24 @@ if (!auth || !db) {
   async function handleLogout() {
     try {
       await signOut(auth);
-      window.showToast("✓ Logged out", "ok");
+      if (window.showToast) window.showToast("✓ Logged out", "ok");
     } catch (err) {
       console.error("Logout error:", err);
-      window.showToast("Logout failed", "error");
+      if (window.showToast) window.showToast("Logout failed", "error");
     }
   }
 
   /* ═══════════ EVENT BINDINGS ═══════════ */
-  if (loginBtn) loginBtn.onclick = openAuthModal;
+  const initialLoginBtn = $("loginBtn");
+  if (initialLoginBtn) initialLoginBtn.onclick = openAuthModal;
 
   document.querySelectorAll("[data-close-modal]").forEach(btn => {
-    btn.addEventListener("click", closeAuthModal);
+    btn.addEventListener("click", () => {
+      // Only close auth modal when the auth modal is open
+      if (authModal && authModal.classList.contains("open")) {
+        closeAuthModal();
+      }
+    });
   });
 
   if (authModal) {
@@ -310,7 +305,7 @@ if (!auth || !db) {
   }
 
   document.addEventListener("keydown", e => {
-    if (e.key === "Escape" && authModal?.classList.contains("open")) {
+    if (e.key === "Escape" && authModal && authModal.classList.contains("open")) {
       closeAuthModal();
     }
   });
@@ -335,7 +330,7 @@ if (!auth || !db) {
     if (redirectResult && redirectResult.user) {
       await saveUserProfile(redirectResult.user);
       await updateAuthUI(redirectResult.user);
-      window.showToast("✓ Logged in with Google!", "ok");
+      if (window.showToast) window.showToast("✓ Logged in with Google!", "ok");
     }
   } catch (e) {
     if (e && e.code) console.warn("Redirect result:", e.code);
