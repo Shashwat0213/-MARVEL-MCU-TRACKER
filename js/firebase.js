@@ -1,6 +1,7 @@
 /* ═══════════════════════════════════════════════════════════
    MCU TRACKER — FIREBASE INITIALIZATION
    Single global instance — no conflicts
+   Purana config — jo pehle kaam kar raha tha
    ═══════════════════════════════════════════════════════════ */
 
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
@@ -79,19 +80,6 @@ window.escapeHTML = function(str) {
  * Escape for use in HTML attributes
  */
 window.escapeAttr = window.escapeHTML;
-
-/**
- * Hide the loading screen
- */
-window.hideLoader = function() {
-  const loader = document.getElementById("loader");
-  if (loader) {
-    loader.classList.add("hidden");
-    setTimeout(() => {
-      loader.style.display = "none";
-    }, 600);
-  }
-};
 
 /**
  * Log admin activity to Firestore
