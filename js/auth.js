@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════
    MCU TRACKER — AUTHENTICATION
-   Email/Password + Google Sign-in (fixed for mobile)
+   Email/Password + Google Sign-in (mobile redirect + desktop popup)
    + Profile sync + Admin role check
    ═══════════════════════════════════════════════════════════ */
 
@@ -27,9 +27,7 @@ import {
 const auth = window.__mcuAuth;
 const db = window.__mcuDb;
 
-/* ═══════════ ADMIN EMAIL ═══════════
-   Aapka admin Gmail — iske saath login hone par admin banega
-*/
+/* ═══════════ ADMIN EMAIL ═══════════ */
 const ADMIN_EMAIL = "mcutrackersupport@gmail.com";
 
 if (!auth || !db) {
@@ -130,7 +128,6 @@ if (!auth || !db) {
     try {
       const snap = await getDoc(doc(db, "users", user.uid));
       if (snap.exists() && snap.data().role === "admin") return "admin";
-      // Fallback: check admin email
       if ((user.email || "").toLowerCase() === ADMIN_EMAIL.toLowerCase()) return "admin";
       return "user";
     } catch (e) {
@@ -236,7 +233,7 @@ if (!auth || !db) {
     }
   }
 
-  /* ═══════════ GOOGLE LOGIN (FIXED — Mobile + Desktop) ═══════════ */
+  /* ═══════════ GOOGLE LOGIN (FIXED — Force mobile redirect) ═══════════ */
   async function handleGoogleLogin() {
     if (!googleBtn) return;
 
@@ -244,18 +241,19 @@ if (!auth || !db) {
     googleBtn.disabled = true;
     googleBtn.innerHTML = "Signing in…";
 
-    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    // ✅ IMPROVED mobile detection — screen width check bhi
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile|Tablet|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 900;
 
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
 
     try {
       if (isMobile) {
-        // Mobile: redirect flow (popup block issue)
+        // Mobile/tablet: redirect flow (popup block issue)
         await signInWithRedirect(auth, provider);
-        // Page reload hoga. getRedirectResult() niche handle karega.
+        // Page will reload; result handled by getRedirectResult() below
       } else {
-        // Desktop: popup
+        // Desktop: popup flow
         const result = await signInWithPopup(auth, provider);
         if (result.user) {
           await saveUserProfile(result.user);
