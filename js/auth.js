@@ -1,7 +1,6 @@
 /* ═══════════════════════════════════════════════════════════
    MCU TRACKER — AUTHENTICATION
    Email/Password + Google Sign-in (mobile redirect + desktop popup)
-   + Profile sync + Admin role check
    ═══════════════════════════════════════════════════════════ */
 
 import {
@@ -27,7 +26,6 @@ import {
 const auth = window.__mcuAuth;
 const db = window.__mcuDb;
 
-/* ═══════════ ADMIN EMAIL ═══════════ */
 const ADMIN_EMAIL = "mcutrackersupport@gmail.com";
 
 if (!auth || !db) {
@@ -53,7 +51,6 @@ if (!auth || !db) {
 
   let currentUser = null;
 
-  /* ═══════════ MODAL ═══════════ */
   function openAuthModal() {
     if (!authModal) return;
     authModal.classList.add("open");
@@ -92,7 +89,6 @@ if (!auth || !db) {
     authMessage.classList.toggle("success", ok);
   }
 
-  /* ═══════════ PROFILE SAVE ═══════════ */
   async function saveUserProfile(user) {
     if (!user) return;
     try {
@@ -135,7 +131,6 @@ if (!auth || !db) {
     }
   }
 
-  /* ═══════════ UPDATE UI ═══════════ */
   async function updateAuthUI(user) {
     currentUser = user;
     window.__mcuUser = user;
@@ -170,7 +165,6 @@ if (!auth || !db) {
     }
   }
 
-  /* ═══════════ EMAIL/PASSWORD SUBMIT ═══════════ */
   async function handleAuthSubmit(e) {
     e.preventDefault();
     if (!authForm) return;
@@ -192,11 +186,7 @@ if (!auth || !db) {
         const cred = await createUserWithEmailAndPassword(auth, email, password);
 
         if (name) {
-          try {
-            await updateProfile(cred.user, { displayName: name });
-          } catch (e) {
-            console.warn("Could not set display name:", e);
-          }
+          try { await updateProfile(cred.user, { displayName: name }); } catch (e) {}
         }
 
         await saveUserProfile(cred.user);
@@ -233,7 +223,7 @@ if (!auth || !db) {
     }
   }
 
-  /* ═══════════ GOOGLE LOGIN (FIXED — Force mobile redirect) ═══════════ */
+  /* ═══════════ GOOGLE LOGIN — Mobile + Desktop Fixed ═══════════ */
   async function handleGoogleLogin() {
     if (!googleBtn) return;
 
@@ -241,7 +231,7 @@ if (!auth || !db) {
     googleBtn.disabled = true;
     googleBtn.innerHTML = "Signing in…";
 
-    // ✅ IMPROVED mobile detection — screen width check bhi
+    // IMPROVED mobile detection
     const isMobile = /Android|iPhone|iPad|iPod|Mobile|Tablet|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 900;
 
     const provider = new GoogleAuthProvider();
@@ -251,7 +241,6 @@ if (!auth || !db) {
       if (isMobile) {
         // Mobile/tablet: redirect flow (popup block issue)
         await signInWithRedirect(auth, provider);
-        // Page will reload; result handled by getRedirectResult() below
       } else {
         // Desktop: popup flow
         const result = await signInWithPopup(auth, provider);
@@ -280,7 +269,6 @@ if (!auth || !db) {
     }
   }
 
-  /* ═══════════ LOGOUT ═══════════ */
   async function handleLogout() {
     try {
       await signOut(auth);
@@ -348,7 +336,6 @@ if (!auth || !db) {
   /* ═══════════ AUTH STATE LISTENER ═══════════ */
   onAuthStateChanged(auth, async user => {
     await updateAuthUI(user);
-
     if (user) {
       document.dispatchEvent(new CustomEvent("user-logged-in", { detail: { user } }));
     } else {
@@ -356,7 +343,6 @@ if (!auth || !db) {
     }
   });
 
-  /* ═══════════ GLOBAL EXPORTS ═══════════ */
   window.openAuthModal = openAuthModal;
   window.closeAuthModal = closeAuthModal;
   window.handleLogout = handleLogout;
