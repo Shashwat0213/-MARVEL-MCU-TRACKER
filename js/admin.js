@@ -17,6 +17,8 @@ import {
 const auth = window.__mcuAuth;
 const db = window.__mcuDb;
 
+const ADMIN_EMAIL = "mcutrackersupport@gmail.com";
+
 if (!auth || !db) {
   console.error("❌ admin.js: Firebase not initialized");
 } else {
@@ -25,12 +27,9 @@ if (!auth || !db) {
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
   }[c]));
 
-  let currentAdminUser = null;
-  let currentTmdbType = "movie";
-
-  /* ═══════════ HELPERS ═══════════ */
   async function isAdmin(user) {
     if (!user) return false;
+    if ((user.email || "").toLowerCase() === ADMIN_EMAIL.toLowerCase()) return true;
     try {
       const snap = await getDoc(doc(db, "users", user.uid));
       return snap.exists() && snap.data().role === "admin";
@@ -50,7 +49,7 @@ if (!auth || !db) {
     if (window.showToast) window.showToast(msg, isError ? "error" : "ok");
   }
 
-  /* ═══════════ OPEN/CLOSE PANEL ═══════════ */
+  /* ═══════════ OPEN / CLOSE ═══════════ */
   async function openAdminPanel() {
     const user = auth.currentUser;
     if (!user) {
@@ -62,7 +61,6 @@ if (!auth || !db) {
       return;
     }
 
-    currentAdminUser = user;
     const panel = $("adminPanel");
     if (!panel) return;
 
@@ -84,7 +82,7 @@ if (!auth || !db) {
     document.body.style.overflow = "";
   }
 
-  /* ═══════════ TAB SWITCHING ═══════════ */
+  /* ═══════════ TABS ═══════════ */
   function switchAdminTab(tab) {
     document.querySelectorAll(".admin-tab").forEach(t => {
       t.classList.toggle("active", t.dataset.adminTab === tab);
@@ -116,18 +114,14 @@ if (!auth || !db) {
       let totalWatched = 0, totalFavs = 0;
       const watchCount = {};
 
-      const userDocs = usersSnap.docs.slice(0, 100);
-      for (const u of userDocs) {
+      for (const u of usersSnap.docs.slice(0, 100)) {
         try {
           const t = await getDoc(doc(db, "users", u.id, "private", "tracker"));
           if (t.exists()) {
             const data = t.data();
             const w = data.watched || {};
             Object.entries(w).forEach(([k, v]) => {
-              if (v) {
-                watchCount[k] = (watchCount[k] || 0) + 1;
-                totalWatched++;
-              }
+              if (v) { watchCount[k] = (watchCount[k] || 0) + 1; totalWatched++; }
             });
             totalFavs += Object.values(data.favorites || {}).filter(Boolean).length;
           }
@@ -137,25 +131,24 @@ if (!auth || !db) {
       set("adminStatWatched", totalWatched);
       set("adminStatFavs", totalFavs);
 
-      const top = Object.entries(watchCount)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 5);
+      const top = Object.entries(watchCount).sort((a, b) => b[1] - a[1]).slice(0, 5);
       const max = top[0] ? top[0][1] : 1;
       const movies = moviesSnap.docs.map(d => ({ id: d.id, ...d.data() }));
 
       const topEl = $("adminTopMovies");
       if (topEl) {
-        topEl.innerHTML = top.map(item => {
-          const mid = item[0], cnt = item[1];
+        topEl.innerHTML = top.map(([mid, cnt]) => {
           const m = movies.find(x => x.id === mid);
           const pct = Math.round((cnt / max) * 100);
-          return '<div style="margin-bottom:12px">' +
-            '<div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:0.75rem">' +
-            '<span>' + esc(m && m.title ? m.title : mid) + '</span>' +
-            '<b style="color:var(--primary)">' + cnt + '</b></div>' +
-            '<div style="height:6px;background:var(--card-2);border-radius:3px;overflow:hidden">' +
-            '<div style="height:100%;width:' + pct + '%;background:linear-gradient(90deg,var(--primary),var(--secondary));border-radius:3px;transition:width 0.5s ease"></div>' +
-            '</div></div>';
+          return `<div style="margin-bottom:12px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:0.75rem">
+              <span>${esc(m && m.title ? m.title : mid)}</span>
+              <b style="color:var(--primary)">${cnt}</b>
+            </div>
+            <div style="height:6px;background:var(--card-2);border-radius:3px;overflow:hidden">
+              <div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--primary),var(--secondary));border-radius:3px;transition:width 0.5s ease"></div>
+            </div>
+          </div>`;
         }).join("") || "<p style='opacity:0.6;font-size:0.8rem'>No data yet.</p>";
       }
     } catch (e) {
@@ -177,18 +170,12 @@ if (!auth || !db) {
 
   async function tmdbSearch() {
     const key = ($("tmdbKey") && $("tmdbKey").value.trim()) || getTmdbKey();
-    if (!key) {
-      adminToast("Please paste your TMDB API key first.", true);
-      return;
-    }
+    if (!key) { adminToast("Please paste your TMDB API key first.", true); return; }
     saveTmdbKey(key);
 
     const type = ($("tmdbType") && $("tmdbType").value) || "movie";
     const queryText = $("tmdbQuery") ? $("tmdbQuery").value.trim() : "";
-    if (!queryText) {
-      adminToast("Type a title to search.", true);
-      return;
-    }
+    if (!queryText) { adminToast("Type a title to search.", true); return; }
 
     const resultsEl = $("tmdbResults");
     if (resultsEl) resultsEl.innerHTML = "<p style='padding:12px;opacity:0.7'>Searching TMDB…</p>";
@@ -215,15 +202,15 @@ if (!auth || !db) {
             ? "https://image.tmdb.org/t/p/w300" + r.poster_path
             : "https://placehold.co/300x450/0d1422/00e5ff?text=No+Poster";
           const year = (r.release_date || r.first_air_date || "").slice(0, 4);
-          return '<div class="tmdb-result" data-tmdb-id="' + r.id + '">' +
-            '<img src="' + poster + '" alt="">' +
-            '<div class="tmdb-result-info">' +
-            '<b>' + esc(r.title || r.name || "") + '</b>' +
-            '<small>' + year + ' • ⭐ ' + (r.vote_average || 0).toFixed(1) + '</small>' +
-            '</div></div>';
+          return `<div class="tmdb-result" data-tmdb-id="${r.id}">
+            <img src="${poster}" alt="">
+            <div class="tmdb-result-info">
+              <b>${esc(r.title || r.name || "")}</b>
+              <small>${year} • ⭐ ${(r.vote_average || 0).toFixed(1)}</small>
+            </div>
+          </div>`;
         }).join("");
 
-        currentTmdbType = type;
         resultsEl.querySelectorAll(".tmdb-result").forEach(card => {
           card.addEventListener("click", () => fillFromTmdb(card.dataset.tmdbId, key, type));
         });
@@ -240,18 +227,15 @@ if (!auth || !db) {
       const res = await fetch(
         "https://api.themoviedb.org/3/" + type + "/" + id +
         "?api_key=" + key +
-        "&language=en-US" +
-        "&append_to_response=credits,videos"
+        "&language=en-US&append_to_response=credits,videos"
       );
       const d = await res.json();
 
       const title = d.title || d.name || "";
       const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
       const year = (d.release_date || d.first_air_date || "").slice(0, 4);
-      const videos = (d.videos && d.videos.results) || [];
-      const trailer = videos.find(v => v.type === "Trailer" && v.site === "YouTube");
-      const credits = (d.credits && d.credits.cast) || [];
-      const cast = credits.slice(0, 10).map(c => c.name).join(", ");
+      const trailer = (d.videos && d.videos.results || []).find(v => v.type === "Trailer" && v.site === "YouTube");
+      const cast = ((d.credits && d.credits.cast) || []).slice(0, 10).map(c => c.name).join(", ");
       const genres = (d.genres || []).map(g => g.name).join(", ");
 
       const set = (eid, val) => { const el = $(eid); if (el) el.value = val == null ? "" : val; };
@@ -279,7 +263,6 @@ if (!auth || !db) {
   function buildMoviePayload(status) {
     const user = auth.currentUser;
     const val = id => { const el = $(id); return el ? el.value.trim() : ""; };
-
     const title = val("mTitle");
     const id = val("mId") || title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
@@ -311,18 +294,11 @@ if (!auth || !db) {
     try {
       await requireAdmin();
       const payload = buildMoviePayload(status);
-
-      if (!payload.id || !payload.title) {
-        throw new Error("ID and Title are required.");
-      }
+      if (!payload.id || !payload.title) throw new Error("ID and Title are required.");
 
       await setDoc(doc(db, "movies", payload.id), payload, { merge: true });
-
       if (window.logActivity) {
-        window.logActivity(
-          status === "draft" ? "Save Draft" : "Publish Movie",
-          payload.id + " — " + payload.title
-        );
+        window.logActivity(status === "draft" ? "Save Draft" : "Publish Movie", payload.id + " — " + payload.title);
       }
 
       const statusEl = $("movieFormStatus");
@@ -331,37 +307,30 @@ if (!auth || !db) {
         statusEl.style.color = "var(--success)";
       }
       adminToast(status === "draft" ? "📝 Draft saved" : "✅ Published!");
-
       document.dispatchEvent(new CustomEvent("movies-changed"));
     } catch (e) {
       console.error(e);
       const statusEl = $("movieFormStatus");
-      if (statusEl) {
-        statusEl.textContent = e.message;
-        statusEl.style.color = "var(--danger)";
-      }
+      if (statusEl) { statusEl.textContent = e.message; statusEl.style.color = "var(--danger)"; }
       adminToast(e.message, true);
     }
   }
 
   function clearMovieForm() {
-    ["mId", "mTitle", "mYear", "mReleaseDate", "mRating", "mPhase", "mSlot",
-     "mPoster", "mBackdrop", "mTrailer", "mDownload", "mWatchUrl",
-     "mDescription", "mCast", "mGenres"].forEach(id => {
-      const el = $(id);
-      if (el) el.value = "";
+    ["mId","mTitle","mYear","mReleaseDate","mRating","mPhase","mSlot",
+     "mPoster","mBackdrop","mTrailer","mDownload","mWatchUrl",
+     "mDescription","mCast","mGenres"].forEach(id => {
+      const el = $(id); if (el) el.value = "";
     });
     const typeEl = $("mType"); if (typeEl) typeEl.value = "movie";
     const impEl = $("mImportance"); if (impEl) impEl.value = "Important";
-    const statusEl = $("movieFormStatus");
-    if (statusEl) statusEl.textContent = "";
+    const statusEl = $("movieFormStatus"); if (statusEl) statusEl.textContent = "";
   }
 
   /* ═══════════ CATALOG ═══════════ */
   async function loadCatalog() {
     try {
       await requireAdmin();
-
       const snap = await getDocs(collection(db, "movies"));
       const items = [];
       snap.forEach(d => items.push({ id: d.id, ...d.data() }));
@@ -391,18 +360,19 @@ if (!auth || !db) {
         const badge = x.status === "draft"
           ? '<span class="badge badge-draft">DRAFT</span>'
           : '<span class="badge badge-published">LIVE</span>';
-        const poster = esc(x.poster || "");
-        return '<div class="admin-row">' +
-          '<div class="admin-row-content">' +
-          '<img class="admin-row-thumb" src="' + poster + '" onerror="this.style.display=\'none\'" alt="">' +
-          '<div class="admin-row-text">' +
-          '<b>' + esc(x.title || x.id) + '</b>' +
-          '<small>' + esc(x.type || "movie") + ' • Slot ' + esc(String(x.timelineSlot || "?")) + ' • ' + badge + '</small>' +
-          '</div></div>' +
-          '<div class="admin-row-actions">' +
-          '<button data-catalog-edit="' + esc(x.id) + '">✏️ Edit</button>' +
-          '<button class="danger" data-catalog-delete="' + esc(x.id) + '">🗑️</button>' +
-          '</div></div>';
+        return `<div class="admin-row">
+          <div class="admin-row-content">
+            <img class="admin-row-thumb" src="${esc(x.poster || "")}" onerror="this.style.display='none'" alt="">
+            <div class="admin-row-text">
+              <b>${esc(x.title || x.id)}</b>
+              <small>${esc(x.type || "movie")} • Slot ${esc(String(x.timelineSlot || "?"))} • ${badge}</small>
+            </div>
+          </div>
+          <div class="admin-row-actions">
+            <button data-catalog-edit="${esc(x.id)}">✏️ Edit</button>
+            <button class="danger" data-catalog-delete="${esc(x.id)}">🗑️</button>
+          </div>
+        </div>`;
       }).join("");
 
       listEl.querySelectorAll("[data-catalog-edit]").forEach(btn => {
@@ -422,7 +392,6 @@ if (!auth || !db) {
       await requireAdmin();
       const snap = await getDoc(doc(db, "movies", id));
       if (!snap.exists()) return;
-
       const x = { id: snap.id, ...snap.data() };
       const set = (elId, val) => { const el = $(elId); if (el) el.value = val == null ? "" : val; };
 
@@ -485,15 +454,17 @@ if (!auth || !db) {
 
       listEl.innerHTML = timers.map(t => {
         const dateStr = t.targetDate ? new Date(t.targetDate).toLocaleString() : "No date";
-        return '<div class="admin-row">' +
-          '<div class="admin-row-content">' +
-          '<div class="admin-row-text">' +
-          '<b>' + esc(t.title) + '</b>' +
-          '<small>' + esc(dateStr) + '</small>' +
-          '</div></div>' +
-          '<div class="admin-row-actions">' +
-          '<button class="danger" data-timer-delete="' + esc(t.id) + '">🗑️</button>' +
-          '</div></div>';
+        return `<div class="admin-row">
+          <div class="admin-row-content">
+            <div class="admin-row-text">
+              <b>${esc(t.title)}</b>
+              <small>${esc(dateStr)}</small>
+            </div>
+          </div>
+          <div class="admin-row-actions">
+            <button class="danger" data-timer-delete="${esc(t.id)}">🗑️</button>
+          </div>
+        </div>`;
       }).join("");
 
       listEl.querySelectorAll("[data-timer-delete]").forEach(btn => {
@@ -524,8 +495,7 @@ if (!auth || !db) {
       const subtitleEl = $("timerSubtitle");
 
       await setDoc(doc(db, "timers", id), {
-        id,
-        title,
+        id, title,
         targetDate: new Date(date).toISOString(),
         poster: posterEl ? posterEl.value.trim() : "",
         subtitle: subtitleEl ? subtitleEl.value.trim() : "",
@@ -533,19 +503,13 @@ if (!auth || !db) {
       }, { merge: true });
 
       const statusEl = $("timerStatus");
-      if (statusEl) {
-        statusEl.textContent = "✓ Timer saved!";
-        statusEl.style.color = "var(--success)";
-      }
+      if (statusEl) { statusEl.textContent = "✓ Timer saved!"; statusEl.style.color = "var(--success)"; }
       adminToast("✓ Timer saved");
       loadTimers();
     } catch (e) {
       console.error(e);
       const statusEl = $("timerStatus");
-      if (statusEl) {
-        statusEl.textContent = e.message;
-        statusEl.style.color = "var(--danger)";
-      }
+      if (statusEl) { statusEl.textContent = e.message; statusEl.style.color = "var(--danger)"; }
       adminToast(e.message, true);
     }
   }
@@ -575,7 +539,7 @@ if (!auth || !db) {
       listEl.innerHTML = filtered.map(u => {
         const initial = esc((u.displayName || u.email || "U").charAt(0).toUpperCase());
         const avatar = u.photoURL
-          ? '<img src="' + esc(u.photoURL) + '" alt="">'
+          ? '<img src="' + esc(u.photoURL) + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%" alt="">'
           : initial;
         const isAdm = u.role === "admin";
         const roleBadge = isAdm
@@ -585,15 +549,16 @@ if (!auth || !db) {
           ? '<button data-user-demote="' + esc(u.id) + '">⬇ Demote</button>'
           : '<button data-user-promote="' + esc(u.id) + '">⬆ Promote</button>';
 
-        return '<div class="admin-row">' +
-          '<div class="admin-row-content">' +
-          '<div class="user-avatar" style="width:40px;height:40px;font-size:1rem">' + avatar + '</div>' +
-          '<div class="admin-row-text">' +
-          '<b>' + esc(u.displayName || "User") + '</b>' +
-          '<small>' + esc(u.email || "") + '</small>' +
-          '</div></div>' +
-          '<div class="admin-row-actions">' + roleBadge + roleBtn + '</div>' +
-          '</div>';
+        return `<div class="admin-row">
+          <div class="admin-row-content">
+            <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#000;font-weight:800;overflow:hidden;flex-shrink:0">${avatar}</div>
+            <div class="admin-row-text">
+              <b>${esc(u.displayName || "User")}</b>
+              <small>${esc(u.email || "")}</small>
+            </div>
+          </div>
+          <div class="admin-row-actions">${roleBadge}${roleBtn}</div>
+        </div>`;
       }).join("");
 
       listEl.querySelectorAll("[data-user-promote]").forEach(btn => {
@@ -611,10 +576,7 @@ if (!auth || !db) {
   async function setUserRole(uid, role) {
     try {
       await requireAdmin();
-      await updateDoc(doc(db, "users", uid), {
-        role,
-        updatedAt: serverTimestamp()
-      });
+      await updateDoc(doc(db, "users", uid), { role, updatedAt: serverTimestamp() });
       if (window.logActivity) window.logActivity("User Role Update", uid + " → " + role);
       adminToast("✓ Role updated to " + role);
       loadUsers();
@@ -627,14 +589,14 @@ if (!auth || !db) {
   /* ═══════════ EVENT BINDINGS ═══════════ */
   document.addEventListener("admin-open", openAdminPanel);
 
-  // Tabs
+  // Admin close
+  const adminClose = $("adminClose");
+  if (adminClose) adminClose.addEventListener("click", closeAdminPanel);
+
+  // Admin tabs
   document.querySelectorAll(".admin-tab").forEach(tab => {
     tab.addEventListener("click", () => switchAdminTab(tab.dataset.adminTab));
   });
-
-  // Close button
-  const closeBtn = $("adminClose");
-  if (closeBtn) closeBtn.addEventListener("click", closeAdminPanel);
 
   // TMDB
   const tmdbKeyInput = $("tmdbKey");
@@ -656,10 +618,7 @@ if (!auth || !db) {
   const tmdbQueryInput = $("tmdbQuery");
   if (tmdbQueryInput) {
     tmdbQueryInput.addEventListener("keydown", e => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        tmdbSearch();
-      }
+      if (e.key === "Enter") { e.preventDefault(); tmdbSearch(); }
     });
   }
 
@@ -698,7 +657,7 @@ if (!auth || !db) {
   const userSearch = $("userSearch");
   if (userSearch) userSearch.addEventListener("input", loadUsers);
 
-  // Escape key
+  // Escape
   document.addEventListener("keydown", e => {
     if (e.key === "Escape") {
       const panel = $("adminPanel");
