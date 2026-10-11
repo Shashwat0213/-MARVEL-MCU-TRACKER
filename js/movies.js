@@ -20,9 +20,9 @@ if (!db) {
   let allMovies = [];
   let currentFilter = "all";
   let currentSearch = "";
-  let currentSort = "timeline";
+  let currentSort = "default";
 
-  /* ═══════════ LOAD MOVIES FROM FIRESTORE ═══════════ */
+  /* ═══════════ LOAD FROM FIRESTORE ═══════════ */
   async function loadMoviesFromFirestore() {
     try {
       const snap = await getDocs(collection(db, "movies"));
@@ -81,7 +81,10 @@ if (!db) {
       case "rating":
         result.sort((a, b) => (parseFloat(b.rating) || 0) - (parseFloat(a.rating) || 0));
         break;
-      case "timeline":
+      case "phase":
+        result.sort((a, b) => (a.phase || "").localeCompare(b.phase || ""));
+        break;
+      case "default":
       default:
         result.sort((a, b) => {
           const sa = Number.isFinite(Number(a.timelineSlot)) ? Number(a.timelineSlot) : 9999;
@@ -94,19 +97,19 @@ if (!db) {
     return result;
   }
 
-  /* ═══════════ RENDER MOVIE CARDS ═══════════ */
+  /* ═══════════ RENDER ═══════════ */
   function renderMovies() {
-    const grid = $("moviesGrid");
-    if (!grid) return;
+    const movieList = $("movieList");
+    if (!movieList) return;
 
     const filtered = getFilteredMovies();
 
     if (filtered.length === 0) {
-      grid.innerHTML = `
+      movieList.innerHTML = `
         <li class="empty-state">
           <div class="empty-icon">🎬</div>
           <p>${allMovies.length === 0
-            ? "No movies yet. Admin can add movies from the admin panel."
+            ? "No movies yet. Admin can add from the admin panel."
             : "No movies match your filter."}</p>
         </li>
       `;
@@ -114,7 +117,7 @@ if (!db) {
       return;
     }
 
-    grid.innerHTML = "";
+    movieList.innerHTML = "";
 
     filtered.forEach(movie => {
       const isWatched = !!(window.__mcuWatched || {})[movie.id];
@@ -131,7 +134,8 @@ if (!db) {
       const rating = movie.rating && movie.rating > 0
         ? `⭐ ${Number(movie.rating).toFixed(1)}`
         : "⭐ TBA";
-      const typeLabel = movie.type === "series" ? "📺" : "🎬";
+      const typeLabel = movie.type === "series" ? "📺 WEB SERIES" : "🎬 MOVIE";
+      const importanceText = movie.importance ? ` • ${window.escapeHTML(movie.importance).toUpperCase()}` : "";
 
       li.innerHTML = `
         <div class="poster-container">
@@ -144,29 +148,31 @@ if (!db) {
           </button>
         </div>
         <div class="movie-info">
-          <h2 class="movie-title">${title}</h2>
+          <h2 class="movie-title" ${isWatched ? 'style="text-decoration:line-through;opacity:0.6"' : ""}>${title}</h2>
+          <span class="movie-type-badge">${typeLabel}${importanceText}</span>
           <div class="movie-meta">
-            <span class="meta-item">${typeLabel} ${window.escapeHTML(movie.type || "movie").toUpperCase()}</span>
             <span class="meta-item">📅 ${window.escapeHTML(String(releaseDate))}</span>
             <span class="meta-item rating">${rating}</span>
+            <span class="meta-item">⚡ ${phase}</span>
+            ${movie.timelineSlot ? `<span class="meta-item">🎬 Slot ${window.escapeHTML(String(movie.timelineSlot))}</span>` : ""}
           </div>
           <div class="watch-row">
             <label class="watch-label">
               <input type="checkbox" class="watch-checkbox" data-action="watched" data-id="${window.escapeAttr(movie.id)}" ${isWatched ? "checked" : ""}>
-              <span class="${isWatched ? "watched-text" : ""}">${isWatched ? "Watched" : "Mark watched"}</span>
+              <span class="${isWatched ? "watched-text" : ""}">${isWatched ? "Watched" : "Mark as watched"}</span>
             </label>
-            <span class="fav-indicator">${isFavorite ? "❤️" : ""}</span>
+            <span class="fav-indicator">${isFavorite ? "❤️" : "♡"}</span>
           </div>
         </div>
       `;
 
-      grid.appendChild(li);
+      movieList.appendChild(li);
     });
 
     updateStats();
   }
 
-  /* ═══════════ CARD EVENT DELEGATION ═══════════ */
+  /* ═══════════ CARD CLICK HANDLERS ═══════════ */
   document.addEventListener("click", e => {
     const favBtn = e.target.closest('[data-action="favorite"]');
     if (favBtn) {
@@ -184,7 +190,6 @@ if (!db) {
     }
   });
 
-  /* ═══════════ WATCHED CHECKBOX EVENT ═══════════ */
   document.addEventListener("change", e => {
     const cb = e.target.closest('[data-action="watched"]');
     if (cb) {
@@ -193,7 +198,7 @@ if (!db) {
     }
   });
 
-  /* ═══════════ STATS UPDATE ═══════════ */
+  /* ═══════════ STATS ═══════════ */
   function updateStats() {
     const watched = window.__mcuWatched || {};
     const favorites = window.__mcuFavorites || {};
@@ -201,28 +206,35 @@ if (!db) {
     const total = allMovies.length;
     const done = allMovies.filter(m => watched[m.id]).length;
     const favs = allMovies.filter(m => favorites[m.id]).length;
+    const remaining = total - done;
     const percent = total > 0 ? Math.round((done / total) * 100) : 0;
 
     const setText = (id, val) => {
       const el = $(id);
-      if (el) {
-        const prev = el.textContent;
-        el.textContent = val;
-        if (prev !== String(val)) {
-          el.classList.add("updating");
-          setTimeout(() => el.classList.remove("updating"), 400);
-        }
-      }
+      if (el) el.textContent = val;
     };
 
-    setText("statTotal", total);
-    setText("statWatched", done);
-    setText("statFavorites", favs);
-    setText("statProgress", percent + "%");
+    setText("totalMovies", total);
+    setText("watchedMovies", done);
+    setText("remainingMovies", remaining);
+    setText("favoriteMovies", favs);
+
+    const progressBar = $("progressBar");
+    const progressText = $("progressText");
+    if (progressBar) progressBar.style.width = percent + "%";
+    if (progressText) progressText.textContent = `${done}/${total} (${percent}%)`;
+
+    // V3 dashboard
+    setText("v3Watched", done);
+    setText("v3Favs", favs);
+    setText("v3Remaining", remaining);
+    setText("v3ProgressText", percent + "%");
+    const v3ProgressFill = $("v3ProgressFill");
+    if (v3ProgressFill) v3ProgressFill.style.width = percent + "%";
   }
 
-  /* ═══════════ TOOLBAR EVENT BINDINGS ═══════════ */
-  const searchInput = $("searchInput");
+  /* ═══════════ TOOLBAR ═══════════ */
+  const searchInput = $("search");
   if (searchInput) {
     searchInput.addEventListener("input", e => {
       currentSearch = e.target.value;
@@ -230,9 +242,9 @@ if (!db) {
     });
   }
 
-  document.querySelectorAll(".filter-chip").forEach(chip => {
+  document.querySelectorAll(".filter-btn").forEach(chip => {
     chip.addEventListener("click", () => {
-      document.querySelectorAll(".filter-chip").forEach(c => c.classList.remove("active"));
+      document.querySelectorAll(".filter-btn").forEach(c => c.classList.remove("active"));
       chip.classList.add("active");
       currentFilter = chip.dataset.filter || "all";
       renderMovies();
@@ -247,7 +259,7 @@ if (!db) {
     });
   }
 
-  /* ═══════════ MOVIE DETAILS MODAL ═══════════ */
+  /* ═══════════ MOVIE MODAL ═══════════ */
   function openMovieModal(movie) {
     const modal = $("movieModal");
     if (!modal || !movie) return;
@@ -290,10 +302,7 @@ if (!db) {
       });
     }
 
-    if (desc) {
-      desc.textContent = movie.description || "No description available yet.";
-    }
-
+    if (desc) desc.textContent = movie.description || "Movie details are not available yet.";
     if (genres) {
       genres.innerHTML = "";
       if (movie.genres) {
@@ -305,10 +314,7 @@ if (!db) {
         });
       }
     }
-
-    if (cast) {
-      cast.textContent = movie.cast ? "Cast: " + movie.cast : "";
-    }
+    if (cast) cast.textContent = movie.cast ? "Cast: " + movie.cast : "";
 
     if (trailerBtn) {
       if (movie.trailer) {
@@ -318,7 +324,6 @@ if (!db) {
         trailerBtn.style.display = "none";
       }
     }
-
     if (downloadBtn) {
       if (movie.downloadUrl) {
         downloadBtn.style.display = "";
@@ -327,7 +332,6 @@ if (!db) {
         downloadBtn.style.display = "none";
       }
     }
-
     if (watchBtn) {
       const isWatched = !!watched[movie.id];
       watchBtn.textContent = isWatched ? "✓ Watched" : "✓ Mark Watched";
@@ -336,7 +340,6 @@ if (!db) {
         watchBtn.textContent = watched[movie.id] ? "✓ Watched" : "✓ Mark Watched";
       };
     }
-
     if (favBtn) {
       const isFav = !!favorites[movie.id];
       favBtn.textContent = isFav ? "❤️ Favorited" : "♡ Favorite";
@@ -349,7 +352,7 @@ if (!db) {
       };
     }
 
-    modal.classList.add("open");
+    modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
   }
@@ -357,7 +360,7 @@ if (!db) {
   function closeMovieModal() {
     const modal = $("movieModal");
     if (!modal) return;
-    modal.classList.remove("open");
+    modal.classList.remove("active");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
   }
@@ -365,10 +368,9 @@ if (!db) {
   window.openMovieModal = openMovieModal;
   window.closeMovieModal = closeMovieModal;
 
-  /* ═══════════ MOVIE MODAL CLOSE HANDLERS ═══════════ */
   const movieModal = $("movieModal");
   if (movieModal) {
-    const closeBtn = movieModal.querySelector("[data-close-modal]");
+    const closeBtn = $("movieModalClose");
     if (closeBtn) closeBtn.addEventListener("click", closeMovieModal);
     movieModal.addEventListener("click", e => {
       if (e.target === movieModal) closeMovieModal();
@@ -376,7 +378,7 @@ if (!db) {
   }
 
   document.addEventListener("keydown", e => {
-    if (e.key === "Escape" && movieModal && movieModal.classList.contains("open")) {
+    if (e.key === "Escape" && movieModal && movieModal.classList.contains("active")) {
       closeMovieModal();
     }
   });
@@ -394,19 +396,11 @@ if (!db) {
   (async () => {
     await loadMoviesFromFirestore();
     renderMovies();
-    if (window.hideLoader) window.hideLoader();
     document.dispatchEvent(new CustomEvent("movies-loaded"));
   })();
 
-  /* ═══════════ RELOAD WHEN TRACKER STATE CHANGES ═══════════ */
-  document.addEventListener("tracker-updated", () => {
-    renderMovies();
-  });
-
-  /* ═══════════ RELOAD WHEN ADMIN ADDS/EDITS ═══════════ */
-  document.addEventListener("movies-changed", () => {
-    window.MCU.reloadMovies();
-  });
+  document.addEventListener("tracker-updated", renderMovies);
+  document.addEventListener("movies-changed", () => window.MCU.reloadMovies());
 
   console.log("✅ Movies module loaded");
 }
