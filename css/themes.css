@@ -1,230 +1,120 @@
-/* ═══════════════════════════════════════════════════════════
-   MCU TRACKER — CLEAN THEMES
-   7 themes, clean variables only, no layout breaking
-   ═══════════════════════════════════════════════════════════ */
+/* ============================================
+   MCU TRACKER — THEMES (VARIABLE-ONLY)
+   Sirf colors change hote hain, layout NAHI
+   ============================================ */
 
-/* ═══════════ 1. COSMOS (Default) ═══════════ */
-body {
-  --bg: #0a0616;
-  --bg-2: #120a24;
-  --card: #16102a;
-  --card-2: #1e1538;
-  --header-bg: rgba(10, 6, 22, 0.85);
-  --primary: #22d3ee;
-  --primary-glow: rgba(34, 211, 238, 0.5);
-  --secondary: #a855f7;
-  --accent: #f472b6;
-  --text: #ffffff;
-  --muted: #b8a8d9;
-  --border: #2a1f4a;
-  --grid-line: rgba(34, 211, 238, 0.04);
-  --success: #00e676;
-  --danger: #ff1744;
-  --gold: #fbbf24;
-  --premium-accent: #22d3ee;
-  --premium-accent2: #a855f7;
-  --premium-glow: rgba(34, 211, 238, 0.3);
-}
-
-/* ═══════════ 2. ARC REACTOR ═══════════ */
-body.theme-arcreactor {
-  --bg: #020508;
-  --bg-2: #050b12;
-  --card: #0a121c;
-  --card-2: #0f1a28;
-  --header-bg: rgba(2, 5, 8, 0.9);
-  --primary: #00d9ff;
-  --primary-glow: rgba(0, 217, 255, 0.6);
-  --secondary: #00a0ff;
-  --accent: #ffcc00;
-  --text: #ffffff;
-  --muted: #7a9ab0;
-  --border: #0a2a3a;
-  --grid-line: rgba(0, 217, 255, 0.05);
-  --premium-accent: #00d9ff;
-  --premium-accent2: #ffcc00;
-  --premium-glow: rgba(0, 217, 255, 0.4);
-}
-
-/* ═══════════ 3. INFERNO ═══════════ */
-body.theme-inferno {
-  --bg: #0d0302;
-  --bg-2: #1a0705;
-  --card: #200a08;
-  --card-2: #2a0f0c;
-  --header-bg: rgba(13, 3, 2, 0.9);
-  --primary: #ff5500;
-  --primary-glow: rgba(255, 85, 0, 0.5);
-  --secondary: #e10600;
-  --accent: #ffcc00;
-  --text: #ffffff;
-  --muted: #d9a08c;
-  --border: #5a1a10;
-  --grid-line: rgba(255, 85, 0, 0.05);
-  --premium-accent: #ff5500;
-  --premium-accent2: #ffcc00;
-  --premium-glow: rgba(255, 85, 0, 0.35);
-}
-
-/* ═══════════ 4. VIBRANIUM ═══════════ */
-body.theme-vibranium {
-  --bg: #060a0f;
-  --bg-2: #0a1018;
-  --card: #0d1620;
-  --card-2: #111c28;
-  --header-bg: rgba(6, 10, 15, 0.9);
-  --primary: #a78bfa;
-  --primary-glow: rgba(167, 139, 250, 0.6);
-  --secondary: #2dd4bf;
-  --accent: #f0abfc;
-  --text: #ffffff;
-  --muted: #9ca8c4;
-  --border: #2a2a4a;
-  --grid-line: rgba(167, 139, 250, 0.05);
-  --premium-accent: #a78bfa;
-  --premium-accent2: #2dd4bf;
-  --premium-glow: rgba(167, 139, 250, 0.4);
-}
-
-/* ═══════════ 5. BIFROST ═══════════ */
-body.theme-bifrost {
-  --bg: #040a14;
-  --bg-2: #081220;
-  --card: #0a1a2e;
-  --card-2: #0e2440;
-  --header-bg: rgba(4, 10, 20, 0.9);
-  --primary: #38bdf8;
-  --primary-glow: rgba(56, 189, 248, 0.6);
-  --secondary: #818cf8;
-  --accent: #34d399;
-  --text: #ffffff;
-  --muted: #94a8d0;
+/* ===== Default (Cosmos) ===== */
+:root, body.theme-cosmos {
+  --primary: #a855f7;
+  --primary-2: #22d3ee;
+  --accent: #00e5ff;
+  --bg: #0a0e17;
+  --bg-2: #111827;
+  --bg-3: #1a2332;
+  --text: #e0e7f5;
+  --text-dim: #94a3b8;
   --border: #1e3a5f;
-  --grid-line: rgba(56, 189, 248, 0.05);
-  --premium-accent: #38bdf8;
-  --premium-accent2: #818cf8;
-  --premium-glow: rgba(56, 189, 248, 0.4);
+  --glow: rgba(168, 85, 247, 0.5);
+  --hero-bg: linear-gradient(135deg, #1a0b2e 0%, #0a0e17 100%);
 }
 
-/* ═══════════ 6. DOOMSDAY ═══════════ */
+/* ===== Arc Reactor ===== */
+body.theme-arc {
+  --primary: #22d3ee;
+  --primary-2: #67e8f9;
+  --accent: #00e5ff;
+  --bg: #061018;
+  --bg-2: #0c1a26;
+  --bg-3: #122636;
+  --text: #e0f7ff;
+  --text-dim: #7dd3fc;
+  --border: #155e75;
+  --glow: rgba(34, 211, 238, 0.5);
+  --hero-bg: linear-gradient(135deg, #06202e 0%, #061018 100%);
+}
+
+/* ===== Inferno ===== */
+body.theme-inferno {
+  --primary: #ef4444;
+  --primary-2: #f97316;
+  --accent: #fbbf24;
+  --bg: #1a0808;
+  --bg-2: #2a0e0e;
+  --bg-3: #3a1414;
+  --text: #fee2e2;
+  --text-dim: #fca5a5;
+  --border: #7f1d1d;
+  --glow: rgba(239, 68, 68, 0.5);
+  --hero-bg: linear-gradient(135deg, #3a0a0a 0%, #1a0808 100%);
+}
+
+/* ===== Vibranium ===== */
+body.theme-vibranium {
+  --primary: #a855f7;
+  --primary-2: #2dd4bf;
+  --accent: #5eead4;
+  --bg: #0a0a1a;
+  --bg-2: #15152e;
+  --bg-3: #202040;
+  --text: #ede9fe;
+  --text-dim: #c4b5fd;
+  --border: #4c1d95;
+  --glow: rgba(168, 85, 247, 0.5);
+  --hero-bg: linear-gradient(135deg, #1a0a2e 0%, #0a0a1a 100%);
+}
+
+/* ===== Bifrost ===== */
+body.theme-bifrost {
+  --primary: #3b82f6;
+  --primary-2: #06b6d4;
+  --accent: #67e8f9;
+  --bg: #04101e;
+  --bg-2: #0a1e30;
+  --bg-3: #102c44;
+  --text: #dbeafe;
+  --text-dim: #93c5fd;
+  --border: #1e40af;
+  --glow: rgba(59, 130, 246, 0.5);
+  --hero-bg: linear-gradient(135deg, #052e4a 0%, #04101e 100%);
+}
+
+/* ===== Doomsday ===== */
 body.theme-doomsday {
-  --bg: #020a04;
-  --bg-2: #051508;
-  --card: #081a0d;
-  --card-2: #0d2412;
-  --header-bg: rgba(2, 10, 4, 0.9);
-  --primary: #4ade80;
-  --primary-glow: rgba(74, 222, 128, 0.6);
-  --secondary: #16a34a;
-  --accent: #bef264;
-  --text: #ffffff;
-  --muted: #94d0a8;
-  --border: #1e4a26;
-  --grid-line: rgba(74, 222, 128, 0.05);
-  --premium-accent: #4ade80;
-  --premium-accent2: #bef264;
-  --premium-glow: rgba(74, 222, 128, 0.4);
+  --primary: #22c55e;
+  --primary-2: #84cc16;
+  --accent: #a3e635;
+  --bg: #051a0a;
+  --bg-2: #0a2a12;
+  --bg-3: #103a1a;
+  --text: #dcfce7;
+  --text-dim: #86efac;
+  --border: #14532d;
+  --glow: rgba(34, 197, 94, 0.5);
+  --hero-bg: linear-gradient(135deg, #0a3a1a 0%, #051a0a 100%);
 }
 
-/* ═══════════ 7. NOIR ═══════════ */
+/* ===== Noir ===== */
 body.theme-noir {
-  --bg: #0a0a0a;
-  --bg-2: #141414;
-  --card: #1a1a1a;
-  --card-2: #242424;
-  --header-bg: rgba(10, 10, 10, 0.95);
-  --primary: #00e5ff;
-  --primary-glow: rgba(0, 229, 255, 0.5);
-  --secondary: #ffffff;
-  --accent: #a3a3a3;
-  --text: #ffffff;
-  --muted: #b8b8b8;
-  --border: #333333;
-  --grid-line: rgba(0, 229, 255, 0.04);
-  --premium-accent: #00e5ff;
-  --premium-accent2: #ffffff;
-  --premium-glow: rgba(0, 229, 255, 0.35);
+  --primary: #e5e7eb;
+  --primary-2: #22d3ee;
+  --accent: #67e8f9;
+  --bg: #000000;
+  --bg-2: #0a0a0a;
+  --bg-3: #141414;
+  --text: #f5f5f5;
+  --text-dim: #a3a3a3;
+  --border: #262626;
+  --glow: rgba(255, 255, 255, 0.3);
+  --hero-bg: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
 }
 
-/* ═══════════ BODY BACKGROUND APPLY ═══════════ */
-body {
-  background: radial-gradient(
-    circle at 50% -10%,
-    var(--bg-2, #120a24) 0%,
-    var(--bg, #0a0616) 55%
-  ) !important;
-  color: var(--text, #ffffff) !important;
-  transition: background 0.6s ease, color 0.6s ease !important;
-}
-
-/* Hero background per theme */
-.premium-hero {
-  background:
-    linear-gradient(90deg, rgba(10,6,22,.95) 0%, rgba(18,10,36,.75) 42%, rgba(30,15,60,.25) 100%),
-    url("https://image.tmdb.org/t/p/w1280/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg") center right/cover no-repeat !important;
-}
-
-body.theme-arcreactor .premium-hero {
-  background:
-    linear-gradient(90deg, rgba(2,5,8,.95) 0%, rgba(10,20,35,.75) 42%, rgba(0,217,255,.15) 100%),
-    url("https://image.tmdb.org/t/p/w1280/78lPtwv72eTNqFW9COBYI0dWDJa.jpg") center right/cover no-repeat !important;
-}
-
-body.theme-inferno .premium-hero {
-  background:
-    linear-gradient(90deg, rgba(20,3,2,.95) 0%, rgba(42,15,12,.75) 42%, rgba(255,85,0,.18) 100%),
-    url("https://image.tmdb.org/t/p/w1280/or06FN3Dka5tukK1e9sl16pB3iy.jpg") center right/cover no-repeat !important;
-}
-
-body.theme-vibranium .premium-hero {
-  background:
-    linear-gradient(90deg, rgba(6,10,15,.95) 0%, rgba(17,28,40,.75) 42%, rgba(167,139,250,.15) 100%),
-    url("https://image.tmdb.org/t/p/w1280/sv1xJUazXeYqALzczSZ3O6nkH75.jpg") center right/cover no-repeat !important;
-}
-
-body.theme-bifrost .premium-hero {
-  background:
-    linear-gradient(90deg, rgba(4,10,20,.95) 0%, rgba(14,36,64,.75) 42%, rgba(56,189,248,.18) 100%),
-    url("https://image.tmdb.org/t/p/w1280/rzRwTcFvttcN1ZpX2xv4j3tSdJu.jpg") center right/cover no-repeat !important;
-}
-
-body.theme-doomsday .premium-hero {
-  background:
-    linear-gradient(90deg, rgba(2,10,4,.95) 0%, rgba(13,36,18,.75) 42%, rgba(74,222,128,.18) 100%),
-    url("https://images.flickdirect.com/movies/avengers-doomsday/avengers-doomsday-poster.jpg") center right/cover no-repeat !important;
-}
-
-body.theme-noir .premium-hero {
-  background:
-    linear-gradient(90deg, rgba(10,10,10,.95) 0%, rgba(20,20,20,.75) 42%, rgba(0,229,255,.15) 100%),
-    url("https://image.tmdb.org/t/p/w1280/78lPtwv72eTNqFW9COBYI0dWDJa.jpg") center right/cover no-repeat !important;
-}
-
-/* Smooth transitions */
-body, .panel, .movie-card, .stat-card, .v3-card, .btn, .top-btn,
-header, .site-header, .auth-card, .admin-card, input, select, textarea,
-.filter-btn, .theme-choice, footer {
-  transition:
-    background-color 0.5s ease,
-    background 0.5s ease,
-    border-color 0.5s ease,
-    color 0.5s ease,
-    box-shadow 0.5s ease !important;
-}
-
-/* Theme flash */
-@keyframes themeFlash {
-  0% { opacity: 0; }
-  30% { opacity: 0.5; }
-  100% { opacity: 0; }
-}
-
-body.theme-switching::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: var(--primary, #22d3ee);
-  pointer-events: none;
-  z-index: 99999;
-  animation: themeFlash 0.5s ease;
+/* ===== Light Mode (sirf colors, layout safe) ===== */
+body.light-mode {
+  --bg: #f5f7fb;
+  --bg-2: #ffffff;
+  --bg-3: #e8edf5;
+  --text: #0f172a;
+  --text-dim: #475569;
+  --border: #cbd5e1;
+  --hero-bg: linear-gradient(135deg, #e0e7ff 0%, #f5f7fb 100%);
 }
