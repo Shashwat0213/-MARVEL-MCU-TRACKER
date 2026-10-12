@@ -19,7 +19,7 @@
 
 <div class="container">
 
-    <!-- ═══════════ HEADER ═══════════ -->
+    <!-- HEADER -->
     <header>
         <h1 class="logo">
             ⚡ MARVEL MCU TRACKER
@@ -33,7 +33,7 @@
         </div>
     </header>
 
-    <!-- ═══════════ AUTH UI ═══════════ -->
+    <!-- AUTH UI -->
     <div class="auth-bar" id="authBar">
         <div class="auth-user" id="authUserBox">
             <span class="auth-avatar" id="authAvatar">S</span>
@@ -44,7 +44,7 @@
         <button class="auth-login-btn" id="authOpenBtn">👤 Login</button>
     </div>
 
-    <!-- ═══════════ AUTH MODAL ═══════════ -->
+    <!-- AUTH MODAL -->
     <div class="auth-overlay" id="authOverlay" aria-hidden="true">
         <section class="auth-card" role="dialog" aria-modal="true">
             <button class="auth-close" id="authCloseBtn" aria-label="Close">×</button>
@@ -79,7 +79,7 @@
         </section>
     </div>
 
-    <!-- ═══════════ PREMIUM HERO ═══════════ -->
+    <!-- PREMIUM HERO -->
     <section class="premium-hero" aria-label="Premium MCU dashboard">
         <div class="hero-kicker">Marvel Inspired • Personal Watch Tracker</div>
         <h2 class="hero-title">Your MCU. Your Timeline.</h2>
@@ -89,7 +89,29 @@
         </div>
     </section>
 
-    <!-- ═══════════ THEME SWITCHER ═══════════ -->
+    <!-- DOOMSDAY COUNTDOWN -->
+    <section class="doomsday-feature" id="doomsdayCountdown" aria-label="Avengers Doomsday countdown">
+        <div class="doomsday-poster-wrap">
+            <img class="doomsday-poster"
+                 src="https://images.flickdirect.com/movies/avengers-doomsday/avengers-doomsday-poster.jpg"
+                 alt="Avengers: Doomsday poster"
+                 onerror="this.onerror=null; this.src='https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg';">
+        </div>
+        <div class="doomsday-content">
+            <div class="doomsday-kicker">⚠ PHASE 6 • FINAL STORY TARGET</div>
+            <h2>AVENGERS: DOOMSDAY</h2>
+            <p>Live countdown to the Doomsday release. Indian Standard Time (IST).</p>
+            <div class="doomsday-live-digits">
+                <div><b id="doomsdayDays">000</b><span>Days</span></div>
+                <div><b id="doomsdayHours">00</b><span>Hours</span></div>
+                <div><b id="doomsdayMinutes">00</b><span>Minutes</span></div>
+                <div><b id="doomsdaySeconds">00</b><span>Seconds</span></div>
+            </div>
+            <div class="doomsday-date">18 DECEMBER 2026 • INDIA TIME</div>
+        </div>
+    </section>
+
+    <!-- THEME SWITCHER -->
     <section class="theme-switcher" aria-label="Hero theme selector">
         <span class="theme-label">Hero Theme</span>
         <button class="theme-choice active" data-hero-theme="blue">🔵 Massive Blue</button>
@@ -101,7 +123,7 @@
         <button class="theme-choice" data-hero-theme="doomsday">☠️ Doomsday</button>
     </section>
 
-    <!-- ═══════════ THEME POSTER STRIP ═══════════ -->
+    <!-- THEME POSTER STRIP -->
     <section class="theme-poster-strip" aria-live="polite">
         <img id="themePoster" src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg" alt="Theme poster">
         <div class="theme-poster-info">
@@ -111,7 +133,7 @@
         <span class="theme-poster-chip">CINEMATIC THEME</span>
     </section>
 
-    <!-- ═══════════ V3 DASHBOARD ═══════════ -->
+    <!-- V3 DASHBOARD -->
     <section class="v3-dashboard" aria-label="Personal MCU dashboard">
         <div class="v3-card">
             <div class="v3-profile">
@@ -148,7 +170,7 @@
         </div>
     </section>
 
-    <!-- ═══════════ MAIN PANEL ═══════════ -->
+    <!-- MAIN PANEL -->
     <main class="panel">
 
         <!-- SEARCH -->
@@ -221,14 +243,14 @@
 
     </main>
 
-    <!-- ═══════════ FOOTER ═══════════ -->
+    <!-- FOOTER -->
     <footer>
         © 2026 <span class="footer-highlight">Marvel Inspired MCU Tracker</span> — Powered by Shashwat
     </footer>
 
 </div>
 
-<!-- ═══════════ MOVIE DETAILS MODAL ═══════════ -->
+<!-- MOVIE DETAILS MODAL -->
 <div class="movie-modal" id="movieModal" aria-hidden="true">
     <div class="movie-modal-content">
         <button class="movie-modal-close" id="movieModalClose" aria-label="Close">✕</button>
@@ -249,7 +271,7 @@
     </div>
 </div>
 
-<!-- ═══════════ ADMIN PANEL (NAYA) ═══════════ -->
+<!-- ADMIN PANEL -->
 <section class="admin-panel" id="adminPanel" aria-hidden="true">
     <div class="admin-inner">
 
@@ -391,10 +413,10 @@
     </div>
 </section>
 
-<!-- ═══════════ TOAST ═══════════ -->
+<!-- TOAST -->
 <div class="toast" id="toast" role="alert"></div>
 
-<!-- ═══════════ JS MODULES ═══════════ -->
+<!-- JS MODULES -->
 <script type="module" src="js/firebase.js"></script>
 <script type="module" src="js/theme.js"></script>
 <script type="module" src="js/auth.js"></script>
