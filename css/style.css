@@ -1,185 +1,183 @@
 /* ═══════════════════════════════════════════════════════════
-   LIGHT MODE — Full website override
+   LIGHT MODE — Safe Override (Variables Only)
+   Sirf colors change, layout safe
    ═══════════════════════════════════════════════════════════ */
+
 body.light-mode {
-  --bg: #edf4ff !important;
-  --bg-2: #ffffff !important;
-  --card: #ffffff !important;
-  --card-2: #f2f7ff !important;
-  --header-bg: rgba(237, 244, 255, 0.92) !important;
-  --text: #111827 !important;
-  --muted: #52627a !important;
-  --border: #b9cee9 !important;
-  --grid-line: rgba(0, 100, 200, 0.06) !important;
-  --primary: #0066cc !important;
-  --primary-glow: rgba(0, 102, 204, 0.3) !important;
-  --secondary: #0055aa !important;
-  --premium-accent: #0066cc !important;
-  --premium-accent2: #0099ff !important;
-  --premium-glow: rgba(0, 102, 204, 0.3) !important;
-  background: radial-gradient(circle at 50% -10%, #dceeff 0%, #edf4ff 65%) !important;
-  color: var(--text) !important;
+  --bg: #edf4ff;
+  --bg-2: #ffffff;
+  --card: #ffffff;
+  --card-2: #f2f7ff;
+  --header-bg: rgba(237, 244, 255, 0.92);
+  --text: #111827;
+  --muted: #52627a;
+  --border: #b9cee9;
+  --grid-line: rgba(0, 100, 200, 0.06);
+  --primary: #0066cc;
+  --primary-glow: rgba(0, 102, 204, 0.3);
+  --secondary: #0055aa;
+  --premium-accent: #0066cc;
+  --premium-accent2: #0099ff;
+  --premium-glow: rgba(0, 102, 204, 0.3);
+
+  background-color: #edf4ff;
+  color: #111827;
 }
 
 body.light-mode::before {
-  opacity: 0.08 !important;
-  filter: brightness(1.5) saturate(0.5) !important;
+  opacity: 0.08;
+  filter: brightness(1.5) saturate(0.5);
 }
 
 body.light-mode::after {
-  background:
+  background-image:
     radial-gradient(circle at 50% 0%, rgba(255,255,255,.6) 0%, transparent 60%),
-    linear-gradient(180deg, rgba(255,255,255,.3) 0%, rgba(200,220,255,.4) 100%) !important;
+    linear-gradient(180deg, rgba(255,255,255,.3) 0%, rgba(200,220,255,.4) 100%);
 }
 
-/* Light mode — header */
+/* Header */
 body.light-mode header,
 body.light-mode .site-header {
-  background: var(--header-bg) !important;
-  border-color: var(--border) !important;
+  background-color: var(--header-bg);
+  border-color: var(--border);
 }
 
-/* Light mode — panel */
+/* Panels */
 body.light-mode .panel {
-  background: linear-gradient(145deg, #ffffff, #f2f7ff) !important;
-  border-color: var(--border) !important;
+  background-image: linear-gradient(145deg, #ffffff, #f2f7ff);
+  border-color: var(--border);
 }
 
-/* Light mode — cards */
+/* Cards */
 body.light-mode .movie-card,
 body.light-mode .stat-card,
 body.light-mode .v3-card,
 body.light-mode .admin-card,
 body.light-mode .auth-card {
-  background: linear-gradient(145deg, #ffffff, #f2f7ff) !important;
-  border-color: var(--border) !important;
+  background-image: linear-gradient(145deg, #ffffff, #f2f7ff);
+  border-color: var(--border);
 }
 
-/* Light mode — titles */
+/* Titles */
 body.light-mode .movie-title,
 body.light-mode .stat-number,
 body.light-mode .hero-title,
 body.light-mode .v3-greeting h2,
 body.light-mode .admin-brand h2 {
-  color: #111827 !important;
+  color: #111827;
 }
 
-/* Light mode — text */
-body.light-mode,
+/* Text — NO wildcard span */
 body.light-mode p,
-body.light-mode span,
 body.light-mode label,
 body.light-mode small,
 body.light-mode footer,
 body.light-mode .hero-copy,
 body.light-mode .stat-label,
 body.light-mode .meta-item {
-  color: #111827 !important;
+  color: #111827;
 }
 
 body.light-mode .muted,
 body.light-mode .stat-label,
 body.light-mode .meta-item,
 body.light-mode .hero-copy {
-  color: #52627a !important;
+  color: #52627a;
 }
 
-/* Light mode — inputs */
+/* Inputs */
 body.light-mode input,
 body.light-mode select,
 body.light-mode textarea {
-  background: #ffffff !important;
-  color: #111827 !important;
-  border-color: #b9cee9 !important;
+  background-color: #ffffff;
+  color: #111827;
+  border-color: #b9cee9;
 }
 
 body.light-mode input::placeholder {
-  color: #8a99b0 !important;
+  color: #8a99b0;
 }
 
-/* Light mode — search */
+/* Search */
 body.light-mode .search-box input {
-  background: #ffffff !important;
-  color: #111827 !important;
-  border-color: #b9cee9 !important;
+  background-color: #ffffff;
+  color: #111827;
+  border-color: #b9cee9;
 }
 
-/* Light mode — meta items */
+/* Meta items */
 body.light-mode .meta-item {
-  background: #edf4ff !important;
-  border-color: #c6d8ed !important;
+  background-color: #edf4ff;
+  border-color: #c6d8ed;
 }
 
-/* Light mode — filter buttons */
+/* Filter buttons */
 body.light-mode .filter-btn {
-  background: #ffffff !important;
-  color: #52627a !important;
-  border-color: #b9cee9 !important;
+  background-color: #ffffff;
+  color: #52627a;
+  border-color: #b9cee9;
 }
 
 body.light-mode .filter-btn.active {
-  background: linear-gradient(135deg, #0066cc, #0055aa) !important;
-  color: #fff !important;
+  background-image: linear-gradient(135deg, #0066cc, #0055aa);
+  color: #fff;
 }
 
-/* Light mode — theme choices */
+/* Theme choices */
 body.light-mode .theme-choice {
-  background: rgba(255,255,255,.7) !important;
-  color: #111827 !important;
-  border-color: #b9cee9 !important;
+  background-color: rgba(255,255,255,.7);
+  color: #111827;
+  border-color: #b9cee9;
 }
 
 body.light-mode .theme-choice.active {
-  background: var(--premium-accent) !important;
-  color: #fff !important;
+  background-color: var(--premium-accent);
+  color: #fff;
 }
 
-/* Light mode — hero */
-body.light-mode .premium-hero {
-  color: #ffffff !important;
-}
-
+/* Hero — dark bg hai to text white hi rahe */
+body.light-mode .premium-hero,
 body.light-mode .premium-hero .hero-kicker,
 body.light-mode .premium-hero .hero-copy,
 body.light-mode .premium-hero .hero-title {
-  color: #ffffff !important;
+  color: #ffffff;
 }
 
-/* Light mode — admin */
+/* Admin */
 body.light-mode .admin-panel {
-  background: #edf4ff !important;
+  background-color: #edf4ff;
 }
 
 body.light-mode .admin-tabs {
-  background: #ffffff !important;
-  border-color: #b9cee9 !important;
+  background-color: #ffffff;
+  border-color: #b9cee9;
 }
 
 body.light-mode .admin-tab {
-  color: #52627a !important;
+  color: #52627a;
 }
 
 body.light-mode .admin-tab.active {
-  background: #0066cc !important;
-  color: #ffffff !important;
+  background-color: #0066cc;
+  color: #ffffff;
 }
 
-/* Light mode — progress */
+/* Progress */
 body.light-mode .progress {
-  background: #e0ecff !important;
-  border-color: #b9cee9 !important;
+  background-color: #e0ecff;
+  border-color: #b9cee9;
 }
 
-/* Light mode — v3 dashboard */
+/* V3 dashboard */
 body.light-mode .v3-mini-stat {
-  background: rgba(0, 102, 204, 0.06) !important;
-  border-color: #c6d8ed !important;
+  background-color: rgba(0, 102, 204, 0.06);
+  border-color: #c6d8ed;
 }
 
 body.light-mode .v3-mini-stat strong {
-  color: #0066cc !important;
+  color: #0066cc;
 }
 
 body.light-mode .v3-progress-track {
-  background: #e0ecff !important;
+  background-color: #e0ecff;
 }
