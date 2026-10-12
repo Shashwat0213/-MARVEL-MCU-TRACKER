@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════
-   MCU TRACKER — PREMIUM DYNAMIC THEMES
-   7 themes with unique backgrounds + animated posters
+   MCU TRACKER — THEME SYSTEM + SOUND EFFECTS
+   Full website theme + Dark/Light + Sound + Loading sound
    ═══════════════════════════════════════════════════════════ */
 
 (function() {
@@ -54,34 +54,58 @@
     }
   };
 
+  /* ═══════════ SOUND SYSTEM ═══════════ */
+  let soundEnabled = true;
+  try { soundEnabled = localStorage.getItem("mcuSound") !== "false"; } catch (e) {}
+
+  // Sound URLs
+  const SOUNDS = {
+    button: "https://actions.google.com/sounds/v1/cartoon/pop.ogg",
+    theme: "https://actions.google.com/sounds/v1/science_fiction/laser_1.ogg",
+    tick: "https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg",
+    loading: "https://actions.google.com/sounds/v1/science_fiction/robot_code_scan.ogg",
+    startup: "https://actions.google.com/sounds/v1/science_fiction/computer_ready.ogg",
+    favorite: "https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"
+  };
+
+  function playSound(url, volume = 0.35) {
+    if (!soundEnabled) return;
+    try {
+      const audio = new Audio(url);
+      audio.volume = volume;
+      audio.play().catch(() => {});
+    } catch (e) {
+      console.log("Sound unavailable");
+    }
+  }
+
+  window.playButtonSound = () => playSound(SOUNDS.button, 0.35);
+  window.playThemeSound = () => playSound(SOUNDS.theme, 0.35);
+  window.playTickSound = () => playSound(SOUNDS.tick, 0.35);
+  window.playFavoriteSound = () => playSound(SOUNDS.favorite, 0.4);
+
   /* ═══════════ APPLY THEME ═══════════ */
   function applyTheme(themeId) {
     if (!themeData[themeId]) themeId = "cosmos";
 
-    // Flash animation
     document.body.classList.add("theme-switching");
     setTimeout(() => document.body.classList.remove("theme-switching"), 600);
 
-    // Remove all theme classes
     document.body.classList.remove(
       "theme-cosmos", "theme-arcreactor", "theme-inferno",
       "theme-vibranium", "theme-bifrost", "theme-doomsday", "theme-noir"
     );
 
-    // Add active theme class (except cosmos which is default)
     if (themeId !== "cosmos") {
       document.body.classList.add("theme-" + themeId);
     }
 
-    // Save preference
     try { localStorage.setItem("mcuHeroTheme", themeId); } catch (e) {}
 
-    // Update button active state
     document.querySelectorAll("[data-hero-theme]").forEach(btn => {
       btn.classList.toggle("active", btn.dataset.heroTheme === themeId);
     });
 
-    // Update hero poster + text
     const data = themeData[themeId];
     const poster = $("themePoster");
     const title = $("themePosterTitle");
@@ -96,10 +120,7 @@
 
   /* ═══════════ BIND THEME BUTTONS ═══════════ */
   function bindThemeButtons() {
-    const buttons = document.querySelectorAll("[data-hero-theme]");
-    console.log(`🎨 Found ${buttons.length} theme buttons`);
-
-    buttons.forEach(btn => {
+    document.querySelectorAll("[data-hero-theme]").forEach(btn => {
       const newBtn = btn.cloneNode(true);
       btn.parentNode.replaceChild(newBtn, btn);
     });
@@ -110,6 +131,7 @@
         e.stopPropagation();
         const theme = btn.dataset.heroTheme;
         applyTheme(theme);
+        playThemeSound();
 
         if (window.showToast) {
           const data = themeData[theme];
@@ -128,10 +150,8 @@
   /* ═══════════ DARK / LIGHT TOGGLE ═══════════ */
   const themeBtn = $("themeBtn");
 
-  function loadDarkMode() {
-    let saved = null;
-    try { saved = localStorage.getItem("mcuTheme"); } catch (e) {}
-    if (saved === "light") {
+  function applyLightMode(isLight) {
+    if (isLight) {
       document.body.classList.add("light-mode");
       if (themeBtn) themeBtn.textContent = "🌙 Dark";
     } else {
@@ -140,22 +160,26 @@
     }
   }
 
+  function loadDarkMode() {
+    let saved = null;
+    try { saved = localStorage.getItem("mcuTheme"); } catch (e) {}
+    applyLightMode(saved === "light");
+  }
+
   if (themeBtn) {
     themeBtn.addEventListener("click", () => {
-      document.body.classList.toggle("light-mode");
-      const isLight = document.body.classList.contains("light-mode");
-      try { localStorage.setItem("mcuTheme", isLight ? "light" : "dark"); } catch (e) {}
-      themeBtn.textContent = isLight ? "🌙 Dark" : "☀️ Light";
-      if (window.showToast) window.showToast(isLight ? "☀️ Light mode" : "🌙 Dark mode", "ok");
+      playButtonSound();
+      const willBeLight = !document.body.classList.contains("light-mode");
+      applyLightMode(willBeLight);
+      try { localStorage.setItem("mcuTheme", willBeLight ? "light" : "dark"); } catch (e) {}
+      if (window.showToast) window.showToast(willBeLight ? "☀️ Light mode" : "🌙 Dark mode", "ok");
     });
   }
 
   loadDarkMode();
 
-  /* ═══════════ SOUND ═══════════ */
+  /* ═══════════ SOUND TOGGLE ═══════════ */
   const soundBtn = $("soundBtn");
-  let soundEnabled = true;
-  try { soundEnabled = localStorage.getItem("mcuSound") !== "false"; } catch (e) {}
 
   function updateSoundBtn() {
     if (soundBtn) soundBtn.textContent = soundEnabled ? "🔊 Sound" : "🔇 Sound";
@@ -166,24 +190,27 @@
       soundEnabled = !soundEnabled;
       try { localStorage.setItem("mcuSound", soundEnabled); } catch (e) {}
       updateSoundBtn();
+      if (soundEnabled) playButtonSound();
       if (window.showToast) window.showToast(soundEnabled ? "🔊 Sound on" : "🔇 Sound off", "ok");
     });
   }
 
   updateSoundBtn();
 
-  /* ═══════════ RESET ═══════════ */
+  /* ═══════════ RESET BUTTON ═══════════ */
   const resetBtn = $("resetBtn");
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
+      playButtonSound();
       if (window.resetTracker) window.resetTracker();
     });
   }
 
-  /* ═══════════ EXPLORE ═══════════ */
+  /* ═══════════ EXPLORE BUTTON ═══════════ */
   const heroExploreBtn = $("heroExploreBtn");
   if (heroExploreBtn) {
     heroExploreBtn.addEventListener("click", () => {
+      playButtonSound();
       const movieList = $("movieList");
       if (movieList) movieList.scrollIntoView({ behavior: "smooth" });
     });
@@ -208,6 +235,7 @@
   const v3SaveName = $("v3SaveName");
   if (v3SaveName) {
     v3SaveName.addEventListener("click", () => {
+      playButtonSound();
       const input = $("v3NameInput");
       const value = (input && input.value.trim()) || "Shashwat";
       try { localStorage.setItem(V3.nameKey, value); } catch (e) {}
@@ -254,7 +282,10 @@
     if (title) title.textContent = movie.title || movie.id;
     if (meta) meta.textContent = (movie.phase || "MCU") + " • " + (movie.year || "TBA") + " • ⭐ " + (movie.rating || "TBA");
     if (box && window.openMovieModal) {
-      box.onclick = () => window.openMovieModal(movie);
+      box.onclick = () => {
+        playButtonSound();
+        window.openMovieModal(movie);
+      };
     }
   }
 
@@ -297,7 +328,13 @@
   function init() {
     bindThemeButtons();
     loadSavedTheme();
-    console.log("✅ Premium dynamic themes initialized");
+
+    // Play startup sound once (only if sound enabled)
+    setTimeout(() => {
+      if (soundEnabled) playSound(SOUNDS.startup, 0.2);
+    }, 2000);
+
+    console.log("✅ Theme + Sound system initialized");
   }
 
   if (document.readyState === "loading") {
