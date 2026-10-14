@@ -1,120 +1,139 @@
-/* ============================================
-   MCU TRACKER — THEMES (VARIABLE-ONLY)
-   Sirf colors change hote hain, layout NAHI
-   ============================================ */
+/* ═══════════════════════════════════════════════════════════
+   MCU TRACKER — THEMES (VARIABLE-ONLY, LAYOUT-SAFE)
+   Sirf colors change, layout kabhi nahi
+   ═══════════════════════════════════════════════════════════ */
 
-/* ===== Default (Cosmos) ===== */
+/* Default (Cosmos) */
 :root, body.theme-cosmos {
-  --primary: #a855f7;
-  --primary-2: #22d3ee;
-  --accent: #00e5ff;
-  --bg: #0a0e17;
-  --bg-2: #111827;
-  --bg-3: #1a2332;
-  --text: #e0e7f5;
-  --text-dim: #94a3b8;
-  --border: #1e3a5f;
-  --glow: rgba(168, 85, 247, 0.5);
-  --hero-bg: linear-gradient(135deg, #1a0b2e 0%, #0a0e17 100%);
+  --primary: #00e5ff;
+  --secondary: #0077ff;
+  --premium-accent: #27a7ff;
+  --premium-accent2: #a7e8ff;
+  --premium-glow: rgba(39, 167, 255, 0.28);
+  --bg: #05070d;
+  --bg-2: #0a0e17;
+  --card: #0d1422;
+  --card-2: #111b2f;
+  --text: #ffffff;
+  --text-dim: #9db4d1;
+  --muted: #9db4d1;
+  --border: #18345b;
+  --grid-line: rgba(0, 229, 255, 0.035);
+  --gold: #ffd54a;
+  --success: #00e676;
+  --danger: #ff1744;
 }
 
-/* ===== Arc Reactor ===== */
-body.theme-arc {
+/* Arc Reactor */
+body.theme-arcreactor {
   --primary: #22d3ee;
-  --primary-2: #67e8f9;
-  --accent: #00e5ff;
+  --secondary: #0891b2;
+  --premium-accent: #22d3ee;
+  --premium-accent2: #67e8f9;
+  --premium-glow: rgba(34, 211, 238, 0.28);
   --bg: #061018;
   --bg-2: #0c1a26;
-  --bg-3: #122636;
+  --card: #0c1a26;
+  --card-2: #122636;
   --text: #e0f7ff;
   --text-dim: #7dd3fc;
+  --muted: #7dd3fc;
   --border: #155e75;
-  --glow: rgba(34, 211, 238, 0.5);
-  --hero-bg: linear-gradient(135deg, #06202e 0%, #061018 100%);
+  --grid-line: rgba(34, 211, 238, 0.035);
 }
 
-/* ===== Inferno ===== */
+/* Inferno */
 body.theme-inferno {
   --primary: #ef4444;
-  --primary-2: #f97316;
-  --accent: #fbbf24;
+  --secondary: #f97316;
+  --premium-accent: #ef4444;
+  --premium-accent2: #fbbf24;
+  --premium-glow: rgba(239, 68, 68, 0.28);
   --bg: #1a0808;
   --bg-2: #2a0e0e;
-  --bg-3: #3a1414;
+  --card: #2a0e0e;
+  --card-2: #3a1414;
   --text: #fee2e2;
   --text-dim: #fca5a5;
+  --muted: #fca5a5;
   --border: #7f1d1d;
-  --glow: rgba(239, 68, 68, 0.5);
-  --hero-bg: linear-gradient(135deg, #3a0a0a 0%, #1a0808 100%);
+  --grid-line: rgba(239, 68, 68, 0.035);
 }
 
-/* ===== Vibranium ===== */
+/* Vibranium */
 body.theme-vibranium {
   --primary: #a855f7;
-  --primary-2: #2dd4bf;
-  --accent: #5eead4;
+  --secondary: #2dd4bf;
+  --premium-accent: #a855f7;
+  --premium-accent2: #5eead4;
+  --premium-glow: rgba(168, 85, 247, 0.28);
   --bg: #0a0a1a;
   --bg-2: #15152e;
-  --bg-3: #202040;
+  --card: #15152e;
+  --card-2: #202040;
   --text: #ede9fe;
   --text-dim: #c4b5fd;
+  --muted: #c4b5fd;
   --border: #4c1d95;
-  --glow: rgba(168, 85, 247, 0.5);
-  --hero-bg: linear-gradient(135deg, #1a0a2e 0%, #0a0a1a 100%);
+  --grid-line: rgba(168, 85, 247, 0.035);
 }
 
-/* ===== Bifrost ===== */
+/* Bifrost */
 body.theme-bifrost {
   --primary: #3b82f6;
-  --primary-2: #06b6d4;
-  --accent: #67e8f9;
+  --secondary: #06b6d4;
+  --premium-accent: #3b82f6;
+  --premium-accent2: #67e8f9;
+  --premium-glow: rgba(59, 130, 246, 0.28);
   --bg: #04101e;
   --bg-2: #0a1e30;
-  --bg-3: #102c44;
+  --card: #0a1e30;
+  --card-2: #102c44;
   --text: #dbeafe;
   --text-dim: #93c5fd;
+  --muted: #93c5fd;
   --border: #1e40af;
-  --glow: rgba(59, 130, 246, 0.5);
-  --hero-bg: linear-gradient(135deg, #052e4a 0%, #04101e 100%);
+  --grid-line: rgba(59, 130, 246, 0.035);
 }
 
-/* ===== Doomsday ===== */
+/* Doomsday */
 body.theme-doomsday {
   --primary: #22c55e;
-  --primary-2: #84cc16;
-  --accent: #a3e635;
+  --secondary: #84cc16;
+  --premium-accent: #22c55e;
+  --premium-accent2: #a3e635;
+  --premium-glow: rgba(34, 197, 94, 0.28);
   --bg: #051a0a;
   --bg-2: #0a2a12;
-  --bg-3: #103a1a;
+  --card: #0a2a12;
+  --card-2: #103a1a;
   --text: #dcfce7;
   --text-dim: #86efac;
+  --muted: #86efac;
   --border: #14532d;
-  --glow: rgba(34, 197, 94, 0.5);
-  --hero-bg: linear-gradient(135deg, #0a3a1a 0%, #051a0a 100%);
+  --grid-line: rgba(34, 197, 94, 0.035);
 }
 
-/* ===== Noir ===== */
+/* Noir */
 body.theme-noir {
   --primary: #e5e7eb;
-  --primary-2: #22d3ee;
-  --accent: #67e8f9;
+  --secondary: #22d3ee;
+  --premium-accent: #e5e7eb;
+  --premium-accent2: #67e8f9;
+  --premium-glow: rgba(255, 255, 255, 0.18);
   --bg: #000000;
   --bg-2: #0a0a0a;
-  --bg-3: #141414;
+  --card: #0a0a0a;
+  --card-2: #141414;
   --text: #f5f5f5;
   --text-dim: #a3a3a3;
+  --muted: #a3a3a3;
   --border: #262626;
-  --glow: rgba(255, 255, 255, 0.3);
-  --hero-bg: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+  --grid-line: rgba(255, 255, 255, 0.035);
 }
 
-/* ===== Light Mode (sirf colors, layout safe) ===== */
+/* Light Mode */
 body.light-mode {
-  --bg: #f5f7fb;
+  --bg: #edf4ff;
   --bg-2: #ffffff;
-  --bg-3: #e8edf5;
-  --text: #0f172a;
-  --text-dim: #475569;
-  --border: #cbd5e1;
-  --hero-bg: linear-gradient(135deg, #e0e7ff 0%, #f5f7fb 100%);
-}
+  --card:
