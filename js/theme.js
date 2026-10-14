@@ -1,82 +1,200 @@
-/* ============================================
-   MCU TRACKER — THEME SWITCHER (FIXED)
-   Sirf body pe class lagata hai. Layout safe.
-   ============================================ */
+/* ═══════════════════════════════════════════════════════════
+   MCU TRACKER — THEME + SOUND + DOOMSDAY COUNTDOWN
+   ═══════════════════════════════════════════════════════════ */
 
 (function () {
   'use strict';
 
-  const THEMES = ['cosmos', 'arc', 'inferno', 'vibranium', 'bifrost', 'doomsday', 'noir'];
+  /* ============ THEME CONFIG ============ */
+  const THEMES = {
+    cosmos:     { name: 'Cosmos',      poster: 'https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg', title: 'Guardians of the Galaxy', sub: 'Cosmos • Phase 2' },
+    arcreactor: { name: 'Arc Reactor', poster: 'https://image.tmdb.org/t/p/w500/6WBeq4fCfn7AN0o21W9qNcRF2l9.jpg', title: 'Iron Man',                sub: 'Arc Reactor • Phase 1' },
+    inferno:    { name: 'Inferno',     poster: 'https://image.tmdb.org/t/p/w500/6ELJEzQJ3Y45HczvreC3dg0GV5R.jpg', title: 'Thor: Ragnarok',          sub: 'Inferno • Phase 3' },
+    vibranium:  { name: 'Vibranium',   poster: 'https://image.tmdb.org/t/p/w500/uxzzxijgPIY7slzFvMotPv8wjKA.jpg', title: 'Black Panther',          sub: 'Vibranium • Phase 3' },
+    bifrost:    { name: 'Bifrost',     poster: 'https://image.tmdb.org/t/p/w500/rzRwTcFvttcN1ZpX2xv4j3tSdJu.jpg', title: 'Thor',                    sub: 'Bifrost • Phase 1' },
+    doomsday:   { name: 'Doomsday',    poster: 'https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg', title: 'Avengers: Doomsday',      sub: 'Doomsday • Phase 6' },
+    noir:       { name: 'Noir',        poster: 'https://image.tmdb.org/t/p/w500/9BBTo63ANSmhC4e6r62OJFuK2GL.jpg', title: 'Werewolf by Night',       sub: 'Noir • Phase 4' }
+  };
+
   const DEFAULT_THEME = 'cosmos';
+  const THEME_KEY = 'mcuHeroTheme';
+  const LIGHT_KEY = 'mcuLightMode';
+  const SOUND_KEY = 'mcuSound';
 
-  // ===== Apply Theme =====
-  function applyTheme(themeName) {
-    if (!THEMES.includes(themeName)) themeName = DEFAULT_THEME;
+  /* ============ APPLY THEME ============ */
+  function applyTheme(key) {
+    if (!THEMES[key]) key = DEFAULT_THEME;
 
-    // Remove all theme-* classes safely
-    THEMES.forEach(t => document.body.classList.remove('theme-' + t));
+    // Remove old theme classes
+    Array.from(document.body.classList).forEach(cls => {
+      if (cls.startsWith('theme-')) document.body.classList.remove(cls);
+    });
 
     // Add new theme class
-    document.body.classList.add('theme-' + themeName);
+    document.body.classList.add('theme-' + key);
 
-    // Save to localStorage
-    try {
-      localStorage.setItem('mcuHeroTheme', themeName);
-    } catch (e) { /* ignore */ }
-
-    // Update active button UI
+    // Active button
     document.querySelectorAll('[data-hero-theme]').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.heroTheme === themeName);
+      btn.classList.toggle('active', btn.dataset.heroTheme === key);
     });
+
+    // Poster strip
+    const poster = document.getElementById('themePoster');
+    const title  = document.getElementById('themePosterTitle');
+    const sub    = document.getElementById('themePosterSubtitle');
+    if (poster && THEMES[key]) {
+      poster.src = THEMES[key].poster;
+      poster.onerror = () => { poster.src = THEMES.cosmos.poster; };
+    }
+    if (title) title.textContent = THEMES[key].title;
+    if (sub)   sub.textContent   = THEMES[key].sub;
+
+    try { localStorage.setItem(THEME_KEY, key); } catch (e) {}
   }
 
-  // ===== Load Theme on Start =====
-  function loadSavedTheme() {
-    let saved = DEFAULT_THEME;
-    try {
-      saved = localStorage.getItem('mcuHeroTheme') || DEFAULT_THEME;
-    } catch (e) { /* ignore */ }
-    applyTheme(saved);
-  }
-
-  // ===== Dark / Light Toggle =====
+  /* ============ LIGHT MODE ============ */
   function toggleLightMode() {
     document.body.classList.toggle('light-mode');
     const isLight = document.body.classList.contains('light-mode');
-    try {
-      localStorage.setItem('mcuLightMode', isLight ? '1' : '0');
-    } catch (e) { /* ignore */ }
+    try { localStorage.setItem(LIGHT_KEY, isLight ? '1' : '0'); } catch (e) {}
+    updateThemeBtnText();
+    playSound('click');
   }
 
   function loadLightMode() {
     try {
-      if (localStorage.getItem('mcuLightMode') === '1') {
+      if (localStorage.getItem(LIGHT_KEY) === '1') {
         document.body.classList.add('light-mode');
       }
-    } catch (e) { /* ignore */ }
+    } catch (e) {}
+    updateThemeBtnText();
   }
 
-  // ===== Attach Button Listeners =====
-  function setupButtons() {
+  function updateThemeBtnText() {
+    const btn = document.getElementById('themeBtn');
+    if (!btn) return;
+    const isLight = document.body.classList.contains('light-mode');
+    btn.textContent = isLight ? '☀️ Light' : '🌙 Dark';
+  }
+
+  /* ============ SOUND ============ */
+  let soundEnabled = true;
+  let audioCtx = null;
+
+  function initAudio() {
+    if (audioCtx) return;
+    try {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    } catch (e) { soundEnabled = false; }
+  }
+
+  function playSound(type) {
+    if (!soundEnabled) return;
+    initAudio();
+    if (!audioCtx) return;
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      let freq = 440, dur = 0.08, vol = 0.05;
+      if (type === 'click') { freq = 660; dur = 0.05; vol = 0.03; }
+      else if (type === 'success') { freq = 880; dur = 0.15; vol = 0.06; }
+      else if (type === 'error') { freq = 220; dur = 0.2; vol = 0.06; }
+
+      osc.frequency.value = freq;
+      osc.type = 'sine';
+      gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+
+      osc.start(audioCtx.currentTime);
+      osc.stop(audioCtx.currentTime + dur);
+    } catch (e) {}
+  }
+
+  function toggleSound() {
+    soundEnabled = !soundEnabled;
+    try { localStorage.setItem(SOUND_KEY, soundEnabled ? '1' : '0'); } catch (e) {}
+    updateSoundBtnText();
+    if (soundEnabled) playSound('success');
+  }
+
+  function loadSound() {
+    try {
+      const saved = localStorage.getItem(SOUND_KEY);
+      if (saved !== null) soundEnabled = saved === '1';
+    } catch (e) {}
+    updateSoundBtnText();
+  }
+
+  function updateSoundBtnText() {
+    const btn = document.getElementById('soundBtn');
+    if (btn) btn.textContent = soundEnabled ? '🔊 Sound' : '🔇 Muted';
+  }
+
+  /* ============ DOOMSDAY COUNTDOWN ============ */
+  function startDoomsday() {
+    const target = new Date('2026-12-18T00:00:00+05:30').getTime();
+
+    const daysEl = document.getElementById('doomsdayDays');
+    const hoursEl = document.getElementById('doomsdayHours');
+    const minsEl = document.getElementById('doomsdayMinutes');
+    const secsEl = document.getElementById('doomsdaySeconds');
+
+    if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
+
+    function tick() {
+      let diff = target - Date.now();
+      if (diff < 0) diff = 0;
+
+      const days  = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const mins  = Math.floor((diff % 3600000) / 60000);
+      const secs  = Math.floor((diff % 60000) / 1000);
+
+      daysEl.textContent  = String(days).padStart(3, '0');
+      hoursEl.textContent = String(hours).padStart(2, '0');
+      minsEl.textContent  = String(mins).padStart(2, '0');
+      secsEl.textContent  = String(secs).padStart(2, '0');
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  }
+
+  /* ============ INIT ============ */
+  function init() {
+    // Load theme
+    let saved = DEFAULT_THEME;
+    try { saved = localStorage.getItem(THEME_KEY) || DEFAULT_THEME; } catch (e) {}
+    applyTheme(saved);
+
+    loadLightMode();
+    loadSound();
+
     // Theme buttons
     document.querySelectorAll('[data-hero-theme]').forEach(btn => {
       btn.addEventListener('click', () => {
         applyTheme(btn.dataset.heroTheme);
+        playSound('click');
       });
     });
 
-    // Dark/light toggle
+    // Dark/Light
     const themeBtn = document.getElementById('themeBtn');
-    if (themeBtn) {
-      themeBtn.addEventListener('click', toggleLightMode);
-    }
-  }
+    if (themeBtn) themeBtn.addEventListener('click', toggleLightMode);
 
-  // ===== Init on DOM Ready =====
-  function init() {
-    loadSavedTheme();
-    loadLightMode();
-    setupButtons();
+    // Sound
+    const soundBtn = document.getElementById('soundBtn');
+    if (soundBtn) soundBtn.addEventListener('click', toggleSound);
+
+    // Doomsday
+    startDoomsday();
+
+    // Expose for other scripts
+    window.__mcuApplyTheme = applyTheme;
+    window.__mcuPlaySound = playSound;
   }
 
   if (document.readyState === 'loading') {
@@ -84,8 +202,5 @@
   } else {
     init();
   }
-
-  // Expose for other scripts
-  window.__mcuApplyTheme = applyTheme;
 
 })();
